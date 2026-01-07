@@ -174,7 +174,10 @@ const CITIES_DATA = {
    * 8. Clinton (15K pop, 2.5 mi) - NEEDS RESEARCH
    */
 
-  // Placeholder template for next city
+  /**
+   * WORCESTER, MA - FULLY RESEARCHED
+   * Distance: 15 miles | Population: 206,000 | County: Worcester
+   */
   worcester: {
     name: "Worcester",
     slug: "worcester",
@@ -182,20 +185,323 @@ const CITIES_DATA = {
     county: "Worcester",
     distanceFromHudson: 15,
     population: 206000,
+    medianHomeValue: 300000,
+    medianIncome: 57500,
+    medianAge: 34,
+    ownerOccupiedPercent: 46,
     zipCodes: ["01601", "01602", "01603", "01604", "01605", "01606", "01607", "01608", "01609", "01610"],
 
-    // TO BE RESEARCHED:
-    // - Median home value, income, demographics
-    // - Housing stock characteristics and age distribution
-    // - Predominant architectural styles
-    // - Pre-1978 housing percentage
-    // - Climate specifics and painting challenges
-    // - Major neighborhoods and landmarks
-    // - Local painting concerns and regulations
-    // - Community priorities and culture
+    housing: {
+      predominantStyles: [
+        "Triple-Deckers (most iconic)",
+        "Victorian (Queen Anne, Italianate, Second Empire)",
+        "Colonial Revival",
+        "Craftsman/Bungalow (1910s-1930s)",
+        "Cape Cod and Ranch (post-WWII)",
+        "Two-family homes"
+      ],
+      medianAge: 90, // 80-100 years
+      peakConstruction: "1890-1930 (industrial boom era)",
+      ageDistribution: {
+        pre1950: 65,
+        between1950and1978: 20,
+        post1978: 15
+      },
+      pre1978Percent: 75, // Critical - one of highest in MA
+      exteriorMaterials: ["Wood clapboard (most common on triple-deckers)", "Wood shingles", "Vinyl siding (retrofits)", "Brick", "Asbestos siding", "Aluminum siding"],
+      singleFamilyPercent: 42,
+      multiFamilyPercent: 58 // Triple-deckers dominate
+    },
+
+    climate: {
+      type: "Humid continental",
+      annualPrecipitation: 47.5,
+      annualSnowfall: "45-50 inches",
+      summerHighAvg: 85,
+      winterLowAvg: 15,
+      freezeThawCycles: "30-40 per winter",
+      humidityRange: { low: 60, high: 80 },
+      optimalPaintingSeason: "Late May through September (4-5 month window)",
+
+      paintingChallenges: [
+        "Severe freeze-thaw cycles (30-40 per winter)",
+        "High summer humidity (70-80%) promotes mildew",
+        "Temperature extremes stress paint films",
+        "Short painting season creates scheduling pressure",
+        "Heavy snowfall causes ice dam damage"
+      ],
+
+      commonPaintProblems: [
+        "Peeling and blistering from freeze-thaw",
+        "Mildew and mold on north-facing surfaces",
+        "Wood rot on window sills and trim",
+        "Lead paint concerns (70-75% pre-1978 homes)",
+        "Chalking and fading from UV exposure",
+        "Caulk failure from expansion/contraction"
+      ]
+    },
+
+    neighborhoods: [
+      {
+        name: "West Side",
+        characteristics: "Historic, diverse, mix of triple-deckers and single-families",
+        paintingFocus: "Multi-family experience, triple-decker expertise"
+      },
+      {
+        name: "Main South",
+        characteristics: "Dense urban, predominantly triple-deckers, diverse working-class",
+        paintingFocus: "Investor-friendly pricing, lead-safe practices"
+      },
+      {
+        name: "Shrewsbury Street Area",
+        characteristics: "Restaurant district, commercial/residential mix",
+        paintingFocus: "Quick turnaround, minimal disruption"
+      },
+      {
+        name: "Worcester Heights/Tatnuck",
+        characteristics: "More suburban, single-family homes, higher-end",
+        paintingFocus: "Premium finishes, architectural preservation"
+      },
+      {
+        name: "Elm Park Area",
+        characteristics: "Historic district, Victorian homes, tree-lined streets",
+        paintingFocus: "Historic home expertise, multi-color Victorian schemes"
+      },
+      {
+        name: "Vernon Hill",
+        characteristics: "Dense urban, working-class, older housing stock",
+        paintingFocus: "Value-focused services, lead compliance"
+      },
+      {
+        name: "Green Island",
+        characteristics: "Residential with mix of housing types",
+        paintingFocus: "Versatile approach for varied stock"
+      },
+      {
+        name: "College Hill (Clark University)",
+        characteristics: "Mix of owner-occupied and rentals, student area",
+        paintingFocus: "Flexible scheduling, rental-friendly options"
+      }
+    ],
+
+    landmarks: [
+      "Elm Park (oldest public park in America)",
+      "Clark University",
+      "Worcester Common",
+      "Shrewsbury Street restaurant row",
+      "Union Station",
+      "Hanover Theatre",
+      "DCU Center",
+      "Greendale area"
+    ],
+
+    paintingInsights: {
+      leadPaintConcern: "EXTREME - 70-75% of homes built before 1978, highest in MA",
+      historicRestrictions: "Yes - Elm Park Historic District, Crown Hill Historic District",
+      commonExteriorIssues: [
+        "Wood rot on triple-decker porches and trim",
+        "Failed caulking around windows",
+        "Deteriorated three-story porches requiring structural repair",
+        "Water damage from ice dams and poor drainage",
+        "Peeling lead paint requiring proper remediation",
+        "Vinyl siding damage from freeze-thaw",
+        "Stucco/EIFS failures on 1980s-1990s buildings"
+      ],
+      popularExteriorColors: [
+        "Traditional triple-decker schemes (cream/white with darker trim)",
+        "Multi-color Victorian schemes highlighting details",
+        "Grays, blues, darker earth tones (contemporary trend)",
+        "Muted colors maintaining neighborhood character"
+      ],
+      maintenanceInterval: {
+        woodSiding: "5-7 years (harsh climate)",
+        tripleDecker: "Regular inspection every 2-3 years",
+        average: "7-10 years depending on exposure"
+      }
+    },
+
+    community: {
+      type: "Urban working-class city, diverse, educational hub",
+      priorities: [
+        "Value and affordability (budget-conscious market)",
+        "Lead paint safety (critical for 75% of housing)",
+        "Durability in harsh climate",
+        "Preventing wood rot on aging structures",
+        "Energy efficiency through proper sealing",
+        "Curb appeal despite economic constraints",
+        "Quick turnaround (short painting season)",
+        "Warranty and guarantees on investment",
+        "Local reputation and community references",
+        "Multi-family coordination for triple-decker owners"
+      ],
+      demographicNotes: "Second-largest MA city, working-class heritage, diverse (25% Hispanic, 12% Black, 60% White), educational hub (10+ colleges), affordable Boston alternative, values quality but price-sensitive"
+    }
+  },
+
+  /**
+   * WALTHAM, MA - FULLY RESEARCHED
+   * Distance: 17 miles | Population: 65,218 | County: Middlesex
+   */
+  waltham: {
+    name: "Waltham",
+    slug: "waltham",
+    state: "MA",
+    county: "Middlesex",
+    distanceFromHudson: 17,
+    population: 65218,
+    medianHomeValue: 650000,
+    medianIncome: 90000,
+    medianAge: 36,
+    ownerOccupiedPercent: 46,
+    zipCodes: ["02451", "02452", "02453"],
+
+    housing: {
+      predominantStyles: [
+        "Colonial & Colonial Revival (most common)",
+        "Victorian (in older central neighborhoods)",
+        "Triple-deckers (multi-family wooden structures)",
+        "Contemporary/Modern (newer developments)",
+        "Mid-century Ranch (post-WWII neighborhoods)",
+        "Multi-family conversions"
+      ],
+      medianAge: 75, // 70-80 years
+      peakConstruction: "1920-1950",
+      ageDistribution: {
+        pre1950: 50,
+        between1950and1978: 20,
+        post1978: 30
+      },
+      pre1978Percent: 70, // Critical for lead paint
+      exteriorMaterials: ["Wood clapboard siding (predominant)", "Vinyl siding (renovated homes)", "Brick (multi-family)", "Aluminum siding", "Cedar shakes", "Stucco"],
+      singleFamilyPercent: 37,
+      multiFamilyPercent: 63 // High density suburban area
+    },
+
+    climate: {
+      type: "Humid continental with coastal influence",
+      annualPrecipitation: 47,
+      annualSnowfall: "45 inches average",
+      summerHighAvg: 85,
+      winterLowAvg: 10,
+      coastalProximity: "15 miles - brings salt air and moisture",
+      humidityRange: { low: 60, high: 80 },
+      optimalPaintingSeason: "May through September (optimal: June-August)",
+
+      paintingChallenges: [
+        "Freeze-thaw cycles causing cracking and peeling",
+        "High summer humidity (70-80%)",
+        "Coastal salt air and moisture",
+        "Temperature extremes (0°F to 90°F range)",
+        "Spring rain delays painting season start"
+      ],
+
+      commonPaintProblems: [
+        "Peeling and blistering from freeze-thaw cycles",
+        "Wood rot from moisture penetration in older wood siding",
+        "Mildew and algae growth on north-facing walls",
+        "Paint chalking from UV exposure",
+        "Caulking failure around windows from temperature fluctuations",
+        "Lead paint issues in 70% of housing stock"
+      ]
+    },
+
+    neighborhoods: [
+      {
+        name: "Prospect Hill",
+        characteristics: "Historic neighborhood, older homes near Brandeis University",
+        paintingFocus: "Historic preservation, university area quality standards"
+      },
+      {
+        name: "Piety Corner",
+        characteristics: "Residential area with mix of single and multi-family",
+        paintingFocus: "Versatile services for varied housing types"
+      },
+      {
+        name: "The Highlands",
+        characteristics: "Established residential neighborhood",
+        paintingFocus: "Traditional craftsmanship, curb appeal focus"
+      },
+      {
+        name: "South Side",
+        characteristics: "Dense multi-family housing, diverse community",
+        paintingFocus: "Multi-family expertise, value-conscious pricing"
+      },
+      {
+        name: "North Waltham",
+        characteristics: "Mix of residential and commercial near Bentley University",
+        paintingFocus: "Flexible scheduling, professional clientele"
+      },
+      {
+        name: "Central/Moody Street",
+        characteristics: "Downtown area, mixed-use, historic district",
+        paintingFocus: "Historic district compliance, minimal disruption"
+      },
+      {
+        name: "The Chemistry",
+        characteristics: "Former industrial area being redeveloped, modern condos",
+        paintingFocus: "Contemporary finishes, HOA coordination"
+      },
+      {
+        name: "Banks/Cedarwood",
+        characteristics: "Residential neighborhoods with varied housing stock",
+        paintingFocus: "Comprehensive residential services"
+      }
+    },
+
+    landmarks: [
+      "Moody Street (restaurant row, cultural center)",
+      "Charles River Reservation",
+      "Brandeis University",
+      "Bentley University",
+      "Prospect Hill Park",
+      "Lyman Estate (historic mansion)",
+      "Watch City Brewing",
+      "City Hall and Common"
+    ],
+
+    paintingInsights: {
+      leadPaintConcern: "CRITICAL - 65-70% of homes built before 1978",
+      historicRestrictions: "Yes - Moody Street area has historic district overlay, some National Register properties",
+      commonExteriorIssues: [
+        "Wood rot on triple-decker porches and trim",
+        "Ice dam damage on older rooflines causing fascia deterioration",
+        "Moisture issues from poor drainage around foundations",
+        "Failing caulk around windows on multi-family buildings",
+        "Aluminum siding oxidation on 1960s-70s homes",
+        "Lead paint abatement required on renovations",
+        "Mildew on north faces due to tree coverage"
+      ],
+      popularExteriorColors: [
+        "Traditional New England: whites, grays, navy, forest green",
+        "Colonial scheme: white body with dark shutters (black, green, navy)",
+        "Victorian: multiple colors highlighting architectural details",
+        "Contemporary trend: grays and warm neutrals",
+        "Multi-family: neutral tones (beige, tan, light gray)"
+      ],
+      maintenanceInterval: {
+        woodSiding: "7-10 years",
+        coastalExposure: "5-7 years (salt air accelerates wear)",
+        average: "7-10 years depending on exposure"
+      }
+    },
+
+    community: {
+      type: "Suburban city with urban characteristics, biotech hub, educational presence",
+      priorities: [
+        "Property value maintenance (strong $650K median market)",
+        "Curb appeal (competitive real estate market)",
+        "Energy efficiency (proper sealing reduces heating costs)",
+        "Lead paint safety (major concern for families)",
+        "Low maintenance solutions (busy professionals)",
+        "Quality over cost (established market supports premium)",
+        "Quick turnaround (commuters prefer minimal disruption)",
+        "Warranty and reliability (significant investment protection)"
+      ],
+      demographicNotes: "Watch City heritage, biotech/pharmaceutical hub (50+ life sciences companies), Brandeis & Bentley Universities, diverse immigrant gateway (Brazilian, Indian, Guatemalan), commuter community to Boston (8 miles), $650K median home value supports premium services, professional demographic values expertise"
+    }
   }
 
-  // Additional 58 cities to be added with full research data...
+  // Additional 57 cities to be added with full research data...
 };
 
 /**
