@@ -446,7 +446,7 @@ const CITIES_DATA = {
         characteristics: "Residential neighborhoods with varied housing stock",
         paintingFocus: "Comprehensive residential services"
       }
-    },
+    ],
 
     landmarks: [
       "Moody Street (restaurant row, cultural center)",
