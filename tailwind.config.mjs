@@ -11,33 +11,92 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#E10600',
-          dark: '#CC0500',
-          light: '#FF261A'
+          50: '#FFF1F0',
+          100: '#FFE0DE',
+          200: '#FFC2BD',
+          300: '#FF918A',
+          400: '#FF5147',
+          500: '#E10600',
+          600: '#CC0500',
+          700: '#A30400',
+          800: '#7A0300',
+          900: '#520200',
         },
         secondary: {
           DEFAULT: '#0A1F44',
-          light: '#153774'
+          50: '#E8EDF5',
+          100: '#C5D1E6',
+          200: '#9EB3D4',
+          300: '#7795C2',
+          400: '#5077B0',
+          500: '#0A1F44',
+          600: '#091B3C',
+          700: '#071530',
+          800: '#051024',
+          900: '#030A18',
         },
-        accent: {
-          DEFAULT: '#222222',
-          light: '#374151'
+        gold: {
+          DEFAULT: '#D4AF37',
+          light: '#E5C55C',
+          dark: '#B8941F',
+          50: '#FCF9EE',
+          100: '#F7F0D4',
+          200: '#EFE0A9',
+          300: '#E5C55C',
+          400: '#D4AF37',
+          500: '#B8941F',
+          600: '#9A7A19',
+          700: '#7C6114',
+          800: '#5E490F',
+          900: '#40310A',
         },
-        navy: '#0A1F44',
-        ink: '#222222',
-        charcoal: '#222222',
-        gold: '#d6b25e',
-        stone: '#f4f4f4',
-        fog: '#f7f8fb'
+        dark: {
+          DEFAULT: '#111111',
+          50: '#F5F5F5',
+          100: '#E0E0E0',
+          200: '#BDBDBD',
+          300: '#9E9E9E',
+          400: '#757575',
+          500: '#616161',
+          600: '#424242',
+          700: '#303030',
+          800: '#212121',
+          900: '#111111',
+        },
+        neutral: '#222222',
+        stone: '#F4F4F4',
+        fog: '#F7F8FB',
       },
       fontFamily: {
-        heading: ['"DM Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif']
+        heading: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         subtle: '0 10px 30px rgba(0,0,0,0.08)',
-        card: '0 16px 40px rgba(0,0,0,0.12)'
-      }
-    }
+        card: '0 16px 40px rgba(0,0,0,0.12)',
+        glow: '0 0 40px rgba(212, 175, 55, 0.3)',
+        'glow-primary': '0 0 40px rgba(225, 6, 0, 0.3)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-gradient': 'linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(17, 17, 17, 0.9) 100%)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-out',
+        'slide-up': 'slideUp 0.6s ease-out',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

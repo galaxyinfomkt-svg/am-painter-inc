@@ -1,12 +1,15 @@
-﻿'use client'
+'use client'
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
-import { business } from '@/data/business'
+import { business, services } from '@/data/business'
+import { CITIES } from '@/data/cities'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema } from '@/components/Schema'
-import { services } from '@/data/business'
+import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon } from '@heroicons/react/24/solid'
 
 const galleryImages = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeac0a85ae3ca2ff0.webp', alt: 'Interior painting perfection in Hudson MA' },
@@ -15,498 +18,602 @@ const galleryImages = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398bab169a42ce4718c3de.webp', alt: 'Exterior painting crew at work' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babe03e9d4902a73090.webp', alt: 'Luxury interior repaint project' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb26327248d956492.webp', alt: 'Cabinet finishing detail in MA' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeeed0415009e842b.webp', alt: 'Deck staining and refinishing Massachusetts' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb263277019956491.webp', alt: 'Exterior surface preparation Hudson' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7eeed04edd09e6ab3.webp', alt: 'Interior repaint living room' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7ea1b123c071f0056.webp', alt: 'Kitchen painting finish' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7d1810d361767592f.webp', alt: 'Cabinet spraying setup' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7eeed040d399e6ab2.webp', alt: 'Home remodeling project' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7e03e9d314ca71656.webp', alt: 'Deck restoration Massachusetts' },
-]
-
-const serviceDetails = [
-  {
-    id: 'interior-painting',
-    title: 'Interior Painting Services in Hudson, MA',
-    summary: 'Meticulous prep, premium paints, flawless finishes for every room.',
-    bullets: [
-      'Living rooms, bedrooms, kitchens, basements',
-      'Ceilings, trim, doors, accent walls',
-      'Low-VOC paints and clean job sites',
-      'Color consultations and samples',
-    ],
-    cta: 'Request Interior Painting Quote',
-  },
-  {
-    id: 'exterior-painting',
-    title: 'Exterior Painting for New England Weather',
-    summary: 'Weather-tested coatings, full prep, and careful protection for your home.',
-    bullets: [
-      'Siding, trim, shutters, doors',
-      'Power washing, scraping, sanding',
-      'Caulking, priming, and repairs',
-      'Deck and fence staining',
-    ],
-    cta: 'Get Exterior Painting Estimate',
-  },
-  {
-    id: 'cabinet-refinishing',
-    title: 'Cabinet Painting & Refinishing',
-    summary: 'Factory-smooth cabinet finishes that transform kitchens and baths.',
-    bullets: [
-      'Kitchen and bath cabinet refinishing',
-      'Spray-applied finishes, hardware updates',
-      'Color matching and durable topcoats',
-      'Save 50-70% vs. replacement',
-    ],
-    cta: 'Refinish My Cabinets',
-  },
-  {
-    id: 'deck-staining',
-    title: 'Deck Staining & Restoration',
-    summary: 'Restore, protect, and beautify outdoor living spaces.',
-    bullets: [
-      'Cleaning, sanding, and repairs',
-      'Staining, sealing, and maintenance plans',
-      'Transparent to solid stain options',
-      'Protection from UV and moisture',
-    ],
-    cta: 'Restore My Deck',
-  },
-  {
-    id: 'drywall-repair',
-    title: 'Drywall Repair & Installation',
-    summary: 'Seamless walls and ceilings ready for paint.',
-    bullets: [
-      'Hole and crack repair, water damage fixes',
-      'New drywall install, taping, mudding, sanding',
-      'Ceiling texture and smoothing',
-      'Dust containment and fast turnarounds',
-    ],
-    cta: 'Request Drywall Quote',
-  },
-  {
-    id: 'remodeling',
-    title: 'Home Remodeling',
-    summary: 'Full-service remodeling from kitchens to basements.',
-    bullets: [
-      'Kitchen and bathroom remodels',
-      'Basement finishing and flooring',
-      'Room additions and custom carpentry',
-      'Planning, permits, and project management',
-    ],
-    cta: 'Plan My Remodel',
-  },
-  {
-    id: 'general-contracting',
-    title: 'General Contracting',
-    summary: 'One partner to coordinate every trade and timeline.',
-    bullets: [
-      'Project planning and budgeting',
-      'Permit coordination and inspections',
-      'Subcontractor management',
-      'Quality control and schedule adherence',
-    ],
-    cta: 'Discuss My Project',
-  },
 ]
 
 const testimonials = [
-  { quote: 'A&M Painter did an amazing job on our exterior. Professional, on-time, and the results are stunning.', name: 'Sarah M.', location: 'Hudson, MA' },
-  { quote: 'Our kitchen cabinets look factory-new. Clear communication and spotless cleanup.', name: 'John D.', location: 'Marlborough, MA' },
-  { quote: 'From start to finish, the team was excellent. Great prep work and beautiful finish.', name: 'Maria L.', location: 'Framingham, MA' },
+  { quote: 'A&M Painter did an amazing job on our exterior. Professional, on-time, and the results are stunning. Highly recommend!', name: 'Sarah M.', location: 'Hudson, MA', rating: 5 },
+  { quote: 'Our kitchen cabinets look factory-new. Clear communication and spotless cleanup. Will use again!', name: 'John D.', location: 'Marlborough, MA', rating: 5 },
+  { quote: 'From start to finish, the team was excellent. Great prep work and beautiful finish. Very impressed.', name: 'Maria L.', location: 'Framingham, MA', rating: 5 },
 ]
 
 const faqList = [
   { question: 'Are you licensed and insured in Massachusetts?', answer: 'Yes. We are fully licensed, carry $2,000,000 in liability coverage, and follow EPA lead-safe practices on every project.' },
   { question: 'Do you serve both residential and commercial clients?', answer: 'Absolutely. We deliver interior, exterior, cabinet refinishing, remodeling, and general contracting for homes and businesses.' },
   { question: 'How quickly can I get an estimate?', answer: 'Most quotes are turned around within 24 hours. Call or submit the form and we will schedule a walkthrough immediately.' },
-  { question: 'Which areas do you cover?', answer: 'Based in Hudson, we serve Hudson, Marlborough, Framingham, Worcester, Shrewsbury, Westborough, and surrounding Massachusetts communities.' },
+  { question: 'Which areas do you cover?', answer: `Based in Hudson, we serve ${Object.keys(CITIES).length}+ Massachusetts communities including Hudson, Marlborough, Framingham, Worcester, and surrounding areas.` },
 ]
 
-const cityList = ['Hudson, MA', 'Marlborough, MA', 'Framingham, MA', 'Worcester, MA', 'Shrewsbury, MA', 'Westborough, MA', 'Acton, MA', 'Berlin, MA', 'Bolton, MA']
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+}
 
-const container = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+}
 
 export default function HomePage() {
   return (
     <>
       <HomePageSchema />
       <FAQSchema faqs={faqList} />
+      <Header />
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src={business.images.logo} alt={`${business.name} logo`} width={48} height={48} className="h-12 w-12 object-contain" priority />
-            <div className="leading-tight">
-              <p className="text-white font-semibold text-sm md:text-base">{business.tagline}</p>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-white/80 text-sm font-semibold">
-            <a href="#home" className="hover:text-white transition">Home</a>
-            <a href="#services" className="hover:text-white transition">Services</a>
-            <a href="#projects" className="hover:text-white transition">Projects</a>
-            <a href="#about" className="hover:text-white transition">About</a>
-            <a href="#contact" className="hover:text-white transition">Contact</a>
-          </nav>
-          <a href={`tel:${business.phoneRaw}`} className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary text-white font-semibold shadow-lg hover:-translate-y-[1px] transition">
-            {business.phone}
-          </a>
-        </div>
-      </header>
-
-      <main className="pt-24" id="home">
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-secondary text-white">
+      <main className="pt-[120px]">
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex items-center bg-secondary overflow-hidden">
+          {/* Background Image */}
           <div className="absolute inset-0">
             <Image
               src={business.images.heroBackground}
-              alt="A&M Painter hero background"
+              alt="Professional painting services in Hudson MA"
               fill
               priority
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-secondary/85" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/85 to-secondary/70" />
           </div>
-          <div className="relative max-w-6xl mx-auto px-4 py-20 lg:py-24 grid lg:grid-cols-2 gap-12 items-start">
-            <motion.div className="space-y-6" initial="hidden" whileInView="show" viewport={{ once: true }} variants={container}>
-              <p className="text-xs uppercase tracking-[0.3em] text-gray-200 font-semibold">Hudson, MA - Licensed & Insured</p>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">Professional Painting & Remodeling Services in Hudson, MA</h1>
-              <p className="text-lg text-gray-200 max-w-2xl">
-                Transform your home with expert interior and exterior painting, cabinet refinishing, deck restoration, drywall repair, and full remodeling. Five-star finishes, clean job sites, and concierge communication.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {[
-                  'Licensed & Insured Professionals',
-                  'Interior & Exterior Painting',
-                  'Cabinet Refinishing & Deck Staining',
-                  'Complete Remodeling Services',
-                  'Free Estimates in Hudson & Nearby',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-gray-100">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href="#contact" className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-primary text-white font-semibold shadow-lg hover:scale-[1.02] transition">
-                  Get Free Estimate
-                </a>
-                <a href={`tel:${business.phoneRaw}`} className="inline-flex items-center justify-center px-5 py-3 rounded-full border border-white text-white font-semibold hover:bg-white hover:text-secondary transition">
-                  Call {business.phone}
-                </a>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                {[
-                  { label: 'Years of Experience', value: `${business.yearsInBusiness}+` },
-                  { label: 'Five-Star Reviews', value: `${business.reviewCount}+` },
-                  { label: 'Insured Coverage', value: business.insurance },
-                ].map((item) => (
-                  <div key={item.label} className="rounded-xl bg-white/10 border border-white/10 p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-white">{item.value}</p>
-                    <p className="text-sm text-white/80">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
 
-            <motion.div className="w-full max-w-[460px] lg:ml-auto bg-white text-accent rounded-2xl shadow-2xl p-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h3 className="text-2xl font-bold mb-2 text-secondary">Request Your Free Quote</h3>
-              <p className="text-sm text-gray-600 mb-4">Fast response, detailed proposals, and accurate timelines.</p>
-              <div className="rounded-lg overflow-hidden border border-gray-200">
-                <iframe
-                  src={business.formEmbedUrl}
-                  title="A&M Painter Contact Form Hudson MA"
-                  style={{ width: '100%', height: '660px', border: 'none', borderRadius: '6px' }}
-                  loading="lazy"
-                />
-              </div>
-              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
-            </motion.div>
-          </div>
-        </section>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Content */}
+              <motion.div
+                className="space-y-8"
+                initial="hidden"
+                animate="visible"
+                variants={staggerContainer}
+              >
+                {/* Trust Badges */}
+                <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
+                    <MapIcon className="h-4 w-4 text-primary" />
+                    Serving {Object.keys(CITIES).length}+ MA Cities
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
+                    <StarIcon className="h-4 w-4 text-yellow-400" />
+                    {business.reviewCount}+ Five-Star Reviews
+                  </span>
+                </motion.div>
 
-        {/* About */}
-        <section id="about" className="bg-white py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div className="space-y-5" initial="hidden" whileInView="show" viewport={{ once: true }} variants={container}>
-              <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">About A&M Painter Inc.</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-secondary">Hudson-based painting, remodeling, and general contracting.</h2>
-              <p className="text-gray-700">
-                A&M Painter Inc. is a professional painting and remodeling company serving Hudson, Massachusetts and surrounding communities. From interior and exterior painting to cabinet refinishing and full-scale remodeling, we deliver premium craftsmanship, transparent communication, and spotless job sites.
-              </p>
-              <p className="text-gray-700">
-                Based at 74 Broad Street in Hudson, our licensed and insured team uses premium materials, lead-safe practices, and proven processes to protect your home and investment.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  { title: 'Expert Craftsmanship', desc: 'Professional painters and contractors with a proven track record.' },
-                  { title: 'Quality Materials', desc: 'Premium coatings, finishes, and building materials for durability.' },
-                  { title: 'Licensed & Insured', desc: '$2,000,000 liability coverage and EPA lead-safe practices.' },
-                  { title: 'Customer Focused', desc: 'Free estimates, clear timelines, and satisfaction guaranteed.' },
-                ].map((item) => (
-                  <div key={item.title} className="rounded-xl border border-gray-200 p-4 shadow-sm">
-                    <p className="text-primary text-sm font-semibold uppercase tracking-wide">{item.title}</p>
-                    <p className="text-gray-700 text-sm mt-1">{item.desc}</p>
+                {/* Headline */}
+                <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                  Professional <span className="text-primary">Painting</span> & Remodeling in Hudson, MA
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-xl">
+                  Transform your home with expert interior and exterior painting, cabinet refinishing, deck restoration, and complete remodeling services. {business.yearsInBusiness}+ years of five-star craftsmanship.
+                </motion.p>
+
+                {/* Features */}
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { icon: ShieldCheckIcon, text: 'Licensed & $2M Insured' },
+                    { icon: CheckCircleIcon, text: 'EPA Lead-Safe Certified' },
+                    { icon: ClockIcon, text: 'Same Day Response' },
+                    { icon: SparklesIcon, text: 'Free Estimates' },
+                  ].map((item) => (
+                    <div key={item.text} className="flex items-center gap-3 text-white">
+                      <item.icon className="h-6 w-6 text-primary flex-shrink-0" />
+                      <span className="font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* CTA Buttons */}
+                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={`tel:${business.phoneRaw}`}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-bold text-lg rounded-full shadow-lg hover:bg-primary-600 hover:shadow-glow-primary transition-all duration-300"
+                  >
+                    <PhoneIcon className="h-6 w-6" />
+                    Call {business.phone}
+                  </a>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-full hover:bg-white hover:text-secondary transition-all duration-300"
+                  >
+                    Get Free Estimate
+                  </a>
+                </motion.div>
+
+                {/* Stats */}
+                <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-6 pt-6 border-t border-white/20">
+                  {[
+                    { value: `${business.yearsInBusiness}+`, label: 'Years Experience' },
+                    { value: `${business.reviewCount}+`, label: 'Happy Clients' },
+                    { value: business.insurance, label: 'Insured' },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center sm:text-left">
+                      <p className="text-3xl font-bold text-white">{stat.value}</p>
+                      <p className="text-sm text-gray-400">{stat.label}</p>
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              {/* Right - Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="hidden lg:block"
+              >
+                <div className="bg-white rounded-2xl shadow-2xl p-8">
+                  <h3 className="text-2xl font-bold text-secondary mb-2">Request Your Free Quote</h3>
+                  <p className="text-gray-600 mb-6">Fast response, detailed proposals, and accurate timelines.</p>
+                  <div className="rounded-xl overflow-hidden border border-gray-200">
+                    <iframe
+                      src={business.formEmbedUrl}
+                      title="A&M Painter Contact Form"
+                      style={{ width: '100%', height: '520px', border: 'none' }}
+                      loading="lazy"
+                    />
                   </div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div className="grid grid-cols-2 gap-3" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              {[business.images.hero, business.images.interiorPainting, business.images.exteriorPainting, business.images.cabinetRefinishing].map((img, idx) => (
-                <div key={img} className={`relative h-36 sm:h-40 md:h-48 rounded-2xl overflow-hidden shadow-lg ${idx % 2 === 0 ? 'translate-y-2' : '-translate-y-2'}`}>
-                  <Image src={img} alt={`A&M Painter project ${idx + 1}`} fill sizes="50vw" className="object-cover" loading="lazy" />
+                  <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                 </div>
-              ))}
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* Services */}
-        <section id="services" className="bg-stone py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">Our Services</p>
-                <h2 className="text-3xl md:text-4xl font-bold text-secondary">Comprehensive painting, remodeling, and contracting.</h2>
-                <p className="text-gray-700 max-w-2xl mt-2">Seven core services built for New England homes and businesses with premium materials, meticulous prep, and reliable schedules.</p>
-              </div>
-              <a href="#contact" className="self-start inline-flex items-center px-4 py-2 rounded-full bg-primary text-white font-semibold shadow-lg hover:scale-[1.02] transition">
-                Request a quote
-              </a>
-            </div>
+        {/* Services Section */}
+        <section id="services" className="py-20 lg:py-28 bg-stone">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider mb-3">
+                Our Services
+              </motion.p>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+                Expert <span className="text-primary">Painting</span> & Remodeling Services
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Comprehensive services built for New England homes and businesses with premium materials and meticulous attention to detail.
+              </motion.p>
+            </motion.div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {serviceDetails.map((service, idx) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
                 <motion.div
                   key={service.id}
-                  className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col gap-4 hover:-translate-y-1 hover:shadow-lg transition"
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-primary font-semibold">Service</p>
-                      <h3 className="text-xl font-bold text-secondary">{service.title}</h3>
-                      <p className="text-gray-700 mt-2">{service.summary}</p>
+                  <Link
+                    href={`/${service.id}-hudson-ma`}
+                    className={`group block bg-white rounded-2xl overflow-hidden shadow-subtle hover:shadow-card transition-all duration-300 hover:-translate-y-2 ${index === 0 ? 'ring-2 ring-primary' : ''}`}
+                  >
+                    {/* Service Image */}
+                    <div className="relative h-52 overflow-hidden">
+                      <Image
+                        src={galleryImages[index % galleryImages.length].src}
+                        alt={service.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
+                      {index === 0 && (
+                        <span className="absolute top-4 right-4 px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">
+                          FEATURED
+                        </span>
+                      )}
+                      <h3 className="absolute bottom-4 left-4 right-4 text-xl font-bold text-white">
+                        {service.name}
+                      </h3>
                     </div>
-                  </div>
-                  <ul className="text-sm text-gray-700 grid grid-cols-1 gap-2">
-                    {service.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white font-semibold shadow hover:scale-[1.01] transition">
-                    {service.cta}
-                  </a>
+
+                    {/* Service Content */}
+                    <div className="p-6">
+                      <p className="text-gray-600 mb-4">{service.description}</p>
+                      <span className="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                        Learn More
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                    </div>
+                  </Link>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Projects */}
-        <section id="projects" className="bg-white py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 space-y-6">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">Projects</p>
-                <h2 className="text-3xl md:text-4xl font-bold text-secondary">Our work in Hudson & surrounding areas.</h2>
-                <p className="text-gray-700 max-w-2xl mt-2">Interior, exterior, cabinets, decks, and remodeling - delivered with clean lines, rich color, and durable protection.</p>
-              </div>
-              <a href={business.googleReviewUrl} target="_blank" rel="noreferrer" className="inline-flex items-center px-4 py-2 rounded-full bg-secondary text-white font-semibold hover:scale-[1.02] transition">
-                See our Google reviews
-              </a>
+        {/* About Section */}
+        <section id="about" className="py-20 lg:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Images Grid */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-2 gap-4"
+              >
+                {[business.images.hero, business.images.interiorPainting, business.images.exteriorPainting, business.images.cabinetRefinishing].map((img, idx) => (
+                  <div
+                    key={img}
+                    className={`relative rounded-2xl overflow-hidden shadow-lg ${idx === 0 ? 'col-span-2 h-64' : 'h-48'}`}
+                  >
+                    <Image src={img} alt={`A&M Painter project ${idx + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-500" />
+                    {idx === 0 && (
+                      <div className="absolute bottom-4 left-4 bg-primary text-white px-4 py-2 rounded-full text-sm font-bold">
+                        {business.yearsInBusiness}+ Years of Excellence
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* Content */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="space-y-6"
+              >
+                <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider">
+                  About A&M Painter Inc.
+                </motion.p>
+                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary">
+                  Hudson&apos;s Trusted <span className="text-primary">Painting</span> Experts
+                </motion.h2>
+                <motion.p variants={fadeInUp} className="text-lg text-gray-600">
+                  A&M Painter Inc. is a professional painting and remodeling company serving Hudson, Massachusetts and surrounding communities. From interior and exterior painting to cabinet refinishing and full-scale remodeling, we deliver premium craftsmanship, transparent communication, and spotless job sites.
+                </motion.p>
+                <motion.p variants={fadeInUp} className="text-lg text-gray-600">
+                  Based at {business.address.street} in Hudson, our licensed and insured team uses premium materials, lead-safe practices, and proven processes to protect your home and investment.
+                </motion.p>
+
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-4 pt-4">
+                  {[
+                    { title: 'Expert Craftsmanship', desc: 'Professional painters with a proven track record' },
+                    { title: 'Premium Materials', desc: 'Quality coatings for lasting durability' },
+                    { title: 'Licensed & Insured', desc: `${business.insurance} liability coverage` },
+                    { title: 'Customer Focused', desc: 'Free estimates and satisfaction guaranteed' },
+                  ].map((item) => (
+                    <div key={item.title} className="flex items-start gap-3">
+                      <CheckCircleIcon className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-secondary">{item.title}</p>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+
+                <motion.div variants={fadeInUp}>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary-600 transition"
+                  >
+                    Get Your Free Estimate
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </motion.div>
+              </motion.div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          </div>
+        </section>
+
+        {/* Projects Gallery */}
+        <section id="projects" className="py-20 lg:py-28 bg-secondary">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider mb-3">
+                Our Work
+              </motion.p>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Recent <span className="text-primary">Projects</span>
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Interior, exterior, cabinets, decks, and remodeling delivered with precision and care.
+              </motion.p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {galleryImages.map((img, idx) => (
                 <motion.div
                   key={img.src}
-                  className="relative overflow-hidden rounded-2xl shadow-md group border border-gray-100"
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.03 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="relative aspect-[4/3] rounded-xl overflow-hidden group"
                 >
                   <Image
                     src={img.src}
                     alt={img.alt}
-                    width={600}
-                    height={420}
-                    className="h-60 w-full object-cover"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition" />
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Service Area */}
-        <section id="service-areas" className="bg-stone py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 space-y-6">
-            <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">Service Area</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary">Proudly serving Hudson, MA & surrounding communities.</h2>
-            <p className="text-gray-700 max-w-3xl">
-              Local crews, fast scheduling, and detailed prep across MetroWest and Central Massachusetts.
-            </p>
-            <div className="grid sm:grid-cols-3 gap-3">
-              {cityList.map((city) => (
-                <div key={city} className="flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm">
-                  <span className="h-2 w-2 rounded-full bg-primary" />
-                  <span className="text-gray-800 text-sm">{city}</span>
-                </div>
-              ))}
+            <div className="text-center mt-12">
+              <a
+                href={business.googleReviewUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-secondary font-bold rounded-full shadow-lg hover:bg-gray-100 transition"
+              >
+                <StarIcon className="h-5 w-5 text-yellow-400" />
+                See Our {business.reviewCount}+ Google Reviews
+              </a>
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="bg-secondary text-white py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">Reviews</p>
-                <h2 className="text-3xl md:text-4xl font-bold">What our clients say</h2>
-                <p className="text-white/80 max-w-2xl mt-2">Five-star experiences from Hudson homeowners and nearby communities.</p>
-              </div>
-              <a href={business.googleReviewUrl} target="_blank" rel="noreferrer" className="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white font-semibold hover:scale-[1.02] transition">
-                Leave us a review
-              </a>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
+        <section className="py-20 lg:py-28 bg-stone">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider mb-3">
+                Testimonials
+              </motion.p>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+                What Our <span className="text-primary">Clients</span> Say
+              </motion.h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((item, idx) => (
                 <motion.div
                   key={item.name}
-                  className="bg-white text-accent rounded-2xl p-6 shadow-sm border border-white/10"
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="bg-white rounded-2xl p-8 shadow-subtle"
                 >
-                  <p className="text-lg font-semibold text-secondary mb-3">"{item.quote}"</p>
-                  <p className="text-sm text-gray-700">{item.name} - {item.location}</p>
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <StarIcon key={i} className="h-5 w-5 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-lg text-gray-700 mb-6">&quot;{item.quote}&quot;</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="text-xl font-bold text-primary">{item.name[0]}</span>
+                    </div>
+                    <div>
+                      <p className="font-bold text-secondary">{item.name}</p>
+                      <p className="text-sm text-gray-500">{item.location}</p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="bg-white py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
-            <motion.div className="space-y-4" initial="hidden" whileInView="show" viewport={{ once: true }} variants={container}>
-              <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold">Contact</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-secondary">Get your free estimate today.</h2>
-              <p className="text-gray-700 max-w-xl">Call, email, or submit the form for fast scheduling, clear pricing, and a detailed scope for your painting or remodeling project.</p>
-              <div className="space-y-3 text-gray-800">
-                <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-2 text-primary font-semibold hover:underline">
-                  <span className="h-2 w-2 rounded-full bg-primary" />
-                  {business.phone}
-                </a>
-                <a href={`mailto:${business.email}`} className="flex items-center gap-2 hover:text-primary transition">
-                  <span className="h-2 w-2 rounded-full bg-primary" />
-                  {business.email}
-                </a>
-                <p className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                  74 Broad Street, Hudson, Massachusetts
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                  Hours: Mon-Fri 7AM-6PM • Sat 8AM-4PM
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <a href={`tel:${business.phoneRaw}`} className="px-4 py-2 rounded-full bg-primary text-white font-semibold shadow hover:scale-[1.02] transition">Call Now</a>
-                <a href={`mailto:${business.email}`} className="px-4 py-2 rounded-full bg-secondary text-white font-semibold shadow hover:scale-[1.02] transition">Email Us</a>
-                <a href={business.googleReviewUrl} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-full bg-primary text-white font-semibold shadow hover:scale-[1.02] transition">Leave a Google Review</a>
-              </div>
+        {/* Service Areas */}
+        <section id="service-areas" className="py-20 lg:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider mb-3">
+                Service Areas
+              </motion.p>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+                Serving <span className="text-primary">{Object.keys(CITIES).length}+</span> Massachusetts Cities
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Local crews, fast scheduling, and premium service across MetroWest and Central Massachusetts.
+              </motion.p>
             </motion.div>
-            <motion.div className="w-full h-[420px] rounded-2xl overflow-hidden shadow-lg border border-gray-200" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <iframe
-                src={business.gmbMapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="A&M Painter Inc Location Hudson MA"
-              />
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
+            >
+              {Object.values(CITIES).slice(0, 24).map((city) => (
+                <Link
+                  key={city.slug}
+                  href={`/interior-painting-${city.slug}-ma`}
+                  className="group flex items-center gap-2 px-4 py-3 bg-stone rounded-xl hover:bg-primary hover:text-white transition-all duration-300"
+                >
+                  <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition" />
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-white transition">
+                    {city.name}, MA
+                  </span>
+                </Link>
+              ))}
             </motion.div>
+
+            <p className="text-center mt-8 text-gray-500">
+              + {Object.keys(CITIES).length - 24} more communities served
+            </p>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 lg:py-28 bg-secondary">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* Contact Info */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="space-y-8"
+              >
+                <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider">
+                  Contact Us
+                </motion.p>
+                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white">
+                  Get Your <span className="text-primary">Free Estimate</span> Today
+                </motion.h2>
+                <motion.p variants={fadeInUp} className="text-xl text-gray-300">
+                  Call, email, or submit the form for fast scheduling, clear pricing, and a detailed scope for your painting or remodeling project.
+                </motion.p>
+
+                <motion.div variants={fadeInUp} className="space-y-6">
+                  <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-4 text-white group">
+                    <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition">
+                      <PhoneIcon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Call Us Now</p>
+                      <p className="text-2xl font-bold group-hover:text-primary transition">{business.phone}</p>
+                    </div>
+                  </a>
+
+                  <a href={`mailto:${business.email}`} className="flex items-center gap-4 text-white group">
+                    <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary transition">
+                      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Email Us</p>
+                      <p className="text-lg font-semibold group-hover:text-primary transition">{business.email}</p>
+                    </div>
+                  </a>
+
+                  <div className="flex items-center gap-4 text-white">
+                    <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center">
+                      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">Our Location</p>
+                      <p className="text-lg font-semibold">{business.address.street}, {business.address.city}, {business.address.state}</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Map */}
+                <motion.div variants={fadeInUp} className="rounded-2xl overflow-hidden h-64 border border-white/10">
+                  <iframe
+                    src={business.gmbMapEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="A&M Painter Location"
+                  />
+                </motion.div>
+              </motion.div>
+
+              {/* Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl shadow-2xl p-8"
+              >
+                <h3 className="text-2xl font-bold text-secondary mb-2">Request Your Free Quote</h3>
+                <p className="text-gray-600 mb-6">Fill out the form below and we&apos;ll get back to you within 24 hours.</p>
+                <div className="rounded-xl overflow-hidden border border-gray-200">
+                  <iframe
+                    src={business.formEmbedUrl}
+                    title="A&M Painter Contact Form"
+                    style={{ width: '100%', height: '580px', border: 'none' }}
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 lg:py-28 bg-stone">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.p variants={fadeInUp} className="text-primary font-semibold uppercase tracking-wider mb-3">
+                FAQ
+              </motion.p>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary">
+                Frequently Asked <span className="text-primary">Questions</span>
+              </motion.h2>
+            </motion.div>
+
+            <div className="space-y-4">
+              {faqList.map((faq, idx) => (
+                <motion.div
+                  key={faq.question}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="bg-white rounded-xl p-6 shadow-subtle"
+                >
+                  <h3 className="text-lg font-bold text-secondary mb-2">{faq.question}</h3>
+                  <p className="text-gray-600">{faq.answer}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-secondary text-white pt-12 pb-8 border-t border-white/10" id="footer-areas">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-4 gap-10">
-          <div className="space-y-3">
-            <Link href="/" className="flex items-center gap-3">
-              <Image src={business.images.logo} alt="A&M Painter Logo" width={52} height={52} className="h-12 w-12 object-contain" />
-              <div className="leading-tight">
-                <p className="text-lg font-bold">A&M <span className="text-primary">Painter</span></p>
-                <p className="text-xs text-white/70">Professional Painting & Remodeling in Hudson, MA</p>
-              </div>
-            </Link>
-            <p className="text-white/80 text-sm">Licensed & Insured - {business.phone}</p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-primary">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#home" className="hover:text-primary transition">Home</a></li>
-              <li><a href="#services" className="hover:text-primary transition">Services</a></li>
-              <li><a href="#projects" className="hover:text-primary transition">Projects</a></li>
-              <li><a href="#about" className="hover:text-primary transition">About</a></li>
-              <li><a href="#contact" className="hover:text-primary transition">Contact</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-primary">Services</h3>
-            <ul className="space-y-2 text-sm text-white/80">
-              {services.map((service) => (
-                <li key={service.id}>
-                  <a href="#services" className="hover:text-primary transition">{service.name}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-primary">Contact</h3>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li><a href={`tel:${business.phoneRaw}`} className="hover:text-primary transition">{business.phone}</a></li>
-              <li><a href={`mailto:${business.email}`} className="hover:text-primary transition">{business.email}</a></li>
-              <li>74 Broad Street, Hudson, MA</li>
-            </ul>
-            <div className="flex items-center gap-3 mt-3">
-              <a href={business.instagramUrl} target="_blank" rel="noreferrer" className="text-white hover:text-primary transition text-sm">Instagram</a>
-              <a href={business.facebookUrl} target="_blank" rel="noreferrer" className="text-white hover:text-primary transition text-sm">Facebook</a>
-              <a href={business.googleReviewUrl} target="_blank" rel="noreferrer" className="text-white hover:text-primary transition text-sm">Google</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 mt-8 pt-5 border-t border-white/10 text-sm text-white/70 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p>© 2025 A&M Painter Inc. All Rights Reserved. Professional Painting & Remodeling Services in Hudson, Massachusetts.</p>
-          <div className="flex items-center gap-3">
-            <Link href="/privacy-policy" className="hover:text-primary transition">Privacy</Link>
-            <Link href="/terms-of-service" className="hover:text-primary transition">Terms</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }
 
+function MapIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  )
+}
