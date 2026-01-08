@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
 import { business } from '@/data/business'
 
 const inter = Inter({
@@ -68,8 +66,8 @@ export const metadata: Metadata = {
     images: [business.images.og],
   },
   icons: {
-    icon: business.images.logo,
-    apple: business.images.logo,
+    icon: business.images.favicon,
+    apple: business.images.favicon,
   },
   alternates: {
     canonical: '/',
@@ -97,9 +95,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <body className="font-sans antialiased bg-white text-gray-900">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   )
