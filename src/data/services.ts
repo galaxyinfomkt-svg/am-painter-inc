@@ -16,24 +16,29 @@ export const SERVICES: Record<string, Service> = {
     description: "Protect and beautify your home's exterior with expert painting"
   },
   'cabinet-refinishing': {
-    name: "Cabinet Refinishing",
+    name: "Cabinet Painting & Refinishing",
     slug: "cabinet-refinishing",
     description: "Refresh your kitchen and bathrooms with cabinet refinishing"
-  },
-  'power-washing': {
-    name: "Power Washing",
-    slug: "power-washing",
-    description: "Deep clean your property's exterior surfaces"
   },
   'deck-staining': {
     name: "Deck Staining",
     slug: "deck-staining",
     description: "Protect and enhance your outdoor deck"
   },
-  'commercial-painting': {
-    name: "Commercial Painting",
-    slug: "commercial-painting",
-    description: "Professional painting services for commercial properties"
+  'drywall-repair': {
+    name: "Drywall Repair & Installation",
+    slug: "drywall-repair",
+    description: "Seamless drywall repair, water damage fixes, and new installs"
+  },
+  'remodeling': {
+    name: "Home Remodeling",
+    slug: "remodeling",
+    description: "Kitchen, bath, and whole-home remodeling services"
+  },
+  'general-contracting': {
+    name: "General Contracting",
+    slug: "general-contracting",
+    description: "Full-service general contracting and project coordination"
   }
 };
 

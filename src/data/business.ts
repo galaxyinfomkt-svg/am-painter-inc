@@ -2,13 +2,14 @@
 export const business = {
   name: 'A&M Painter Inc',
   legalName: 'A&M Painter Inc',
+  tagline: 'Professional Painting, Remodeling & General Contracting in Hudson, MA',
   phone: '(508) 631-0469',
   phoneRaw: '+15086310469',
-  email: 'contact@ampainterma.com',
+  email: 'info@ampainterinc.com',
 
   // Address (NAP - Name, Address, Phone)
   address: {
-    street: '10 Coolidge Street',
+    street: '74 Broad Street',
     city: 'Hudson',
     state: 'MA',
     stateFullName: 'Massachusetts',
@@ -43,19 +44,13 @@ export const business = {
   // Social/External
   googleBusinessUrl: 'https://g.page/ampainterinc',
 
-  // Brand colors
-  colors: {
-    primary: '#B91C1C',
-    secondary: '#0A1F44',
-    accent: '#153774',
-  },
-
   // Images
   images: {
-    logo: 'https://ezjjorkzzulmmuyeqhyg.supabase.co/storage/v1/object/public/brief-images/293cbd10-23df-42f4-a7ea-8152261718af/a0e5e202-a3a4-4483-a8e2-19310765caba/logo-1767117343033-AM_Painter_500x500_transparent.png',
+    logo: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398e1f169a422340195b7c.png',
+    favicon: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398f4ed1810d790f683b05.png',
     og: 'https://ezjjorkzzulmmuyeqhyg.supabase.co/storage/v1/object/public/brief-images/293cbd10-23df-42f4-a7ea-8152261718af/a0e5e202-a3a4-4483-a8e2-19310765caba/og-1767117374876-19b1fa38-b1ab-4f4e-bf62-e05f400d4e43.jpg',
-    hero: 'https://ezjjorkzzulmmuyeqhyg.supabase.co/storage/v1/object/public/brief-images/293cbd10-23df-42f4-a7ea-8152261718af/a0e5e202-a3a4-4483-a8e2-19310765caba/hero-1767117359662-IMG_3538.webp',
-    heroBackground: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398bab169a42ce4718c3de.webp',
+    hero: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babd1810d2bb7677482.webp',
+    heroBackground: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babe03e9d4902a73090.webp',
     interiorPainting: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeac0a85ae3ca2ff0.webp',
     exteriorPainting: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398bab169a42ce4718c3de.webp',
     cabinetRefinishing: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb26327248d956492.webp',
@@ -68,6 +63,14 @@ export const business = {
   googleReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   facebookUrl: 'https://www.facebook.com/p/AM-Painter-100083000816674/',
   instagramUrl: 'https://www.instagram.com/am_painterinc/',
+
+  // Brand colors
+  colors: {
+    primary: '#E10600',
+    secondary: '#0A1F44',
+    accent: '#153774',
+    neutral: '#222222',
+  },
 } as const
 
 // Services
@@ -86,27 +89,33 @@ export const services = [
   },
   {
     id: 'cabinet-refinishing',
-    name: 'Cabinet Refinishing',
-    description: 'Give your kitchen a fresh look without the cost of replacement. Expert cabinet refinishing and painting for a fraction of the price.',
+    name: 'Cabinet Painting & Refinishing',
+    description: 'Factory-smooth cabinet painting and refinishing that transforms kitchens and baths without full replacement.',
     shortDescription: 'Kitchen cabinet transformation',
   },
   {
-    id: 'power-washing',
-    name: 'Power Washing',
-    description: 'Restore your property surfaces to like-new condition. Professional power washing for decks, driveways, siding, and more.',
-    shortDescription: 'Professional surface cleaning',
-  },
-  {
     id: 'deck-staining',
-    name: 'Deck Staining',
-    description: 'Protect and enhance your deck with professional staining and sealing. Extend the life of your outdoor living space.',
+    name: 'Deck Staining & Restoration',
+    description: 'Clean, sand, repair, and stain decks to protect from New England weather and keep outdoor spaces beautiful.',
     shortDescription: 'Deck protection and enhancement',
   },
   {
-    id: 'commercial-painting',
-    name: 'Commercial Painting',
-    description: 'Professional painting services for businesses, offices, and commercial properties. Minimal disruption, maximum results.',
-    shortDescription: 'Business and commercial services',
+    id: 'drywall-repair',
+    name: 'Drywall Repair & Installation',
+    description: 'Seamless drywall repair, water damage fixes, and new installs ready for paint with clean job sites.',
+    shortDescription: 'Flawless surface preparation',
+  },
+  {
+    id: 'remodeling',
+    name: 'Home Remodeling',
+    description: 'Kitchen, bath, and whole-home remodeling with detailed project planning, premium finishes, and on-time delivery.',
+    shortDescription: 'Complete remodeling services',
+  },
+  {
+    id: 'general-contracting',
+    name: 'General Contracting',
+    description: 'Full-service general contracting coordinating all trades, permits, and schedules for residential and commercial work.',
+    shortDescription: 'One partner for every trade',
   },
 ] as const
 

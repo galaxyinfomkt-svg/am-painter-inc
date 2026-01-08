@@ -10,23 +10,23 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#B91C1C',
-          dark: '#991B1B',
-          light: '#DC2626'
+          DEFAULT: '#E10600',
+          dark: '#CC0500',
+          light: '#FF261A'
         },
         secondary: {
           DEFAULT: '#0A1F44',
           light: '#153774'
         },
         accent: {
-          DEFAULT: '#153774',
-          light: '#1E4A8F'
+          DEFAULT: '#222222',
+          light: '#374151'
         },
-        navy: '#0c1b2a',
-        ink: '#0b1220',
-        charcoal: '#111827',
+        navy: '#0A1F44',
+        ink: '#222222',
+        charcoal: '#222222',
         gold: '#d6b25e',
-        stone: '#e5e7eb',
+        stone: '#f4f4f4',
         fog: '#f7f8fb'
       },
       fontFamily: {
