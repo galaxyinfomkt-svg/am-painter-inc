@@ -1,5 +1,4 @@
 {
-  "buildCommand": "cd am-painter-next && npm install && npm run build",
-  "outputDirectory": "am-painter-next/out",
-  "installCommand": "cd am-painter-next && npm install"
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
 }

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { ServiceSchema, BreadcrumbSchema } from '@/components/Schema';
+import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema } from '@/components/Schema';
 import { CITIES } from '@/data/cities';
 import { SERVICES } from '@/data/services';
 import { business } from '@/data/business';
@@ -34,9 +34,38 @@ export async function generateMetadata({ params }: { params: Promise<{ service: 
     return { title: 'Page Not Found' };
   }
 
+  const canonical = `${business.url}/${service.slug}-${city.slug}-ma/`;
+  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, Massachusetts. Expert lead-safe practices for pre-1978 homes. Free estimates available.`;
+  const title = `${service.name} in ${city.name}, MA | ${business.name}`;
+
   return {
-    title: `${service.name} in ${city.name}, MA | A&M Painter Inc`,
-    description: `Professional ${service.name.toLowerCase()} in ${city.name}, Massachusetts. Expert lead-safe practices for pre-1978 homes. Free estimates available.`,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: business.name,
+      type: 'website',
+      locale: 'en_US',
+      images: [
+        {
+          url: business.images.og,
+          width: 1200,
+          height: 630,
+          alt: `${business.name} - ${service.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [business.images.og],
+    },
   };
 }
 
@@ -56,6 +85,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ se
   return (
     <>
       <ServiceSchema cityName={city.name} serviceName={service.name} />
+      <LocalBusinessSchema />
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: business.url },
