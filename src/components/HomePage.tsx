@@ -740,7 +740,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                <div className="relative">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
                       <SparklesIcon className="h-6 w-6 text-white" />

@@ -1,15 +1,41 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { business, services } from '@/data/business'
+import { CITIES } from '@/data/cities'
 import { PhoneIcon, EnvelopeIcon, MapPinIcon, Bars3Icon, XMarkIcon, ChevronDownIcon, ClockIcon } from '@heroicons/react/24/solid'
 
-export function Header() {
+interface HeaderProps {
+  cityName?: string
+}
+
+export function Header({ cityName }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+
+  // Extract city from URL if not provided as prop
+  const getCityFromPath = (): string => {
+    if (cityName) return cityName
+
+    // Try to extract city from URL pattern: /service-city-ma
+    if (pathname && pathname !== '/') {
+      const match = pathname.match(/-([a-z-]+)-ma$/i)
+      if (match) {
+        const citySlug = match[1]
+        const city = CITIES[citySlug]
+        if (city) return city.name
+      }
+    }
+
+    return 'Hudson' // Default to headquarters
+  }
+
+  const displayCity = getCityFromPath()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +54,7 @@ export function Header() {
             <div className="flex items-center gap-4 lg:gap-8">
               <div className="flex items-center gap-2">
                 <MapPinIcon className="h-4 w-4 text-white/80" />
-                <span className="font-medium">Hudson, MA</span>
+                <span className="font-medium">{displayCity}, MA</span>
                 <span className="hidden sm:inline text-white/60">& Surrounding Areas</span>
               </div>
               <div className="hidden md:flex items-center gap-2 text-white/90">
