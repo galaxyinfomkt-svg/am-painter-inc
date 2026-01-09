@@ -26,8 +26,9 @@ export function Header({ cityName }: HeaderProps) {
     if (pathname && pathname !== '/') {
       const match = pathname.match(/-([a-z-]+)-ma$/i)
       if (match) {
-        const citySlug = match[1]
-        const city = CITIES[citySlug]
+        const citySlug = match[1].toLowerCase()
+        // Search by slug property since keys use camelCase but slugs use kebab-case
+        const city = Object.values(CITIES).find(c => c.slug === citySlug)
         if (city) return city.name
       }
     }
