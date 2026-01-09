@@ -26,10 +26,10 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-11 text-sm">
             <div className="flex items-center gap-4 lg:gap-8">
-              <div className="hidden sm:flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <MapPinIcon className="h-4 w-4 text-white/80" />
                 <span className="font-medium">Hudson, MA</span>
-                <span className="text-white/60">& Surrounding Areas</span>
+                <span className="hidden sm:inline text-white/60">& Surrounding Areas</span>
               </div>
               <div className="hidden md:flex items-center gap-2 text-white/90">
                 <ClockIcon className="h-4 w-4 text-white/80" />
@@ -53,7 +53,7 @@ export function Header() {
       </div>
 
       {/* Main Navigation */}
-      <nav className={`transition-all duration-300 ${scrolled ? 'bg-secondary shadow-2xl' : 'bg-secondary/95 backdrop-blur-md'}`}>
+      <nav className={`transition-all duration-300 ${scrolled ? 'bg-white shadow-2xl' : 'bg-white shadow-lg'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -70,16 +70,16 @@ export function Header() {
                 />
               </div>
               <div className="hidden sm:block">
-                <p className="text-xl font-bold text-white group-hover:text-primary transition">
+                <p className="text-xl font-bold text-secondary group-hover:text-primary transition">
                   A&M <span className="text-primary">Painter</span>
                 </p>
-                <p className="text-xs text-gray-400 tracking-wider uppercase">Professional Painting</p>
+                <p className="text-xs text-gray-500 tracking-wider uppercase">Professional Painting</p>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              <Link href="/" className="px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5">
+              <Link href="/" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 Home
               </Link>
 
@@ -87,7 +87,7 @@ export function Header() {
               <div className="relative group">
                 <button
                   type="button"
-                  className="flex items-center gap-1 px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5"
+                  className="flex items-center gap-1 px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50"
                   onMouseEnter={() => setServicesOpen(true)}
                   onMouseLeave={() => setServicesOpen(false)}
                 >
@@ -103,7 +103,7 @@ export function Header() {
                     {services.map((service, index) => (
                       <Link
                         key={service.id}
-                        href={`/${service.id}-hudson-ma`}
+                        href={`/services/${service.id}`}
                         className={`flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-50 transition group`}
                       >
                         <span className={`flex items-center justify-center w-10 h-10 rounded-xl ${index === 0 ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 group-hover:bg-primary group-hover:text-white'} transition`}>
@@ -131,16 +131,13 @@ export function Header() {
                 </div>
               </div>
 
-              <Link href="/#projects" className="px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5">
+              <Link href="/#projects" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 Projects
               </Link>
-              <Link href="/#about" className="px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5">
+              <Link href="/#about" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 About
               </Link>
-              <Link href="/#service-areas" className="px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5">
-                Areas
-              </Link>
-              <Link href="/#contact" className="px-4 py-2 text-white font-medium hover:text-primary transition rounded-lg hover:bg-white/5">
+              <Link href="/#contact" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 Contact
               </Link>
             </div>
@@ -159,7 +156,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-white hover:text-primary transition rounded-lg hover:bg-white/10"
+                className="lg:hidden p-2 text-secondary hover:text-primary transition rounded-lg hover:bg-gray-50"
               >
                 {mobileMenuOpen ? (
                   <XMarkIcon className="h-8 w-8" />
@@ -184,7 +181,7 @@ export function Header() {
                 {services.map((service, index) => (
                   <Link
                     key={service.id}
-                    href={`/${service.id}-hudson-ma`}
+                    href={`/services/${service.id}`}
                     className="flex items-center gap-3 text-white py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition"
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -204,9 +201,6 @@ export function Header() {
               </Link>
               <Link href="/#about" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
                 About
-              </Link>
-              <Link href="/#service-areas" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
-                Service Areas
               </Link>
               <Link href="/#contact" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
                 Contact

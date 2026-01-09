@@ -1,32 +1,62 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema } from '@/components/Schema'
 import { CITIES } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { business, services } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon } from '@heroicons/react/24/solid'
 
+// Helper function to parse the slug (e.g., "interior-painting-marlborough-ma" -> { service: "interior-painting", city: "marlborough" })
+function parseSlug(slug: string): { serviceSlug: string; citySlug: string } | null {
+  // Remove -ma suffix if present
+  const cleanSlug = slug.endsWith('-ma') ? slug.slice(0, -3) : slug
+
+  // Try to match against known services and cities
+  for (const serviceKey of Object.keys(SERVICES)) {
+    if (cleanSlug.startsWith(serviceKey + '-')) {
+      const cityPart = cleanSlug.slice(serviceKey.length + 1)
+      // Check if this city exists
+      if (CITIES[cityPart]) {
+        return { serviceSlug: serviceKey, citySlug: cityPart }
+      }
+    }
+  }
+
+  return null
+}
+
+// Allow dynamic params
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const paths: { city: string; service: string }[] = []
+  const paths: { slug: string }[] = []
   const cityKeys = Object.keys(CITIES)
   const serviceKeys = Object.keys(SERVICES)
 
   for (const city of cityKeys) {
     for (const service of serviceKeys) {
-      paths.push({ city, service })
+      paths.push({ slug: `${service}-${city}-ma` })
     }
   }
 
   return paths
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ service: string; city: string }> }): Promise<Metadata> {
-  const { service: serviceSlug, city: citySlug } = await params
-  const city = CITIES[citySlug]
-  const service = SERVICES[serviceSlug]
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const parsed = parseSlug(slug)
+
+  if (!parsed) {
+    return { title: 'Page Not Found' }
+  }
+
+  const city = CITIES[parsed.citySlug]
+  const service = SERVICES[parsed.serviceSlug]
 
   if (!city || !service) {
     return { title: 'Page Not Found' }
@@ -34,15 +64,20 @@ export async function generateMetadata({ params }: { params: Promise<{ service: 
 
   const canonical = `${business.url}/${service.slug}-${city.slug}-ma/`
   const populationText = city.population ? city.population.toLocaleString() : 'local'
-  const pre1978 = city.pre1978Percent || 60
-  const description = `${service.name} in ${city.name}, MA for ${populationText} residents. Lead-safe prep for ${pre1978}% pre-1978 homes, premium coatings for New England weather, and fast scheduling from ${business.name}.`
-  const title = `${service.name} in ${city.name}, MA | ${business.name}`
+  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, MA. Serving ${populationText} residents with EPA lead-safe certified prep, premium Benjamin Moore & Sherwin-Williams paints, and ${business.yearsInBusiness}+ years of experience. ${business.insurance} insured. Free estimates - call ${business.phone}.`
+  const title = `${service.name} in ${city.name}, MA | #1 Rated | ${business.name}`
   const keywords = [
     `${service.name} ${city.name} MA`,
     `${city.name} painters`,
     `${service.name.toLowerCase()} contractor ${city.name}`,
     `${city.name} painting company`,
+    `best ${service.name.toLowerCase()} ${city.name}`,
+    `professional painters ${city.name} Massachusetts`,
+    `${service.name.toLowerCase()} services near me`,
+    `licensed painters ${city.name} MA`,
     'lead-safe painting Massachusetts',
+    'EPA certified painters',
+    `${city.name} home improvement`,
     business.name,
   ]
 
@@ -83,13 +118,20 @@ const galleryImages = [
   'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398bab169a42ce4718c3de.webp',
 ]
 
-export default async function CityServicePage({ params }: { params: Promise<{ service: string; city: string }> }) {
-  const { service: serviceSlug, city: citySlug } = await params
+export default async function CityServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const parsed = parseSlug(slug)
+
+  if (!parsed) {
+    notFound()
+  }
+
+  const { serviceSlug, citySlug } = parsed
   const city = CITIES[citySlug]
   const service = SERVICES[serviceSlug]
 
   if (!city || !service) {
-    return <div>Page not found</div>
+    notFound()
   }
 
   const pre1978 = city.pre1978Percent || 60
@@ -111,9 +153,9 @@ export default async function CityServicePage({ params }: { params: Promise<{ se
       />
       <Header />
 
-      <main className="pt-[120px]">
+      <main className="pt-[124px]">
         {/* Hero Section */}
-        <section className="relative bg-secondary py-20 lg:py-28 overflow-hidden">
+        <section className="relative bg-black py-20 lg:py-28 overflow-hidden">
           <div className="absolute inset-0">
             <Image
               src={business.images.heroBackground}
@@ -122,7 +164,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ se
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/90 to-secondary/80" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -374,6 +416,9 @@ export default async function CityServicePage({ params }: { params: Promise<{ se
             </div>
           </div>
         </section>
+
+        {/* Reviews Widget */}
+        <ReviewsWidget />
       </main>
 
       <Footer />

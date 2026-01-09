@@ -10,6 +10,18 @@ export interface City {
 }
 
 export const CITIES: Record<string, City> = {
+  // Headquarters city
+  hudson: {
+    name: "Hudson",
+    slug: "hudson",
+    population: 20310,
+    medianHomeValue: 475000,
+    medianIncome: 95000,
+    pre1978Percent: 65,
+    county: "Middlesex",
+    zipCodes: ["01749"]
+  },
+
   // Fully researched cities
   marlborough: {
     name: "Marlborough",

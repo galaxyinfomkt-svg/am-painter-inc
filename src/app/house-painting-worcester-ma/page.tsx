@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { business, services, cityData } from '@/data/business'
 import { CityPageSchema, FAQSchema } from '@/components/Schema'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { ReviewsWidget } from '@/components/ReviewsWidget'
 
 const city = cityData['worcester']
 const cityName = city.name
@@ -87,6 +90,7 @@ export default function WorcesterPage() {
       {/* Schema Markup - Rendered in initial HTML */}
       <CityPageSchema cityName={cityName} />
       <FAQSchema faqs={faqs} />
+      <Header />
 
       {/* Breadcrumb Navigation */}
       <nav className="bg-gray-100 pt-32 md:pt-36">
@@ -100,7 +104,7 @@ export default function WorcesterPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-secondary text-white py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-black text-white py-16 md:py-24 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -110,7 +114,7 @@ export default function WorcesterPage() {
             priority
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/85 to-secondary/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="max-w-4xl">
@@ -374,6 +378,9 @@ export default function WorcesterPage() {
         </div>
       </section>
 
+      {/* Reviews Widget */}
+      <ReviewsWidget />
+
       {/* Mobile Floating CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg md:hidden z-40">
         <div className="flex gap-3">
@@ -394,6 +401,8 @@ export default function WorcesterPage() {
       </div>
 
       <div className="h-20 md:hidden" />
+
+      <Footer />
     </>
   )
 }

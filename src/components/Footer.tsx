@@ -85,7 +85,7 @@ export function Footer() {
               {services.map((service, index) => (
                 <li key={service.id}>
                   <Link
-                    href={`/${service.id}-hudson-ma`}
+                    href={`/services/${service.id}`}
                     className={`inline-flex items-center gap-2 text-sm hover:text-primary transition ${index === 0 ? 'text-primary font-semibold' : 'text-gray-400'}`}
                   >
                     <span className={`w-1.5 h-1.5 rounded-full ${index === 0 ? 'bg-primary' : 'bg-gray-600'}`} />
