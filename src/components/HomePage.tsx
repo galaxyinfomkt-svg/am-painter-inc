@@ -193,21 +193,21 @@ export default function HomePage() {
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
                   <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
-                  <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                        <SparklesIcon className="h-6 w-6 text-primary" />
+                      <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
+                        <SparklesIcon className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-secondary">Get Your Free Quote</h3>
-                        <p className="text-sm text-gray-500">Response within 24 hours</p>
+                        <h3 className="text-xl font-bold text-white">Get Your Free Quote</h3>
+                        <p className="text-sm text-gray-300">Response within 24 hours</p>
                       </div>
                     </div>
-                    <div className="rounded-2xl overflow-hidden border border-gray-100">
+                    <div className="rounded-2xl overflow-hidden">
                       <iframe
                         src={business.formEmbedUrl}
                         title="A&M Painter Contact Form - Free Estimate Massachusetts"
-                        style={{ width: '100%', height: '480px', border: 'none' }}
+                        style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
                         loading="lazy"
                       />
                     </div>
