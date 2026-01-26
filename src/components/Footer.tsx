@@ -6,7 +6,6 @@ import { PhoneIcon, EnvelopeIcon, MapPinIcon, ClockIcon, StarIcon } from '@heroi
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
-  const cityList = Object.values(CITIES).slice(0, 24)
 
   return (
     <footer className="bg-dark-900 text-white">
@@ -227,24 +226,28 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Service Areas */}
+        {/* Service Areas - Like RS Development */}
         <div className="mt-12 pt-8 border-t border-white/10">
-          <h4 className="text-lg font-bold text-white mb-4">
-            Serving {Object.keys(CITIES).length}+ Massachusetts Communities
+          <h4 className="text-lg font-bold text-primary text-center mb-6">
+            Painting Services Service Areas
           </h4>
-          <div className="flex flex-wrap gap-2">
-            {cityList.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/interior-painting-${city.slug}-ma`}
-                className="text-xs text-gray-400 hover:text-primary transition px-3 py-1.5 bg-white/5 rounded-full hover:bg-white/10"
-              >
-                {city.name}, MA
-              </Link>
-            ))}
-            <span className="text-xs text-gray-500 px-3 py-1.5">
-              + {Object.keys(CITIES).length - 24} more cities
-            </span>
+          <div className="text-center">
+            <p className="text-sm text-gray-300 leading-relaxed">
+              {Object.values(CITIES).slice(0, 25).map((city, index) => (
+                <span key={city.slug}>
+                  <Link
+                    href={`/interior-painting-${city.slug}-ma`}
+                    className="hover:text-primary transition"
+                  >
+                    {city.name}
+                  </Link>
+                  {index < 24 && <span className="text-gray-500"> • </span>}
+                </span>
+              ))}
+              <span className="text-primary font-semibold cursor-pointer hover:underline">
+                {' '}+{Object.keys(CITIES).length - 25} more cities
+              </span>
+            </p>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { business, services } from '@/data/business'
 import { CITIES } from '@/data/cities'
-import { PhoneIcon, EnvelopeIcon, MapPinIcon, Bars3Icon, XMarkIcon, ChevronDownIcon, ClockIcon } from '@heroicons/react/24/solid'
+import { PhoneIcon, EnvelopeIcon, MapPinIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 
 interface HeaderProps {
   cityName?: string
@@ -51,27 +51,18 @@ export function Header({ cityName }: HeaderProps) {
       {/* Top Bar - RED with Contact Info */}
       <div className="bg-primary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-11 text-sm">
-            <div className="flex items-center gap-4 lg:gap-8">
+          <div className="flex items-center justify-between h-10 text-sm">
+            <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <MapPinIcon className="h-4 w-4 text-white/80" />
-                <span className="font-medium">{displayCity}, MA</span>
-                <span className="hidden sm:inline text-white/60">& Surrounding Areas</span>
+                <MapPinIcon className="h-4 w-4" />
+                <span className="font-medium">Serving {displayCity}, Massachusetts</span>
               </div>
-              <div className="hidden md:flex items-center gap-2 text-white/90">
-                <ClockIcon className="h-4 w-4 text-white/80" />
-                <span>Mon-Fri: 7AM-6PM</span>
-              </div>
-              <a href={`mailto:${business.email}`} className="hidden lg:flex items-center gap-2 hover:text-white/80 transition">
-                <EnvelopeIcon className="h-4 w-4 text-white/80" />
+              <a href={`mailto:${business.email}`} className="hidden md:flex items-center gap-2 hover:text-white/80 transition">
+                <EnvelopeIcon className="h-4 w-4" />
                 <span>{business.email}</span>
               </a>
             </div>
-            <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-2 font-bold hover:text-white/80 transition group">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-              </span>
+            <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-2 font-bold hover:text-white/80 transition">
               <PhoneIcon className="h-4 w-4" />
               <span className="tracking-wide">{business.phone}</span>
             </a>
@@ -96,11 +87,18 @@ export function Header({ cityName }: HeaderProps) {
                   priority
                 />
               </div>
-              <div className="hidden sm:block">
-                <p className="text-xl font-bold text-secondary group-hover:text-primary transition">
-                  A&M <span className="text-primary">Painter</span>
-                </p>
-                <p className="text-xs text-gray-500 tracking-wider uppercase">Professional Painting</p>
+              <div className="hidden sm:flex items-center gap-3">
+                <div>
+                  <p className="text-xl font-bold text-secondary group-hover:text-primary transition">
+                    A&M <span className="text-primary">Painter</span>
+                  </p>
+                  <p className="text-xs text-gray-500 tracking-wider uppercase">Licensed Contractor</p>
+                </div>
+                <div className="hidden md:block h-10 w-px bg-gray-200" />
+                <div className="hidden md:block">
+                  <p className="text-sm font-bold text-primary">{displayCity}, MA</p>
+                  <p className="text-xs text-gray-500">& Surrounding Areas</p>
+                </div>
               </div>
             </Link>
 

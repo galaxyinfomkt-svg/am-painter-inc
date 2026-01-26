@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     default: `#1 Painting Contractor Massachusetts | ${business.name} | Hudson, Marlborough, Worcester`,
     template: `%s | ${business.name}`,
   },
-  description: `Award-winning painting contractor serving Massachusetts since 1992. ${business.yearsInBusiness}+ years experience in interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Licensed, ${business.insurance} insured, EPA Lead-Safe. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  description: `Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Licensed, ${business.insurance} insured, EPA Lead-Safe certified. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
   keywords: [
     // Primary Massachusetts keywords
     'painting contractor Massachusetts',
@@ -75,9 +75,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'verification-code-here', // Add Google Search Console verification
-  },
+  // Google Search Console verification - add your code when ready
+  // verification: { google: 'your-verification-code' },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -106,6 +105,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: business.url,
+    languages: {
+      'en-US': business.url,
+      'x-default': business.url,
+    },
   },
   category: 'Home Improvement',
   other: {

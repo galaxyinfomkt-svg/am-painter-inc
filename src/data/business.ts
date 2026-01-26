@@ -24,8 +24,8 @@ export const business = {
   },
 
   // Business details
-  yearsInBusiness: 32,
-  foundedYear: 1992,
+  yearsInBusiness: 5,
+  foundedYear: 2020,
   owner: 'Agrimaldo Oliveira',
   insurance: '$2,000,000',
   rating: 5.0,

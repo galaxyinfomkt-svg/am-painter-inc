@@ -6,7 +6,7 @@ import HomePage from '@/components/HomePage'
 // Comprehensive SEO Metadata - Optimized for Google Rankings
 export const metadata: Metadata = {
   title: `#1 Painting Contractor in Massachusetts | ${business.name} | Hudson, Marlborough, Worcester`,
-  description: `Award-winning painting contractor serving Massachusetts since 1992. ${business.yearsInBusiness}+ years experience in interior & exterior painting, cabinet refinishing, deck staining, and home remodeling. Licensed, ${business.insurance} insured, EPA Lead-Safe certified. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  description: `Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, and home remodeling. Licensed, ${business.insurance} insured, EPA Lead-Safe certified. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
   keywords: [
     // Primary geo-targeted keywords
     'painting contractor Massachusetts',
