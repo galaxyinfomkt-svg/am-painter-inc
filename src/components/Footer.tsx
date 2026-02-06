@@ -61,10 +61,24 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Professional painting and remodeling services in Hudson, Massachusetts.
+              Professional painting and remodeling services serving Massachusetts, New Hampshire, Maine, and Vermont.
               {business.yearsInBusiness}+ years of five-star craftsmanship, premium materials,
               and spotless job sites.
             </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-semibold">
+                Massachusetts
+              </span>
+              <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-semibold">
+                New Hampshire
+              </span>
+              <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-semibold">
+                Maine
+              </span>
+              <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-semibold">
+                Vermont
+              </span>
+            </div>
             <div className="flex items-center gap-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
@@ -228,9 +242,12 @@ export function Footer() {
 
         {/* Service Areas - Like RS Development */}
         <div className="mt-12 pt-8 border-t border-white/10">
-          <h4 className="text-lg font-bold text-primary text-center mb-6">
-            Painting Services Service Areas
+          <h4 className="text-lg font-bold text-primary text-center mb-2">
+            Proudly Serving MA, NH, ME & VT
           </h4>
+          <p className="text-center text-gray-400 text-sm mb-6">
+            Professional Painting & Remodeling Services Across New England
+          </p>
           <div className="text-center">
             <p className="text-sm text-gray-300 leading-relaxed">
               {Object.values(CITIES).slice(0, 25).map((city, index) => (

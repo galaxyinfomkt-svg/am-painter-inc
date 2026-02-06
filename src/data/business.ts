@@ -2,10 +2,10 @@
 export const business = {
   name: 'A&M Painter Inc',
   legalName: 'A&M Painter Inc',
-  tagline: 'Professional Painting, Remodeling & General Contracting in Hudson, MA',
-  phone: '(508) 631-0469',
-  phoneRaw: '+15086310469',
-  email: 'info@ampainterinc.com',
+  tagline: 'Professional Painting, Remodeling & General Contracting in MA, NH, ME & VT',
+  phone: '(774) 417-9689',
+  phoneRaw: '+17744179689',
+  email: 'ampainter3766@gmail.com',
 
   // Address (NAP - Name, Address, Phone)
   address: {
