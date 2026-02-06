@@ -277,6 +277,7 @@ export default function HomePage() {
                         src={allProjectPhotos[index % allProjectPhotos.length].src}
                         alt={`${service.name} services in Massachusetts - ${business.name}`}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent" />
@@ -393,6 +394,7 @@ export default function HomePage() {
                         src={allProjectPhotos[0].src}
                         alt="Interior painting services Massachusetts - Living room transformation"
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                       />
                     </div>
@@ -401,6 +403,7 @@ export default function HomePage() {
                         src={allProjectPhotos[3].src}
                         alt="Exterior house painting Massachusetts - Curb appeal improvement"
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                       />
                     </div>
@@ -411,6 +414,7 @@ export default function HomePage() {
                         src={allProjectPhotos[5].src}
                         alt="Cabinet refinishing Massachusetts - Kitchen cabinet painting"
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                       />
                     </div>
@@ -419,6 +423,7 @@ export default function HomePage() {
                         src={allProjectPhotos[8].src}
                         alt="Home remodeling Massachusetts - Kitchen renovation"
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                       />
                     </div>
@@ -545,6 +550,7 @@ export default function HomePage() {
                     src={img.src}
                     alt={`${img.alt} - Professional painting in Massachusetts`}
                     fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
