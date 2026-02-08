@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { CITIES } from '@/data/cities'
 import { SERVICES } from '@/data/services'
+import { REGIONS } from '@/data/regions'
 import { business } from '@/data/business'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -57,9 +58,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // Regional service pages (NEW - High Priority for Multi-State SEO)
+  const regionalServicePages: MetadataRoute.Sitemap = []
+  const regionSlugs = Object.keys(REGIONS)
+
+  for (const regionSlug of regionSlugs) {
+    for (const serviceSlug of serviceSlugs) {
+      regionalServicePages.push({
+        url: `${baseUrl}/region/${regionSlug}/${serviceSlug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.9, // High priority for regional coverage
+      })
+    }
+  }
+
   return [
     ...homepage,
     ...servicePages,
+    ...regionalServicePages,
     ...housePaintingPages,
     ...cityServicePages,
   ]

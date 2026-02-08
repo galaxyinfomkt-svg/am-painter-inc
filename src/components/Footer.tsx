@@ -4,14 +4,6 @@ import { business, services } from '@/data/business'
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
-  // Service areas by region
-  const regions = [
-    'Greater Boston',
-    'Rhode Island and New Hampshire',
-    'Maine and Vermont',
-    'Worcester and Nearby Towns',
-  ]
-
   return (
     <footer className="bg-white border-t border-gray-200">
       {/* Main Footer Content */}
@@ -23,16 +15,38 @@ export function Footer() {
               Interior Painting
             </h3>
             <ul className="space-y-3">
-              {regions.map((region) => (
-                <li key={region}>
-                  <Link
-                    href="/services/interior-painting"
-                    className="text-sm text-gray-600 hover:text-primary transition"
-                  >
-                    {region}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/region/greater-boston/interior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Greater Boston
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/rhode-island-new-hampshire/interior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Rhode Island and New Hampshire
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/maine-vermont/interior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Maine and Vermont
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/worcester-nearby/interior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Worcester and Nearby Towns
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -42,16 +56,38 @@ export function Footer() {
               Exterior Painting
             </h3>
             <ul className="space-y-3">
-              {regions.map((region) => (
-                <li key={region}>
-                  <Link
-                    href="/services/exterior-painting"
-                    className="text-sm text-gray-600 hover:text-primary transition"
-                  >
-                    {region}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/region/greater-boston/exterior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Greater Boston
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/rhode-island-new-hampshire/exterior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Rhode Island and New Hampshire
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/maine-vermont/exterior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Maine and Vermont
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/worcester-nearby/exterior-painting"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Worcester and Nearby Towns
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -61,16 +97,38 @@ export function Footer() {
               Cabinet Refinishing
             </h3>
             <ul className="space-y-3">
-              {regions.map((region) => (
-                <li key={region}>
-                  <Link
-                    href="/services/cabinet-refinishing"
-                    className="text-sm text-gray-600 hover:text-primary transition"
-                  >
-                    {region}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/region/greater-boston/cabinet-refinishing"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Greater Boston
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/rhode-island-new-hampshire/cabinet-refinishing"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Rhode Island and New Hampshire
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/maine-vermont/cabinet-refinishing"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Maine and Vermont
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/worcester-nearby/cabinet-refinishing"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Worcester and Nearby Towns
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -80,16 +138,38 @@ export function Footer() {
               Home Remodeling
             </h3>
             <ul className="space-y-3">
-              {regions.map((region) => (
-                <li key={region}>
-                  <Link
-                    href="/services/remodeling"
-                    className="text-sm text-gray-600 hover:text-primary transition"
-                  >
-                    {region}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/region/greater-boston/remodeling"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Greater Boston
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/rhode-island-new-hampshire/remodeling"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Rhode Island and New Hampshire
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/maine-vermont/remodeling"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Maine and Vermont
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/region/worcester-nearby/remodeling"
+                  className="text-sm text-gray-600 hover:text-primary transition"
+                >
+                  Worcester and Nearby Towns
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
