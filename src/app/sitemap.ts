@@ -18,6 +18,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // About page (AI Discovery optimized)
+  const aboutPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/about`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+  ]
+
   // Service pages
   const servicePages: MetadataRoute.Sitemap = Object.keys(SERVICES).map((serviceSlug) => ({
     url: `${baseUrl}/services/${serviceSlug}`,
@@ -75,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...homepage,
+    ...aboutPage,
     ...servicePages,
     ...regionalServicePages,
     ...housePaintingPages,

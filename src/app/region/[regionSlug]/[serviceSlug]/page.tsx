@@ -160,14 +160,14 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
               {/* Contact Form - Desktop */}
               <div className="hidden lg:block">
-                <div className="bg-primary rounded-2xl p-8 shadow-2xl">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
                   <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
                   <p className="text-white/80 mb-6">{service.name} in {region.name}</p>
 
                   <iframe
                     src={business.formEmbedUrl}
                     title={`Contact Form - ${service.name} ${region.name}`}
-                    style={{ width: '100%', height: '480px', border: 'none' }}
+                    style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
                     loading="lazy"
                   />
                   <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
@@ -412,22 +412,22 @@ export default async function RegionalServicePage({ params }: PageProps) {
         </section>
 
         {/* Contact Section - Full Form */}
-        <section id="contact" className="py-16 lg:py-20 bg-secondary">
+        <section id="contact" className="py-16 lg:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
                 Get Your Free {service.name} Estimate
               </h2>
-              <p className="text-xl text-gray-300">
+              <p className="text-xl text-gray-600">
                 Serving {region.name} with {business.yearsInBusiness}+ years of experience
               </p>
             </div>
 
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6">
               <iframe
                 src={business.formEmbedUrl}
                 title={`Contact Form - ${service.name} ${region.name}`}
-                style={{ width: '100%', height: '600px', border: 'none' }}
+                style={{ width: '100%', height: '600px', border: 'none', background: 'transparent' }}
                 loading="lazy"
               />
               <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
