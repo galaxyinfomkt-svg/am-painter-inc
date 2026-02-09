@@ -9,18 +9,18 @@ export const business = {
 
   // Address (NAP - Name, Address, Phone)
   address: {
-    street: '74 Broad Street',
-    city: 'Hudson',
+    street: '15 Waverly St. Unit 130',
+    city: 'Brighton',
     state: 'MA',
     stateFullName: 'Massachusetts',
-    zip: '01749',
+    zip: '02135',
     country: 'US',
   },
 
-  // Location coordinates
+  // Location coordinates (Brighton, MA)
   geo: {
-    latitude: 42.387234,
-    longitude: -71.5623108,
+    latitude: 42.3519,
+    longitude: -71.1470,
   },
 
   // Business details
@@ -85,11 +85,15 @@ export const business = {
 
   // External URLs
   formEmbedUrl: 'https://api.leadconnectorhq.com/widget/form/Mh6K2okib8bY2wNnjYYq',
-  gmbMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5893.8040115743015!2d-71.5623108!3d42.387234!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e38ccf0f66aaab%3A0x9a5ad8be5750f365!2sA%26M%20Painter%20Inc!5e0!3m2!1sen!2sbr!4v1765381214853!5m2!1sen!2sbr',
+  gmbMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.6!2d-71.1470!3d42.3519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzA2LjgiTiA3McKwMDgnNDkuMiJX!5e0!3m2!1sen!2sus!4v1234567890',
   reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/npwVVdTpo5dMM8CCSeCT',
   googleReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   facebookUrl: 'https://www.facebook.com/p/AM-Painter-100083000816674/',
   instagramUrl: 'https://www.instagram.com/am_painterinc/',
+
+  // Company video
+  youtubeVideoId: 'Ud65VIz-icQ',
+  youtubeVideoUrl: 'https://www.youtube.com/watch?v=Ud65VIz-icQ',
 
   // Brand colors
   colors: {

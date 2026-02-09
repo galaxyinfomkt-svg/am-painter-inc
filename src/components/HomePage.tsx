@@ -11,6 +11,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema } from '@/components/Schema'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon, PlayIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 // All project photos organized
@@ -494,6 +495,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Video Section */}
+        <HeroVideoSection />
 
         {/* Projects Gallery - Interactive */}
         <section id="projects" className="py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">

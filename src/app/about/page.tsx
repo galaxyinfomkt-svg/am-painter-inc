@@ -5,6 +5,7 @@ import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { aiBusinessDescription, aiFrequentlyAskedQuestions, aiRegionalExpertise, aiServiceDescriptions } from '@/data/ai-discovery'
+import { YouTubeVideo } from '@/components/YouTubeVideo'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
@@ -180,6 +181,15 @@ export default function AboutPage() {
                       </li>
                     </ul>
                   </div>
+                </div>
+
+                {/* Video Section */}
+                <div className="my-16">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl md:text-4xl font-bold text-secondary mb-4">See Our Work in Action</h3>
+                    <p className="text-lg text-gray-600">Watch how we transform homes across Massachusetts</p>
+                  </div>
+                  <YouTubeVideo />
                 </div>
 
                 <h3 className="text-2xl font-bold text-secondary mt-12 mb-6">Our Services</h3>

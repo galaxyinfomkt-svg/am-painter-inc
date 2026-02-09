@@ -7,6 +7,7 @@ import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { CompactVideoCard } from '@/components/YouTubeVideo'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 import Script from 'next/script'
 
@@ -393,6 +394,9 @@ export default async function RegionalServicePage({ params }: PageProps) {
                     {business.phone}
                   </a>
                 </div>
+
+                {/* Video Card */}
+                <CompactVideoCard />
 
                 {/* Unique Features */}
                 <div className="bg-gray-50 rounded-2xl p-6">
