@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -232,15 +233,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const canonical = `${business.url}/${service.slug}-${city.slug}-ma/`
-  const populationText = city.population ? city.population.toLocaleString() : 'local'
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
 
-  // Create city-specific, unique meta description
-  const challengeText = city.challenges[0] ? `Solving ${city.challenges[0].toLowerCase()}. ` : ''
+  // Create city-specific, unique meta description (max 155 chars)
   const architectureText = city.architectureStyle.slice(0, 2).join(' & ')
-  const climateText = city.climate.split(',')[0]
 
-  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, MA. Experts in ${architectureText} homes. ${challengeText}${climateText} weather protection with premium Benjamin Moore & Sherwin-Williams paints. ${city.pre1978Percent || 60}% pre-1978 homes - EPA Lead-Safe certified. ${business.yearsInBusiness}+ years serving ${regionName}. ${business.insurance} insured. Free estimates: ${business.phone}`
+  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, MA. ${architectureText} home experts. EPA Lead-Safe certified, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`
 
   // Create unique, city-specific title
   const title = `${service.name} ${city.name} MA | ${architectureText} Home Experts | ${business.name}`
@@ -273,7 +271,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: { canonical },
     openGraph: {
       title: `${service.name} in ${city.name}, MA | ${business.reviewCount}+ 5-Star Reviews`,
-      description: `Expert ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. ${challengeText}${business.yearsInBusiness}+ years experience. Free estimates!`,
+      description: `Expert ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. ${business.yearsInBusiness}+ years experience. Free estimates!`,
       url: canonical,
       siteName: business.name,
       type: 'website',
@@ -415,52 +413,19 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                 </div>
               </div>
 
-              {/* Sticky Form - Like RS Development */}
+              {/* Sticky Form - Embedded LeadConnector */}
               <div className="hidden lg:block">
-                <div className="bg-primary rounded-2xl p-8 shadow-2xl">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
                   <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
                   <p className="text-white/80 mb-6">{service.name} in {city.name}, MA</p>
 
-                  <form className="space-y-4">
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1">Full Name *</label>
-                      <input
-                        type="text"
-                        placeholder="Full Name"
-                        className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1">Phone *</label>
-                      <input
-                        type="tel"
-                        placeholder="Phone"
-                        className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1">Email *</label>
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1">What project can we help you with? *</label>
-                      <textarea
-                        rows={3}
-                        placeholder="Describe your project..."
-                        className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-white resize-none"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full py-4 bg-secondary text-white font-bold rounded-lg hover:bg-secondary/90 transition"
-                    >
-                      Request Free Estimate
-                    </button>
-                  </form>
+                  <iframe
+                    src={business.formEmbedUrl}
+                    title={`Contact Form - ${service.name} ${city.name}, MA`}
+                    style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
+                    loading="lazy"
+                  />
+                  <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                 </div>
               </div>
             </div>

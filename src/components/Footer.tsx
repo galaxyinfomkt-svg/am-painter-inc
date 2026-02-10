@@ -215,16 +215,21 @@ export function Footer() {
             {cityColumns.map((column, columnIndex) => (
               <div key={columnIndex}>
                 <ul className="space-y-2">
-                  {column.map((city) => (
-                    <li key={city.slug}>
-                      <Link
-                        href={`/interior-painting-${city.slug}-ma`}
-                        className="text-sm text-gray-600 hover:text-primary transition block"
-                      >
-                        {city.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {column.map((city, cityIdx) => {
+                    // Rotate through different services for diverse internal linking
+                    const serviceRotation = ['interior-painting', 'exterior-painting', 'cabinet-refinishing', 'deck-staining', 'drywall-repair', 'remodeling', 'general-contracting']
+                    const serviceSlug = serviceRotation[(columnIndex + cityIdx) % serviceRotation.length]
+                    return (
+                      <li key={city.slug}>
+                        <Link
+                          href={`/${serviceSlug}-${city.slug}-ma`}
+                          className="text-sm text-gray-600 hover:text-primary transition block"
+                        >
+                          {city.name}
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             ))}

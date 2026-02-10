@@ -49,3 +49,45 @@ body {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
 }
+
+/* PageSpeed: CSS animations replacing framer-motion (saves ~115KB JS) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounceScroll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-bounceScroll {
+  animation: bounceScroll 1.5s ease-in-out infinite;
+}
+
+.animation-delay-100 { animation-delay: 0.12s; }
+.animation-delay-200 { animation-delay: 0.24s; }
+.animation-delay-300 { animation-delay: 0.36s; }
+.animation-delay-400 { animation-delay: 0.48s; }
+.animation-delay-500 { animation-delay: 0.6s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+.animation-delay-1500 { animation-delay: 1.5s; }

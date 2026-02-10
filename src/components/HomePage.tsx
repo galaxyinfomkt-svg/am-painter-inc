@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
@@ -45,16 +44,6 @@ const faqList = [
   { question: 'Which areas do you cover?', answer: `Based in Hudson, we serve ${Object.keys(CITIES).length}+ Massachusetts communities including Hudson, Marlborough, Framingham, Worcester, and surrounding areas.` },
 ]
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12 } }
-}
-
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -96,14 +85,9 @@ export default function HomePage() {
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Left Content */}
-              <motion.div
-                className="space-y-8"
-                initial="hidden"
-                animate="visible"
-                variants={staggerContainer}
-              >
+              <div className="space-y-8">
                 {/* Trust Badges */}
-                <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3 animate-fadeInUp">
                   <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 backdrop-blur-sm rounded-full text-sm text-white border border-primary/30 font-medium">
                     <ShieldCheckIcon className="h-4 w-4 text-primary" />
                     Licensed & Insured
@@ -112,23 +96,23 @@ export default function HomePage() {
                     <StarIcon className="h-4 w-4 text-yellow-400" />
                     {business.reviewCount}+ 5-Star Reviews
                   </span>
-                </motion.div>
+                </div>
 
                 {/* SEO-Optimized H1 Headline */}
-                <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight animate-fadeInUp animation-delay-100">
                   <span className="text-primary">#1 Painting Contractor</span> in Massachusetts
                   <span className="block text-3xl sm:text-4xl lg:text-5xl mt-4 text-gray-200">
                     Hudson, Marlborough, Worcester & Beyond
                   </span>
-                </motion.h1>
+                </h1>
 
                 {/* Description with keywords */}
-                <motion.p variants={fadeInUp} className="text-xl lg:text-2xl text-gray-300 max-w-xl leading-relaxed">
+                <p className="text-xl lg:text-2xl text-gray-300 max-w-xl leading-relaxed animate-fadeInUp animation-delay-200">
                   Award-winning <strong className="text-white">interior & exterior painting</strong>, cabinet refinishing, deck staining, and home remodeling. Serving {Object.keys(CITIES).length}+ Massachusetts cities for {business.yearsInBusiness}+ years.
-                </motion.p>
+                </p>
 
                 {/* Features Grid */}
-                <motion.div variants={fadeInUp} className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 animate-fadeInUp animation-delay-300">
                   {[
                     { icon: ShieldCheckIcon, text: '$2M Insured', highlight: true },
                     { icon: CheckCircleIcon, text: 'EPA Lead-Safe' },
@@ -140,10 +124,10 @@ export default function HomePage() {
                       <span className="text-white font-medium text-sm">{item.text}</span>
                     </div>
                   ))}
-                </motion.div>
+                </div>
 
                 {/* CTA Buttons */}
-                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fadeInUp animation-delay-400">
                   <a
                     href={`tel:${business.phoneRaw}`}
                     className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-primary text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-600 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300"
@@ -162,10 +146,10 @@ export default function HomePage() {
                     Get Free Estimate
                     <ArrowRightIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </a>
-                </motion.div>
+                </div>
 
                 {/* Stats Row */}
-                <motion.div variants={fadeInUp} className="flex items-center gap-8 pt-8 border-t border-white/10">
+                <div className="flex items-center gap-8 pt-8 border-t border-white/10 animate-fadeInUp animation-delay-500">
                   {[
                     { value: `${business.yearsInBusiness}+`, label: 'Years' },
                     { value: `${business.reviewCount}+`, label: 'Reviews' },
@@ -179,16 +163,11 @@ export default function HomePage() {
                       </div>
                     </div>
                   ))}
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
               {/* Right - Contact Form Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 50, rotateY: -5 }}
-                animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="hidden lg:block"
-              >
+              <div className="hidden lg:block animate-fadeInUp animation-delay-400">
                 <div className="relative">
                   {/* Decorative elements */}
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
@@ -215,59 +194,38 @@ export default function HomePage() {
                     <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-          >
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 animate-fadeIn animation-delay-1500">
             <span className="text-xs text-gray-400 uppercase tracking-widest">Scroll</span>
             <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
-              <motion.div
-                className="w-1.5 h-1.5 rounded-full bg-primary"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-bounceScroll" />
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* Services Section - Card Grid */}
         <section id="services" className="py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-              className="text-center mb-16"
-            >
-              <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
                 <SparklesIcon className="h-4 w-4" />
                 Professional Painting Services Massachusetts
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary mb-6 tracking-tight">
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary mb-6 tracking-tight">
                 Painting & Remodeling Services in <span className="text-primary">Massachusetts</span>
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 From interior painting to complete home renovations, we deliver premium craftsmanship across Hudson, Marlborough, Worcester, Framingham, and {Object.keys(CITIES).length - 4}+ more Massachusetts cities.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {services.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
+                <div key={service.id}>
                   <Link
                     href={`/services/${service.id}`}
                     className={`group block h-full bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${index === 0 ? 'ring-2 ring-primary ring-offset-4' : 'border border-gray-100'}`}
@@ -307,7 +265,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -316,23 +274,17 @@ export default function HomePage() {
         {/* Why Choose Us - SEO Rich Section */}
         <section className="py-24 lg:py-32 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-16"
-            >
-              <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
                 Why Massachusetts Homeowners Choose Us
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
                 The Most Trusted <span className="text-primary">Painting Contractor</span> in Massachusetts
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Since 1992, {business.name} has been the preferred choice for homeowners and businesses across Massachusetts seeking professional painting and remodeling services.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -356,13 +308,9 @@ export default function HomePage() {
                   title: 'EPA Lead-Safe Certified',
                   description: 'Certified lead-safe practices for homes built before 1978, protecting your family throughout the painting process.',
                 },
-              ].map((item, index) => (
-                <motion.article
+              ].map((item) => (
+                <article
                   key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
@@ -370,7 +318,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl font-bold text-secondary mb-3">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
-                </motion.article>
+                </article>
               ))}
             </div>
           </div>
@@ -381,13 +329,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               {/* Images Collage */}
-              <motion.div
-                initial={{ opacity: 0, x: -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
-              >
+              <div className="relative">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-7 space-y-4">
                     <div className="relative h-72 rounded-3xl overflow-hidden shadow-2xl">
@@ -436,29 +378,23 @@ export default function HomePage() {
                   <p className="text-4xl font-bold">{business.yearsInBusiness}+</p>
                   <p className="text-sm opacity-90">Years Experience</p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Content */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={staggerContainer}
-                className="space-y-8"
-              >
-                <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
+              <div className="space-y-8">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
                   About {business.name}
-                </motion.span>
+                </span>
 
-                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
                   Massachusetts&apos; Premier <span className="text-primary">Painting</span> & Remodeling Company
-                </motion.h2>
+                </h2>
 
-                <motion.p variants={fadeInUp} className="text-lg text-gray-300 leading-relaxed">
+                <p className="text-lg text-gray-300 leading-relaxed">
                   {business.name} has been transforming homes and businesses across Massachusetts since 1992. Based in Hudson, we serve over {Object.keys(CITIES).length} communities including Marlborough, Worcester, Framingham, Shrewsbury, and throughout MetroWest. Our licensed and insured team combines expert craftsmanship with premium materials to deliver exceptional results on every project.
-                </motion.p>
+                </p>
 
-                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   {[
                     { title: 'Expert Craftsmen', desc: 'Skilled painters with decades of Massachusetts experience' },
                     { title: 'Premium Materials', desc: 'Benjamin Moore, Sherwin-Williams & top-quality products' },
@@ -473,9 +409,9 @@ export default function HomePage() {
                       </div>
                     </div>
                   ))}
-                </motion.div>
+                </div>
 
-                <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 pt-4">
+                <div className="flex flex-wrap gap-4 pt-4">
                   <a
                     href="#contact"
                     className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl shadow-lg hover:bg-primary-600 transition-all"
@@ -490,8 +426,8 @@ export default function HomePage() {
                     <PhoneIcon className="h-5 w-5" />
                     Call Now
                   </a>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -502,26 +438,20 @@ export default function HomePage() {
         {/* Projects Gallery - Interactive */}
         <section id="projects" className="py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-12"
-            >
-              <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
                 <PlayIcon className="h-4 w-4" />
                 Our Portfolio - Massachusetts Painting Projects
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary mb-6">
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary mb-6">
                 Recent <span className="text-primary">Painting Projects</span> in Massachusetts
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
                 Browse our portfolio of completed painting and remodeling projects from homes across Hudson, Marlborough, Worcester, and beyond.
-              </motion.p>
+              </p>
 
               {/* Category Filter */}
-              <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -532,22 +462,14 @@ export default function HomePage() {
                     {cat}
                   </button>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Gallery Grid */}
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-              layout
-            >
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredPhotos.map((img, idx) => (
-                <motion.div
+                <div
                   key={img.src}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  layout
                   className={`relative rounded-2xl overflow-hidden group cursor-pointer ${idx === 0 || idx === 5 ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'}`}
                 >
                   <Image
@@ -563,9 +485,9 @@ export default function HomePage() {
                       {img.category}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
             <div className="text-center mt-12">
               <a
@@ -584,31 +506,19 @@ export default function HomePage() {
         {/* Testimonials - Carousel Style */}
         <section className="py-24 lg:py-32 bg-primary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-16"
-            >
-              <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
                 <StarIcon className="h-4 w-4" />
                 Customer Reviews - Massachusetts Painting
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white mb-4">
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 What Massachusetts Homeowners Say
-              </motion.h2>
-            </motion.div>
+              </h2>
+            </div>
 
             {/* Testimonial Carousel */}
             <div className="relative max-w-4xl mx-auto">
-              <motion.div
-                key={currentTestimonial}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
-              >
+              <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
                     <StarIcon key={i} className="h-6 w-6 text-yellow-400" />
@@ -631,7 +541,7 @@ export default function HomePage() {
                     {testimonials[currentTestimonial].service}
                   </span>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Navigation */}
               <div className="flex items-center justify-center gap-4 mt-8">
@@ -675,26 +585,20 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               {/* Contact Info */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={staggerContainer}
-                className="space-y-8"
-              >
-                <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
+              <div className="space-y-8">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
                   Contact Us
-                </motion.span>
+                </span>
 
-                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white">
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
                   Get Your <span className="text-primary">Free Painting Estimate</span> in Massachusetts
-                </motion.h2>
+                </h2>
 
-                <motion.p variants={fadeInUp} className="text-xl text-gray-300">
+                <p className="text-xl text-gray-300">
                   Ready to transform your home? Contact {business.name} for a free, no-obligation estimate on your painting or remodeling project anywhere in Massachusetts.
-                </motion.p>
+                </p>
 
-                <motion.div variants={fadeInUp} className="space-y-6">
+                <div className="space-y-6">
                   <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-5 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition group">
                     <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition">
                       <PhoneIcon className="h-7 w-7 text-white" />
@@ -726,10 +630,10 @@ export default function HomePage() {
                       <p className="text-lg font-semibold text-white">{business.address.street}, {business.address.city}, {business.address.state}</p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Map */}
-                <motion.div variants={fadeInUp} className="rounded-2xl overflow-hidden h-72 border border-white/10">
+                <div className="rounded-2xl overflow-hidden h-72 border border-white/10">
                   <iframe
                     src={business.gmbMapEmbedUrl}
                     width="100%"
@@ -740,16 +644,11 @@ export default function HomePage() {
                     referrerPolicy="no-referrer-when-downgrade"
                     title="A&M Painter Location - Hudson Massachusetts"
                   />
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
               {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
+              <div className="relative">
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
@@ -769,7 +668,7 @@ export default function HomePage() {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -777,29 +676,19 @@ export default function HomePage() {
         {/* FAQ Section */}
         <section className="py-24 lg:py-32 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-16"
-            >
-              <motion.span variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
                 Frequently Asked Questions
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-secondary">
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-secondary">
                 Common <span className="text-primary">Questions</span> About Our Massachusetts Painting Services
-              </motion.h2>
-            </motion.div>
+              </h2>
+            </div>
 
             <div className="space-y-4">
               {faqList.map((faq, idx) => (
-                <motion.article
+                <article
                   key={faq.question}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
                   className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition"
                   itemScope
                   itemType="https://schema.org/Question"
@@ -813,7 +702,7 @@ export default function HomePage() {
                   <div itemScope itemType="https://schema.org/Answer" itemProp="acceptedAnswer">
                     <p className="text-gray-600 pl-11" itemProp="text">{faq.answer}</p>
                   </div>
-                </motion.article>
+                </article>
               ))}
             </div>
           </div>

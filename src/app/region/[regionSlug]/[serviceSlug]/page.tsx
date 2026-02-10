@@ -3,11 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { REGIONS, getRegionBySlug } from '@/data/regions'
 import { SERVICES, getServiceBySlug } from '@/data/services'
+import { CITIES } from '@/data/cities'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
+import { LocalBusinessSchema, BreadcrumbSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 import Script from 'next/script'
 
@@ -88,8 +90,30 @@ export default async function RegionalServicePage({ params }: PageProps) {
     'Budget control'
   ]
 
+  // Get cities that belong to this region for internal linking
+  const regionCities = Object.values(CITIES)
+    .filter(c => {
+      const cityRegionMap: Record<string, string[]> = {
+        'greater-boston': ['greater-boston'],
+        'rhode-island-new-hampshire': [],
+        'maine-vermont': [],
+        'worcester-nearby': ['worcester-county', 'metrowest', 'central-ma'],
+      }
+      return cityRegionMap[regionSlug]?.includes(c.region)
+    })
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 12)
+
   return (
     <>
+      <LocalBusinessSchema />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: business.url },
+          { name: 'Services', url: `${business.url}/#services` },
+          { name: `${service.name} in ${region.name}`, url: `${business.url}/region/${regionSlug}/${serviceSlug}` },
+        ]}
+      />
       <Header />
 
       <main className="pt-[124px]">
@@ -414,6 +438,42 @@ export default async function RegionalServicePage({ params }: PageProps) {
             </div>
           </div>
         </section>
+
+        {/* City Pages Links Section - SEO Internal Linking */}
+        {regionCities.length > 0 && (
+          <section className="py-16 lg:py-20 bg-stone-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <p className="text-primary font-semibold uppercase tracking-wider mb-3">Service Areas</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-secondary">
+                  {service.name} in <span className="text-primary">{region.name} Cities</span>
+                </h2>
+                <p className="text-gray-600 mt-3">Click any city for dedicated service information</p>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {regionCities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={`/${serviceSlug}-${city.slug}-ma`}
+                    className="group flex items-center gap-2 px-4 py-3 bg-white rounded-xl hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition" />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-white transition">
+                      {city.name}, MA
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="text-center mt-8">
+                <Link href="/#service-areas" className="text-primary font-semibold hover:underline">
+                  View All {Object.keys(CITIES).length}+ Service Areas →
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Contact Section - Full Form */}
         <section id="contact" className="py-16 lg:py-20 bg-gray-50">

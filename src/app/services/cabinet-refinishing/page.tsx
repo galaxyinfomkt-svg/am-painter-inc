@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
+import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 
 const painPoints = [
   {
@@ -303,6 +304,9 @@ export default function CabinetRefinishingPage() {
             </div>
           </div>
         </section>
+
+        {/* City Service Areas */}
+        <ServiceCityLinks serviceSlug="cabinet-refinishing" serviceName="Cabinet Refinishing" />
 
         {/* Reviews */}
         <ReviewsWidget />

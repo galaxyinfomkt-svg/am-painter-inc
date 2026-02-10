@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { PlayIcon } from '@heroicons/react/24/solid'
 import { business } from '@/data/business'
 
@@ -37,11 +38,12 @@ export function YouTubeVideo({
         // Video Thumbnail with Play Button
         <div className="relative w-full h-full group cursor-pointer" onClick={handlePlay}>
           {/* YouTube Thumbnail */}
-          <img
+          <Image
             src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
             alt={title}
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
+            className="object-cover"
           />
 
           {/* Dark Overlay */}
