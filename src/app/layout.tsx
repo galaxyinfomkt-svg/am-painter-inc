@@ -155,6 +155,13 @@ export default function RootLayout({
         </Script>
         {children}
         <FloatingPhoneButton />
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="69f90afc397a1d1a9c218fb6"
+          data-source="WEB_USER"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )

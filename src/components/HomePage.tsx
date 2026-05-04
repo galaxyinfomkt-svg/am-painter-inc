@@ -184,12 +184,6 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="rounded-2xl overflow-hidden">
-                      <iframe
-                        src={business.formEmbedUrl}
-                        title="A&M Painter Contact Form - Free Estimate Massachusetts"
-                        style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
-                        loading="lazy"
-                      />
                     </div>
                     <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                   </div>
@@ -660,12 +654,6 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="rounded-2xl overflow-hidden">
-                    <iframe
-                      src={business.formEmbedUrl}
-                      title="A&M Painter Contact Form - Free Painting Estimate Massachusetts"
-                      style={{ width: '100%', height: '540px', border: 'none', background: 'transparent' }}
-                      loading="lazy"
-                    />
                   </div>
                 </div>
               </div>
