@@ -28,6 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // Legal / compliance pages
+  const legalPages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/privacy`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/cookies`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/sms-terms`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+  ]
+
   // Service pages
   const servicePages: MetadataRoute.Sitemap = Object.keys(SERVICES).map((serviceSlug) => ({
     url: `${baseUrl}/services/${serviceSlug}`,
@@ -86,6 +94,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...homepage,
     ...aboutPage,
+    ...legalPages,
     ...servicePages,
     ...regionalServicePages,
     ...housePaintingPages,

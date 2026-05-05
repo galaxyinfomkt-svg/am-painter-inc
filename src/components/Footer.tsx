@@ -281,6 +281,15 @@ export function Footer() {
               </a>
             </div>
           </div>
+          <div className="mt-4 flex flex-wrap justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-gray-600">
+            <Link href="/privacy" className="hover:text-primary transition">Privacy Policy</Link>
+            <span className="text-gray-300">•</span>
+            <Link href="/terms" className="hover:text-primary transition">Terms &amp; Conditions</Link>
+            <span className="text-gray-300">•</span>
+            <Link href="/cookies" className="hover:text-primary transition">Cookie Policy</Link>
+            <span className="text-gray-300">•</span>
+            <Link href="/sms-terms" className="hover:text-primary transition">SMS Terms</Link>
+          </div>
         </div>
       </div>
     </footer>
