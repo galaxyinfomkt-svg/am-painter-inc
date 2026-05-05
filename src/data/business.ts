@@ -5,7 +5,7 @@ export const business = {
   tagline: 'Professional Painting, Remodeling & General Contracting in MA, NH, ME & VT',
   phone: '(774) 416-1275',
   phoneRaw: '+17744161275',
-  email: 'ampainter3766@gmail.com',
+  email: 'info@ampainterinc.com',
 
   // Address (NAP - Name, Address, Phone)
   address: {
