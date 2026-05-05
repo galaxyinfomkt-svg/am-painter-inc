@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import { business, services } from '@/data/business'
 import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
@@ -185,7 +184,6 @@ export default function HomePage() {
                     </div>
                     <div className="rounded-2xl overflow-hidden">
                     </div>
-                    <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                   </div>
                 </div>
               </div>

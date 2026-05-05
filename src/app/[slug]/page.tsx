@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -419,13 +418,6 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
                   <p className="text-white/80 mb-6">{service.name} in {city.name}, MA</p>
 
-                  <iframe
-                    src={business.formEmbedUrl}
-                    title={`Contact Form - ${service.name} ${city.name}, MA`}
-                    style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
-                    loading="lazy"
-                  />
-                  <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                 </div>
               </div>
             </div>

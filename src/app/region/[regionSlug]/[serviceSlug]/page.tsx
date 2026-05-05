@@ -11,7 +11,6 @@ import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
 import { LocalBusinessSchema, BreadcrumbSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
-import Script from 'next/script'
 
 interface PageProps {
   params: Promise<{
@@ -189,13 +188,6 @@ export default async function RegionalServicePage({ params }: PageProps) {
                   <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
                   <p className="text-white/80 mb-6">{service.name} in {region.name}</p>
 
-                  <iframe
-                    src={business.formEmbedUrl}
-                    title={`Contact Form - ${service.name} ${region.name}`}
-                    style={{ width: '100%', height: '480px', border: 'none', background: 'transparent' }}
-                    loading="lazy"
-                  />
-                  <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
                 </div>
               </div>
             </div>
@@ -488,13 +480,6 @@ export default async function RegionalServicePage({ params }: PageProps) {
             </div>
 
             <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6">
-              <iframe
-                src={business.formEmbedUrl}
-                title={`Contact Form - ${service.name} ${region.name}`}
-                style={{ width: '100%', height: '600px', border: 'none', background: 'transparent' }}
-                loading="lazy"
-              />
-              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
             </div>
           </div>
         </section>
