@@ -166,7 +166,7 @@ export default function HomePage() {
               </div>
 
               {/* Right - Contact Form Card */}
-              <div className="hidden lg:block animate-fadeInUp animation-delay-400">
+              <div className="block animate-fadeInUp animation-delay-400">
                 <div className="relative">
                   {/* Decorative elements */}
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
