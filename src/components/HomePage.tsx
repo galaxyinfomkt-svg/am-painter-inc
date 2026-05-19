@@ -172,11 +172,15 @@ export default function HomePage() {
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
                   <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
-                  <div className="relative bg-white rounded-2xl p-1 border border-white/20 shadow-2xl overflow-hidden">
-                    <div className="rounded-xl overflow-hidden">
+                  <div className="relative bg-white rounded-2xl p-2 border border-white/20 shadow-2xl overflow-hidden">
+                    <div className="text-center mb-2">
+                      <h3 className="text-base font-bold text-secondary leading-tight">Get Your Free Quote</h3>
+                      <p className="text-xs text-gray-600">Response within 24 hours</p>
+                    </div>
+                    <div className="rounded-lg overflow-hidden">
                       <iframe
                         src={business.formEmbedUrl}
-                        style={{ width: '100%', height: '480px', border: 'none', borderRadius: '8px', display: 'block' }}
+                        style={{ width: '100%', height: '360px', border: 'none', borderRadius: '6px', display: 'block' }}
                         id="inline-Mh6K2okib8bY2wNnjYYq-hero"
                         data-layout="{'id':'INLINE'}"
                         data-trigger-type="alwaysShow"
@@ -659,19 +663,19 @@ export default function HomePage() {
               {/* Contact Form */}
               <div className="relative">
                 <div className="relative">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
-                      <SparklesIcon className="h-6 w-6 text-white" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                      <SparklesIcon className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">Request Your Free Quote</h3>
-                      <p className="text-sm text-gray-300">We respond within 24 hours</p>
+                      <h3 className="text-lg font-bold text-white">Request Your Free Quote</h3>
+                      <p className="text-xs text-gray-300">We respond within 24 hours</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl overflow-hidden bg-white">
+                  <div className="rounded-xl overflow-hidden bg-white p-1">
                     <iframe
                       src={business.formEmbedUrl}
-                      style={{ width: '100%', height: '616px', border: 'none', borderRadius: '3px' }}
+                      style={{ width: '100%', height: '420px', border: 'none', borderRadius: '6px', display: 'block' }}
                       id="inline-Mh6K2okib8bY2wNnjYYq"
                       data-layout="{'id':'INLINE'}"
                       data-trigger-type="alwaysShow"
