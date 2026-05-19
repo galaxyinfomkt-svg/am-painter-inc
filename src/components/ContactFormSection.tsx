@@ -33,6 +33,7 @@ export function ContactFormSection({
           <iframe
             src={business.formEmbedUrl}
             style={{ width: '100%', height: '420px', border: 'none', borderRadius: '8px', display: 'block' }}
+            loading="lazy"
             id={iframeId}
             data-layout="{'id':'INLINE'}"
             data-trigger-type="alwaysShow"

@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import { business } from '@/data/business'
 import { FloatingPhoneButton } from '@/components/FloatingPhoneButton'
+import { ChatWidgetLoader } from '@/components/ChatWidgetLoader'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -124,13 +125,7 @@ export default function RootLayout({
         )}
         {children}
         <FloatingPhoneButton />
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="69f9394eb396d30fc569f988"
-          data-source="WEB_USER"
-          strategy="lazyOnload"
-        />
+        <ChatWidgetLoader widgetId="69f9394eb396d30fc569f988" />
         <Script
           src="https://link.msgsndr.com/js/form_embed.js"
           strategy="lazyOnload"
