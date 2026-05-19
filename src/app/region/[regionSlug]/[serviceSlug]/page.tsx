@@ -10,7 +10,7 @@ import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
-import { LocalBusinessSchema, BreadcrumbSchema } from '@/components/Schema'
+import { LocalBusinessSchema, BreadcrumbSchema, FAQSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 
 interface PageProps {
@@ -37,6 +37,30 @@ export default async function RegionalServicePage({ params }: PageProps) {
   if (!region || !service) {
     notFound()
   }
+
+  // Region + service specific FAQs (drives FAQPage JSON-LD and visible Q&A)
+  const regionFAQs: Array<{ question: string; answer: string }> = [
+    {
+      question: `Do you serve all of ${region.name}?`,
+      answer: `Yes. Our crews work across ${region.name}, including ${region.popularCities.slice(0, 4).join(', ')}. Coverage is from a single dispatch base — same crew lead, same standards across the whole region.`,
+    },
+    {
+      question: `How does ${region.name}'s climate affect ${service.name.toLowerCase()}?`,
+      answer: `${region.climate} ${service.name === 'Exterior Painting' || service.name === 'Deck Staining & Restoration' ? 'This drives our coating choice (UV inhibitors, freeze-thaw resistance) and our seasonal schedule.' : 'We choose products and prep methods that hold up to that environment.'}`,
+    },
+    {
+      question: `What does ${service.name.toLowerCase()} typically cost in ${region.name}?`,
+      answer: `Pricing varies by city, scope, and home size. Most ${region.name} ${service.name.toLowerCase()} projects fall in the mid-range for ${business.address.state}. We provide free, fixed-price written estimates after a walk-through — call ${business.phone}.`,
+    },
+    {
+      question: `Are you licensed and insured for ${region.name} work?`,
+      answer: `Yes. We hold an active Massachusetts Home Improvement Contractor (HIC) registration, carry ${business.insurance} in general liability plus workers' comp, and we send certificates of insurance to clients, condo boards, and property managers on request.`,
+    },
+    {
+      question: `How quickly can you start a ${service.name.toLowerCase()} project in ${region.name}?`,
+      answer: `For most ${region.name} projects we can schedule a walk-through within 3–5 business days and start work within 2–4 weeks, depending on season and scope. Emergency repairs (storm damage, water leaks) are prioritized.`,
+    },
+  ]
 
   // Get what we offer based on service
   const whatWeOffer = serviceSlug === 'interior-painting' ? [
@@ -107,11 +131,12 @@ export default async function RegionalServicePage({ params }: PageProps) {
   return (
     <>
       <LocalBusinessSchema />
+      <FAQSchema faqs={regionFAQs} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: business.url },
           { name: 'Services', url: `${business.url}/#services` },
-          { name: `${service.name} in ${region.name}`, url: `${business.url}/region/${regionSlug}/${serviceSlug}` },
+          { name: `${service.name} in ${region.name}`, url: `${business.url}/region/${regionSlug}/${serviceSlug}/` },
         ]}
       />
       <Header />
@@ -487,6 +512,31 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
         {/* Reviews Widget */}
         <ReviewsWidget />
+
+        {/* Frequently Asked Questions — region + service specific */}
+        <section className="py-16 lg:py-20 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <p className="text-primary font-semibold uppercase tracking-wider mb-3">FAQ</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-secondary">
+                {service.name} in {region.name} — Common Questions
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {regionFAQs.map((faq, idx) => (
+                <details key={idx} className="group rounded-xl border border-gray-200 bg-white open:shadow-md transition">
+                  <summary className="flex cursor-pointer items-start justify-between gap-4 p-5 font-semibold text-secondary list-none">
+                    <span>{faq.question}</span>
+                    <span className="flex-shrink-0 mt-1 text-primary group-open:rotate-45 transition-transform text-2xl leading-none" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <ContactFormSection
           heading="Get Your Free Estimate"

@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ContactFormSection } from '@/components/ContactFormSection'
-import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema } from '@/components/Schema'
+import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { business, services } from '@/data/business'
@@ -200,6 +200,156 @@ function getCityIntro(city: City, serviceName: string): string {
   return `As ${city.name}'s full-service general contractor, we handle projects of all sizes throughout ${regionName}. From ${city.architectureStyle[0] || 'residential'} home repairs to commercial work, our licensed team manages permits, coordinates subcontractors, and ensures quality results. ${business.yearsInBusiness}+ years serving Massachusetts families means you can trust us with your project.`
 }
 
+// Generate a second, data-rich paragraph using neighborhoods, county, zip codes
+function getCityDetailsParagraph(city: City): string {
+  const neighborhoodList = city.neighborhoods && city.neighborhoods.length > 0
+    ? city.neighborhoods.slice(0, 3).join(', ')
+    : null
+  const zip = city.zipCodes && city.zipCodes.length > 0 ? city.zipCodes[0] : null
+  const county = city.county ? `${city.county} County` : null
+
+  const parts: string[] = []
+  if (neighborhoodList) {
+    parts.push(`We frequently work in ${neighborhoodList} and the surrounding ${city.name} neighborhoods.`)
+  }
+  if (county || zip) {
+    const ident = [county, zip ? `ZIP ${zip}` : null].filter(Boolean).join(' / ')
+    parts.push(`${city.name} (${ident}) sees a ${city.areaType} mix of ${city.architectureStyle.slice(0, 2).join(' and ')} homes — most renovations here center on weathering, lead-safe prep, and color-matching to historic exteriors.`)
+  } else {
+    parts.push(`${city.name}'s ${city.areaType} character means most projects center on weathering, lead-safe prep, and color-matching to existing architecture.`)
+  }
+  return parts.join(' ')
+}
+
+// Generate 4-6 city + service specific FAQ items (drives FAQPage JSON-LD and visible Q&A)
+function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: string; answer: string }> {
+  const climate = city.climate.split(',')[0]
+  const arch = city.architectureStyle[0] || 'traditional'
+  const pre78 = city.pre1978Percent || 60
+  const phone = business.phone
+  const county = city.county ? `${city.county} County` : 'the surrounding county'
+
+  if (serviceName.includes('Interior')) {
+    return [
+      {
+        question: `How much does interior painting cost in ${city.name}, MA?`,
+        answer: `Interior painting in ${city.name} typically runs $3.50–$5.50 per square foot of wall area, depending on prep needs, ceiling height, and finish quality. A standard 12×14 bedroom in ${city.name} averages $450–$700. Free, fixed-price estimates are available — call ${phone}.`,
+      },
+      {
+        question: `Are you EPA Lead-Safe certified for older ${city.name} homes?`,
+        answer: `Yes. Approximately ${pre78}% of homes in ${city.name} were built before 1978, so EPA Lead-Safe Renovation, Repair and Painting (RRP) compliance is required by law on disturbed painted surfaces. Our team is fully certified and uses HEPA containment, dust monitoring, and proper waste disposal on every pre-1978 ${city.name} project.`,
+      },
+      {
+        question: `How long does interior painting take in a typical ${city.name} home?`,
+        answer: `Most ${city.name} interior projects take 2–5 working days. A single room is usually done in 1 day, a full first floor of a ${arch} home in 3–4 days, and a whole-house repaint in 5–7 days. We give a specific timeline with each estimate.`,
+      },
+      {
+        question: `What paints do you use on ${city.name} interiors?`,
+        answer: `We standardize on Benjamin Moore (Aura, Regal Select) and Sherwin-Williams (Cashmere, Emerald) lines, with low-VOC and zero-VOC options for occupied homes. Premium acrylic latex finishes hold up well to ${city.name}'s ${climate} indoor humidity swings.`,
+      },
+    ]
+  }
+  if (serviceName.includes('Exterior')) {
+    return [
+      {
+        question: `When is the best time of year to paint a house exterior in ${city.name}, MA?`,
+        answer: `Mid-May through mid-October is the prime exterior painting window in ${city.name}. ${city.climate} — surface temps need to be 50°F+ for 36 hours after application. We schedule ${city.name} exteriors as far out as October weather permits and reschedule rain-out days at no charge.`,
+      },
+      {
+        question: `How much does exterior painting cost in ${city.name}?`,
+        answer: `${arch} homes in ${city.name} typically run $4,500–$11,000 to repaint, depending on siding type, height, prep needs, and stories. Heavy carpentry repair (rotted trim, lead-safe stripping for pre-1978 homes) is quoted separately. Free written estimate: ${phone}.`,
+      },
+      {
+        question: `Do you handle wood rot and trim repair on ${city.name} homes?`,
+        answer: `Yes. Wood rot from ${city.climate.toLowerCase()} is one of the most common findings on ${city.name} exteriors. We replace rotted trim, fascia, soffit and clapboard sections in-house before painting, so the new coating sits on sound substrate.`,
+      },
+      {
+        question: `Are you licensed and insured to work in ${county}?`,
+        answer: `Yes. We hold an active Massachusetts Home Improvement Contractor (HIC) registration and carry ${business.insurance} in liability coverage plus workers' comp. Certificates of insurance are sent on request before work starts.`,
+      },
+    ]
+  }
+  if (serviceName.includes('Cabinet')) {
+    return [
+      {
+        question: `How much does cabinet refinishing cost in ${city.name}?`,
+        answer: `Most ${city.name} kitchen cabinet refinishing projects fall between $2,800 and $5,800, vs. $15,000+ for full replacement. Pricing depends on door count, whether you change cabinet hardware, and color (white-on-stained is the most labor-intensive).`,
+      },
+      {
+        question: `Will refinished cabinets in ${city.name} hold up like a factory finish?`,
+        answer: `Yes, when sprayed properly. We use HVLP spray with conversion varnish or 2K urethane that cures to a hard, scratch-resistant film comparable to a factory paint finish — much harder than brushed wall paint. Most ${city.name} clients see 10+ years of daily kitchen use with no chipping.`,
+      },
+      {
+        question: `How long is my ${city.name} kitchen out of commission?`,
+        answer: `Doors and drawer fronts come off-site to our spray booth for 3–5 days; cabinet boxes are sprayed in-place over 2 days. Total: about a week of partial kitchen use. We seal the work area and clean nightly so families can stay in the home.`,
+      },
+    ]
+  }
+  if (serviceName.includes('Deck')) {
+    return [
+      {
+        question: `When should I have my ${city.name} deck stained?`,
+        answer: `Late May through September is the ideal staining window in ${city.name}, when surface temps are dry and 50–90°F. ${city.climate} — boards must be moisture-tested below 15% before stain goes on, especially after a wet spring.`,
+      },
+      {
+        question: `How often does a deck in ${city.name} need to be re-stained?`,
+        answer: `Pressure-treated and cedar decks in ${city.name} typically need re-staining every 2–3 years on the floor boards (heaviest sun + foot traffic) and every 4–5 years on rails and balusters. We use semi-transparent penetrating stains that flake less than film-forming products.`,
+      },
+      {
+        question: `Can you fix damaged boards before staining?`,
+        answer: `Yes — we replace rotted, split or fastener-pulled boards before staining. We also pop and re-set proud nail heads and tighten loose railings as part of the staining scope.`,
+      },
+    ]
+  }
+  if (serviceName.includes('Drywall')) {
+    return [
+      {
+        question: `How much does drywall repair cost in ${city.name}?`,
+        answer: `Small patches (doorknob holes, nail pops) run $150–$300; mid-size repairs (water-damaged ceiling section, large wall patch) $400–$900; full sheet replacement $250–$450 per sheet installed and finished. ${city.name} homes built before 1978 may require lead-safe handling, which adds ~$120 per affected area.`,
+      },
+      {
+        question: `Can you match my existing ${city.name} wall texture?`,
+        answer: `Yes. ${arch} ${city.name} homes typically have either smooth, light orange-peel, or knockdown texture. We hand-blend repairs and feather them 12–18 inches past the patch so the finish disappears into the existing wall.`,
+      },
+      {
+        question: `Do you handle water damage repair after a roof or plumbing leak?`,
+        answer: `Yes — and the most important step is making sure the source is fixed and the area is dry before we drywall. We test moisture, remove damaged board, treat for mold if needed, and re-board, mud, sand, prime and paint to match.`,
+      },
+    ]
+  }
+  if (serviceName.includes('Remodeling')) {
+    return [
+      {
+        question: `How long does a kitchen remodel take in ${city.name}?`,
+        answer: `Mid-range kitchen remodels in ${city.name} typically run 6–10 weeks from demo to finish, depending on cabinet lead time and whether plumbing or electrical needs to move. We sequence trades tightly to keep your kitchen out of service for as little time as possible.`,
+      },
+      {
+        question: `Do you pull permits in ${city.name}?`,
+        answer: `Yes. We file and manage building, electrical, and plumbing permits with the ${city.name} building department on every remodel that requires them, and we coordinate inspections so you don't have to take time off work.`,
+      },
+      {
+        question: `What's the typical cost of a bathroom remodel in ${city.name}?`,
+        answer: `A full bathroom remodel in ${city.name} usually runs $14,000–$28,000 depending on fixture grade, tile choices, and whether the tub/shower is reconfigured. Powder-room refreshes (paint, vanity, fixtures, lighting, no tile) start around $3,500.`,
+      },
+    ]
+  }
+  // General contracting
+  return [
+    {
+      question: `What kinds of projects do you take on in ${city.name}?`,
+      answer: `As a licensed Massachusetts general contractor, we handle full remodels, additions, interior/exterior painting, drywall, deck work, and cabinet refinishing across ${city.name} and ${county}. For specialty trades (HVAC, plumbing, structural) we coordinate licensed subs and manage the schedule end-to-end.`,
+    },
+    {
+      question: `Do you handle permits and inspections in ${city.name}?`,
+      answer: `Yes. We pull all required building, electrical, and plumbing permits with the ${city.name} building department and stage work to pass inspection on the first visit. Final occupancy or completion sign-off is part of every scope.`,
+    },
+    {
+      question: `Are you insured for residential and commercial work in ${city.name}?`,
+      answer: `Yes — we carry ${business.insurance} in general liability plus Massachusetts workers' comp, and we'll send certificates of insurance directly to your insurer, condo board, or property manager on request.`,
+    },
+  ]
+}
+
 // Allow dynamic params
 export const dynamicParams = true
 
@@ -333,12 +483,15 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
   const commonIssues = getCityServiceChallenges(city, service.name) // City-specific challenges
   const whatWeOffer = getWhatWeOffer(service.name)
   const cityIntro = getCityIntro(city, service.name) // Unique intro paragraph
+  const cityDetails = getCityDetailsParagraph(city) // Second paragraph using neighborhoods/county/zip
+  const cityFAQs = getCityServiceFAQs(city, service.name) // Drives FAQPage JSON-LD and visible Q&A
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
 
   return (
     <>
       <ServiceSchema cityName={city.name} serviceName={service.name} />
       <LocalBusinessSchema />
+      <FAQSchema faqs={cityFAQs} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: business.url },
@@ -440,6 +593,9 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </div>
                   <p className="text-lg text-gray-600 leading-relaxed mb-4">
                     {cityIntro}
+                  </p>
+                  <p className="text-base text-gray-600 leading-relaxed mb-4">
+                    {cityDetails}
                   </p>
                   {/* Climate Info Box */}
                   <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
@@ -660,6 +816,31 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Frequently Asked Questions — city + service specific */}
+        <section className="py-16 lg:py-20 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <p className="text-primary font-semibold uppercase tracking-wider mb-3">FAQ</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-secondary">
+                {service.name} in {city.name}, MA — Common Questions
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {cityFAQs.map((faq, idx) => (
+                <details key={idx} className="group rounded-xl border border-gray-200 bg-white open:shadow-md transition">
+                  <summary className="flex cursor-pointer items-start justify-between gap-4 p-5 font-semibold text-secondary list-none">
+                    <span>{faq.question}</span>
+                    <span className="flex-shrink-0 mt-1 text-primary group-open:rotate-45 transition-transform text-2xl leading-none" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </section>
