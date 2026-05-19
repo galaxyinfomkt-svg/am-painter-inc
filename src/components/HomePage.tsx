@@ -286,7 +286,7 @@ export default function HomePage() {
                 The Most Trusted <span className="text-primary">Painting Contractor</span> in Massachusetts
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Since 1992, {business.name} has been the preferred choice for homeowners and businesses across Massachusetts seeking professional painting and remodeling services.
+                Since {business.foundedYear}, {business.name} has been the preferred choice for homeowners and businesses across Massachusetts seeking professional painting and remodeling services.
               </p>
             </div>
 
@@ -305,7 +305,7 @@ export default function HomePage() {
                 {
                   icon: ClockIcon,
                   title: `${business.yearsInBusiness}+ Years Experience`,
-                  description: 'Serving Massachusetts families since 1992 with expert craftsmanship that stands the test of time.',
+                  description: `Serving Massachusetts families since ${business.foundedYear} with expert craftsmanship that stands the test of time.`,
                 },
                 {
                   icon: CheckCircleIcon,
@@ -395,7 +395,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  {business.name} has been transforming homes and businesses across Massachusetts since 1992. Based in Hudson, we serve over {Object.keys(CITIES).length} communities including Marlborough, Worcester, Framingham, Shrewsbury, and throughout MetroWest. Our licensed and insured team combines expert craftsmanship with premium materials to deliver exceptional results on every project.
+                  {business.name} has been transforming homes and businesses across Massachusetts since {business.foundedYear}. Headquartered in MetroWest, we serve over {Object.keys(CITIES).length} communities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, and throughout the region. Our licensed and insured team combines expert craftsmanship with premium materials to deliver exceptional results on every project.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-6">

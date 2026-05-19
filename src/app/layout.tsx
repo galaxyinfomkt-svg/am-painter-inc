@@ -76,10 +76,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // Google Search Console - replace with your code from search.google.com/search-console
-  verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE',
-  },
+  // Google Search Console verification — set NEXT_PUBLIC_GSC_VERIFICATION in Vercel env to enable
+  ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } }
+    : {}),
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -140,19 +140,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <body className="font-sans antialiased bg-white text-gray-900">
-        {/* Google Analytics 4 - Replace G-XXXXXXXXXX with your actual GA4 Measurement ID */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
+        {/* Google Analytics 4 — set NEXT_PUBLIC_GA_ID in Vercel env to enable */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
         {children}
         <FloatingPhoneButton />
         <Script

@@ -570,7 +570,11 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </div>
                   <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                     <iframe
-                      src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(city.name + ', Massachusetts, USA')}&zoom=12`}
+                      src={
+                        process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
+                          ? `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(city.name + ', Massachusetts, USA')}&zoom=12`
+                          : `https://maps.google.com/maps?q=${encodeURIComponent(city.name + ', Massachusetts, USA')}&t=&z=12&ie=UTF8&iwloc=&output=embed`
+                      }
                       width="100%"
                       height="300"
                       className="border-0"
