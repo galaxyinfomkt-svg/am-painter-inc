@@ -9,6 +9,9 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  // Only load the weights the design system actually uses (was loading 9 weights)
+  weight: ['400', '500', '600', '700', '800'],
+  preload: true,
 })
 
 // Default/fallback metadata for the entire site - Pages can override with their own metadata
