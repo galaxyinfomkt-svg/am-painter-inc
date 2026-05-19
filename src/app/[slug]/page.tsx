@@ -238,10 +238,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Create city-specific, unique meta description (max 155 chars)
   const architectureText = city.architectureStyle.slice(0, 2).join(' & ')
 
-  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, MA. ${architectureText} home experts. EPA Lead-Safe certified, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`
+  const description = `${service.name} in ${city.name}, MA. ${architectureText} home experts, EPA Lead-Safe, insured. Free estimate: ${business.phone}`
 
-  // Create unique, city-specific title
-  const title = `${service.name} ${city.name} MA | ${architectureText} Home Experts | ${business.name}`
+  // Create unique, city-specific title (layout template appends brand)
+  const title = `${service.name} in ${city.name}, MA | ${architectureText} Homes`
 
   // Generate comprehensive keywords including city-specific terms
   const keywords = [

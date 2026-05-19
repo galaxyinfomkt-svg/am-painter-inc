@@ -5,7 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: `Cookie Policy | ${business.name}`,
+  title: 'Cookie Policy',
   description: `Cookie Policy for ${business.name}. Learn how our website uses cookies and similar tracking technologies, and how you can control them.`,
   alternates: { canonical: `${business.url}/cookies` },
   robots: { index: true, follow: true },

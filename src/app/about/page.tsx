@@ -10,8 +10,8 @@ import { ContactFormSection } from '@/components/ContactFormSection'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
-  title: `About ${business.name} | Professional Painting Contractor Massachusetts`,
-  description: `Learn about ${business.name}, Massachusetts' trusted painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities with interior painting, exterior painting, cabinet refinishing, and home remodeling. Licensed, ${business.insurance} insured, ${business.reviewCount}+ 5-star reviews.`,
+  title: 'About Us | Professional Painting Contractor Massachusetts',
+  description: `Trusted Massachusetts painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities. Licensed, insured, ${business.reviewCount}+ 5-star reviews.`,
   keywords: [
     'about A&M Painter',
     'A&M Painter Inc Massachusetts',

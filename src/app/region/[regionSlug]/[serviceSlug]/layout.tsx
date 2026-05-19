@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   // Unique SEO titles for each region-service combination
   const titleTemplates: Record<string, Record<string, string>> = {
     'greater-boston': {
-      'interior-painting': `#1 Interior Painting Greater Boston | Historic Homes & Modern Condos | ${business.name}`,
-      'exterior-painting': `Boston Exterior Painting | Salt-Air Resistant Coatings | ${business.name}`,
+      'interior-painting': '#1 Interior Painting Greater Boston | Historic Homes & Modern Condos',
+      'exterior-painting': 'Boston Exterior Painting | Salt-Air Resistant Coatings',
       'cabinet-refinishing': `Cabinet Refinishing Greater Boston | Luxury Kitchen Transformations`,
       'deck-staining': `Deck Staining & Weatherproofing | Greater Boston Coastal Homes`,
       'drywall-repair': `Drywall Repair Greater Boston | Brownstone & Condo Specialists`,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       'general-contracting': `General Contractor Greater Boston | Full-Service Renovation`
     },
     'rhode-island-new-hampshire': {
-      'interior-painting': `Interior Painting RI & NH | Coastal Homes & Mountain Retreats | ${business.name}`,
+      'interior-painting': 'Interior Painting RI & NH | Coastal Homes & Mountain Retreats',
       'exterior-painting': `Exterior Painting Rhode Island & New Hampshire | Weather-Tough Coatings`,
       'cabinet-refinishing': `Cabinet Refinishing RI & NH | Providence to Portsmouth`,
       'deck-staining': `Deck Staining RI & NH | Lake & Coastal Properties`,
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       'general-contracting': `General Contractor RI & NH | Residential & Commercial`
     },
     'maine-vermont': {
-      'interior-painting': `Interior Painting Maine & Vermont | Cold-Climate Specialists | ${business.name}`,
+      'interior-painting': 'Interior Painting Maine & Vermont | Cold-Climate Specialists',
       'exterior-painting': `Exterior Painting ME & VT | Extreme Weather Protection`,
       'cabinet-refinishing': `Cabinet Refinishing Maine & Vermont | Portland to Burlington`,
       'deck-staining': `Deck Staining ME & VT | Mountain & Coastal Properties`,
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       'general-contracting': `General Contractor Maine & Vermont | Licensed & Insured`
     },
     'worcester-nearby': {
-      'interior-painting': `Interior Painting Worcester MA | Triple-Decker Specialists | ${business.name}`,
+      'interior-painting': 'Interior Painting Worcester MA | Triple-Decker Specialists',
       'exterior-painting': `Exterior Painting Worcester & Central MA | Freeze-Thaw Resistant`,
       'cabinet-refinishing': `Cabinet Refinishing Worcester MA | Affordable Quality`,
       'deck-staining': `Deck Staining Worcester & Nearby | Budget-Friendly Excellence`,
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   }
 
   const title = titleTemplates[regionSlug]?.[serviceSlug] ||
-    `${service.name} in ${region.name} | ${business.name}`
+    `${service.name} in ${region.name}`
 
   const description = descriptionTemplates[regionSlug]?.[serviceSlug] ||
     `Professional ${service.name.toLowerCase()} services in ${region.name}. Serving ${region.popularCities.slice(0, 3).join(', ')}. ${region.climate}. Licensed, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`

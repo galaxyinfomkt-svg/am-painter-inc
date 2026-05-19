@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `General Contracting Services Massachusetts | ${business.name} | Licensed Contractor`,
-  description: `Professional general contracting services in Massachusetts. Full-service project management, permit handling, subcontractor coordination. ${business.yearsInBusiness}+ years experience. Licensed, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'General Contracting Services Massachusetts | Licensed Contractor',
+  description: `General contracting in Massachusetts. Project management, permits, subcontractor coordination. Licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     'general contractor Massachusetts',
     'general contracting MA',

@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Interior Painting Services Massachusetts | ${business.name} | Professional House Painters`,
-  description: `Expert interior painting services in Massachusetts. Transform your home with ${business.yearsInBusiness}+ years of experience. Premium Benjamin Moore & Sherwin-Williams paints, low-VOC options, color consultation. Licensed, ${business.insurance} insured, EPA Lead-Safe certified. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Interior Painting Services Massachusetts | Professional House Painters',
+  description: `Interior painting in Massachusetts. ${business.yearsInBusiness}+ years, premium paints, low-VOC, EPA Lead-Safe. Free estimate: ${business.phone}`,
   keywords: [
     'interior painting Massachusetts',
     'interior house painting MA',

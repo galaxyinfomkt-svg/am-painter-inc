@@ -16,7 +16,7 @@ export function LocalBusinessSchema() {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'HousePainter', 'HomeAndConstructionBusiness', 'GeneralContractor', 'ProfessionalService'],
+    '@type': ['HomeAndConstructionBusiness', 'HousePainter'],
     '@id': `${business.url}/#business`,
 
     // === IDENTIDADE DA EMPRESA (AI Discovery) ===
@@ -235,26 +235,22 @@ export function LocalBusinessSchema() {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Painting & Remodeling Services',
-      itemListElement: services.map((service, index) => ({
-        '@type': 'OfferCatalog',
-        name: service.name,
-        itemListElement: [{
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            '@id': `${business.url}/services/${service.id}`,
-            name: service.name,
-            description: service.description,
-            provider: {
-              '@id': `${business.url}/#business`,
-            },
-            areaServed: {
-              '@type': 'State',
-              name: 'Massachusetts',
-            },
-            serviceType: service.name,
+      itemListElement: services.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          '@id': `${business.url}/services/${service.id}`,
+          name: service.name,
+          description: service.description,
+          provider: {
+            '@id': `${business.url}/#business`,
           },
-        }],
+          areaServed: {
+            '@type': 'State',
+            name: 'Massachusetts',
+          },
+          serviceType: service.name,
+        },
       })),
     },
 
@@ -264,10 +260,6 @@ export function LocalBusinessSchema() {
         '@type': 'Service',
         name: service.name,
         description: service.description,
-      },
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        priceCurrency: 'USD',
       },
       areaServed: {
         '@type': 'State',
@@ -333,8 +325,8 @@ export function LocalBusinessSchema() {
           '@type': 'EntryPoint',
           urlTemplate: `${business.url}/#contact`,
           actionPlatform: [
-            'http://schema.org/DesktopWebPlatform',
-            'http://schema.org/MobileWebPlatform',
+            'https://schema.org/DesktopWebPlatform',
+            'https://schema.org/MobileWebPlatform',
           ],
         },
         result: {
@@ -348,7 +340,7 @@ export function LocalBusinessSchema() {
         target: {
           '@type': 'EntryPoint',
           urlTemplate: `tel:${business.phoneRaw}`,
-          actionPlatform: 'http://schema.org/TelephonePlatform',
+          actionPlatform: 'https://schema.org/TelephonePlatform',
         },
       },
       {
@@ -525,7 +517,6 @@ export function WebPageSchema({
       '@id': `${business.url}/#organization`,
     },
     inLanguage: 'en-US',
-    datePublished: `${business.foundedYear}-01-01`,
     dateModified: new Date().toISOString().split('T')[0],
   }
 

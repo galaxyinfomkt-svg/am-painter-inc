@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Exterior Painting Services Massachusetts | ${business.name} | House Painters`,
-  description: `Professional exterior painting services in Massachusetts. Protect your home from New England weather with ${business.yearsInBusiness}+ years experience. Premium weather-resistant paints, wood rot repair, power washing. EPA Lead-Safe certified. ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Exterior Painting Services Massachusetts | House Painters',
+  description: `Exterior painting in Massachusetts. Weather-resistant paints, wood rot repair, power washing. EPA Lead-Safe. Free estimate: ${business.phone}`,
   keywords: [
     'exterior painting Massachusetts',
     'exterior house painting MA',

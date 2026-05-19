@@ -15,53 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
   title: {
-    default: `#1 Painting Contractor Massachusetts | ${business.name} | Hudson, Marlborough, Worcester`,
+    default: `Painting Contractor Massachusetts | ${business.name}`,
     template: `%s | ${business.name}`,
   },
-  description: `Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Licensed, ${business.insurance} insured, EPA Lead-Safe certified. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
-  keywords: [
-    // Primary Massachusetts keywords
-    'painting contractor Massachusetts',
-    'house painters Massachusetts',
-    'painters near me Massachusetts',
-    'professional painters MA',
-    'painting company Massachusetts',
-
-    // Hudson HQ keywords
-    'painting contractor Hudson MA',
-    'house painters Hudson Massachusetts',
-    'interior painting Hudson MA',
-    'exterior painting Hudson MA',
-
-    // Major cities
-    'painters Marlborough MA',
-    'house painters Worcester MA',
-    'painting services Framingham MA',
-    'painters Shrewsbury MA',
-    'painting company MetroWest',
-
-    // Service keywords
-    'interior house painting Massachusetts',
-    'exterior house painting MA',
-    'cabinet refinishing Massachusetts',
-    'cabinet painting MA',
-    'kitchen cabinet painters Massachusetts',
-    'deck staining MA',
-    'drywall repair Massachusetts',
-    'home remodeling MA',
-    'general contractor Massachusetts',
-
-    // Trust/Intent keywords
-    'best painters Massachusetts',
-    'licensed painters MA',
-    'insured painting contractor Massachusetts',
-    'EPA lead safe certified painters',
-    '5-star rated painters MA',
-    'affordable painting Massachusetts',
-    'quality house painters MA',
-    'residential painting Massachusetts',
-    'commercial painting MA',
-  ],
+  description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck, remodeling. Licensed, insured, EPA Lead-Safe. Free estimate: ${business.phone}`,
   authors: [{ name: business.name }],
   creator: business.name,
   publisher: business.name,
@@ -115,20 +72,12 @@ export const metadata: Metadata = {
     'geo.placename': 'Massachusetts',
     'geo.position': `${business.geo.latitude};${business.geo.longitude}`,
     'ICBM': `${business.geo.latitude}, ${business.geo.longitude}`,
-    'rating': '5',
-    'revisit-after': '7 days',
-    'distribution': 'global',
-    'coverage': 'Massachusetts',
-    'target': 'all',
-    'HandheldFriendly': 'True',
-    'MobileOptimized': '320',
   },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
   themeColor: business.colors.secondary,
 }
 

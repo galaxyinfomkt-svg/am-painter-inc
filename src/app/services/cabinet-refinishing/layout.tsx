@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Cabinet Painting & Refinishing Massachusetts | ${business.name} | Kitchen Cabinets`,
-  description: `Professional cabinet painting and refinishing in Massachusetts. Transform your kitchen for 1/3 the cost of replacement. Factory-smooth spray finish, ${business.yearsInBusiness}+ years experience. Premium primers and conversion varnishes. ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Cabinet Painting & Refinishing Massachusetts | Kitchen Cabinets',
+  description: `Cabinet painting & refinishing in Massachusetts. Factory-smooth spray finish, ${business.yearsInBusiness}+ years. Free estimate: ${business.phone}`,
   keywords: [
     'cabinet refinishing Massachusetts',
     'cabinet painting MA',
