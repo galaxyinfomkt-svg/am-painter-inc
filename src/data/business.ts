@@ -88,6 +88,7 @@ export const business = {
   gmbMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.6!2d-71.1470!3d42.3519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzA2LjgiTiA3McKwMDgnNDkuMiJX!5e0!3m2!1sen!2sus!4v1234567890',
   reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/npwVVdTpo5dMM8CCSeCT',
   googleReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
+  googleWriteReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   facebookUrl: 'https://www.facebook.com/p/AM-Painter-100083000816674/',
   instagramUrl: 'https://www.instagram.com/am_painterinc/',
 

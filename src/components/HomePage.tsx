@@ -481,7 +481,7 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href={business.googleReviewUrl}
                 target="_blank"
@@ -490,6 +490,15 @@ export default function HomePage() {
               >
                 <StarIcon className="h-5 w-5 text-yellow-400" />
                 See Our {business.reviewCount}+ Google Reviews
+              </a>
+              <a
+                href={business.googleWriteReviewUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-2xl shadow-lg hover:bg-primary/90 transition"
+              >
+                <StarIcon className="h-5 w-5 text-yellow-300" />
+                Write a Review on Google
               </a>
             </div>
           </div>
@@ -651,7 +660,24 @@ export default function HomePage() {
                       <p className="text-sm text-gray-300">We respond within 24 hours</p>
                     </div>
                   </div>
-                  <div className="rounded-2xl overflow-hidden">
+                  <div className="rounded-2xl overflow-hidden bg-white">
+                    <iframe
+                      src={business.formEmbedUrl}
+                      style={{ width: '100%', height: '616px', border: 'none', borderRadius: '3px' }}
+                      id="inline-Mh6K2okib8bY2wNnjYYq"
+                      data-layout="{'id':'INLINE'}"
+                      data-trigger-type="alwaysShow"
+                      data-trigger-value=""
+                      data-activation-type="alwaysActivated"
+                      data-activation-value=""
+                      data-deactivation-type="neverDeactivate"
+                      data-deactivation-value=""
+                      data-form-name="FORM SITE AM PAINTER"
+                      data-height="616"
+                      data-layout-iframe-id="inline-Mh6K2okib8bY2wNnjYYq"
+                      data-form-id="Mh6K2okib8bY2wNnjYYq"
+                      title="FORM SITE AM PAINTER"
+                    />
                   </div>
                 </div>
               </div>
