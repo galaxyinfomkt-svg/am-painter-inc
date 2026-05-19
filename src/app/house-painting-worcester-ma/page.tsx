@@ -6,6 +6,7 @@ import { CityPageSchema, FAQSchema } from '@/components/Schema'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ContactFormSection } from '@/components/ContactFormSection'
 
 const city = cityData['worcester']
 const cityName = city.name
@@ -399,6 +400,12 @@ export default function WorcesterPage() {
           </Link>
         </div>
       </div>
+
+      <ContactFormSection
+        heading="Get Your Free Worcester Painting Estimate"
+        subheading="Tell us about your project — we respond within 24 hours."
+        variant="worcester"
+      />
 
       <div className="h-20 md:hidden" />
 

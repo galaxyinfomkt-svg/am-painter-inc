@@ -8,6 +8,7 @@ import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { ContactFormSection } from '@/components/ContactFormSection'
 
 const painPoints = [
   {
@@ -298,6 +299,12 @@ export default function RemodelingPage() {
 
         {/* Reviews */}
         <ReviewsWidget />
+
+        <ContactFormSection
+          heading="Get Your Free Remodeling Estimate"
+          subheading="Tell us about your project — we respond within 24 hours."
+          variant="remodeling"
+        />
       </main>
 
       <Footer />

@@ -8,6 +8,7 @@ import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ContactFormSection } from '@/components/ContactFormSection'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
 import { LocalBusinessSchema, BreadcrumbSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
@@ -486,6 +487,12 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
         {/* Reviews Widget */}
         <ReviewsWidget />
+
+        <ContactFormSection
+          heading="Get Your Free Estimate"
+          subheading="Tell us about your project — we respond within 24 hours."
+          variant="region-service"
+        />
       </main>
 
       <Footer />

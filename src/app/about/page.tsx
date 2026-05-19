@@ -6,6 +6,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { aiBusinessDescription, aiFrequentlyAskedQuestions, aiRegionalExpertise, aiServiceDescriptions } from '@/data/ai-discovery'
 import { YouTubeVideo } from '@/components/YouTubeVideo'
+import { ContactFormSection } from '@/components/ContactFormSection'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
@@ -283,6 +284,12 @@ export default function AboutPage() {
             </p>
           </div>
         </section>
+
+        <ContactFormSection
+          heading="Get Your Free Estimate"
+          subheading="Tell us about your project — we respond within 24 hours."
+          variant="about"
+        />
       </main>
 
       <Footer />
