@@ -24,5 +24,14 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2"
-  }
+  },
+  "browserslist": [
+    "Chrome >= 109",
+    "Edge >= 109",
+    "Firefox >= 102",
+    "Safari >= 15.6",
+    "iOS >= 15.6",
+    "not dead",
+    "not op_mini all"
+  ]
 }

@@ -12,14 +12,46 @@ interface LazyFormEmbedProps {
   ctaLabel?: string
 }
 
+let globalFormsActive = false
+const globalSubscribers = new Set<() => void>()
+let globalListenersInstalled = false
+
+function activateAllForms() {
+  globalFormsActive = true
+  globalSubscribers.forEach(fn => fn())
+  globalSubscribers.clear()
+  uninstallGlobalListeners()
+}
+
+function installGlobalListeners() {
+  if (globalListenersInstalled || typeof window === 'undefined') return
+  globalListenersInstalled = true
+  const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+  events.forEach(ev =>
+    window.addEventListener(ev, activateAllForms, { once: false, passive: true, capture: true })
+  )
+  // Fallback: load after 8s of pure idle so bots and very-low-engagement
+  // visits still get a working form.
+  window.setTimeout(activateAllForms, 8000)
+}
+
+function uninstallGlobalListeners() {
+  if (typeof window === 'undefined') return
+  const events = ['scroll', 'pointermove', 'pointerdown', 'touchstart', 'keydown']
+  events.forEach(ev => window.removeEventListener(ev, activateAllForms, { capture: true } as never))
+}
+
 /**
- * Renders a static placeholder until either:
- *  - the user clicks the placeholder, or
- *  - the placeholder enters the viewport.
+ * Renders a placeholder that activates the LeadConnector iframe only after:
+ *  - the user clicks the placeholder itself, OR
+ *  - the user makes ANY interaction with the page (scroll / pointer / touch /
+ *    keyboard), OR
+ *  - 8 seconds elapse without interaction.
  *
- * On either trigger, swap to the real LeadConnector iframe. This stops the
- * iframe (and its heavy recaptcha / fbevents / preview-script cascade) from
- * running during the initial paint — the single biggest Lighthouse drain.
+ * Interaction-gated (rather than viewport-gated) so that an above-the-fold
+ * form on the home hero doesn't auto-load during Lighthouse simulation —
+ * the GHL iframe pulls in recaptcha (~365 KiB, ~2 s CPU), fbevents
+ * (~97 KiB), libphonenumber, and several preview scripts that crater TBT.
  */
 export function LazyFormEmbed({
   src,
@@ -29,26 +61,25 @@ export function LazyFormEmbed({
   ctaLabel = 'Load the contact form',
 }: LazyFormEmbedProps) {
   const [active, setActive] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (active) return
     if (typeof window === 'undefined') return
-    const el = ref.current
-    if (!el) return
 
-    // Auto-activate when the placeholder is within 200px of the viewport
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some(e => e.isIntersecting)) {
-          setActive(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: '200px 0px' }
-    )
-    io.observe(el)
-    return () => io.disconnect()
+    // If a sibling form already activated, snap this one too.
+    if (globalFormsActive) {
+      setActive(true)
+      return
+    }
+
+    const onActivate = () => setActive(true)
+    globalSubscribers.add(onActivate)
+    installGlobalListeners()
+
+    return () => {
+      globalSubscribers.delete(onActivate)
+    }
   }, [active])
 
   if (active) {
@@ -71,9 +102,12 @@ export function LazyFormEmbed({
 
   return (
     <button
-      ref={ref as unknown as React.Ref<HTMLButtonElement>}
+      ref={ref}
       type="button"
-      onClick={() => setActive(true)}
+      onClick={() => {
+        setActive(true)
+        activateAllForms()
+      }}
       className="block w-full bg-gradient-to-br from-gray-50 to-gray-100 hover:from-white hover:to-gray-50 rounded-lg border border-gray-200 text-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       style={{ height: `${height}px` }}
       aria-label={ctaLabel}
