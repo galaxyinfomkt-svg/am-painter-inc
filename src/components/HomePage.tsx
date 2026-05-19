@@ -172,20 +172,11 @@ export default function HomePage() {
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
                   <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
-                  <div className="relative bg-white rounded-3xl p-4 border border-white/20 shadow-2xl">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <SparklesIcon className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-secondary">Get Your Free Quote</h3>
-                        <p className="text-xs text-gray-600">Response within 24 hours</p>
-                      </div>
-                    </div>
+                  <div className="relative bg-white rounded-2xl p-1 border border-white/20 shadow-2xl overflow-hidden">
                     <div className="rounded-xl overflow-hidden">
                       <iframe
                         src={business.formEmbedUrl}
-                        style={{ width: '100%', height: '480px', border: 'none', borderRadius: '8px' }}
+                        style={{ width: '100%', height: '480px', border: 'none', borderRadius: '8px', display: 'block' }}
                         id="inline-Mh6K2okib8bY2wNnjYYq-hero"
                         data-layout="{'id':'INLINE'}"
                         data-trigger-type="alwaysShow"
