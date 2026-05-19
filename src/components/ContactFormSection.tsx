@@ -29,7 +29,7 @@ export function ContactFormSection({
           <p className="text-sm md:text-base text-gray-300 max-w-xl mx-auto">{subheading}</p>
         </div>
 
-        <div className="bg-white rounded-xl p-1 border border-white/20 shadow-2xl overflow-hidden">
+        <div className="bg-white rounded-xl p-[5px] border border-white/20 shadow-2xl overflow-hidden mx-auto w-full max-w-[420px]">
           <iframe
             src={business.formEmbedUrl}
             style={{ width: '100%', height: '420px', border: 'none', borderRadius: '8px', display: 'block' }}
