@@ -27,7 +27,15 @@ export const business = {
   yearsInBusiness: 5,
   foundedYear: 2020,
   owner: 'Agrimaldo Oliveira',
+  ownerTitle: 'Owner & Master Painter',
+  ownerBio: 'Agrimaldo founded A&M Painter Inc to bring honest, high-craft painting and remodeling to MetroWest Massachusetts homeowners. He personally walks every estimate and checks in on every active jobsite. The team is bilingual (English / Portuguese) and serves the large Portuguese-speaking community in Hudson, Framingham, Marlborough, and surrounding towns.',
+  // TODO: replace the placeholder with a real headshot of the owner
+  ownerPhoto: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398e1f169a422340195b7c.png',
   insurance: '$2,000,000',
+  // TODO: fill in the real MA Home Improvement Contractor (HIC) number + CSL once the user provides it
+  hicLicense: '' as string,
+  cslLicense: '' as string,
+  languages: ['English', 'Portuguese'] as string[],
   rating: 5.0,
   reviewCount: 150,
 
