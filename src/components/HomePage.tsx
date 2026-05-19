@@ -10,6 +10,7 @@ import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema } from '@/components/Schema'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
+import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon, PlayIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 // All project photos organized
@@ -74,7 +75,9 @@ export default function HomePage() {
               alt="Professional painting contractor Massachusetts - Interior and exterior house painting services"
               fill
               priority
+              fetchPriority="high"
               sizes="100vw"
+              quality={70}
               className="object-cover scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/50" />
@@ -178,23 +181,11 @@ export default function HomePage() {
                       <p className="text-xs text-gray-600">Response within 24 hours</p>
                     </div>
                     <div className="rounded-lg overflow-hidden">
-                      <iframe
+                      <LazyFormEmbed
                         src={business.formEmbedUrl}
-                        style={{ width: '100%', height: '360px', border: 'none', borderRadius: '6px', display: 'block' }}
-                        loading="lazy"
-                        id="inline-Mh6K2okib8bY2wNnjYYq-hero"
-                        data-layout="{'id':'INLINE'}"
-                        data-trigger-type="alwaysShow"
-                        data-trigger-value=""
-                        data-activation-type="alwaysActivated"
-                        data-activation-value=""
-                        data-deactivation-type="neverDeactivate"
-                        data-deactivation-value=""
-                        data-form-name="FORM SITE AM PAINTER"
-                        data-height="616"
-                        data-layout-iframe-id="inline-Mh6K2okib8bY2wNnjYYq-hero"
-                        data-form-id="Mh6K2okib8bY2wNnjYYq"
-                        title="Request a free painting estimate"
+                        formId="Mh6K2okib8bY2wNnjYYq"
+                        variant="hero"
+                        height={360}
                       />
                     </div>
                   </div>

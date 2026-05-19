@@ -93,14 +93,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* Preconnect to known third-party origins so resources negotiate TLS earlier */}
+        {/* Preconnect to the LCP image origin only — keep the list tight per Lighthouse advice */}
         <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://widgets.leadconnectorhq.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.leadconnectorhq.com" />
-        <link rel="dns-prefetch" href="https://link.msgsndr.com" />
+        <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
         <link rel="dns-prefetch" href="https://reputationhub.site" />
-        <link rel="dns-prefetch" href="https://www.google.com" />
-        <link rel="dns-prefetch" href="https://img.youtube.com" />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         <a href="#main-content" className="skip-to-content">
@@ -126,10 +123,11 @@ export default function RootLayout({
         {children}
         <FloatingPhoneButton />
         <ChatWidgetLoader widgetId="69f9394eb396d30fc569f988" />
-        <Script
-          src="https://link.msgsndr.com/js/form_embed.js"
-          strategy="lazyOnload"
-        />
+        {/* form_embed.js intentionally removed — it pulls in a 200+ KB cascade
+            (recaptcha, fbevents x2, libphonenumber-js, several /_preview/*.js).
+            Our iframes use fixed inline heights and load with loading="lazy",
+            so they render and submit correctly without form_embed's auto-
+            resize helper. */}
       </body>
     </html>
   )
