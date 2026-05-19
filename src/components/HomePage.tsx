@@ -166,14 +166,14 @@ export default function HomePage() {
               </div>
 
               {/* Right - Contact Form Card */}
-              <div className="block animate-fadeInUp animation-delay-400">
-                <div className="relative">
+              <div className="block animate-fadeInUp animation-delay-400 lg:flex lg:justify-end">
+                <div className="relative w-full max-w-[400px] mx-auto lg:mx-0">
                   {/* Decorative elements */}
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
                   <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
-                  <div className="relative bg-white rounded-2xl p-2 border border-white/20 shadow-2xl overflow-hidden">
-                    <div className="text-center mb-2">
+                  <div className="relative bg-white rounded-2xl p-[5px] border border-white/20 shadow-2xl overflow-hidden">
+                    <div className="text-center mb-1 pt-1">
                       <h3 className="text-base font-bold text-secondary leading-tight">Get Your Free Quote</h3>
                       <p className="text-xs text-gray-600">Response within 24 hours</p>
                     </div>
@@ -672,7 +672,7 @@ export default function HomePage() {
                       <p className="text-xs text-gray-300">We respond within 24 hours</p>
                     </div>
                   </div>
-                  <div className="rounded-xl overflow-hidden bg-white p-1">
+                  <div className="rounded-xl overflow-hidden bg-white p-[5px] mx-auto w-full max-w-[420px]">
                     <iframe
                       src={business.formEmbedUrl}
                       style={{ width: '100%', height: '420px', border: 'none', borderRadius: '6px', display: 'block' }}
