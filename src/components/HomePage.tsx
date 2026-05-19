@@ -59,7 +59,7 @@ export default function HomePage() {
       <FAQSchema faqs={faqList} />
       <Header />
 
-      <main className="pt-[124px]">
+      <main id="main-content" className="pt-[124px]">
         {/* Hero Section - Modern Full Screen */}
         <section className="relative min-h-[95vh] flex items-center bg-secondary overflow-hidden">
           {/* Animated Background Pattern */}
@@ -193,7 +193,7 @@ export default function HomePage() {
                         data-height="616"
                         data-layout-iframe-id="inline-Mh6K2okib8bY2wNnjYYq-hero"
                         data-form-id="Mh6K2okib8bY2wNnjYYq"
-                        title="FORM SITE AM PAINTER"
+                        title="Request a free painting estimate"
                       />
                     </div>
                   </div>
@@ -573,8 +573,10 @@ export default function HomePage() {
                       type="button"
                       aria-label={`Go to testimonial ${idx + 1}`}
                       onClick={() => setCurrentTestimonial(idx)}
-                      className={`w-3 h-3 rounded-full transition ${idx === currentTestimonial ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/60'}`}
-                    />
+                      className="inline-flex items-center justify-center w-6 h-6 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary rounded-full"
+                    >
+                      <span className={`block rounded-full transition-all ${idx === currentTestimonial ? 'w-8 h-3 bg-white' : 'w-3 h-3 bg-white/40 hover:bg-white/60'}`} />
+                    </button>
                   ))}
                 </div>
                 <button
@@ -660,37 +662,29 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Contact Form */}
+              {/* Contact CTA (the hero already has the LeadConnector form;
+                  do not render a second iframe here to avoid loading the
+                  third-party form script twice per page). */}
               <div className="relative">
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                      <SparklesIcon className="h-5 w-5 text-white" />
+                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center">
+                      <SparklesIcon className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white">Request Your Free Quote</h3>
-                      <p className="text-xs text-gray-300">We respond within 24 hours</p>
+                      <h3 className="text-xl font-bold text-white">Ready to start?</h3>
+                      <p className="text-sm text-gray-300">We respond within 24 hours</p>
                     </div>
                   </div>
-                  <div className="rounded-xl overflow-hidden bg-white p-[5px] mx-auto w-full max-w-[420px]">
-                    <iframe
-                      src={business.formEmbedUrl}
-                      style={{ width: '100%', height: '420px', border: 'none', borderRadius: '6px', display: 'block' }}
-                      id="inline-Mh6K2okib8bY2wNnjYYq"
-                      data-layout="{'id':'INLINE'}"
-                      data-trigger-type="alwaysShow"
-                      data-trigger-value=""
-                      data-activation-type="alwaysActivated"
-                      data-activation-value=""
-                      data-deactivation-type="neverDeactivate"
-                      data-deactivation-value=""
-                      data-form-name="FORM SITE AM PAINTER"
-                      data-height="616"
-                      data-layout-iframe-id="inline-Mh6K2okib8bY2wNnjYYq"
-                      data-form-id="Mh6K2okib8bY2wNnjYYq"
-                      title="FORM SITE AM PAINTER"
-                    />
-                  </div>
+                  <p className="text-gray-300 mb-6">
+                    Scroll to the top of this page to submit the form, or contact us directly using the options on the left.
+                  </p>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-600 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-secondary"
+                  >
+                    Request a Free Estimate
+                  </a>
                 </div>
               </div>
             </div>

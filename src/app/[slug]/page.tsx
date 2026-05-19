@@ -347,7 +347,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
       />
       <Header cityName={city.name} />
 
-      <main className="pt-[124px]">
+      <main id="main-content" className="pt-[124px]">
         {/* Hero Section */}
         <section className="relative bg-black py-20 lg:py-28 overflow-hidden">
           <div className="absolute inset-0">

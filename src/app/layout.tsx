@@ -88,15 +88,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
+      <head>
+        {/* Preconnect to known third-party origins so resources negotiate TLS earlier */}
+        <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://widgets.leadconnectorhq.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.leadconnectorhq.com" />
+        <link rel="dns-prefetch" href="https://link.msgsndr.com" />
+        <link rel="dns-prefetch" href="https://reputationhub.site" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+      </head>
       <body className="font-sans antialiased bg-white text-gray-900">
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         {/* Google Analytics 4 — set NEXT_PUBLIC_GA_ID in Vercel env to enable */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -113,11 +126,11 @@ export default function RootLayout({
           data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
           data-widget-id="69f9394eb396d30fc569f988"
           data-source="WEB_USER"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           src="https://link.msgsndr.com/js/form_embed.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>

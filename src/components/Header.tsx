@@ -109,20 +109,27 @@ export function Header({ cityName }: HeaderProps) {
               </Link>
 
               {/* Services Dropdown */}
-              <div className="relative group">
+              <div
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
                 <button
                   type="button"
-                  className="flex items-center gap-1 px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50"
-                  onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
+                  className="flex items-center gap-1 px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-expanded={servicesOpen}
+                  aria-haspopup="true"
+                  aria-controls="services-dropdown"
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                  onFocus={() => setServicesOpen(true)}
                 >
                   Services
                   <ChevronDownIcon className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 <div
+                  id="services-dropdown"
+                  role="menu"
                   className={`absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}
-                  onMouseEnter={() => setServicesOpen(true)}
-                  onMouseLeave={() => setServicesOpen(false)}
                 >
                   <div className="p-3">
                     {services.map((service, index) => (
@@ -181,7 +188,10 @@ export function Header({ cityName }: HeaderProps) {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-secondary hover:text-primary transition rounded-lg hover:bg-gray-50"
+                className="lg:hidden p-2 text-secondary hover:text-primary transition rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 {mobileMenuOpen ? (
                   <XMarkIcon className="h-8 w-8" />
@@ -194,7 +204,10 @@ export function Header({ cityName }: HeaderProps) {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden bg-secondary border-t border-white/10 overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div
+          id="mobile-menu"
+          className={`lg:hidden bg-secondary border-t border-white/10 overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}
+        >
           <div className="px-4 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
             <Link href="/" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
               Home

@@ -40,7 +40,7 @@ export default function AboutPage() {
     <>
       <Header />
 
-      <main className="pt-[124px]">
+      <main id="main-content" className="pt-[124px]">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-secondary via-secondary to-secondary/90 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
