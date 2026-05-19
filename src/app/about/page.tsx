@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { business } from '@/data/business'
 import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
@@ -89,9 +90,12 @@ export default function AboutPage() {
                 {/* From the Owner — E-E-A-T anchor */}
                 <div className="my-10 grid md:grid-cols-[160px_1fr] gap-6 items-start border-l-4 border-primary bg-gray-50 rounded-r-xl p-6">
                   <div className="flex justify-center md:justify-start">
-                    <img
+                    <Image
                       src={business.ownerPhoto}
                       alt={`${business.owner}, ${business.ownerTitle} at ${business.name}`}
+                      width={128}
+                      height={128}
+                      sizes="128px"
                       className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
                     />
                   </div>

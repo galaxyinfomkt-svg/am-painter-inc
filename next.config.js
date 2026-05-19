@@ -23,13 +23,19 @@ const nextConfig = {
     ],
     // Optimize image formats for PageSpeed
     formats: ['image/avif', 'image/webp'],
+    // Hold optimized image variants in cache for 31 days (immutable assets)
+    minimumCacheTTL: 2678400,
   },
 
-  // Compress responses
   compress: true,
-
-  // Remove X-Powered-By header
   poweredByHeader: false,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
+
+  // Tree-shake icon imports so only the icons actually used are bundled
+  experimental: {
+    optimizePackageImports: ['@heroicons/react'],
+  },
 }
 
 module.exports = nextConfig
