@@ -9,18 +9,18 @@ export const business = {
 
   // Address (NAP - Name, Address, Phone)
   address: {
-    street: '15 Waverly St. Unit 130',
-    city: 'Brighton',
+    street: '74 Broad St',
+    city: 'Hudson',
     state: 'MA',
     stateFullName: 'Massachusetts',
-    zip: '02135',
+    zip: '01749',
     country: 'US',
   },
 
-  // Location coordinates (Brighton, MA)
+  // Location coordinates (74 Broad St, Hudson, MA 01749)
   geo: {
-    latitude: 42.3519,
-    longitude: -71.1470,
+    latitude: 42.3917,
+    longitude: -71.5677,
   },
 
   // Business details
@@ -93,7 +93,7 @@ export const business = {
 
   // External URLs
   formEmbedUrl: 'https://api.leadconnectorhq.com/widget/form/Mh6K2okib8bY2wNnjYYq',
-  gmbMapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.6!2d-71.1470!3d42.3519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzA2LjgiTiA3McKwMDgnNDkuMiJX!5e0!3m2!1sen!2sus!4v1234567890',
+  gmbMapEmbedUrl: 'https://maps.google.com/maps?q=74+Broad+St%2C+Hudson%2C+MA+01749&t=&z=15&ie=UTF8&iwloc=&output=embed',
   reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/npwVVdTpo5dMM8CCSeCT',
   googleReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   googleWriteReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
