@@ -1,5 +1,6 @@
 import { business } from '@/data/business'
 import { SparklesIcon, PhoneIcon } from '@heroicons/react/24/solid'
+import { LazyFormEmbed } from './LazyFormEmbed'
 
 interface ContactFormSectionProps {
   heading?: string
@@ -13,8 +14,6 @@ export function ContactFormSection({
   subheading = 'Tell us about your project — we respond within 24 hours.',
   variant = 'page',
 }: ContactFormSectionProps) {
-  const iframeId = `inline-Mh6K2okib8bY2wNnjYYq-${variant}`
-
   return (
     <section id="contact" className="py-10 lg:py-14 bg-secondary">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,23 +29,11 @@ export function ContactFormSection({
         </div>
 
         <div className="bg-white rounded-xl p-[5px] border border-white/20 shadow-2xl overflow-hidden mx-auto w-full max-w-[420px]">
-          <iframe
+          <LazyFormEmbed
             src={business.formEmbedUrl}
-            style={{ width: '100%', height: '420px', border: 'none', borderRadius: '8px', display: 'block' }}
-            loading="lazy"
-            id={iframeId}
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="FORM SITE AM PAINTER"
-            data-height="616"
-            data-layout-iframe-id={iframeId}
-            data-form-id="Mh6K2okib8bY2wNnjYYq"
-            title="Request a free painting estimate"
+            formId="Mh6K2okib8bY2wNnjYYq"
+            variant={variant}
+            height={420}
           />
         </div>
 
