@@ -93,7 +93,7 @@ export default function InteriorPaintingPage() {
     <>
       <Header />
 
-      <main className="pt-[124px]">
+      <main id="main-content" className="pt-[124px]">
         {/* Hero Section */}
         <section className="relative bg-black py-20 lg:py-32 overflow-hidden">
           <div className="absolute inset-0">

@@ -1,25 +1,6 @@
-'use client'
-
-import { useEffect } from 'react'
+import Script from 'next/script'
 
 export function ReviewsWidget() {
-  useEffect(() => {
-    // Load the review widget script
-    const script = document.createElement('script')
-    script.src = 'https://reputationhub.site/reputation/assets/review-widget.js'
-    script.type = 'text/javascript'
-    script.async = true
-    document.body.appendChild(script)
-
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector('script[src="https://reputationhub.site/reputation/assets/review-widget.js"]')
-      if (existingScript) {
-        existingScript.remove()
-      }
-    }
-  }, [])
-
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,8 +21,13 @@ export function ReviewsWidget() {
             src="https://reputationhub.site/reputation/widgets/review_widget/npwVVdTpo5dMM8CCSeCT?widgetId=693995dc7e2e568690fbcf48"
             frameBorder="0"
             scrolling="no"
+            loading="lazy"
             style={{ minWidth: '100%', width: '100%', minHeight: '500px' }}
-            title="Customer Reviews"
+            title="Verified customer reviews on Google"
+          />
+          <Script
+            src="https://reputationhub.site/reputation/assets/review-widget.js"
+            strategy="lazyOnload"
           />
         </div>
       </div>
