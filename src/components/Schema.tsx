@@ -33,7 +33,7 @@ export function LocalBusinessSchema() {
     ],
 
     // === DESCRIÇÃO RICA PARA AI ===
-    description: `${business.name} is a professional painting contractor based in Hudson, Massachusetts, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. With ${business.reviewCount}+ five-star reviews, we are the top-rated painting contractor in Massachusetts. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
+    description: `${business.name} is a professional painting contractor based in ${business.address.city}, ${business.address.state}, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. With ${business.reviewCount}+ five-star reviews, we are the top-rated painting contractor in Massachusetts. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
 
     slogan: 'Massachusetts\' Most Trusted Painting Contractor',
 
@@ -74,7 +74,7 @@ export function LocalBusinessSchema() {
         url: business.images.og,
         width: 1200,
         height: 630,
-        caption: `${business.name} - Professional Painting Contractor in Hudson, Massachusetts`,
+        caption: `${business.name} - Professional Painting Contractor in ${business.address.city}, ${business.address.stateFullName}`,
       },
       {
         '@type': 'ImageObject',
@@ -122,9 +122,9 @@ export function LocalBusinessSchema() {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Hudson',
-        addressRegion: 'MA',
-        addressCountry: 'US',
+        addressLocality: business.address.city,
+        addressRegion: business.address.state,
+        addressCountry: business.address.country,
       },
     },
     numberOfEmployees: {
@@ -276,6 +276,10 @@ export function LocalBusinessSchema() {
     })),
 
     // === AVALIAÇÕES (Rich Snippets com Estrelas) ===
+    // NOTE: aggregateRating only — review[] array removed to comply with Google's
+    // 2024+ guideline against self-serving / unverifiable reviews. Re-add a `review`
+    // array ONLY when each item is a real review the business has received and is
+    // also rendered as visible HTML on the page (not inside the GHL iframe).
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: business.rating.toString(),
@@ -284,105 +288,6 @@ export function LocalBusinessSchema() {
       ratingCount: business.reviewCount.toString(),
       reviewCount: business.reviewCount.toString(),
     },
-
-    // === REVIEWS RECENTES (Para Rich Snippets) ===
-    review: [
-      {
-        '@type': 'Review',
-        '@id': `${business.url}/#review-1`,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: '5',
-          bestRating: '5',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'Sarah M.',
-        },
-        reviewBody: 'A&M Painter did an amazing job on our exterior in Marlborough. Professional, on-time, and the results are stunning. The team was respectful and cleaned up perfectly. Highly recommend for any painting project!',
-        datePublished: '2025-01-10',
-        publisher: {
-          '@type': 'Organization',
-          name: 'Google',
-        },
-      },
-      {
-        '@type': 'Review',
-        '@id': `${business.url}/#review-2`,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: '5',
-          bestRating: '5',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'John D.',
-        },
-        reviewBody: 'Our kitchen cabinets in Hudson look factory-new after A&M refinished them. The spray finish is flawless. Clear communication throughout and spotless cleanup. Will definitely use again for our bathroom!',
-        datePublished: '2025-01-05',
-        publisher: {
-          '@type': 'Organization',
-          name: 'Google',
-        },
-      },
-      {
-        '@type': 'Review',
-        '@id': `${business.url}/#review-3`,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: '5',
-          bestRating: '5',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'Maria L.',
-        },
-        reviewBody: 'From start to finish, the A&M team was excellent. They painted our entire interior in Worcester - great prep work, beautiful finish, and very fair pricing. The owner Agrimaldo personally checked on quality.',
-        datePublished: '2024-12-20',
-        publisher: {
-          '@type': 'Organization',
-          name: 'Google',
-        },
-      },
-      {
-        '@type': 'Review',
-        '@id': `${business.url}/#review-4`,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: '5',
-          bestRating: '5',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'Michael R.',
-        },
-        reviewBody: 'Best painting company in MetroWest! They restored our deck in Framingham and it looks brand new. Very knowledgeable about stains and sealers for New England weather. Fair price and great results.',
-        datePublished: '2024-12-15',
-        publisher: {
-          '@type': 'Organization',
-          name: 'Google',
-        },
-      },
-      {
-        '@type': 'Review',
-        '@id': `${business.url}/#review-5`,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: '5',
-          bestRating: '5',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'Jennifer K.',
-        },
-        reviewBody: 'A&M Painter transformed our 1950s home in Shrewsbury. They handled the lead paint safely (EPA certified), repaired all the drywall, and painted everything beautifully. True professionals!',
-        datePublished: '2024-12-01',
-        publisher: {
-          '@type': 'Organization',
-          name: 'Google',
-        },
-      },
-    ],
 
     // === CREDENCIAIS E CERTIFICAÇÕES ===
     hasCredential: [
@@ -546,7 +451,7 @@ export function OrganizationSchema() {
       name: business.owner,
     },
     foundingDate: `${business.foundedYear}`,
-    foundingLocation: 'Hudson, MA',
+    foundingLocation: `${business.address.city}, ${business.address.state}`,
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: '15',
