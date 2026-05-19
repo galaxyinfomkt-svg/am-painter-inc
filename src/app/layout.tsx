@@ -162,6 +162,10 @@ export default function RootLayout({
           data-source="WEB_USER"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://link.msgsndr.com/js/form_embed.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
