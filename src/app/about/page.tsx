@@ -79,12 +79,36 @@ export default function AboutPage() {
 
               <div className="prose prose-lg max-w-none text-gray-700 space-y-6">
                 <p>
-                  <strong>{business.name}</strong> (A&M Painter Inc) is a professional painting contractor and home remodeling company based in Hudson, Massachusetts. Founded in {business.foundedYear} by {business.owner}, we have been proudly serving MetroWest Massachusetts, Greater Boston, Worcester, and surrounding areas for {business.yearsInBusiness}+ years.
+                  <strong>{business.name}</strong> (A&M Painter Inc) is a professional painting contractor and home remodeling company serving Hudson, MetroWest Massachusetts, Greater Boston, Worcester, and surrounding areas. Founded in {business.foundedYear} by {business.owner}, we have been delivering high-craft work to homeowners for {business.yearsInBusiness}+ years.
                 </p>
 
                 <p>
                   As a family-owned and operated business, we bring professionalism, reliability, and old-fashioned craftsmanship to every project. Our team of skilled painters and contractors specializes in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting services.
                 </p>
+
+                {/* From the Owner — E-E-A-T anchor */}
+                <div className="my-10 grid md:grid-cols-[160px_1fr] gap-6 items-start border-l-4 border-primary bg-gray-50 rounded-r-xl p-6">
+                  <div className="flex justify-center md:justify-start">
+                    <img
+                      src={business.ownerPhoto}
+                      alt={`${business.owner}, ${business.ownerTitle} at ${business.name}`}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-secondary mb-1">{business.owner}</h3>
+                    <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">{business.ownerTitle}</p>
+                    <p className="text-gray-700 mb-0">{business.ownerBio}</p>
+                  </div>
+                </div>
+
+                {/* Portuguese-speaking call-out */}
+                <div className="bg-secondary text-white rounded-xl p-6 my-8">
+                  <h3 className="text-xl font-bold mb-2">🇧🇷 Falamos Português</h3>
+                  <p className="mb-0 text-white/90">
+                    Atendemos a comunidade brasileira e portuguesa em Hudson, Framingham, Marlborough e arredores. Ligue para {business.phone} — solicite o {business.owner} ou um membro da equipe que fala português, sem custo adicional.
+                  </p>
+                </div>
 
                 <div className="bg-amber-50 border-l-4 border-primary p-6 my-8">
                   <h3 className="text-xl font-bold text-secondary mb-4">Our Mission</h3>

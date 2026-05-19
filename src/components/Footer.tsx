@@ -281,6 +281,15 @@ export function Footer() {
               </a>
             </div>
           </div>
+          {(business.hicLicense || business.cslLicense) && (
+            <p className="mt-3 text-center md:text-left text-xs text-gray-500">
+              Licensed in Massachusetts
+              {business.hicLicense ? ` — HIC #${business.hicLicense}` : ''}
+              {business.cslLicense ? ` • CSL #${business.cslLicense}` : ''}
+              {business.insurance ? ` • ${business.insurance} liability insured` : ''}
+              {' • EPA Lead-Safe Certified Firm'}
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-gray-600">
             <Link href="/privacy" className="hover:text-primary transition">Privacy Policy</Link>
             <span className="text-gray-300">•</span>
