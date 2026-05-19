@@ -181,6 +181,7 @@ export default function HomePage() {
                       <iframe
                         src={business.formEmbedUrl}
                         style={{ width: '100%', height: '360px', border: 'none', borderRadius: '6px', display: 'block' }}
+                        loading="lazy"
                         id="inline-Mh6K2okib8bY2wNnjYYq-hero"
                         data-layout="{'id':'INLINE'}"
                         data-trigger-type="alwaysShow"
