@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Drywall Repair & Installation Massachusetts | ${business.name} | Drywall Contractors`,
-  description: `Professional drywall repair and installation in Massachusetts. Expert hole patching, water damage repair, texture matching, ceiling repair. ${business.yearsInBusiness}+ years experience. ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Drywall Repair & Installation Massachusetts | Drywall Contractors',
+  description: `Drywall repair & installation in Massachusetts. Hole patching, water damage repair, texture matching, ceiling repair. Free estimate: ${business.phone}`,
   keywords: [
     'drywall repair Massachusetts',
     'drywall repair MA',

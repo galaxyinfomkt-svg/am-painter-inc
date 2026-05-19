@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Home Remodeling Services Massachusetts | ${business.name} | Kitchen & Bath Renovation`,
-  description: `Professional home remodeling services in Massachusetts. Kitchen remodeling, bathroom renovation, basement finishing, room additions. ${business.yearsInBusiness}+ years experience. Licensed, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Home Remodeling Services Massachusetts | Kitchen & Bath Renovation',
+  description: `Home remodeling in Massachusetts. Kitchen, bathroom, basement, room additions. Licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     'home remodeling Massachusetts',
     'home renovation MA',

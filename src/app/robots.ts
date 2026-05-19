@@ -56,6 +56,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${business.url}/sitemap.xml`,
-    host: business.url,
   }
 }

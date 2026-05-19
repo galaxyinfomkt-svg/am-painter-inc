@@ -8,10 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = business.url
   const currentDate = new Date()
 
-  // Homepage
+  // Homepage (with trailing slash to match canonical)
   const homepage: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: `${baseUrl}/`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 1.0,
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // About page (AI Discovery optimized)
   const aboutPage: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}/about/`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.9,
@@ -30,15 +30,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Legal / compliance pages
   const legalPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/privacy`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/cookies`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/sms-terms`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/privacy/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/terms/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/cookies/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}/sms-terms/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
   ]
 
   // Service pages
   const servicePages: MetadataRoute.Sitemap = Object.keys(SERVICES).map((serviceSlug) => ({
-    url: `${baseUrl}/services/${serviceSlug}`,
+    url: `${baseUrl}/services/${serviceSlug}/`,
     lastModified: currentDate,
     changeFrequency: 'monthly',
     priority: 0.9,
@@ -52,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const citySlug of citySlugs) {
     for (const serviceSlug of serviceSlugs) {
       cityServicePages.push({
-        url: `${baseUrl}/${serviceSlug}-${citySlug}-ma`,
+        url: `${baseUrl}/${serviceSlug}-${citySlug}-ma/`,
         lastModified: currentDate,
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -63,13 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Special house-painting pages for high-population cities
   const housePaintingPages: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/house-painting-marlborough-ma`,
+      url: `${baseUrl}/house-painting-marlborough-ma/`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/house-painting-worcester-ma`,
+      url: `${baseUrl}/house-painting-worcester-ma/`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -83,7 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const regionSlug of regionSlugs) {
     for (const serviceSlug of serviceSlugs) {
       regionalServicePages.push({
-        url: `${baseUrl}/region/${regionSlug}/${serviceSlug}`,
+        url: `${baseUrl}/region/${regionSlug}/${serviceSlug}/`,
         lastModified: currentDate,
         changeFrequency: 'weekly',
         priority: 0.9, // High priority for regional coverage

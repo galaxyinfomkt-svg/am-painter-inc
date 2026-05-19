@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: `Deck Staining & Restoration Massachusetts | ${business.name} | Deck Contractors`,
-  description: `Professional deck staining and restoration in Massachusetts. Protect your deck from New England weather with ${business.yearsInBusiness}+ years experience. Premium penetrating stains, wood repair, power washing. ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+  title: 'Deck Staining & Restoration Massachusetts | Deck Contractors',
+  description: `Deck staining & restoration in Massachusetts. Premium penetrating stains, wood repair, power washing. Free estimate: ${business.phone}`,
   keywords: [
     'deck staining Massachusetts',
     'deck staining MA',
