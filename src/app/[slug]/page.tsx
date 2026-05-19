@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ContactFormSection } from '@/components/ContactFormSection'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City } from '@/data/cities'
 import { SERVICES } from '@/data/services'
@@ -741,6 +742,12 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
 
         {/* Reviews Widget */}
         <ReviewsWidget />
+
+        <ContactFormSection
+          heading="Get Your Free Estimate"
+          subheading="Tell us about your project — we respond within 24 hours."
+          variant="city"
+        />
       </main>
 
       <Footer />

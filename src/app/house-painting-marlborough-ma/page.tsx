@@ -6,6 +6,7 @@ import { CityPageSchema, FAQSchema } from '@/components/Schema'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ContactFormSection } from '@/components/ContactFormSection'
 
 const city = cityData['marlborough']
 const cityName = city.name
@@ -359,6 +360,12 @@ export default function MarlboroughPage() {
           </Link>
         </div>
       </div>
+
+      <ContactFormSection
+        heading="Get Your Free Marlborough Painting Estimate"
+        subheading="Tell us about your project — we respond within 24 hours."
+        variant="marlborough"
+      />
 
       <div className="h-20 md:hidden" />
 
