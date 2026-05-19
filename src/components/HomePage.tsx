@@ -172,17 +172,34 @@ export default function HomePage() {
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
                   <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
-                        <SparklesIcon className="h-6 w-6 text-white" />
+                  <div className="relative bg-white rounded-3xl p-6 border border-white/20 shadow-2xl">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                        <SparklesIcon className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white">Get Your Free Quote</h3>
-                        <p className="text-sm text-gray-300">Response within 24 hours</p>
+                        <h3 className="text-xl font-bold text-secondary">Get Your Free Quote</h3>
+                        <p className="text-sm text-gray-600">Response within 24 hours</p>
                       </div>
                     </div>
                     <div className="rounded-2xl overflow-hidden">
+                      <iframe
+                        src={business.formEmbedUrl}
+                        style={{ width: '100%', height: '616px', border: 'none', borderRadius: '12px' }}
+                        id="inline-Mh6K2okib8bY2wNnjYYq-hero"
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="FORM SITE AM PAINTER"
+                        data-height="616"
+                        data-layout-iframe-id="inline-Mh6K2okib8bY2wNnjYYq-hero"
+                        data-form-id="Mh6K2okib8bY2wNnjYYq"
+                        title="FORM SITE AM PAINTER"
+                      />
                     </div>
                   </div>
                 </div>
