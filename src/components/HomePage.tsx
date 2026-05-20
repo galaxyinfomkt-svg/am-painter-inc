@@ -86,7 +86,7 @@ export default function HomePage() {
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Content */}
               <div className="space-y-8">
                 {/* Trust Badges */}
@@ -144,10 +144,10 @@ export default function HomePage() {
                   </a>
                   <a
                     href="#contact"
-                    className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-lg rounded-2xl hover:bg-white hover:text-secondary transition-all duration-300"
+                    className="group inline-flex items-center justify-center gap-3 px-10 py-6 bg-primary hover:bg-primary-600 text-white font-bold text-xl rounded-2xl transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-xl hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-secondary"
                   >
                     Get Free Estimate
-                    <ArrowRightIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRightIcon className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
 
