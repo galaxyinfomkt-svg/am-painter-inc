@@ -33,7 +33,7 @@ export function ContactFormSection({
             src={business.formEmbedUrl}
             formId="Mh6K2okib8bY2wNnjYYq"
             variant={variant}
-            height={420}
+            height={620}
           />
         </div>
 
