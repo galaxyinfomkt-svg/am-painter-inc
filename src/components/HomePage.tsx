@@ -50,9 +50,10 @@ export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const categories = ['All', 'Interior', 'Exterior', 'Cabinet', 'Remodeling']
-  const filteredPhotos = activeCategory === 'All'
+  const filteredPhotos = (activeCategory === 'All'
     ? allProjectPhotos
     : allProjectPhotos.filter(p => p.category === activeCategory)
+  ).slice(0, 8)
 
   return (
     <>
@@ -204,7 +205,7 @@ export default function HomePage() {
         </section>
 
         {/* Services Section - Card Grid */}
-        <section id="services" className="py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50">
+        <section id="services" className="below-fold py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
@@ -268,7 +269,7 @@ export default function HomePage() {
         </section>
 
         {/* Why Choose Us - SEO Rich Section */}
-        <section className="py-24 lg:py-32 bg-gray-50">
+        <section className="below-fold py-24 lg:py-32 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
@@ -321,7 +322,7 @@ export default function HomePage() {
         </section>
 
         {/* About Section - Split Layout */}
-        <section id="about" className="py-24 lg:py-32 bg-secondary overflow-hidden">
+        <section id="about" className="below-fold py-24 lg:py-32 bg-secondary overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               {/* Images Collage */}
@@ -432,7 +433,7 @@ export default function HomePage() {
         <HeroVideoSection />
 
         {/* Projects Gallery - Interactive */}
-        <section id="projects" className="py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
+        <section id="projects" className="below-fold py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
@@ -509,7 +510,7 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials - Carousel Style */}
-        <section className="py-24 lg:py-32 bg-primary">
+        <section className="below-fold py-24 lg:py-32 bg-primary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
@@ -588,7 +589,7 @@ export default function HomePage() {
         <ReviewsWidget />
 
         {/* Contact Section */}
-        <section id="contact" className="py-24 lg:py-32 bg-secondary">
+        <section id="contact" className="below-fold py-24 lg:py-32 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               {/* Contact Info */}
@@ -684,7 +685,7 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-24 lg:py-32 bg-gray-50">
+        <section className="below-fold py-24 lg:py-32 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
