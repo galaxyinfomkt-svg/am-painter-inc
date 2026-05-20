@@ -8,8 +8,6 @@ interface LazyFormEmbedProps {
   variant: string
   /** Iframe height in px. Default 480 (matches data-height of the GHL form). */
   height?: number
-  /** Visible label on the placeholder button. */
-  ctaLabel?: string
 }
 
 let globalFormsActive = false
@@ -42,32 +40,28 @@ function uninstallGlobalListeners() {
 }
 
 /**
- * Renders a placeholder that activates the LeadConnector iframe only after:
- *  - the user clicks the placeholder itself, OR
- *  - the user makes ANY interaction with the page (scroll / pointer / touch /
- *    keyboard), OR
- *  - 8 seconds elapse without interaction.
- *
- * Interaction-gated (rather than viewport-gated) so that an above-the-fold
- * form on the home hero doesn't auto-load during Lighthouse simulation —
- * the GHL iframe pulls in recaptcha (~365 KiB, ~2 s CPU), fbevents
- * (~97 KiB), libphonenumber, and several preview scripts that crater TBT.
+ * Renders a form-shaped skeleton until first user interaction; then swaps
+ * to the real LeadConnector iframe. Activation triggers:
+ *  - click anywhere on the skeleton
+ *  - any scroll / pointer / touch / key event anywhere on the page
+ *  - 8s idle fallback
+ * Skeleton is a static, accessible form mockup so the user immediately
+ * understands a form lives here, without the heavy iframe loading during
+ * initial paint (saves ~2.6s TBT / ~1.9s recaptcha CPU on Lighthouse).
  */
 export function LazyFormEmbed({
   src,
   formId,
   variant,
   height = 480,
-  ctaLabel = 'Load the contact form',
 }: LazyFormEmbedProps) {
   const [active, setActive] = useState(false)
-  const ref = useRef<HTMLButtonElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (active) return
     if (typeof window === 'undefined') return
 
-    // If a sibling form already activated, snap this one too.
     if (globalFormsActive) {
       setActive(true)
       return
@@ -100,27 +94,58 @@ export function LazyFormEmbed({
     )
   }
 
+  const handleActivate = () => {
+    setActive(true)
+    activateAllForms()
+  }
+
   return (
-    <button
+    <div
       ref={ref}
-      type="button"
-      onClick={() => {
-        setActive(true)
-        activateAllForms()
-      }}
-      className="block w-full bg-gradient-to-br from-gray-50 to-gray-100 hover:from-white hover:to-gray-50 rounded-lg border border-gray-200 text-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-      style={{ height: `${height}px` }}
-      aria-label={ctaLabel}
+      role="button"
+      tabIndex={0}
+      onClick={handleActivate}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate() } }}
+      className="block w-full bg-white rounded-lg cursor-pointer focus:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
+      style={{ minHeight: `${height}px` }}
+      aria-label="Request a free painting estimate — click to load the form"
     >
-      <div className="flex flex-col items-center justify-center h-full p-6 gap-3">
-        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-          <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
+      <div className="p-4 space-y-3">
+        <div>
+          <label className="block text-xs font-semibold text-secondary mb-1">Full Name</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+            Your name
+          </div>
         </div>
-        <span className="text-base font-semibold text-secondary">Request a Free Estimate</span>
-        <span className="text-sm text-gray-500">Tap to load the contact form</span>
+        <div>
+          <label className="block text-xs font-semibold text-secondary mb-1">Phone</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+            (___) ___-____
+          </div>
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-secondary mb-1">Email</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+            you@example.com
+          </div>
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-secondary mb-1">Service Needed</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400 flex items-center justify-between">
+            <span>Select an option</span>
+            <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); handleActivate() }}
+          className="w-full bg-primary hover:bg-primary-600 text-white font-bold py-2.5 px-4 rounded-md transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        >
+          Get My Free Quote
+        </button>
       </div>
-    </button>
+    </div>
   )
 }
