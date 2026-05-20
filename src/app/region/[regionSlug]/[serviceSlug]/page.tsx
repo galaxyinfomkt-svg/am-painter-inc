@@ -9,6 +9,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ContactFormSection } from '@/components/ContactFormSection'
+import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
 import { LocalBusinessSchema, BreadcrumbSchema, FAQSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
@@ -208,12 +209,19 @@ export default async function RegionalServicePage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Contact Form - Desktop */}
-              <div className="hidden lg:block">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
-                  <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
-                  <p className="text-white/80 mb-6">{service.name} in {region.name}</p>
-
+              {/* Hero Form - LeadConnector embed (lazy / facade) */}
+              <div className="block">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-2xl border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-1">Get a Free Estimate</h3>
+                  <p className="text-white/80 text-sm mb-3">{service.name} in {region.name}</p>
+                  <div className="bg-white rounded-lg overflow-hidden mx-auto w-full max-w-[420px]">
+                    <LazyFormEmbed
+                      src={business.formEmbedUrl}
+                      formId="Mh6K2okib8bY2wNnjYYq"
+                      variant={`${regionSlug}-${serviceSlug}-hero`}
+                      height={580}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
