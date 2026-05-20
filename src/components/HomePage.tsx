@@ -185,7 +185,7 @@ export default function HomePage() {
                         src={business.formEmbedUrl}
                         formId="Mh6K2okib8bY2wNnjYYq"
                         variant="hero"
-                        height={360}
+                        height={580}
                       />
                     </div>
                   </div>

@@ -106,45 +106,47 @@ export function LazyFormEmbed({
       tabIndex={0}
       onClick={handleActivate}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate() } }}
-      className="block w-full bg-white rounded-lg cursor-pointer focus:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
+      className="w-full bg-white rounded-lg cursor-pointer focus:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 flex flex-col"
       style={{ minHeight: `${height}px` }}
       aria-label="Request a free painting estimate — click to load the form"
     >
-      <div className="p-4 space-y-3">
+      <div className="flex flex-col gap-4 p-5 flex-1">
         <div>
-          <label className="block text-xs font-semibold text-secondary mb-1">Full Name</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+          <label className="block text-sm font-semibold text-secondary mb-1.5">Full Name</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
             Your name
           </div>
         </div>
         <div>
-          <label className="block text-xs font-semibold text-secondary mb-1">Phone</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+          <label className="block text-sm font-semibold text-secondary mb-1.5">Phone</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
             (___) ___-____
           </div>
         </div>
         <div>
-          <label className="block text-xs font-semibold text-secondary mb-1">Email</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
+          <label className="block text-sm font-semibold text-secondary mb-1.5">Email</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
             you@example.com
           </div>
         </div>
         <div>
-          <label className="block text-xs font-semibold text-secondary mb-1">Service Needed</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400 flex items-center justify-between">
+          <label className="block text-sm font-semibold text-secondary mb-1.5">Service Needed</label>
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400 flex items-center justify-between">
             <span>Select an option</span>
             <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); handleActivate() }}
-          className="w-full bg-primary hover:bg-primary-600 text-white font-bold py-2.5 px-4 rounded-md transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        >
-          Get My Free Quote
-        </button>
+        <div className="mt-auto pt-2">
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handleActivate() }}
+            className="w-full bg-primary hover:bg-primary-600 text-white font-bold py-3 px-4 rounded-md transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            Get My Free Quote
+          </button>
+        </div>
       </div>
     </div>
   )
