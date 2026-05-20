@@ -6,6 +6,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ContactFormSection } from '@/components/ContactFormSection'
+import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City } from '@/data/cities'
 import { SERVICES } from '@/data/services'
@@ -566,12 +567,19 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                 </div>
               </div>
 
-              {/* Sticky Form - Embedded LeadConnector */}
-              <div className="hidden lg:block">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
-                  <h3 className="text-2xl font-bold text-white mb-2">Get a Free Estimate</h3>
-                  <p className="text-white/80 mb-6">{service.name} in {city.name}, MA</p>
-
+              {/* Hero Form - LeadConnector embed (lazy / facade) */}
+              <div className="block">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-2xl border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-1">Get a Free Estimate</h3>
+                  <p className="text-white/80 text-sm mb-3">{service.name} in {city.name}, MA</p>
+                  <div className="bg-white rounded-lg overflow-hidden mx-auto w-full max-w-[420px]">
+                    <LazyFormEmbed
+                      src={business.formEmbedUrl}
+                      formId="Mh6K2okib8bY2wNnjYYq"
+                      variant={`${service.slug}-${city.slug}-hero`}
+                      height={580}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
