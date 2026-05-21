@@ -9,6 +9,7 @@ import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 import { ContactFormSection } from '@/components/ContactFormSection'
+import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
 const painPoints = [
   {
@@ -108,52 +109,57 @@ export default function GeneralContractingPage() {
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-                <Link href="/" className="hover:text-primary transition">Home</Link>
-                <span>/</span>
-                <span className="text-white">General Contracting</span>
-              </nav>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                General Contracting <span className="text-primary">Services</span>
-              </h1>
-
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                One partner for every trade. We coordinate all aspects of your construction project -
-                from permits to completion - so you don't have to juggle multiple contractors.
-              </p>
-
-              <div className="flex flex-wrap gap-4 mb-8">
-                <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm">
-                  <CheckCircleIcon className="h-5 w-5 text-primary" />
-                  Fully Licensed
-                </span>
-                <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm">
-                  <StarIcon className="h-5 w-5 text-yellow-400" />
-                  {business.yearsInBusiness}+ Years Experience
-                </span>
-                <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm">
-                  <ShieldCheckIcon className="h-5 w-5 text-primary" />
-                  {business.insurance} Insured
-                </span>
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div>
+                <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
+                  <Link href="/" className="hover:text-primary transition">Home</Link>
+                  <span>/</span>
+                  <span className="text-white">General Contracting</span>
+                </nav>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                  General Contracting <span className="text-primary">Services</span>
+                </h1>
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                  One partner for every trade. We coordinate all aspects of your construction project - from permits to completion - so you don't have to juggle multiple contractors.
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><CheckCircleIcon className="h-5 w-5 text-primary" />Fully Licensed</span>
+                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><StarIcon className="h-5 w-5 text-yellow-400" />{business.yearsInBusiness}+ Years Experience</span>
+                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><ShieldCheckIcon className="h-5 w-5 text-primary" />{business.insurance} Insured</span>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href={`tel:${business.phoneRaw}`} className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary-600 transition shadow-lg shadow-primary/30">
+                    <PhoneIcon className="h-5 w-5" />Call {business.phone}
+                  </a>
+                  <a href="#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-secondary transition">
+                    Get Free Consultation
+                  </a>
+                </div>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={`tel:${business.phoneRaw}`}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary-600 transition"
-                >
-                  <PhoneIcon className="h-5 w-5" />
-                  Call {business.phone}
-                </a>
-                <Link
-                  href="/#contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-secondary transition"
-                >
-                  Get Free Consultation
-                </Link>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-2xl border border-white/20">
+                <h2 className="text-xl font-bold text-white mb-1">Get a Free Consultation</h2>
+                <p className="text-white/80 text-sm mb-3">General Contracting in Massachusetts</p>
+                <div className="bg-white rounded-lg overflow-hidden mx-auto w-full max-w-[420px]">
+                  <LazyFormEmbed src={business.formEmbedUrl} formId="Mh6K2okib8bY2wNnjYYq" variant="general-contracting-hero" height={580} />
+                </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-primary py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white">
+            <div>
+              <p className="text-2xl font-bold">One contractor, every trade.</p>
+              <p className="text-white/90">Free consultation within 24 hours, no obligation.</p>
+            </div>
+            <div className="flex gap-3">
+              <a href={`tel:${business.phoneRaw}`} className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition">
+                <PhoneIcon className="h-5 w-5" /> {business.phone}
+              </a>
+              <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-primary transition">
+                Free Consultation
+              </a>
             </div>
           </div>
         </section>
@@ -289,7 +295,7 @@ export default function GeneralContractingPage() {
                 Call {business.phone}
               </a>
               <Link
-                href="/#contact"
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-primary transition"
               >
                 Request Free Consultation
