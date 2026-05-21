@@ -100,7 +100,7 @@ export default function DeckStainingPage() {
           <div className="absolute inset-0">
             <Image
               src={business.projectPhotos.deck[0]}
-              alt="Professional deck staining services in Massachusetts"
+              alt="Deck staining in Hudson, MA — wooden backyard deck with outdoor furniture and surrounding trees by A&M Painter Inc"
               fill
               priority
               className="object-cover"

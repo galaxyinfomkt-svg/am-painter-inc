@@ -80,6 +80,7 @@ export const business = {
       'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeeed0415009e842b.webp',
     ],
     deck: [
+      '/images/deck-staining-hudson-ma-am-painter-inc.jpg',
       'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb263277019956491.webp',
     ],
     remodeling: [

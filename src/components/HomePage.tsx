@@ -22,7 +22,7 @@ const allProjectPhotos = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babe03e9d4902a73090.webp', alt: 'Exterior house painting in MetroWest Massachusetts by A&M Painter Inc', category: 'Exterior' },
   { src: '/images/cabinet-refinishing-marlborough-ma-am-painter-inc.jpg', alt: 'Cabinet refinishing in Marlborough, MA — white kitchen cabinets with granite countertops and stainless hood by A&M Painter Inc', category: 'Cabinet' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeeed0415009e842b.webp', alt: 'Cabinet painting detail by A&M Painter Inc, Massachusetts', category: 'Cabinet' },
-  { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb263277019956491.webp', alt: 'Deck staining project', category: 'Deck' },
+  { src: '/images/deck-staining-hudson-ma-am-painter-inc.jpg', alt: 'Deck staining in Hudson, MA — wooden backyard deck with outdoor furniture and surrounding trees by A&M Painter Inc', category: 'Deck' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7eeed04edd09e6ab3.webp', alt: 'Remodeling project', category: 'Remodeling' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7ea1b123c071f0056.webp', alt: 'Home renovation', category: 'Remodeling' },
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7d1810d361767592f.webp', alt: 'Kitchen remodeling', category: 'Remodeling' },
@@ -49,7 +49,7 @@ export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
-  const categories = ['All', 'Interior', 'Exterior', 'Cabinet', 'Remodeling']
+  const categories = ['All', 'Interior', 'Exterior', 'Cabinet', 'Deck', 'Remodeling']
   const filteredPhotos = (activeCategory === 'All'
     ? allProjectPhotos
     : allProjectPhotos.filter(p => p.category === activeCategory)
