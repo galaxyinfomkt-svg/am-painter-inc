@@ -221,7 +221,19 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {services.map((service, index) => (
+              {services.map((service, index) => {
+                // Map each service to its correct image (was using positional index, which mis-matched)
+                const serviceImageMap: Record<string, string> = {
+                  'interior-painting': business.images.interiorPainting,
+                  'exterior-painting': business.images.exteriorPainting,
+                  'cabinet-refinishing': business.images.cabinetRefinishing,
+                  'deck-staining': business.projectPhotos.deck[0],
+                  'drywall-repair': business.projectPhotos.interior[2] || business.projectPhotos.interior[0],
+                  'remodeling': business.projectPhotos.remodeling[0],
+                  'general-contracting': business.projectPhotos.remodeling[1] || business.projectPhotos.remodeling[0],
+                }
+                const serviceImage = serviceImageMap[service.id] || business.images.interiorPainting
+                return (
                 <div key={service.id}>
                   <Link
                     href={`/services/${service.id}`}
@@ -230,7 +242,7 @@ export default function HomePage() {
                     {/* Service Image */}
                     <div className="relative h-56 overflow-hidden">
                       <Image
-                        src={allProjectPhotos[index % allProjectPhotos.length].src}
+                        src={serviceImage}
                         alt={`${service.name} services in Massachusetts - ${business.name}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -263,7 +275,8 @@ export default function HomePage() {
                     </div>
                   </Link>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>
