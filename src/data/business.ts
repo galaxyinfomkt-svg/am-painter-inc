@@ -60,8 +60,8 @@ export const business = {
     hero: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babd1810d2bb7677482.webp',
     heroBackground: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babe03e9d4902a73090.webp',
     interiorPainting: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babeac0a85ae3ca2ff0.webp',
-    exteriorPainting: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398bab169a42ce4718c3de.webp',
-    cabinetRefinishing: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398babb26327248d956492.webp',
+    exteriorPainting: '/images/exterior-painting-hudson-ma-am-painter-inc.jpg',
+    cabinetRefinishing: '/images/cabinet-refinishing-marlborough-ma-am-painter-inc.jpg',
   },
 
   // Project Photos by Category

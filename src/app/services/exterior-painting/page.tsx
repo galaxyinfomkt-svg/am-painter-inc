@@ -100,7 +100,7 @@ export default function ExteriorPaintingPage() {
           <div className="absolute inset-0">
             <Image
               src={business.images.exteriorPainting}
-              alt="Professional exterior painting services in Massachusetts"
+              alt="Exterior painting in Hudson, MA — gambrel-roof home with blue siding and white trim by A&M Painter Inc"
               fill
               priority
               className="object-cover"

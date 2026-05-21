@@ -100,7 +100,7 @@ export default function CabinetRefinishingPage() {
           <div className="absolute inset-0">
             <Image
               src={business.images.cabinetRefinishing}
-              alt="Professional cabinet refinishing services in Massachusetts"
+              alt="Cabinet refinishing in Marlborough, MA — white kitchen cabinets with granite countertops and stainless hood by A&M Painter Inc"
               fill
               priority
               className="object-cover"
