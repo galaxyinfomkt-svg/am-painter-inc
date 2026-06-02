@@ -246,6 +246,7 @@ export default function HomePage() {
                         alt={`${service.name} services in Massachusetts - ${business.name}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={90}
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent" />
@@ -477,26 +478,42 @@ export default function HomePage() {
 
             {/* Gallery Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredPhotos.map((img, idx) => (
-                <div
-                  key={img.src}
-                  className={`relative rounded-2xl overflow-hidden group cursor-pointer ${idx === 0 || idx === 5 ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'}`}
-                >
-                  <Image
-                    src={img.src}
-                    alt={`${img.alt} - Professional painting in Massachusetts`}
-                    fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">
-                      {img.category}
-                    </span>
-                  </div>
-                </div>
-              ))}
+              {filteredPhotos.map((img, idx) => {
+                // Map gallery category to its matching service page
+                const categoryToHref: Record<string, string> = {
+                  'Interior': '/services/interior-painting/',
+                  'Exterior': '/services/exterior-painting/',
+                  'Cabinet': '/services/cabinet-refinishing/',
+                  'Deck': '/services/deck-staining/',
+                  'Remodeling': '/services/remodeling/',
+                  'Contracting': '/services/general-contracting/',
+                }
+                const href = categoryToHref[img.category] || '/#services'
+                const isLarge = idx === 0 || idx === 5
+                return (
+                  <Link
+                    key={img.src}
+                    href={href}
+                    aria-label={`View our ${img.category.toLowerCase()} services — ${img.alt}`}
+                    className={`relative rounded-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${isLarge ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'}`}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={`${img.alt} - Professional painting in Massachusetts`}
+                      fill
+                      sizes={isLarge ? '(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw' : '(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'}
+                      quality={90}
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">
+                        {img.category}
+                      </span>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
 
             <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
