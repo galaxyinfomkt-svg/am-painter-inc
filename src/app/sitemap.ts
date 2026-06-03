@@ -8,6 +8,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = business.url
   const currentDate = new Date()
 
+  // Image URLs for top pages — surfaces them in Google Images
+  const heroImage = `${baseUrl}${business.images.heroBackground.startsWith('/') ? business.images.heroBackground : ''}` ||
+    business.images.heroBackground
+  const interiorImage = business.images.interiorPainting.startsWith('/')
+    ? `${baseUrl}${business.images.interiorPainting}`
+    : business.images.interiorPainting
+  const exteriorImage = business.images.exteriorPainting.startsWith('/')
+    ? `${baseUrl}${business.images.exteriorPainting}`
+    : business.images.exteriorPainting
+  const cabinetImage = business.images.cabinetRefinishing.startsWith('/')
+    ? `${baseUrl}${business.images.cabinetRefinishing}`
+    : business.images.cabinetRefinishing
+  const deckImage = `${baseUrl}/images/deck-staining-hudson-ma-am-painter-inc.jpg`
+
   // Homepage (with trailing slash to match canonical)
   const homepage: MetadataRoute.Sitemap = [
     {
@@ -15,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 1.0,
+      images: [interiorImage, exteriorImage, cabinetImage, deckImage],
     },
   ]
 
@@ -25,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.9,
+      images: [business.images.og],
     },
   ]
 
@@ -36,12 +52,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/sms-terms/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
   ]
 
-  // Service pages
+  // Service pages — each gets its matching image
+  const serviceImageMap: Record<string, string> = {
+    'interior-painting': interiorImage,
+    'exterior-painting': exteriorImage,
+    'cabinet-refinishing': cabinetImage,
+    'deck-staining': deckImage,
+  }
   const servicePages: MetadataRoute.Sitemap = Object.keys(SERVICES).map((serviceSlug) => ({
     url: `${baseUrl}/services/${serviceSlug}/`,
     lastModified: currentDate,
     changeFrequency: 'monthly',
     priority: 0.9,
+    ...(serviceImageMap[serviceSlug] ? { images: [serviceImageMap[serviceSlug]] } : {}),
   }))
 
   // City + Service pages (the main SEO pages)

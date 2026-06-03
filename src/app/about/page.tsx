@@ -8,6 +8,7 @@ import { Footer } from '@/components/Footer'
 import { aiBusinessDescription, aiFrequentlyAskedQuestions, aiRegionalExpertise, aiServiceDescriptions } from '@/data/ai-discovery'
 import { YouTubeVideo } from '@/components/YouTubeVideo'
 import { ContactFormSection } from '@/components/ContactFormSection'
+import { BreadcrumbSchema } from '@/components/Schema'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: business.url },
+          { name: 'About', url: `${business.url}/about/` },
+        ]}
+      />
       <Header />
 
       <main id="main-content" className="pt-[124px]">
@@ -46,6 +53,11 @@ export default function AboutPage() {
         <section className="bg-gradient-to-br from-secondary via-secondary to-secondary/90 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
+              <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 text-sm text-gray-400 mb-6">
+                <Link href="/" className="hover:text-primary transition">Home</Link>
+                <span aria-hidden="true">/</span>
+                <span className="text-white">About</span>
+              </nav>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
                 About {business.name}
               </h1>
