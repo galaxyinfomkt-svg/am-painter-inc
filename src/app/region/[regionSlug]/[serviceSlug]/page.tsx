@@ -173,7 +173,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
                 <div className="flex flex-wrap gap-3 mb-6">
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <StarIcon className="h-4 w-4 text-yellow-400" />
-                    {business.reviewCount}+ Five-Star Reviews
+                    5-Star Rated on Google
                   </span>
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <ShieldCheckIcon className="h-4 w-4 text-primary" />
@@ -329,7 +329,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
                       <div>
                         <h4 className="text-lg font-bold text-secondary mb-2">Why {region.name} Homeowners Trust {business.name}</h4>
                         <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {region.states.join(', ')}, we understand {region.name}'s unique needs. Our EPA Lead-Safe certified team has expertise in all local architecture styles. {business.reviewCount}+ 5-star reviews prove our commitment to quality.
+                          With {business.yearsInBusiness}+ years serving {region.states.join(', ')}, we understand {region.name}'s unique needs. Our EPA Lead-Safe certified team has expertise in all local architecture styles. Our 5-star Google reviews prove our commitment to quality.
                         </p>
                       </div>
                     </div>

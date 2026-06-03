@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `General Contracting | ${business.name}`,
-    description: `Professional general contracting in Massachusetts. Licensed, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews.`,
+    description: `Professional general contracting in Massachusetts. Licensed, ${business.insurance} insured. 5-star rated.`,
     images: [business.images.og],
   },
 }

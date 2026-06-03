@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Drywall Repair & Installation | ${business.name}`,
-    description: `Professional drywall repair in Massachusetts. ${business.yearsInBusiness}+ years, expert patching, ${business.reviewCount}+ reviews.`,
+    description: `Professional drywall repair in Massachusetts. ${business.yearsInBusiness}+ years, expert patching, 5-star rated.`,
     images: [business.images.og],
   },
 }

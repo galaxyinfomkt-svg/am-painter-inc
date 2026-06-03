@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   const descriptionTemplates: Record<string, Record<string, string>> = {
     'greater-boston': {
       'interior-painting': `Expert interior painting for Greater Boston's historic brownstones, Victorian homes, and luxury condos. Cambridge Historical Commission compliant. Salt-air resistant coatings. Serving Boston, Cambridge, Newton, Brookline. Licensed & ${business.insurance} insured. Free estimates: ${business.phone}`,
-      'exterior-painting': `Boston exterior painting specialists using marine-grade, salt-resistant coatings for coastal properties. Historical district approved. Serving Greater Boston metro: Boston, Cambridge, Somerville, Brookline, Newton. ${business.yearsInBusiness}+ years experience. ${business.reviewCount}+ 5-star reviews.`,
+      'exterior-painting': `Boston exterior painting specialists using marine-grade, salt-resistant coatings for coastal properties. Historical district approved. Serving Greater Boston metro: Boston, Cambridge, Somerville, Brookline, Newton. ${business.yearsInBusiness}+ years experience. 5-star rated on Google.`,
       'cabinet-refinishing': `Premium cabinet refinishing for Greater Boston luxury homes. Factory-smooth finishes on historic and contemporary kitchens. Serving Boston, Cambridge, Newton, Waltham, Lexington. Benjamin Moore & Sherwin-Williams. Free estimates: ${business.phone}`,
       'deck-staining': `Deck staining and weatherproofing for Greater Boston coastal homes. Salt-resistant sealers, UV protection, mold prevention. Serving waterfront and suburban properties. Licensed & insured. Call ${business.phone} for free estimate.`,
       'drywall-repair': `Drywall repair for Greater Boston brownstones, triple-deckers, and condos. Water damage, cracks, holes, smooth finishes. Serving Boston, Cambridge, Somerville, Arlington. Same-day response. ${business.phone}`,
@@ -98,7 +98,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       'deck-staining': `Deck staining for RI coastal properties and NH lake houses. Salt-resistant, UV-blocking, moisture-sealed. Serving Providence, Newport, Manchester, Portsmouth areas. ${business.phone}`,
       'drywall-repair': `Professional drywall repair across Rhode Island and New Hampshire. Water damage, cracks, patches, smooth finishes. Residential & commercial. Licensed contractors. ${business.phone}`,
       'remodeling': `Home remodeling specialists in RI & NH. Colonial, Victorian, contemporary renovations. Newport mansions to NH farmhouses. Kitchen, bath, whole-home projects. ${business.phone}`,
-      'general-contracting': `General contractor serving Rhode Island & New Hampshire. Full-service residential and commercial work. Providence to Manchester. ${business.insurance} insured. ${business.reviewCount}+ reviews. ${business.phone}`
+      'general-contracting': `General contractor serving Rhode Island & New Hampshire. Full-service residential and commercial work. Providence to Manchester. ${business.insurance} insured. 5-star rated. ${business.phone}`
     },
     'maine-vermont': {
       'interior-painting': `Interior painting Maine & Vermont using cold-climate formulas. Portland, Bangor, Burlington, Rutland specialists. Farmhouses, barns, cottages, contemporary homes. Short-season experts. Licensed & insured. ${business.phone}`,
@@ -110,13 +110,13 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       'general-contracting': `General contractor serving Maine & Vermont. Residential & commercial projects. Cold-climate construction experts. ${business.insurance} insured. Licensed in ME & VT. ${business.phone}`
     },
     'worcester-nearby': {
-      'interior-painting': `Worcester interior painting specialists for triple-deckers, multi-family, and Victorian homes. Lead-safe certified. Budget-friendly quality. Serving Worcester, Shrewsbury, Marlborough, Framingham. ${business.reviewCount}+ reviews. ${business.phone}`,
+      'interior-painting': `Worcester interior painting specialists for triple-deckers, multi-family, and Victorian homes. Lead-safe certified. Budget-friendly quality. Serving Worcester, Shrewsbury, Marlborough, Framingham. 5-star rated. ${business.phone}`,
       'exterior-painting': `Worcester exterior painting using freeze-thaw resistant coatings. Triple-decker, multi-family, Victorian home specialists. Central MA harsh winter protection. Licensed & ${business.insurance} insured. ${business.phone}`,
       'cabinet-refinishing': `Affordable cabinet refinishing in Worcester & Central MA. Owner-occupied and rental property transformations. Shrewsbury, Marlborough, Westborough, Grafton. Quality on budget. ${business.phone}`,
       'deck-staining': `Deck staining Worcester & nearby towns. Durable protection for Central MA freeze-thaw cycles. Budget-conscious excellence. Serving Worcester metro area. ${business.phone}`,
       'drywall-repair': `Drywall repair Worcester MA. Multi-family, triple-decker, Victorian specialists. College rental turnovers, water damage, smooth finishes. Fast, affordable service. ${business.phone}`,
       'remodeling': `Worcester home remodeling. Triple-decker renovations, Victorian restorations, contemporary updates. Budget-friendly project planning. Serving Central Massachusetts. ${business.phone}`,
-      'general-contracting': `Worcester general contractor. Multi-family, residential, commercial work. Value-driven projects. Triple-decker expertise. ${business.insurance} insured. ${business.reviewCount}+ reviews. ${business.phone}`
+      'general-contracting': `Worcester general contractor. Multi-family, residential, commercial work. Value-driven projects. Triple-decker expertise. ${business.insurance} insured. 5-star rated. ${business.phone}`
     }
   }
 
@@ -124,7 +124,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     `${service.name} in ${region.name}`
 
   const description = descriptionTemplates[regionSlug]?.[serviceSlug] ||
-    `Professional ${service.name.toLowerCase()} services in ${region.name}. Serving ${region.popularCities.slice(0, 3).join(', ')}. ${region.climate}. Licensed, ${business.insurance} insured. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`
+    `Professional ${service.name.toLowerCase()} services in ${region.name}. Serving ${region.popularCities.slice(0, 3).join(', ')}. ${region.climate}. Licensed, ${business.insurance} insured. 5-star rated on Google. Free estimates: ${business.phone}`
 
   return {
     title,

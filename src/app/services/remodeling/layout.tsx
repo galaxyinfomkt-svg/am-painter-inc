@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Home Remodeling | ${business.name}`,
-    description: `Professional home remodeling in Massachusetts. Kitchen, bath, basement. ${business.yearsInBusiness}+ years, ${business.reviewCount}+ reviews.`,
+    description: `Professional home remodeling in Massachusetts. Kitchen, bath, basement. ${business.yearsInBusiness}+ years, 5-star rated.`,
     images: [business.images.og],
   },
 }
