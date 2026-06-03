@@ -11,6 +11,7 @@ import { HomePageSchema, FAQSchema } from '@/components/Schema'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
+import { Lightbox } from '@/components/Lightbox'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon, PlayIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 // All project photos organized
@@ -48,6 +49,7 @@ const faqList = [
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [activePhoto, setActivePhoto] = useState<{ src: string; alt: string; category: string } | null>(null)
 
   const categories = ['All', 'Interior', 'Exterior', 'Cabinet', 'Deck', 'Remodeling']
   const filteredPhotos = (activeCategory === 'All'
@@ -479,23 +481,14 @@ export default function HomePage() {
             {/* Gallery Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredPhotos.map((img, idx) => {
-                // Map gallery category to its matching service page
-                const categoryToHref: Record<string, string> = {
-                  'Interior': '/services/interior-painting/',
-                  'Exterior': '/services/exterior-painting/',
-                  'Cabinet': '/services/cabinet-refinishing/',
-                  'Deck': '/services/deck-staining/',
-                  'Remodeling': '/services/remodeling/',
-                  'Contracting': '/services/general-contracting/',
-                }
-                const href = categoryToHref[img.category] || '/#services'
                 const isLarge = idx === 0 || idx === 5
                 return (
-                  <Link
+                  <button
                     key={img.src}
-                    href={href}
-                    aria-label={`View our ${img.category.toLowerCase()} services — ${img.alt}`}
-                    className={`relative rounded-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${isLarge ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'}`}
+                    type="button"
+                    onClick={() => setActivePhoto(img)}
+                    aria-label={`Open full image: ${img.alt}`}
+                    className={`relative rounded-2xl overflow-hidden group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${isLarge ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'}`}
                   >
                     <Image
                       src={img.src}
@@ -511,7 +504,7 @@ export default function HomePage() {
                         {img.category}
                       </span>
                     </div>
-                  </Link>
+                  </button>
                 )
               })}
             </div>
@@ -685,29 +678,26 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Contact CTA (the hero already has the LeadConnector form;
-                  do not render a second iframe here to avoid loading the
-                  third-party form script twice per page). */}
+              {/* Contact Form — LeadConnector embed (lazy / facade) */}
               <div className="relative">
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center">
-                      <SparklesIcon className="h-6 w-6 text-white" />
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                      <SparklesIcon className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">Ready to start?</h3>
-                      <p className="text-sm text-gray-300">We respond within 24 hours</p>
+                      <h3 className="text-lg font-bold text-white">Request a Free Estimate</h3>
+                      <p className="text-xs text-gray-300">We respond within 24 hours</p>
                     </div>
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    Scroll to the top of this page to submit the form, or contact us directly using the options on the left.
-                  </p>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-600 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-secondary"
-                  >
-                    Request a Free Estimate
-                  </a>
+                  <div className="bg-white rounded-lg overflow-hidden mx-auto w-full max-w-[420px]">
+                    <LazyFormEmbed
+                      src={business.formEmbedUrl}
+                      formId="Mh6K2okib8bY2wNnjYYq"
+                      variant="home-contact"
+                      height={580}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -751,6 +741,27 @@ export default function HomePage() {
       </main>
 
       <Footer />
+
+      {activePhoto && (() => {
+        const categoryToHref: Record<string, string> = {
+          'Interior': '/services/interior-painting/',
+          'Exterior': '/services/exterior-painting/',
+          'Cabinet': '/services/cabinet-refinishing/',
+          'Deck': '/services/deck-staining/',
+          'Remodeling': '/services/remodeling/',
+          'Contracting': '/services/general-contracting/',
+        }
+        return (
+          <Lightbox
+            src={activePhoto.src}
+            alt={activePhoto.alt}
+            caption={activePhoto.alt}
+            ctaHref={categoryToHref[activePhoto.category]}
+            ctaLabel={`View ${activePhoto.category} services`}
+            onClose={() => setActivePhoto(null)}
+          />
+        )
+      })()}
     </>
   )
 }
