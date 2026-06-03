@@ -122,9 +122,9 @@ body {
   }
 }
 
-/* Skip rendering work on off-screen sections — major TBT/Style&Layout win.
-   The intrinsic-size hint prevents CLS as sections enter the viewport. */
-.below-fold {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
-}
+/* `.below-fold` previously applied content-visibility: auto for a TBT win.
+   Disabled while investigating an indexing/impressions drop — Googlebot is
+   documented to crawl content-visibility content, but to eliminate it as a
+   variable during recovery we let the browser render these sections
+   normally. Re-enable once impressions stabilize. */
+.below-fold {}
