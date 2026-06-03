@@ -124,7 +124,7 @@ export default function ExteriorPaintingPage() {
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><CheckCircleIcon className="h-5 w-5 text-primary" />10-15 Year Durability</span>
-                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><StarIcon className="h-5 w-5 text-yellow-400" />150+ Five-Star Reviews</span>
+                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><StarIcon className="h-5 w-5 text-yellow-400" />5-Star Rated</span>
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><ShieldCheckIcon className="h-5 w-5 text-primary" />EPA Lead-Safe Certified</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">

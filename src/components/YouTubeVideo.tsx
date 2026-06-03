@@ -124,9 +124,9 @@ export function HeroVideoSection() {
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-              {business.reviewCount}+
+              5.0
             </div>
-            <div className="text-gray-600 font-medium">5-Star Reviews</div>
+            <div className="text-gray-600 font-medium">Google Rating</div>
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">

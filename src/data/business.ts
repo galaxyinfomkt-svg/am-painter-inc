@@ -37,7 +37,9 @@ export const business = {
   cslLicense: '' as string,
   languages: ['English', 'Portuguese'] as string[],
   rating: 5.0,
-  reviewCount: 150,
+  // reviewCount intentionally removed — site no longer claims a specific
+  // count to avoid inflated/inaccurate numbers. Copy uses "5-Star Rated"
+  // or "Top-Rated on Google" instead.
 
   // Hours
   hours: {

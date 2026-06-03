@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Exterior Painting Services | ${business.name}`,
-    description: `Professional exterior painting in Massachusetts. ${business.yearsInBusiness}+ years, weather-resistant paints, ${business.reviewCount}+ reviews.`,
+    description: `Professional exterior painting in Massachusetts. ${business.yearsInBusiness}+ years, weather-resistant paints, 5-star rated.`,
     images: [business.images.exteriorPainting],
   },
 }

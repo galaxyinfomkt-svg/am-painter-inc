@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Deck Staining & Restoration | ${business.name}`,
-    description: `Professional deck staining in Massachusetts. ${business.yearsInBusiness}+ years, premium stains, ${business.reviewCount}+ reviews. Free estimates!`,
+    description: `Professional deck staining in Massachusetts. ${business.yearsInBusiness}+ years, premium stains, 5-star rated. Free estimates!`,
     images: [business.images.og],
   },
 }

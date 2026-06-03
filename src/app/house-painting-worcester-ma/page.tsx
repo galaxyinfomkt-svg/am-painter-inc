@@ -238,7 +238,7 @@ export default function WorcesterPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckIcon />
-                    <span><strong>5.0-star rating</strong> with {business.reviewCount}+ satisfied customers</span>
+                    <span><strong>5.0-star rating</strong> from satisfied customers on Google</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckIcon />

@@ -6,7 +6,7 @@ import HomePage from '@/components/HomePage'
 // Home page — title omits brand suffix; layout template appends " | A&M Painter Inc"
 export const metadata: Metadata = {
   title: '#1 Painting Contractor in Massachusetts',
-  description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck staining, remodeling. ${business.reviewCount}+ 5-star reviews. Free estimate: ${business.phone}`,
+  description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck staining, remodeling. 5-star rated. Free estimate: ${business.phone}`,
   alternates: {
     canonical: business.url,
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${business.name} | #1 Painting Contractor Massachusetts`,
-    description: `${business.yearsInBusiness}+ years serving Massachusetts. ${business.reviewCount}+ 5-star reviews. Free estimates: ${business.phone}`,
+    description: `${business.yearsInBusiness}+ years serving Massachusetts. 5-star rated. Free estimates: ${business.phone}`,
     images: [business.images.og],
   },
 }

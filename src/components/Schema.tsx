@@ -33,7 +33,7 @@ export function LocalBusinessSchema() {
     ],
 
     // === DESCRIÇÃO RICA PARA AI ===
-    description: `${business.name} is a professional painting contractor based in ${business.address.city}, ${business.address.state}, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. With ${business.reviewCount}+ five-star reviews, we are the top-rated painting contractor in Massachusetts. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
+    description: `${business.name} is a professional painting contractor based in ${business.address.city}, ${business.address.state}, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
 
     slogan: 'Massachusetts\' Most Trusted Painting Contractor',
 
@@ -268,18 +268,12 @@ export function LocalBusinessSchema() {
     })),
 
     // === AVALIAÇÕES (Rich Snippets com Estrelas) ===
-    // NOTE: aggregateRating only — review[] array removed to comply with Google's
-    // 2024+ guideline against self-serving / unverifiable reviews. Re-add a `review`
-    // array ONLY when each item is a real review the business has received and is
-    // also rendered as visible HTML on the page (not inside the GHL iframe).
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: business.rating.toString(),
-      bestRating: '5',
-      worstRating: '1',
-      ratingCount: business.reviewCount.toString(),
-      reviewCount: business.reviewCount.toString(),
-    },
+    // NOTE: aggregateRating intentionally removed — business is not currently
+    // publishing a verifiable review count alongside reviewer details, so a
+    // claimed rating could trigger a Google manual action under the
+    // 2024+ structured-data guidelines. Re-add ONLY when (a) the real review
+    // count is known and accurate, and (b) actual reviews are rendered as
+    // visible HTML on the page (not just inside the LeadConnector iframe).
 
     // === CREDENCIAIS E CERTIFICAÇÕES ===
     hasCredential: [
@@ -673,7 +667,7 @@ export function HomePageSchema() {
       <WebSiteSchema />
       <WebPageSchema
         title={`${business.name} - Professional Painting Contractor Massachusetts`}
-        description={`Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. ${business.reviewCount}+ 5-star reviews.`}
+        description={`Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Top-rated on Google.`}
         url={business.url}
       />
     </>

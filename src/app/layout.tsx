@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     url: business.url,
     siteName: business.name,
     title: `${business.name} | #1 Rated Painting Contractor in Massachusetts`,
-    description: `Transform your home with Massachusetts' most trusted painting contractor. Expert interior & exterior painting, cabinet refinishing, remodeling. ${business.yearsInBusiness}+ years, ${business.reviewCount}+ 5-star reviews. Licensed & ${business.insurance} insured. Free estimates!`,
+    description: `Transform your home with Massachusetts' most trusted painting contractor. Expert interior & exterior painting, cabinet refinishing, remodeling. ${business.yearsInBusiness}+ years, 5-star rated. Licensed & ${business.insurance} insured. Free estimates!`,
     images: [
       {
         url: business.images.og,
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${business.name} | #1 Painting Contractor Massachusetts`,
-    description: `${business.yearsInBusiness}+ years serving Massachusetts. Interior & exterior painting, cabinet refinishing, remodeling. ${business.reviewCount}+ 5-star reviews. Free estimates!`,
+    description: `${business.yearsInBusiness}+ years serving Massachusetts. Interior & exterior painting, cabinet refinishing, remodeling. 5-star rated on Google. Free estimates!`,
     images: [business.images.og],
   },
   icons: {

@@ -421,7 +421,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords,
     alternates: { canonical },
     openGraph: {
-      title: `${service.name} in ${city.name}, MA | ${business.reviewCount}+ 5-Star Reviews`,
+      title: `${service.name} in ${city.name}, MA | 5-Star Rated`,
       description: `Expert ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. ${business.yearsInBusiness}+ years experience. Free estimates!`,
       url: canonical,
       siteName: business.name,
@@ -439,7 +439,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     twitter: {
       card: 'summary_large_image',
       title: `${service.name} ${city.name} MA | ${business.name}`,
-      description: `Professional ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. ${business.reviewCount}+ 5-star reviews. Free estimates!`,
+      description: `Professional ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. 5-star rated on Google. Free estimates!`,
       images: [business.images.og],
     },
   }
@@ -531,7 +531,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                 <div className="flex flex-wrap gap-3 mb-6">
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <StarIcon className="h-4 w-4 text-yellow-400" />
-                    {business.reviewCount}+ Five-Star Reviews
+                    5-Star Rated on Google
                   </span>
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <ShieldCheckIcon className="h-4 w-4 text-primary" />
@@ -681,7 +681,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       <div>
                         <h4 className="text-lg font-bold text-secondary">Why {city.name} Homeowners Trust {business.name}</h4>
                         <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}, we understand {city.name}&apos;s {housingTypes.slice(0, 2).join(' and ')} architecture. Our EPA Lead-Safe certified team handles {pre1978}% pre-1978 homes with expertise. {business.reviewCount}+ 5-star reviews prove our commitment to {city.name} quality.
+                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}, we understand {city.name}&apos;s {housingTypes.slice(0, 2).join(' and ')} architecture. Our EPA Lead-Safe certified team handles {pre1978}% pre-1978 homes with expertise. Our 5-star Google reviews prove our commitment to {city.name} quality.
                         </p>
                       </div>
                     </div>

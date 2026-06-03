@@ -260,7 +260,7 @@ export default function MarlboroughPage() {
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span>5.0 Star Rating ({business.reviewCount}+ Reviews)</span>
+                      <span>5.0 Star Rating on Google</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
