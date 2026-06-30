@@ -121,13 +121,13 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   }
 
   const title = titleTemplates[regionSlug]?.[serviceSlug] ||
-    `${service.name} in ${region.name}`
+    `${service.name} ${region.name} — Free 24h Estimate`
 
   const description = descriptionTemplates[regionSlug]?.[serviceSlug] ||
     `Professional ${service.name.toLowerCase()} services in ${region.name}. Serving ${region.popularCities.slice(0, 3).join(', ')}. ${region.climate}. Licensed, ${business.insurance} insured. 5-star rated on Google. Free estimates: ${business.phone}`
 
   return {
-    title,
+    title: { absolute: title },
     description,
     keywords: [
       // Region-specific keywords

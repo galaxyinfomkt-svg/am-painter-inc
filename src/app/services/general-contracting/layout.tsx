@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: 'General Contracting Services Massachusetts | Licensed Contractor',
+  title: { absolute: 'General Contractor Hudson MA — Licensed, $2M Insured' },
   description: `General contracting in Massachusetts. Project management, permits, subcontractor coordination. Licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     'general contractor Massachusetts',

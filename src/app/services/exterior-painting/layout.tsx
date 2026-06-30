@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Exterior Painting Services Massachusetts | House Painters',
+  title: { absolute: 'Exterior Painting Hudson MA — 10-Yr Coatings, Free Quote' },
   description: `Exterior painting in Massachusetts. Weather-resistant paints, wood rot repair, power washing. EPA Lead-Safe. Free estimate: ${business.phone}`,
   keywords: [
     'exterior painting Massachusetts',
