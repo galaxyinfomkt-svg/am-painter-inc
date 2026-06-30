@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -30,7 +30,7 @@ const painPoints = [
   },
   {
     problem: "Not sure who to trust with a major project?",
-    solution: `Licensed, ${business.insurance} insured, with 5-star Google reviews. We've earned our reputation over ${business.yearsInBusiness} years.`
+    solution: `Licensed, ${business.insurance} insured, with family-owned local commitment. We've earned our reputation over ${business.yearsInBusiness} years.`
   }
 ]
 

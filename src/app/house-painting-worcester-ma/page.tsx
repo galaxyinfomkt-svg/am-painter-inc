@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     question: `Why is ${business.name} the best choice for painting in ${cityName}?`,
-    answer: `As the second-largest city in New England, ${cityName} has diverse architecture from Victorian homes in College Hill to modern construction in newer areas. ${business.name} has ${business.yearsInBusiness}+ years of experience handling all styles. We're fully licensed, carry ${business.insurance} insurance, and maintain a 5.0-star rating. We know ${cityName} homes.`,
+    answer: `As the second-largest city in New England, ${cityName} has diverse architecture from Victorian homes in College Hill to modern construction in newer areas. ${business.name} has ${business.yearsInBusiness}+ years of experience handling all styles. We're a family-owned firm, fully licensed, carry ${business.insurance} insurance, and are EPA Lead-Safe certified — important for the many pre-1978 ${cityName} homes. We know ${cityName} homes.`,
   },
   {
     question: `Which ${cityName} neighborhoods do you serve?`,
@@ -238,7 +238,7 @@ export default function WorcesterPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckIcon />
-                    <span><strong>5.0-star rating</strong> from satisfied customers on Google</span>
+                    <span><strong>EPA Lead-Safe Certified Firm</strong> — important for {cityName}&apos;s pre-1978 homes</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckIcon />

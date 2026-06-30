@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { business } from '@/data/business'
-import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
+import { PhoneIcon, CheckCircleIcon, HomeIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
@@ -124,7 +124,7 @@ export default function ExteriorPaintingPage() {
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><CheckCircleIcon className="h-5 w-5 text-primary" />10-15 Year Durability</span>
-                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><StarIcon className="h-5 w-5 text-yellow-400" />5-Star Rated</span>
+                  <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><HomeIcon className="h-5 w-5 text-yellow-400" />Family-Owned, Local</span>
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm"><ShieldCheckIcon className="h-5 w-5 text-primary" />EPA Lead-Safe Certified</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">

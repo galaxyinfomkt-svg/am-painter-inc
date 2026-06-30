@@ -13,7 +13,7 @@ import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } fro
 
 export const metadata: Metadata = {
   title: { absolute: 'About A&M Painter Inc — Hudson MA Family-Owned Painter' },
-  description: `Trusted Massachusetts painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities. Licensed, insured, 5-star rated.`,
+  description: `Family-owned Massachusetts painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities. Licensed, insured, EPA Lead-Safe certified.`,
   keywords: [
     'about A&M Painter',
     'A&M Painter Inc Massachusetts',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: `About ${business.name} | Professional Painting Contractor Massachusetts`,
-    description: `${business.yearsInBusiness}+ years serving Massachusetts with professional painting and remodeling services. Licensed, insured, 5-star rated.`,
+    description: `${business.yearsInBusiness}+ years serving Massachusetts with professional painting and remodeling services. Family-owned, licensed, insured, EPA Lead-Safe.`,
     url: `${business.url}/about`,
     type: 'website',
   },
@@ -63,12 +63,12 @@ export default function AboutPage() {
                 About {business.name}
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                Massachusetts' Most Trusted Painting Contractor Since {business.foundedYear}
+                Family-Owned Massachusetts Painting Contractor Since {business.foundedYear}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur rounded-full text-white border border-white/30">
-                  <StarIcon className="h-5 w-5 text-yellow-400" />
-                  5-Star Rated on Google
+                  <ShieldCheckIcon className="h-5 w-5 text-yellow-400" />
+                  EPA Lead-Safe Certified Firm
                 </span>
                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur rounded-full text-white border border-white/30">
                   <ShieldCheckIcon className="h-5 w-5 text-primary" />

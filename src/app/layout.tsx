@@ -19,13 +19,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
   title: {
-    default: `Painter Hudson MA — Free 24h Estimate | ${business.name}`,
+    default: `Hudson, MA Painter | 2026 Free Quote in 24h | ${business.name}`,
     // Most page-level titles already include the brand contextually; we keep
     // a brand suffix on the template for pages that DO want it but use
     // `title: { absolute: '...' }` on pages where brand would push past 60 chars.
     template: `%s | ${business.name}`,
   },
-  description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck, remodeling. Licensed, insured, EPA Lead-Safe. Free estimate: ${business.phone}`,
+  description: `Family-owned Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck, remodeling. Licensed, insured, EPA Lead-Safe. Free written quote in 24h.`,
   authors: [{ name: business.name }],
   creator: business.name,
   publisher: business.name,
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: business.url,
     siteName: business.name,
-    title: `${business.name} | #1 Rated Painting Contractor in Massachusetts`,
-    description: `Transform your home with Massachusetts' most trusted painting contractor. Expert interior & exterior painting, cabinet refinishing, remodeling. ${business.yearsInBusiness}+ years, 5-star rated. Licensed & ${business.insurance} insured. Free estimates!`,
+    title: `${business.name} | Family-Owned Massachusetts Painting Contractor`,
+    description: `Family-owned Massachusetts painting contractor. Expert interior & exterior painting, cabinet refinishing, remodeling. ${business.yearsInBusiness}+ years. Licensed & ${business.insurance} insured. Free written quote in 24h.`,
     images: [
       {
         url: business.images.og,
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${business.name} | #1 Painting Contractor Massachusetts`,
-    description: `${business.yearsInBusiness}+ years serving Massachusetts. Interior & exterior painting, cabinet refinishing, remodeling. 5-star rated on Google. Free estimates!`,
+    title: `${business.name} | Family-Owned MA Painting Contractor`,
+    description: `${business.yearsInBusiness}+ years serving Massachusetts. Interior & exterior painting, cabinet refinishing, remodeling. Family-owned, EPA Lead-Safe. Free written quote.`,
     images: [business.images.og],
   },
   icons: {

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -30,7 +30,7 @@ const painPoints = [
   },
   {
     problem: "Nervous about hiring the wrong contractor?",
-    solution: `With ${business.yearsInBusiness}+ years experience, ${business.insurance} insurance, and 5-star Google reviews, you're in safe hands.`
+    solution: `With ${business.yearsInBusiness}+ years experience, ${business.insurance} insurance, and family-owned local commitment, you're in safe hands.`
   }
 ]
 
@@ -135,7 +135,7 @@ export default function InteriorPaintingPage() {
                   </span>
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm">
                     <StarIcon className="h-5 w-5 text-yellow-400" />
-                    5-Star Rated
+                    Family-Owned
                   </span>
                   <span className="flex items-center gap-2 text-white bg-white/10 px-4 py-2 rounded-full text-sm">
                     <ShieldCheckIcon className="h-5 w-5 text-primary" />
