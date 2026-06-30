@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { business } from '@/data/business'
 import { ServicePageSchema } from '@/components/Schema'
 
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Exterior Painting Services | ${business.name}`,
-    description: `Professional exterior painting in Massachusetts. ${business.yearsInBusiness}+ years, weather-resistant paints, 5-star rated.`,
+    description: `Professional exterior painting in Massachusetts. ${business.yearsInBusiness}+ years, weather-resistant paints, family-owned, EPA Lead-Safe.`,
     images: [business.images.exteriorPainting],
   },
 }

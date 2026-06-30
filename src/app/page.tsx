@@ -5,8 +5,8 @@ import HomePage from '@/components/HomePage'
 
 // Home page — title omits brand suffix; layout template appends " | A&M Painter Inc"
 export const metadata: Metadata = {
-  title: { absolute: 'Painter Hudson MA — Free 24-Hour Estimate, EPA Lead-Safe' },
-  description: `Hudson, MA painter serving 60+ MetroWest cities. Interior, exterior, cabinets, decks. Free estimate in 24h. Licensed, insured, EPA Lead-Safe. ${business.phone}`,
+  title: { absolute: 'Hudson, MA Painter | 2026 Free Quote in 24h, EPA Lead-Safe' },
+  description: `Family-owned Hudson, MA painters serving ${Object.keys(CITIES).length}+ MetroWest cities. Interior, exterior, cabinets, decks. Free written quote in 24h — 2026 pricing.`,
   alternates: {
     canonical: business.url,
   },
@@ -15,21 +15,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: business.url,
     siteName: business.name,
-    title: `${business.name} | #1 Rated Painting Contractor Massachusetts`,
-    description: `Trusted Massachusetts painting contractor serving ${Object.keys(CITIES).length}+ cities. Interior, exterior, cabinets, remodeling. Licensed, ${business.insurance} insured.`,
+    title: `${business.name} | Family-Owned MetroWest Painters`,
+    description: `Family-owned Massachusetts painting contractor serving ${Object.keys(CITIES).length}+ MetroWest cities. Interior, exterior, cabinets, remodeling. Licensed, ${business.insurance} insured.`,
     images: [
       {
         url: business.images.og,
         width: 1200,
         height: 630,
-        alt: `${business.name} - Professional Painting Contractor Massachusetts`,
+        alt: `${business.name} - Family-Owned Massachusetts Painting Contractor`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${business.name} | #1 Painting Contractor Massachusetts`,
-    description: `${business.yearsInBusiness}+ years serving Massachusetts. 5-star rated. Free estimates: ${business.phone}`,
+    title: `${business.name} | Hudson, MA Family-Owned Painters`,
+    description: `Family-owned Hudson, MA painters serving ${Object.keys(CITIES).length}+ MetroWest cities. Free written quote in 24h.`,
     images: [business.images.og],
   },
 }

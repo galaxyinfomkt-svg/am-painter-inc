@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Cabinet Refinishing | ${business.name}`,
-    description: `Professional cabinet painting in Massachusetts. Transform your kitchen at 1/3 the cost. 5-star rated.`,
+    description: `Professional cabinet painting in Massachusetts. Transform your kitchen at 1/3 the cost. Family-owned.`,
     images: [business.images.cabinetRefinishing],
   },
 }

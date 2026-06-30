@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { business } from '@/data/business'
 import { ServicePageSchema } from '@/components/Schema'
 
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Interior Painting Services | ${business.name} | Massachusetts`,
-    description: `Transform your home with professional interior painting. ${business.yearsInBusiness}+ years experience, premium paints, expert color consultation. 5-star rated. Free estimates!`,
+    description: `Transform your home with professional interior painting. ${business.yearsInBusiness}+ years experience, premium paints, expert color consultation. family-owned. Free estimates!`,
     url: `${business.url}/services/interior-painting`,
     siteName: business.name,
     type: 'website',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Interior Painting Services | ${business.name}`,
-    description: `Expert interior painting in Massachusetts. ${business.yearsInBusiness}+ years, premium paints, 5-star rated. Free estimates!`,
+    description: `Expert interior painting in Massachusetts. ${business.yearsInBusiness}+ years, premium paints, family-owned, EPA Lead-Safe. Free estimates!`,
     images: [business.images.interiorPainting],
   },
 }

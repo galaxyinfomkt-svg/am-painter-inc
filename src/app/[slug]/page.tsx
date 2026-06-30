@@ -455,11 +455,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Create city-specific, unique meta description (max 155 chars)
   const architectureText = city.architectureStyle.slice(0, 2).join(' & ')
 
-  const description = `${service.name} in ${city.name}, MA. ${architectureText} home experts. Free estimate in 24h. Licensed, insured, EPA Lead-Safe. ${business.phone}`
+  // SHORT service labels for the visible part of the SERP. Google truncates
+  // ~58 chars — "Cabinet Painting & Refinishing" alone is 30, which pushed
+  // the previous template past the cut-off and snippet got chopped mid-word.
+  const SERVICE_SHORT: Record<string, string> = {
+    'interior-painting': 'Interior Painters',
+    'exterior-painting': 'Exterior Painters',
+    'cabinet-refinishing': 'Cabinet Refinishing',
+    'deck-staining': 'Deck Staining',
+    'drywall-repair': 'Drywall Repair',
+    'remodeling': 'Home Remodeling',
+    'general-contracting': 'General Contractor',
+  }
+  const serviceShort = SERVICE_SHORT[service.slug] || service.name
 
-  // Title kept absolute to avoid blowing past 60 chars with the brand suffix.
-  // CTR is the bottleneck — front-loaded city name, action hook at the end.
-  const title = `${service.name} ${city.name} MA — Free 24h Estimate`
+  // Build title that fits within Google's ~58-char visible window. The
+  // "(2026)" / "2026" year is a meaningful freshness signal — keep it when
+  // there's room, drop it for long city/service combos.
+  const titleWithYear = `${serviceShort} ${city.name}, MA | 2026 Free Quote`
+  const titleNoYear = `${serviceShort} ${city.name}, MA | Free Quote`
+  const title = titleWithYear.length <= 58 ? titleWithYear : titleNoYear
+
+  // Description: drop the phone number (the page itself surfaces it after
+  // the click), lead with a real differentiator (local + family-owned + 2026
+  // pricing), keep ≤155 chars.
+  const description = `Local family-owned painters for ${city.name}, MA homes. ${architectureText} specialists. Free written quote in 24h — 2026 pricing. EPA Lead-Safe.`
 
   // Generate comprehensive keywords including city-specific terms
   const keywords = [
@@ -488,8 +508,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords,
     alternates: { canonical },
     openGraph: {
-      title: `${service.name} in ${city.name}, MA | 5-Star Rated`,
-      description: `Expert ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. ${business.yearsInBusiness}+ years experience. Free estimates!`,
+      title: `${serviceShort} ${city.name}, MA | Family-Owned Local Painters`,
+      description: `Local family-owned painters for ${city.name}, MA — ${architectureText} home specialists. Free written quote in 24h. EPA Lead-Safe certified firm.`,
       url: canonical,
       siteName: business.name,
       type: 'website',
@@ -505,8 +525,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${service.name} ${city.name} MA | ${business.name}`,
-      description: `Professional ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. 5-star rated on Google. Free estimates!`,
+      title: `${serviceShort} ${city.name}, MA | ${business.name}`,
+      description: `Local family-owned ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. Free written quote in 24h.`,
       images: [business.images.og],
     },
   }
@@ -600,7 +620,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                 <div className="flex flex-wrap gap-3 mb-6">
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <StarIcon className="h-4 w-4 text-yellow-400" />
-                    5-Star Rated on Google
+                    EPA Lead-Safe Certified
                   </span>
                   <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm text-white border border-white/20">
                     <ShieldCheckIcon className="h-4 w-4 text-primary" />
@@ -783,7 +803,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       <div>
                         <h4 className="text-lg font-bold text-secondary">Why {city.name} Homeowners Trust {business.name}</h4>
                         <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}, we understand {city.name}&apos;s {housingTypes.slice(0, 2).join(' and ')} architecture. Our EPA Lead-Safe certified team handles {pre1978}% pre-1978 homes with expertise. Our 5-star Google reviews prove our commitment to {city.name} quality.
+                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}, we understand {city.name}&apos;s {housingTypes.slice(0, 2).join(' and ')} architecture. Our EPA Lead-Safe certified team handles {pre1978}% pre-1978 homes with expertise. As a family-owned local firm, we&apos;re committed to delivering {city.name}-specific quality and accountability on every project.
                         </p>
                       </div>
                     </div>

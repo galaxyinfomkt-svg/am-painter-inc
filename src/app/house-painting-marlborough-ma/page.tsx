@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: `House Painting ${cityName}, MA | ${business.name}`,
-    description: `Professional house painting services in ${cityName}, MA. ${business.yearsInBusiness}+ years experience, 5-star rated, licensed & insured. Free estimates!`,
+    description: `Professional house painting services in ${cityName}, MA. ${business.yearsInBusiness}+ years experience, family-owned, licensed & insured. Free written quote in 24h.`,
     url: `${business.url}/house-painting-${cityName.toLowerCase()}-ma/`,
     images: [{ url: business.images.og, width: 1200, height: 630 }],
   },
@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     question: `Why choose ${business.name} for house painting in ${cityName}?`,
-    answer: `${business.name} has been serving ${cityName} and surrounding areas for ${business.yearsInBusiness}+ years. We're fully licensed and insured with ${business.insurance} coverage, maintain a perfect 5.0-star rating, and use premium paints from Sherwin-Williams and Benjamin Moore. Our team knows the unique challenges of painting homes in ${cityName}'s climate.`,
+    answer: `${business.name} has been serving ${cityName} and surrounding areas for ${business.yearsInBusiness}+ years. We're a family-owned firm, fully licensed and insured with ${business.insurance} coverage, EPA Lead-Safe certified, and use premium paints from Sherwin-Williams and Benjamin Moore. Our team knows the unique challenges of painting homes in ${cityName}'s climate.`,
   },
   {
     question: `Do you serve all neighborhoods in ${cityName}?`,
