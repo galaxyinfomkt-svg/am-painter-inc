@@ -30,8 +30,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'Interior Painting Hudson MA — Free Estimate 24h, Low-VOC' },
-  description: `Interior painting in Massachusetts. ${business.yearsInBusiness}+ years, premium paints, low-VOC, EPA Lead-Safe. Free estimate: ${business.phone}`,
+  title: { absolute: 'Interior Painting MA | Low-VOC, 2026 Free Quote in 24h' },
+  description: `Family-owned interior painting in Massachusetts. ${business.yearsInBusiness}+ years, premium low-VOC paints, EPA Lead-Safe. Free written quote in 24h — 2026 pricing.`,
   keywords: [
     'interior painting Massachusetts',
     'interior house painting MA',

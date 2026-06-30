@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { business } from '@/data/business'
 import { ServicePageSchema } from '@/components/Schema'
 
@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'Cabinet Refinishing Hudson MA — Save 60% vs Replacement' },
+  title: { absolute: 'Cabinet Refinishing MA | Save 60% vs Replacement, 2026' },
   description: `Cabinet painting & refinishing in Massachusetts. Factory-smooth spray finish, ${business.yearsInBusiness}+ years. Free estimate: ${business.phone}`,
   keywords: [
     'cabinet refinishing Massachusetts',

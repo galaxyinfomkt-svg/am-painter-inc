@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'Drywall Repair Hudson MA — Same-Week Service, Free Quote' },
+  title: { absolute: 'Drywall Repair MA | Same-Week Service, 2026 Free Quote' },
   description: `Drywall repair & installation in Massachusetts. Hole patching, water damage repair, texture matching, ceiling repair. Free estimate: ${business.phone}`,
   keywords: [
     'drywall repair Massachusetts',

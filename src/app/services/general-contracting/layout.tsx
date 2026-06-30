@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { business } from '@/data/business'
 import { ServicePageSchema } from '@/components/Schema'
 
@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'General Contractor Hudson MA — Licensed, $2M Insured' },
+  title: { absolute: 'General Contracting MA | Licensed, 2026 Free Quote 24h' },
   description: `General contracting in Massachusetts. Project management, permits, subcontractor coordination. Licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     'general contractor Massachusetts',
