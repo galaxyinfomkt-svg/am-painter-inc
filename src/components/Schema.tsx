@@ -703,41 +703,8 @@ export function OwnerPersonSchema() {
   )
 }
 
-// HowTo Schema (Para rich snippets de processo)
-export function HowToSchema({
-  name,
-  description,
-  steps
-}: {
-  name: string
-  description: string
-  steps: { name: string; text: string }[]
-}) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: name,
-    description: description,
-    step: steps.map((step, index) => ({
-      '@type': 'HowToStep',
-      position: index + 1,
-      name: step.name,
-      text: step.text,
-    })),
-    tool: [
-      { '@type': 'HowToTool', name: 'Benjamin Moore Paint' },
-      { '@type': 'HowToTool', name: 'Sherwin-Williams Paint' },
-      { '@type': 'HowToTool', name: 'Professional Spray Equipment' },
-    ],
-  }
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
-}
+// (Legacy duplicate HowToSchema removed — replaced by the richer one above
+//  that supports totalTime + estimatedCost. Keeping a single source of truth.)
 
 // Combined Schema Component for Home Page
 export function HomePageSchema() {
