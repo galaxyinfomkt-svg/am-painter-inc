@@ -19,7 +19,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
   title: {
-    default: `Painting Contractor Massachusetts | ${business.name}`,
+    default: `Painter Hudson MA — Free 24h Estimate | ${business.name}`,
+    // Most page-level titles already include the brand contextually; we keep
+    // a brand suffix on the template for pages that DO want it but use
+    // `title: { absolute: '...' }` on pages where brand would push past 60 chars.
     template: `%s | ${business.name}`,
   },
   description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck, remodeling. Licensed, insured, EPA Lead-Safe. Free estimate: ${business.phone}`,

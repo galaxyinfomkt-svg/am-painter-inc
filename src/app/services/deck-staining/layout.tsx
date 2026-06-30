@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Deck Staining & Restoration Massachusetts | Deck Contractors',
+  title: { absolute: 'Deck Staining Hudson MA — Restore in 2 Days, Free Quote' },
   description: `Deck staining & restoration in Massachusetts. Premium penetrating stains, wood repair, power washing. Free estimate: ${business.phone}`,
   keywords: [
     'deck staining Massachusetts',

@@ -13,7 +13,7 @@ const cityName = city.name
 
 // Generate metadata for this city page - SSR/SSG
 export const metadata: Metadata = {
-  title: `House Painting ${cityName}, MA | Professional Painters`,
+  title: { absolute: `House Painters ${cityName} MA — Free 24h Estimate` },
   description: `House painters in ${cityName}, MA. Interior & exterior painting, ${business.yearsInBusiness}+ years, licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     `house painting ${cityName} MA`,

@@ -389,10 +389,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Create city-specific, unique meta description (max 155 chars)
   const architectureText = city.architectureStyle.slice(0, 2).join(' & ')
 
-  const description = `${service.name} in ${city.name}, MA. ${architectureText} home experts, EPA Lead-Safe, insured. Free estimate: ${business.phone}`
+  const description = `${service.name} in ${city.name}, MA. ${architectureText} home experts. Free estimate in 24h. Licensed, insured, EPA Lead-Safe. ${business.phone}`
 
-  // Create unique, city-specific title (layout template appends brand)
-  const title = `${service.name} in ${city.name}, MA | ${architectureText} Homes`
+  // Title kept absolute to avoid blowing past 60 chars with the brand suffix.
+  // CTR is the bottleneck — front-loaded city name, action hook at the end.
+  const title = `${service.name} ${city.name} MA — Free 24h Estimate`
 
   // Generate comprehensive keywords including city-specific terms
   const keywords = [
@@ -416,7 +417,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   ]
 
   return {
-    title,
+    title: { absolute: title },
     description,
     keywords,
     alternates: { canonical },

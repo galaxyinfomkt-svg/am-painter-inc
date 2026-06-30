@@ -12,7 +12,7 @@ import { BreadcrumbSchema } from '@/components/Schema'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
-  title: 'About Us | Professional Painting Contractor Massachusetts',
+  title: { absolute: 'About A&M Painter Inc — Hudson MA Family-Owned Painter' },
   description: `Trusted Massachusetts painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities. Licensed, insured, 5-star rated.`,
   keywords: [
     'about A&M Painter',

@@ -5,8 +5,8 @@ import HomePage from '@/components/HomePage'
 
 // Home page — title omits brand suffix; layout template appends " | A&M Painter Inc"
 export const metadata: Metadata = {
-  title: '#1 Painting Contractor in Massachusetts',
-  description: `Massachusetts painting contractor since ${business.foundedYear}. Interior, exterior, cabinets, deck staining, remodeling. 5-star rated. Free estimate: ${business.phone}`,
+  title: { absolute: 'Painter Hudson MA — Free 24-Hour Estimate, EPA Lead-Safe' },
+  description: `Hudson, MA painter serving 60+ MetroWest cities. Interior, exterior, cabinets, decks. Free estimate in 24h. Licensed, insured, EPA Lead-Safe. ${business.phone}`,
   alternates: {
     canonical: business.url,
   },

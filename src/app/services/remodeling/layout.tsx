@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Home Remodeling Services Massachusetts | Kitchen & Bath Renovation',
+  title: { absolute: 'Home Remodeling Hudson MA — Kitchen, Bath, Free Quote 24h' },
   description: `Home remodeling in Massachusetts. Kitchen, bathroom, basement, room additions. Licensed & insured. Free estimate: ${business.phone}`,
   keywords: [
     'home remodeling Massachusetts',

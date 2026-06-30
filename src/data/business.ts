@@ -3,6 +3,8 @@ export const business = {
   name: 'A&M Painter Inc',
   legalName: 'A&M Painter Inc',
   tagline: 'Professional Painting, Remodeling & General Contracting in MA, NH, ME & VT',
+  // Short, memorable USP — designed for hero badges, OG cards, and snippet enhancers
+  shortUSP: 'Free 24-Hour Estimate · EPA Lead-Safe · Bilingual (English/Português)',
   phone: '(774) 416-1275',
   phoneRaw: '+17744161275',
   email: 'info@ampainterinc.com',

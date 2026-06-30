@@ -30,7 +30,7 @@ const faqs = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Cabinet Painting & Refinishing Massachusetts | Kitchen Cabinets',
+  title: { absolute: 'Cabinet Refinishing Hudson MA — Save 60% vs Replacement' },
   description: `Cabinet painting & refinishing in Massachusetts. Factory-smooth spray finish, ${business.yearsInBusiness}+ years. Free estimate: ${business.phone}`,
   keywords: [
     'cabinet refinishing Massachusetts',
