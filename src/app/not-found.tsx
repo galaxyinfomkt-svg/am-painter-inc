@@ -121,6 +121,12 @@ export default function NotFound() {
                 >
                   Browse the painting blog →
                 </Link>
+                <Link
+                  href="/quote-calculator/"
+                  className="block mt-2 text-center text-primary font-semibold hover:underline"
+                >
+                  Painting cost calculator →
+                </Link>
               </div>
             </div>
           </div>

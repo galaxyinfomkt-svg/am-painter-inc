@@ -249,6 +249,13 @@ export function Footer() {
               </Link>
               <span className="text-gray-300">•</span>
               <Link
+                href="/quote-calculator/"
+                className="text-sm font-semibold text-primary hover:text-primary-600 transition"
+              >
+                Cost Calculator
+              </Link>
+              <span className="text-gray-300">•</span>
+              <Link
                 href="/#contact"
                 className="text-sm font-semibold text-primary hover:text-primary-600 transition"
               >
