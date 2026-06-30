@@ -228,6 +228,357 @@ export const POSTS: BlogPost[] = [
     ],
     relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'shrewsbury'],
   },
+  {
+    slug: 'cabinet-refinishing-vs-replacement-hudson-ma-cost',
+    title: 'Cabinet Refinishing vs Replacement in Hudson, MA: 2026 Cost Comparison',
+    metaTitle: 'Cabinet Refinishing vs Replacement Hudson MA — Cost Guide',
+    metaDescription:
+      'Side-by-side cost comparison of cabinet refinishing vs full replacement for Hudson, Marlborough, and Worcester MA kitchens. Real 2026 pricing.',
+    excerpt:
+      'Cabinet refinishing runs $2,800–$5,800 in MetroWest. Replacement runs $15,000–$35,000+. Here is when each makes sense and how to decide.',
+    heroImage: '/images/cabinet-refinishing-marlborough-ma-am-painter-inc.jpg',
+    heroAlt: 'White refinished kitchen cabinets with granite counters in Marlborough, MA',
+    publishedAt: '2026-06-30',
+    updatedAt: '2026-06-30',
+    category: 'Pricing',
+    readMinutes: 7,
+    bodyHtml: `
+<p class="lead">If your kitchen cabinets are solid wood and structurally sound, refinishing saves 60–80% versus full replacement. Here are the real 2026 numbers for Hudson, Marlborough, Worcester, and the surrounding MetroWest market — plus when each choice actually makes sense.</p>
+
+<h2>2026 cost comparison (typical MetroWest kitchen)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Typical cost</th>
+      <th>Timeline</th>
+      <th>Kitchen down-time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Cabinet refinishing</strong> (paint or stain, keep boxes & doors)</td>
+      <td>$2,800–$5,800</td>
+      <td>5–7 days</td>
+      <td>~5–7 days partial use</td>
+    </tr>
+    <tr>
+      <td><strong>Cabinet re-facing</strong> (new doors + drawer fronts + veneer)</td>
+      <td>$7,500–$13,000</td>
+      <td>2–3 weeks</td>
+      <td>1–2 weeks partial use</td>
+    </tr>
+    <tr>
+      <td><strong>Full cabinet replacement</strong> (demo + new boxes + new tops)</td>
+      <td>$15,000–$35,000+</td>
+      <td>4–8 weeks</td>
+      <td>4–8 weeks no use</td>
+    </tr>
+  </tbody>
+</table>
+<p><em>Ranges assume a 10×12 to 12×14 MetroWest kitchen with 18–24 cabinet doors. Costs scale with door count, finish complexity, and hardware decisions.</em></p>
+
+<h2>When refinishing makes sense</h2>
+<p>Refinishing is the right call when:</p>
+<ul>
+  <li><strong>Cabinet boxes are solid wood or quality plywood</strong> — particle-board boxes that have swelled or sagged don't hold paint well.</li>
+  <li><strong>Doors and drawer fronts are structurally fine</strong> — no warping, no broken corners, hinges still aligned.</li>
+  <li><strong>Layout works for you</strong> — you're not adding an island, moving the sink, or changing the footprint.</li>
+  <li><strong>You want a fresh color, not a new look</strong> — refinishing is best for dated finish, not dated style.</li>
+</ul>
+<p>Most Hudson and Marlborough homes built between 1980 and 2010 with original kitchens fit the refinishing profile. The boxes are usually solid; only the finish and hardware are dated.</p>
+
+<h2>When replacement is the right call</h2>
+<ul>
+  <li><strong>Layout doesn't work</strong> — you're rearranging the kitchen, adding cabinets, or changing dimensions.</li>
+  <li><strong>Boxes are damaged</strong> — water damage under the sink, swollen particle board, loose joints.</li>
+  <li><strong>You want a different door style</strong> — going from raised panel to shaker, or from frame-and-panel to slab.</li>
+  <li><strong>Real-estate ROI matters</strong> — selling in 6–12 months? A full kitchen replacement returns 60–70% of cost in MetroWest comps, while a paint refinish returns 80–100%.</li>
+</ul>
+
+<h2>What "refinishing" actually means (it's not just paint)</h2>
+<p>A professional cabinet refinish in the Hudson area includes:</p>
+<ol>
+  <li><strong>Doors and drawer fronts taken off-site</strong> to a controlled spray booth.</li>
+  <li><strong>Hardware removal and label</strong> — every hinge, knob, and pull bagged with location tape.</li>
+  <li><strong>Deglossing and full sand</strong> — 220 grit on flat surfaces, scuff-sand profile detail.</li>
+  <li><strong>Bonding primer</strong> — Sherwin-Williams Extreme Bond or BIN shellac for stained-to-painted conversions.</li>
+  <li><strong>HVLP spray of 2 coats of conversion varnish or 2K urethane</strong> — NOT brush-applied wall paint, which won't hold up on cabinets.</li>
+  <li><strong>Cabinet boxes sprayed in place</strong> with kitchen sealed and HEPA air scrubbers running.</li>
+  <li><strong>Doors reinstalled with new or original hardware</strong>.</li>
+</ol>
+<p>If a quote leaves out any of these steps, the finish won't last. Cheap "cabinet painting" jobs that skip sanding or use wall paint typically chip within 12–24 months.</p>
+
+<h2>Hardware: keep or upgrade?</h2>
+<p>Knobs and pulls are 80% of the perceived "new" feel. Budget $8–$25 per knob/pull, $15–$40 per soft-close hinge. For a 20-door kitchen, $400–$900 in hardware completely changes the kitchen look. Most refinishing quotes from Hudson-area contractors do NOT include new hardware — confirm in writing.</p>
+
+<h2>Color trends in MetroWest kitchens (2026)</h2>
+<p>What we're spraying most across Hudson, Marlborough, Worcester, Framingham, and Sudbury this year:</p>
+<ul>
+  <li><strong>Off-white / soft white</strong> (Benjamin Moore White Dove, Simply White) — still the safe ROI choice.</li>
+  <li><strong>Warm greige</strong> (BM Edgecomb Gray, SW Agreeable Gray) — replacing pure white in higher-end Sudbury and Concord remodels.</li>
+  <li><strong>Two-tone</strong> — white uppers + island in deep navy or sage green (SW Naval, BM Hale Navy, SW Evergreen Fog).</li>
+  <li><strong>Black islands</strong> — still trending, especially with white quartz tops.</li>
+</ul>
+
+<h2>What to ask before signing a refinishing contract in Hudson, MA</h2>
+<ol>
+  <li>Are doors and drawer fronts sprayed off-site in a booth, or in my kitchen?</li>
+  <li>What primer brand and topcoat brand will you use?</li>
+  <li>How many days will the kitchen be unusable?</li>
+  <li>What's the warranty on the finish?</li>
+  <li>Do you handle hardware swap, or is that on me?</li>
+  <li>How are the cabinet interiors treated — sprayed, brushed, or left alone?</li>
+  <li>What's the cleanup process during and after?</li>
+</ol>
+<p>Strong contractors answer all 7 without hesitation.</p>
+`,
+    faqs: [
+      {
+        question: 'How much does cabinet refinishing cost in Hudson, MA in 2026?',
+        answer:
+          'Cabinet refinishing in Hudson, MA typically runs $2,800–$5,800 for a 10×12 to 12×14 kitchen with 18–24 doors. Pricing scales with door count, color (white-on-stained is more labor), and whether hardware is replaced.',
+      },
+      {
+        question: 'Is cabinet refinishing or replacement better for a 1990s kitchen in Marlborough?',
+        answer:
+          'For most 1990s MetroWest kitchens with solid-wood or plywood boxes and dated-but-intact doors, refinishing returns 80–100% of cost vs. 60–70% for replacement. Replace only if layout changes, boxes are damaged, or you want a different door style.',
+      },
+      {
+        question: 'How long is my kitchen unusable during cabinet refinishing?',
+        answer:
+          'Doors and drawer fronts go off-site to a spray booth for 3–5 days; cabinet boxes are sprayed in place over 2 days. Most Hudson-area refinishes total about a week of partial kitchen use — the sink and appliances stay accessible.',
+      },
+      {
+        question: 'Will sprayed cabinet finishes hold up like a factory finish?',
+        answer:
+          'Yes when done correctly. Premium conversion varnish or 2K urethane sprayed with HVLP cures to a hard, chip-resistant film comparable to factory paint. Most MetroWest clients see 10+ years of daily kitchen use with no chipping.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'sudbury', 'natick'],
+  },
+  {
+    slug: 'interior-painting-cost-metrowest-massachusetts-2026',
+    title: 'How Much Does Interior Painting Cost in MetroWest Massachusetts? (2026 Guide)',
+    metaTitle: 'Interior Painting Cost MetroWest Massachusetts 2026',
+    metaDescription:
+      'Real 2026 interior painting prices for Hudson, Marlborough, Worcester, Framingham, and MetroWest MA — per room, per sqft, what affects the quote.',
+    excerpt:
+      'Interior painting in MetroWest runs $3.50–$5.50 per sqft of wall area. Here is per-room pricing, what drives the high vs low end, and how to get an accurate quote in 24 hours.',
+    heroImage: '/images/cabinet-refinishing-marlborough-ma-am-painter-inc.jpg',
+    heroAlt: 'Interior painting cost in MetroWest Massachusetts',
+    publishedAt: '2026-06-30',
+    updatedAt: '2026-06-30',
+    category: 'Pricing',
+    readMinutes: 8,
+    bodyHtml: `
+<p class="lead">Most "interior painting cost" guides cite national averages that don't match what Hudson, Marlborough, or Worcester homeowners actually pay. Here are the real 2026 MetroWest market ranges, broken down by room, by square foot, and by the 5 factors that move a quote up or down.</p>
+
+<h2>Quick reference: 2026 MetroWest interior painting prices</h2>
+<table>
+  <thead>
+    <tr><th>Room / scope</th><th>Typical price</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Standard bedroom (12×14, walls only)</td><td>$450–$700</td></tr>
+    <tr><td>Standard bedroom (walls + trim + ceiling)</td><td>$700–$1,100</td></tr>
+    <tr><td>Living room (16×20, walls + trim + ceiling)</td><td>$950–$1,600</td></tr>
+    <tr><td>Kitchen (walls + trim, cabinets separate)</td><td>$600–$1,200</td></tr>
+    <tr><td>Bathroom (small, walls + trim + ceiling)</td><td>$350–$650</td></tr>
+    <tr><td>Hallway + stairwell (2-story)</td><td>$800–$2,400</td></tr>
+    <tr><td>Whole 1,800–2,200 sqft home (walls + trim, no ceilings)</td><td>$4,500–$8,500</td></tr>
+    <tr><td>Whole 1,800–2,200 sqft home (walls + trim + ceilings)</td><td>$6,500–$11,500</td></tr>
+  </tbody>
+</table>
+
+<h2>Per square foot pricing</h2>
+<p>Most Hudson-area painters quote by wall square footage, not floor square footage. Typical 2026 MetroWest range:</p>
+<ul>
+  <li><strong>$3.50–$5.50 per sqft of wall</strong> for one-color, walls-only, light prep.</li>
+  <li><strong>$5.50–$7.50 per sqft</strong> when including trim, doors, and ceilings.</li>
+  <li><strong>$7.50–$10 per sqft</strong> for heavy prep (lots of caulking, color changes, repairs).</li>
+</ul>
+<p>A 12×14 bedroom has roughly 360 sqft of wall area (after subtracting one door and one window). At $4.50/sqft = $1,620 budget, but actual quote is usually lower because crew efficiency goes up on small standalone jobs.</p>
+
+<h2>The 5 things that move your quote up</h2>
+
+<h3>1. Color change (especially light over dark)</h3>
+<p>Going from a deep navy to white = 3 coats instead of 2 = +20–30% on that surface. Going from white to white = 2 coats. Make a color decision before the quote.</p>
+
+<h3>2. Trim and door count</h3>
+<p>Doors, baseboards, window casings, and crown molding take longer to cut in and require enamel paint (more expensive per gallon). A house with 6-panel doors throughout will quote 15–25% higher than slab-door houses.</p>
+
+<h3>3. Ceiling height</h3>
+<p>Standard 8-foot ceilings = no extra. 9–10 ft = +10%. Vaulted/cathedral = +20–40%. Stairwells with 2-story ceilings (common in Hudson colonials) require scaffold = +$300–$800 per side.</p>
+
+<h3>4. Lead paint (pre-1978 homes)</h3>
+<p>Approximately 60% of homes in Hudson, Marlborough, and Worcester were built before 1978. EPA Lead-Safe RRP work adds ~$300–$900 to a typical interior paint job (containment, HEPA cleanup, monitoring). This is non-negotiable by federal law.</p>
+
+<h3>5. Repairs and prep</h3>
+<p>Nail pops, holes, water stains, peeling paint, wallpaper removal — these are billed separately on most quotes. Average MetroWest add-ons:</p>
+<ul>
+  <li>Small drywall patches: $75–$150 each</li>
+  <li>Water-stain ceiling repair + skim coat: $250–$500</li>
+  <li>Wallpaper removal: $1.50–$3.50 per sqft</li>
+  <li>Caulking baseboards + trim: $200–$500 per floor</li>
+</ul>
+
+<h2>What it should NOT cost in MetroWest</h2>
+<p>If a Hudson-area contractor quotes:</p>
+<ul>
+  <li><strong>Under $250 for a bedroom</strong> — they're skipping prep or using contractor-grade paint that needs re-doing in 2–3 years.</li>
+  <li><strong>Over $1,500 for a single bedroom with no special conditions</strong> — they're padding. Get a second quote.</li>
+  <li><strong>"Around" a number with no scope</strong> — walk away.</li>
+</ul>
+
+<h2>What you should get in writing before paying</h2>
+<ol>
+  <li>Exact rooms and surfaces (walls, trim, ceiling, doors specified per room)</li>
+  <li>Paint brand and product line (e.g., Benjamin Moore Aura, Sherwin-Williams Cashmere)</li>
+  <li>Number of coats per surface (always 2 over primer for color change)</li>
+  <li>Prep included (caulking, patching, sanding scope)</li>
+  <li>Lead-safe protocol if home is pre-1978</li>
+  <li>Start and finish dates</li>
+  <li>Payment schedule (max 30% deposit, balance on completion)</li>
+  <li>Workmanship warranty (2 years is standard)</li>
+  <li>Cleanup expectations</li>
+</ol>
+
+<h2>How to get an accurate quote in 24 hours</h2>
+<p>Most reputable Hudson and MetroWest painters return a written quote within 24–48 hours of a walk-through. To get the most accurate number:</p>
+<ul>
+  <li>Have your color choices ready (paint chip or saved swatch)</li>
+  <li>Note any visible problems: water stains, peeling, holes</li>
+  <li>Confirm the home age (for lead-safe scope)</li>
+  <li>Decide on ceilings vs walls-only before the walk-through</li>
+</ul>
+<p>Free walk-through estimates from A&M Painter Inc are available within 24 hours across all 60+ MetroWest cities — submit a request or call <a href="tel:7744161275">(774) 416-1275</a>.</p>
+`,
+    faqs: [
+      {
+        question: 'How much does it cost to paint a bedroom in Hudson, MA?',
+        answer:
+          'A standard 12×14 bedroom in Hudson, MA costs $450–$700 for walls only or $700–$1,100 with trim and ceiling included. Pricing assumes one color, light prep, and 2 coats over primer.',
+      },
+      {
+        question: 'What is the per square foot cost for interior painting in MetroWest Massachusetts?',
+        answer:
+          'MetroWest interior painting is typically quoted at $3.50–$5.50 per square foot of wall area for walls-only with light prep. With trim, doors, and ceilings included, the range moves to $5.50–$7.50 per sqft. Heavy prep or color changes push it to $7.50–$10 per sqft.',
+      },
+      {
+        question: 'Do interior painters charge extra for lead-safe work in pre-1978 Hudson homes?',
+        answer:
+          'Yes. EPA Lead-Safe Renovation, Repair and Painting (RRP) compliance adds $300–$900 to a typical interior job for HEPA containment, dust monitoring, and proper waste disposal. About 60% of Hudson homes were built before 1978 and require this by federal law.',
+      },
+      {
+        question: 'How fast can a Hudson MA painter give me a written estimate?',
+        answer:
+          'Reputable Hudson, Marlborough, and Worcester painters return a written estimate within 24–48 hours of a walk-through. A&M Painter Inc commits to a written, fixed-price quote within 24 hours — call (774) 416-1275 or submit the contact form.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'natick', 'shrewsbury'],
+  },
+  {
+    slug: 'epa-lead-safe-painting-pre-1978-hudson-ma-homes',
+    title: 'EPA Lead-Safe Painting in Pre-1978 Hudson, MA Homes: What Owners Must Know',
+    metaTitle: 'EPA Lead-Safe Painting Pre-1978 Hudson MA Homes',
+    metaDescription:
+      'How EPA RRP rules apply to painting work in pre-1978 Hudson, Marlborough, and Worcester MA homes — what owners and contractors must do.',
+    excerpt:
+      '60% of MetroWest homes were built before 1978 and contain lead paint. Federal RRP law requires specific work practices and certifications. Here is what every Hudson-area homeowner needs to know before hiring a painter.',
+    heroImage: '/images/exterior-painting-hudson-ma-am-painter-inc.jpg',
+    heroAlt: 'Pre-1978 Hudson MA home receiving EPA Lead-Safe certified exterior painting',
+    publishedAt: '2026-06-30',
+    updatedAt: '2026-06-30',
+    category: 'How-To',
+    readMinutes: 7,
+    bodyHtml: `
+<p class="lead">Lead paint was banned in 1978, but it didn't disappear — it's still on the walls, trim, and siding of about 60% of homes in Hudson, Marlborough, Worcester, and the surrounding MetroWest market. Here's what federal law requires and what Hudson-area homeowners need to verify before any paint job starts.</p>
+
+<h2>What is the EPA RRP rule?</h2>
+<p>The federal <strong>Renovation, Repair and Painting (RRP) rule</strong> (40 CFR Part 745) requires any contractor doing work that disturbs more than 6 sqft interior or 20 sqft exterior of painted surfaces in a pre-1978 home to be <strong>EPA Lead-Safe certified</strong>. This applies to painting, drywall repair, window replacement, siding work, demolition, and renovation.</p>
+<p>Violations carry civil penalties up to $40,000+ per day. The rule applies to contractors, but the homeowner is the one who lives in the dust if it's not done right.</p>
+
+<h2>Why this matters in Hudson and MetroWest</h2>
+<p>About <strong>60% of homes</strong> in Hudson (built 1750s–present, with peak construction in the 1900s–1970s), Marlborough, Worcester, Framingham, Natick, and the surrounding MetroWest market are pre-1978. Most original layers of paint contain lead.</p>
+<p>Lead dust is the primary health hazard, not intact paint. The dust gets created when paint is sanded, scraped, or chipped — exactly what happens during prep for a new paint job. A 50-microgram speck of lead dust on a windowsill exceeds the federal hazard threshold.</p>
+
+<h2>What an EPA Lead-Safe job actually looks like</h2>
+<p>If your home is pre-1978, the contractor must:</p>
+<ol>
+  <li><strong>Verify EPA Firm Certification</strong> — the company itself must be certified, not just the workers. Verify at the <a href="https://cfpub.epa.gov/flpp/pub/index.cfm?do=main.firmSearchAbbreviated" target="_blank" rel="noopener">EPA Firm Locator</a>.</li>
+  <li><strong>Use a Certified Renovator on site</strong> at all times during disturbance.</li>
+  <li><strong>Hand you the EPA pamphlet</strong> "Renovate Right" before starting.</li>
+  <li><strong>Contain the work area</strong> — plastic sheeting on floors, walls, doorways. Interior work requires 6-foot perimeter; exterior requires 10-foot ground containment.</li>
+  <li><strong>Use HEPA tools</strong> — HEPA vacuum, HEPA-filtered sanders, no dry scraping with open-air sanders.</li>
+  <li><strong>Prohibit certain practices</strong> — no open-flame burning, no high-temp heat guns above 1100°F, no power sanding without HEPA, no power-washing with high-pressure on exterior lead paint.</li>
+  <li><strong>Daily cleanup</strong> — HEPA vacuum the work area and 2 feet around it before crew leaves each day.</li>
+  <li><strong>Final cleaning verification</strong> — wet-wash all hard surfaces with a wet cloth, then a clean cloth, then verify cleanliness with a white cloth wipe.</li>
+  <li><strong>Provide records</strong> — keep training records and project documentation for 3 years.</li>
+</ol>
+
+<h2>How to verify a Hudson-area contractor is EPA certified</h2>
+<ol>
+  <li>Ask for the <strong>EPA Firm Certification number</strong>. It's a 7-digit number like NAT-12345-1.</li>
+  <li>Go to the <a href="https://cfpub.epa.gov/flpp/pub/index.cfm?do=main.firmSearchAbbreviated" target="_blank" rel="noopener">EPA Firm Locator</a> and search by firm name or state.</li>
+  <li>Confirm the listing shows <strong>"Active"</strong> certification status and the firm address matches.</li>
+  <li>Ask which <strong>Certified Renovator</strong> will be on your job. That person's name should be on the contract.</li>
+</ol>
+<p>If the contractor can't produce the EPA number or hesitates, walk away. The certification costs them ~$300 and 8 hours of training — there's no excuse not to have it if they work pre-1978 homes.</p>
+
+<h2>What about your own DIY work?</h2>
+<p>The RRP rule applies to <strong>paid contractors</strong>, not homeowners working on their own property. You can legally sand your own pre-1978 walls. But the lead-dust health hazard is the same — and the cleanup is just as hard. If you're disturbing significant paint, follow the same containment + HEPA procedures.</p>
+<p>Pregnant women, children under 6, and pets should be out of the home during DIY lead-paint disturbance. Period.</p>
+
+<h2>Lead paint testing — do you need it?</h2>
+<p>The RRP rule allows contractors to <strong>assume lead is present</strong> in pre-1978 homes and apply full safe-work practices. That's the default and most cost-effective approach.</p>
+<p>Alternatively, the contractor can <strong>test individual surfaces</strong> with EPA-recognized test kits (LeadCheck, D-Lead). If a surface tests negative, RRP requirements lift for that surface.</p>
+<p>For a typical Hudson kitchen-bath-trim job, testing rarely saves money. For a focused single-room job in a 1970s home where lead is unlikely, testing can be worth $200–$400 to skip the full RRP scope.</p>
+
+<h2>What it costs in Hudson MA</h2>
+<p>EPA RRP compliance typically adds <strong>$300–$900 to a residential interior paint job</strong> and <strong>$500–$1,500 to a typical exterior</strong>. The cost reflects:</p>
+<ul>
+  <li>Containment materials (plastic, tape, dust barriers)</li>
+  <li>HEPA vacuum and HEPA-filtered sander rental/wear</li>
+  <li>Certified Renovator labor premium (~10% over standard rate)</li>
+  <li>Disposal of contaminated debris (must go to landfill in sealed bags)</li>
+  <li>Final cleaning verification</li>
+</ul>
+<p>Compared to the $5,000–$25,000+ in fines for non-compliance and the health risks to your family, the added cost is non-negotiable.</p>
+
+<h2>Bottom line for pre-1978 Hudson homeowners</h2>
+<ul>
+  <li>Assume your home has lead paint if built before 1978.</li>
+  <li>Hire only EPA Lead-Safe certified contractors — verify the firm number, not just the claim.</li>
+  <li>Expect $300–$1,500 added cost for RRP compliance on a typical paint job.</li>
+  <li>Keep children, pets, and pregnant women out of the work area during disturbance.</li>
+  <li>Don't accept "we'll just be careful" — that's not RRP compliance, that's negligence.</li>
+</ul>
+`,
+    faqs: [
+      {
+        question: 'Do I need an EPA Lead-Safe certified painter for my pre-1978 Hudson MA home?',
+        answer:
+          'Yes. Federal RRP law requires any contractor disturbing more than 6 sqft interior or 20 sqft exterior of painted surfaces in a pre-1978 home to be EPA Lead-Safe certified. About 60% of homes in Hudson, Marlborough, and Worcester qualify. Verify the firm at the EPA Firm Locator before signing.',
+      },
+      {
+        question: 'How much extra does EPA Lead-Safe painting cost in Hudson, MA?',
+        answer:
+          'EPA RRP compliance adds $300–$900 to a typical residential interior paint job and $500–$1,500 to a typical exterior. The cost covers containment, HEPA tools, Certified Renovator labor, and proper waste disposal.',
+      },
+      {
+        question: 'Can I paint my own pre-1978 Hudson home without EPA certification?',
+        answer:
+          'Yes — the RRP rule applies to paid contractors, not homeowners working on their own property. But the health hazard is the same. Use HEPA containment, keep children and pregnant women out, and follow the EPA "Renovate Right" guidance.',
+      },
+      {
+        question: 'How do I verify an EPA Lead-Safe certification?',
+        answer:
+          'Ask the contractor for their EPA Firm Certification number (7-digit, like NAT-12345-1) and look it up at the EPA Firm Locator (cfpub.epa.gov/flpp/pub/index.cfm). Confirm the listing shows "Active" status and the address matches.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'natick', 'concord'],
+  },
 ]
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

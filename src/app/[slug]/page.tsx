@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
+import { AutoLinkText } from '@/components/AutoLinkText'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City } from '@/data/cities'
 import { SERVICES } from '@/data/services'
@@ -668,10 +669,20 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     </h2>
                   </div>
                   <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                    {cityIntro}
+                    <AutoLinkText
+                      text={cityIntro}
+                      currentCitySlug={city.slug}
+                      currentServiceSlug={service.slug}
+                      maxLinks={2}
+                    />
                   </p>
                   <p className="text-base text-gray-600 leading-relaxed mb-4">
-                    {cityDetails}
+                    <AutoLinkText
+                      text={cityDetails}
+                      currentCitySlug={city.slug}
+                      currentServiceSlug={service.slug}
+                      maxLinks={2}
+                    />
                   </p>
                   {/* Climate Info Box */}
                   <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
