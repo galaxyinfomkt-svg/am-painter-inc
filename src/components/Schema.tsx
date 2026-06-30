@@ -598,11 +598,15 @@ export function ServiceSchema({ cityName, serviceName }: { cityName: string; ser
   )
 }
 
-// FAQ Schema (Para Rich Snippets de FAQ)
+// FAQ Schema (Para Rich Snippets de FAQ) — agora com Speakable pra voice search
 export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }[] }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.faq-question', '.faq-answer'],
+    },
     mainEntity: faqs.map((faq, index) => ({
       '@type': 'Question',
       '@id': `${business.url}/#faq-${index + 1}`,
@@ -610,10 +614,87 @@ export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }
       acceptedAnswer: {
         '@type': 'Answer',
         text: faq.answer,
+        inLanguage: 'en-US',
       },
     })),
   }
 
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+// HowTo Schema — eligible for HowTo rich result + cited by AI Overviews
+export function HowToSchema({
+  name,
+  description,
+  steps,
+  totalTime,
+  estimatedCost,
+}: {
+  name: string
+  description: string
+  steps: { name: string; text: string }[]
+  totalTime?: string // ISO 8601 duration, e.g. "P3D" = 3 days
+  estimatedCost?: { value: string; currency?: string }
+}) {
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name,
+    description,
+    step: steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  }
+  if (totalTime) schema.totalTime = totalTime
+  if (estimatedCost) {
+    schema.estimatedCost = {
+      '@type': 'MonetaryAmount',
+      currency: estimatedCost.currency ?? 'USD',
+      value: estimatedCost.value,
+    }
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+// Person Schema for the owner — strengthens E-E-A-T signal
+export function OwnerPersonSchema() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${business.url}/#owner`,
+    name: business.owner,
+    jobTitle: business.ownerTitle,
+    description: business.ownerBio,
+    image: business.ownerPhoto,
+    worksFor: {
+      '@id': `${business.url}/#business`,
+    },
+    knowsLanguage: business.languages,
+    knowsAbout: [
+      'Interior painting',
+      'Exterior painting',
+      'Cabinet refinishing',
+      'Deck staining',
+      'Drywall repair',
+      'EPA Lead-Safe RRP',
+      'Home remodeling',
+      'General contracting',
+    ],
+    url: `${business.url}/about/`,
+  }
   return (
     <script
       type="application/ld+json"

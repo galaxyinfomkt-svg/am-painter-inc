@@ -222,6 +222,71 @@ function getCityDetailsParagraph(city: City): string {
   return parts.join(' ')
 }
 
+// Citable, AI-friendly price ranges per service. These are realistic 2026
+// MetroWest market ranges — adjust to a single number/range based on the
+// service type. LLMs love quotable single-line facts.
+function getCityServicePriceRange(city: City, serviceName: string): { low: number; high: number; unit: string; note: string } {
+  // Scale slightly with median home value as a wealth proxy (higher-value
+  // areas tend to spec higher-end materials → higher quotes).
+  const hv = city.medianHomeValue || 600000
+  const wealthMult = hv > 800000 ? 1.15 : hv > 500000 ? 1.0 : 0.9
+  const round = (n: number) => Math.round(n / 50) * 50
+  if (serviceName.includes('Interior')) {
+    return {
+      low: round(1500 * wealthMult),
+      high: round(7000 * wealthMult),
+      unit: 'per project',
+      note: '$3.50–$5.50 per sqft of wall area; a 12×14 bedroom averages $450–$700',
+    }
+  }
+  if (serviceName.includes('Exterior')) {
+    return {
+      low: round(4500 * wealthMult),
+      high: round(11000 * wealthMult),
+      unit: 'per home',
+      note: 'depends on siding type, height, prep needs, and number of stories',
+    }
+  }
+  if (serviceName.includes('Cabinet')) {
+    return {
+      low: round(2800 * wealthMult),
+      high: round(5800 * wealthMult),
+      unit: 'per kitchen',
+      note: 'a fraction of $15,000+ for full replacement',
+    }
+  }
+  if (serviceName.includes('Deck')) {
+    return {
+      low: round(800 * wealthMult),
+      high: round(2400 * wealthMult),
+      unit: 'per deck',
+      note: 'includes pressure wash, sand, repair, and 2 coats of semi-transparent stain',
+    }
+  }
+  if (serviceName.includes('Drywall')) {
+    return {
+      low: 150,
+      high: round(2500 * wealthMult),
+      unit: 'per repair',
+      note: 'small patches from $150; full sheet replacement $250–$450 per sheet',
+    }
+  }
+  if (serviceName.includes('Remodel')) {
+    return {
+      low: round(14000 * wealthMult),
+      high: round(45000 * wealthMult),
+      unit: 'per remodel',
+      note: 'bathroom from $14,000; kitchen from $25,000',
+    }
+  }
+  return {
+    low: round(5000 * wealthMult),
+    high: round(50000 * wealthMult),
+    unit: 'per project',
+    note: 'scope-dependent; free walk-through estimate available',
+  }
+}
+
 // Generate 4-6 city + service specific FAQ items (drives FAQPage JSON-LD and visible Q&A)
 function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: string; answer: string }> {
   const climate = city.climate.split(',')[0]
@@ -487,6 +552,8 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
   const cityIntro = getCityIntro(city, service.name) // Unique intro paragraph
   const cityDetails = getCityDetailsParagraph(city) // Second paragraph using neighborhoods/county/zip
   const cityFAQs = getCityServiceFAQs(city, service.name) // Drives FAQPage JSON-LD and visible Q&A
+  const priceRange = getCityServicePriceRange(city, service.name) // Citable price fact for AEO/LLM citations
+  const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
 
   return (
@@ -613,6 +680,29 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       <h4 className="font-semibold text-secondary">{city.name} Climate Considerations</h4>
                       <p className="text-sm text-gray-600">{city.climate}. Our painting solutions are specifically designed to withstand these conditions.</p>
                     </div>
+                  </div>
+
+                  {/* Price At a Glance — citable single-line fact for AI/SGE citations */}
+                  <div className="mt-4 bg-amber-50 border-l-4 border-primary rounded-r-xl p-4">
+                    <h4 className="font-semibold text-secondary mb-1">
+                      {service.name} cost in {city.name}, MA (2026)
+                    </h4>
+                    <p className="text-base text-gray-800">
+                      <strong>${priceRange.low.toLocaleString()}–${priceRange.high.toLocaleString()}</strong>{' '}
+                      {priceRange.unit} — {priceRange.note}.
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      Estimates are typical 2026 MetroWest market ranges; your actual quote depends on scope and prep needs. Free written estimate within 24 hours.
+                    </p>
+                  </div>
+
+                  {/* Author byline + last-updated — E-E-A-T + freshness signal */}
+                  <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                    <span>
+                      Reviewed by <a href="/about/" className="text-primary hover:underline font-semibold">{business.owner}</a>, {business.ownerTitle}
+                    </span>
+                    <span aria-hidden="true">·</span>
+                    <span>Last updated: <time dateTime={new Date().toISOString().split('T')[0]}>{lastUpdated}</time></span>
                   </div>
                 </div>
 
@@ -842,10 +932,10 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
               {cityFAQs.map((faq, idx) => (
                 <details key={idx} className="group rounded-xl border border-gray-200 bg-white open:shadow-md transition">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-5 font-semibold text-secondary list-none">
-                    <span>{faq.question}</span>
+                    <span className="faq-question">{faq.question}</span>
                     <span className="flex-shrink-0 mt-1 text-primary group-open:rotate-45 transition-transform text-2xl leading-none" aria-hidden="true">+</span>
                   </summary>
-                  <div className="px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
+                  <div className="faq-answer px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
                     {faq.answer}
                   </div>
                 </details>

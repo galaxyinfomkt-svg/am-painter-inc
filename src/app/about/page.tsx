@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer'
 import { aiBusinessDescription, aiFrequentlyAskedQuestions, aiRegionalExpertise, aiServiceDescriptions } from '@/data/ai-discovery'
 import { YouTubeVideo } from '@/components/YouTubeVideo'
 import { ContactFormSection } from '@/components/ContactFormSection'
-import { BreadcrumbSchema } from '@/components/Schema'
+import { BreadcrumbSchema, OwnerPersonSchema } from '@/components/Schema'
 import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 export const metadata: Metadata = {
@@ -46,6 +46,7 @@ export default function AboutPage() {
           { name: 'About', url: `${business.url}/about/` },
         ]}
       />
+      <OwnerPersonSchema />
       <Header />
 
       <main id="main-content" className="pt-[124px]">
