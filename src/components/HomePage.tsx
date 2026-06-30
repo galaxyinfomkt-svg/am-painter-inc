@@ -7,7 +7,7 @@ import { business, services } from '@/data/business'
 import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { HomePageSchema, FAQSchema } from '@/components/Schema'
+import { HomePageSchema, FAQSchema, HowToSchema } from '@/components/Schema'
 import { ReviewsWidget } from '@/components/ReviewsWidget'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
@@ -61,6 +61,34 @@ export default function HomePage() {
     <>
       <HomePageSchema />
       <FAQSchema faqs={faqList} />
+      <HowToSchema
+        name="How to hire a painting contractor in Hudson, MA"
+        description="A 5-step process for choosing a licensed, insured painting contractor in Hudson, Marlborough, Worcester, and the MetroWest Massachusetts area."
+        totalTime="P3D"
+        estimatedCost={{ value: '1500', currency: 'USD' }}
+        steps={[
+          {
+            name: 'Verify Massachusetts HIC license + $1M+ insurance',
+            text: 'Confirm the contractor holds an active MA Home Improvement Contractor (HIC) registration and carries at least $1M general liability + workers comp. Ask for a Certificate of Insurance before signing.',
+          },
+          {
+            name: 'Confirm EPA Lead-Safe (RRP) certification for pre-1978 homes',
+            text: 'About 60% of MetroWest homes were built before 1978 and contain lead paint. The contractor must be EPA Lead-Safe Renovation, Repair and Painting (RRP) certified by federal law.',
+          },
+          {
+            name: 'Get a written, fixed-price estimate within 24 hours',
+            text: 'Reputable Hudson-area contractors return a free written estimate within 24-48 hours of a walk-through. Avoid contractors who only give verbal or open-ended pricing.',
+          },
+          {
+            name: 'Check at least 10 recent Google reviews',
+            text: 'Read the most recent reviews on Google Business Profile, not just the rating. Look for consistent praise on prep work, cleanliness, and on-time completion.',
+          },
+          {
+            name: 'Confirm paint brand, prep scope, and warranty in writing',
+            text: 'Premium Hudson-area painters use Benjamin Moore or Sherwin-Williams and include surface prep, primer, and 2 coats. Ask for a 2-year workmanship warranty in the contract.',
+          },
+        ]}
+      />
       <Header />
 
       <main id="main-content" className="pt-[124px]">

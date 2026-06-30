@@ -534,10 +534,10 @@ export default async function RegionalServicePage({ params }: PageProps) {
               {regionFAQs.map((faq, idx) => (
                 <details key={idx} className="group rounded-xl border border-gray-200 bg-white open:shadow-md transition">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-5 font-semibold text-secondary list-none">
-                    <span>{faq.question}</span>
+                    <span className="faq-question">{faq.question}</span>
                     <span className="flex-shrink-0 mt-1 text-primary group-open:rotate-45 transition-transform text-2xl leading-none" aria-hidden="true">+</span>
                   </summary>
-                  <div className="px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
+                  <div className="faq-answer px-5 pb-5 -mt-2 text-gray-700 leading-relaxed">
                     {faq.answer}
                   </div>
                 </details>
