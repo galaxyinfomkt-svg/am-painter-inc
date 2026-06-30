@@ -45,6 +45,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // Tools
+  const toolPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/quote-calculator/`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+  ]
+
   // Legal / compliance pages
   const legalPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/privacy/`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
@@ -137,6 +147,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...homepage,
     ...aboutPage,
+    ...toolPages,
     ...blogPages,
     ...legalPages,
     ...servicePages,
