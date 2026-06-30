@@ -183,3 +183,28 @@ body {
   color: #0A1F44;
   font-weight: 700;
 }
+.article-body table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.article-body table th,
+.article-body table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E7EB;
+  text-align: left;
+  vertical-align: top;
+}
+.article-body table th {
+  background: #F4F4F4;
+  font-weight: 700;
+  color: #0A1F44;
+}
+.article-body table tr:nth-child(even) td {
+  background: #FAFAFA;
+}
+.article-body em {
+  font-style: italic;
+  color: #4B5563;
+}
