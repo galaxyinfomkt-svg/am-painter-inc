@@ -169,6 +169,9 @@ export function Header({ cityName }: HeaderProps) {
               <Link href="/about" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 About
               </Link>
+              <Link href="/blog" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
+                Blog
+              </Link>
               <Link href="/#contact" className="px-4 py-2 text-secondary font-medium hover:text-primary transition rounded-lg hover:bg-gray-50">
                 Contact
               </Link>
@@ -239,6 +242,9 @@ export function Header({ cityName }: HeaderProps) {
               </Link>
               <Link href="/about" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
                 About
+              </Link>
+              <Link href="/blog" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
+                Blog
               </Link>
               <Link href="/#contact" className="block text-white font-semibold py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition" onClick={() => setMobileMenuOpen(false)}>
                 Contact
