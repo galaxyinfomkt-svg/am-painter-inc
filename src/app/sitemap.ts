@@ -3,6 +3,7 @@ import { CITIES } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { REGIONS } from '@/data/regions'
 import { business } from '@/data/business'
+import { POSTS } from '@/data/posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = business.url
@@ -114,9 +115,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  // Blog index + posts
+  const blogPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blog/`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...POSTS.map((p) => ({
+      url: `${baseUrl}/blog/${p.slug}/`,
+      lastModified: new Date(p.updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      images: [
+        p.heroImage.startsWith('/') ? `${baseUrl}${p.heroImage}` : p.heroImage,
+      ],
+    })),
+  ]
+
   return [
     ...homepage,
     ...aboutPage,
+    ...blogPages,
     ...legalPages,
     ...servicePages,
     ...regionalServicePages,
