@@ -140,8 +140,8 @@ export default function AboutPage() {
                   {[
                     `${business.yearsInBusiness}+ years of professional painting experience`,
                     'Verified five-star Google reviews',
-                    'Licensed Massachusetts Home Improvement Contractor',
-                    `$${business.insurance} general liability insurance`,
+                    `Registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` — HIC #${business.hicLicense}` : ''}`,
+                    `${business.insurance} general liability insurance`,
                     'EPA Lead-Safe Certified Firm',
                     'Benjamin Moore and Sherwin-Williams certified',
                     'Family-owned and operated business',

@@ -10,3 +10,4 @@ package-lock.json
 .netlify
 
 .env*.local
+tsconfig.tsbuildinfo

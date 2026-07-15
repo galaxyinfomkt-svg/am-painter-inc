@@ -34,8 +34,13 @@ export const business = {
   // TODO: replace the placeholder with a real headshot of the owner
   ownerPhoto: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398e1f169a422340195b7c.png',
   insurance: '$2,000,000',
-  // TODO: fill in the real MA Home Improvement Contractor (HIC) number + CSL once the user provides it
-  hicLicense: '' as string,
+  // MA Home Improvement Contractor registration. Publicly verifiable at
+  // contractorhub.mass.gov/s/hic-contractor-search
+  hicLicense: '207214' as string,
+  // No Construction Supervisor License on record. Painting is an "ordinary
+  // repair" performable under HIC alone; a CSL is only required for structural
+  // work, roofing, siding, and window replacement. Leave empty until one exists
+  // — the footer and schema render it conditionally.
   cslLicense: '' as string,
   languages: ['English', 'Portuguese'] as string[],
   rating: 5.0,

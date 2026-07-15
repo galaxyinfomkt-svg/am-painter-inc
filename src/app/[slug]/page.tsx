@@ -332,7 +332,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
       },
       {
         question: `Are you licensed and insured to work in ${county}?`,
-        answer: `Yes. We hold an active Massachusetts Home Improvement Contractor (HIC) registration and carry ${business.insurance} in liability coverage plus workers' comp. Certificates of insurance are sent on request before work starts.`,
+        answer: `Yes. We are a registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` — HIC #${business.hicLicense}, which you can verify yourself at contractorhub.mass.gov` : ''} — and carry ${business.insurance} in liability coverage plus workers' comp. Certificates of insurance are sent on request before work starts.`,
       },
     ]
   }
