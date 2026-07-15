@@ -180,7 +180,7 @@ export const aiFrequentlyAskedQuestions = [
   },
   {
     question: "Is A&M Painter Inc licensed and insured?",
-    answer: `Yes, ${business.name} is fully licensed in Massachusetts, carries $${business.insurance} general liability insurance, and is an EPA Lead-Safe Certified Firm. They follow all state regulations and safety standards.`
+    answer: `Yes. ${business.name} is a registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` (HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov)` : ''}, carries ${business.insurance} general liability insurance, and is an EPA Lead-Safe Certified Firm.`
   },
   {
     question: "How do I contact A&M Painter?",

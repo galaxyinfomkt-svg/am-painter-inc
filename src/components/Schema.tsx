@@ -41,6 +41,17 @@ export function LocalBusinessSchema() {
     url: business.url,
     mainEntityOfPage: business.url,
 
+    // === REGISTRO ESTADUAL (verificável publicamente) ===
+    ...(business.hicLicense
+      ? {
+          identifier: {
+            '@type': 'PropertyValue',
+            propertyID: 'MA Home Improvement Contractor Registration',
+            value: business.hicLicense,
+          },
+        }
+      : {}),
+
     // === CONTATO (NAP - Name, Address, Phone) ===
     telephone: business.phone,
     email: business.email,
@@ -277,15 +288,22 @@ export function LocalBusinessSchema() {
 
     // === CREDENCIAIS E CERTIFICAÇÕES ===
     hasCredential: [
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'license',
-        name: 'Massachusetts Home Improvement Contractor License',
-        recognizedBy: {
-          '@type': 'Organization',
-          name: 'Commonwealth of Massachusetts',
-        },
-      },
+      // Only assert the HIC credential when a real registration number exists —
+      // an unnumbered license claim is unverifiable and reads as inflated.
+      ...(business.hicLicense
+        ? [{
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'license',
+            name: 'Massachusetts Home Improvement Contractor Registration',
+            identifier: business.hicLicense,
+            recognizedBy: {
+              '@type': 'GovernmentOrganization',
+              name: 'Massachusetts Office of Consumer Affairs and Business Regulation',
+              url: 'https://www.mass.gov/orgs/office-of-consumer-affairs-and-business-regulation',
+            },
+            url: 'https://contractorhub.mass.gov/s/hic-contractor-search',
+          }]
+        : []),
       {
         '@type': 'EducationalOccupationalCredential',
         credentialCategory: 'certificate',
