@@ -159,6 +159,11 @@ async function main() {
       county,
       density,
       distanceMiles,
+      // Centroid is kept so city-to-city distance can be measured. Distance
+      // from the shop alone is not enough: two towns can both be 15mi from
+      // Hudson yet 30mi apart if they sit in opposite directions.
+      lat: Math.round(g.lat * 10000) / 10000,
+      lon: Math.round(g.lon * 10000) / 10000,
       region: regionFor(county, g.lat, g.lon),
       areaType: areaTypeFor(density),
     })
