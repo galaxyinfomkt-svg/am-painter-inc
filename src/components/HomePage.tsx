@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { business, services } from '@/data/business'
-import { CITIES, SERVICE_AREA_CITY_COUNT, RETIRED_CITY_SLUGS } from '@/data/cities'
+import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema, HowToSchema } from '@/components/Schema'
@@ -42,7 +42,7 @@ const faqList = [
   { question: 'Are you licensed and insured in Massachusetts?', answer: 'Yes. We are fully licensed, carry $2,000,000 in liability coverage, and follow EPA lead-safe practices on every project.' },
   { question: 'Do you serve both residential and commercial clients?', answer: 'Absolutely. We deliver interior, exterior, cabinet refinishing, remodeling, and general contracting for homes and businesses.' },
   { question: 'How quickly can I get an estimate?', answer: 'Most quotes are turned around within 24 hours. Call or submit the form and we will schedule a walkthrough immediately.' },
-  { question: 'Which areas do you cover?', answer: `Based in Hudson, we serve ${SERVICE_AREA_CITY_COUNT}+ Massachusetts communities including Hudson, Marlborough, Framingham, Worcester, and surrounding areas.` },
+  { question: 'Which areas do you cover?', answer: `Based in Hudson, we serve ${Object.keys(CITIES).length}+ Massachusetts communities including Hudson, Marlborough, Framingham, Worcester, and surrounding areas.` },
 ]
 
 
@@ -141,7 +141,7 @@ export default function HomePage() {
 
                 {/* Description with keywords */}
                 <p className="text-xl lg:text-2xl text-gray-300 max-w-xl leading-relaxed animate-fadeInUp animation-delay-200">
-                  Award-winning <strong className="text-white">interior & exterior painting</strong>, cabinet refinishing, deck staining, and home remodeling. Serving {SERVICE_AREA_CITY_COUNT}+ Massachusetts cities for {business.yearsInBusiness}+ years.
+                  Award-winning <strong className="text-white">interior & exterior painting</strong>, cabinet refinishing, deck staining, and home remodeling. Serving {Object.keys(CITIES).length}+ Massachusetts cities for {business.yearsInBusiness}+ years.
                 </p>
 
                 {/* Features Grid */}
@@ -186,7 +186,7 @@ export default function HomePage() {
                   {[
                     { value: `${business.yearsInBusiness}+`, label: 'Years' },
                     { value: '5.0', label: 'Google Rating' },
-                    { value: `${SERVICE_AREA_CITY_COUNT}+`, label: 'Cities' },
+                    { value: `${Object.keys(CITIES).length}+`, label: 'Cities' },
                   ].map((stat, idx) => (
                     <div key={stat.label} className="flex items-center gap-4">
                       {idx > 0 && <div className="h-12 w-px bg-white/20" />}
@@ -246,7 +246,7 @@ export default function HomePage() {
                 Painting & Remodeling Services in <span className="text-primary">Massachusetts</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                From interior painting to complete home renovations, we deliver premium craftsmanship across Hudson, Marlborough, Worcester, Framingham, and {SERVICE_AREA_CITY_COUNT - 4}+ more Massachusetts cities.
+                From interior painting to complete home renovations, we deliver premium craftsmanship across Hudson, Marlborough, Worcester, Framingham, and {Object.keys(CITIES).length - 4}+ more Massachusetts cities.
               </p>
             </div>
 
@@ -432,7 +432,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  {business.name} has been transforming homes and businesses across Massachusetts since {business.foundedYear}. Headquartered in MetroWest, we serve over {SERVICE_AREA_CITY_COUNT} communities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, and throughout the region. Our licensed and insured team combines expert craftsmanship with premium materials to deliver exceptional results on every project.
+                  {business.name} has been transforming homes and businesses across Massachusetts since {business.foundedYear}. Headquartered in MetroWest, we serve over {Object.keys(CITIES).length} communities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, and throughout the region. Our licensed and insured team combines expert craftsmanship with premium materials to deliver exceptional results on every project.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -733,55 +733,6 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Section */}
-        {/* Service Areas — the real target of every "View All Service Areas"
-            link across the site. Towns with a landing page link to it; the
-            rest are listed as plain text because we serve them but don't
-            publish a thin page for each. */}
-        <section id="service-areas" className="below-fold py-24 lg:py-32 bg-white scroll-mt-32">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
-                Service Areas
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-                Serving <span className="text-primary">{SERVICE_AREA_CITY_COUNT} Massachusetts Towns</span> from Hudson
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Based at {business.address.street} in {business.address.city}, we cover MetroWest,
-                Worcester County, and the Greater Boston suburbs — roughly a 45-mile radius.
-                Don&apos;t see your town? Call {business.phone} and ask.
-              </p>
-            </div>
-
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
-              Towns with a dedicated page
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-12">
-              {Object.values(CITIES).map((c) => (
-                <Link
-                  key={c.slug}
-                  href={`/interior-painting-${c.slug}-ma/`}
-                  className="group flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl hover:bg-primary transition-all shadow-sm"
-                >
-                  <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition flex-shrink-0" />
-                  <span className="text-sm font-medium text-gray-700 group-hover:text-white transition">
-                    {c.name}, MA
-                  </span>
-                </Link>
-              ))}
-            </div>
-
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-4">
-              Also serving
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {RETIRED_CITY_SLUGS.map((s) =>
-                s.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-              ).join(' · ')}
-            </p>
-          </div>
-        </section>
-
         <section className="below-fold py-24 lg:py-32 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">

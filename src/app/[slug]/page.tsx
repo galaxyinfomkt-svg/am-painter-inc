@@ -9,7 +9,7 @@ import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { AutoLinkText } from '@/components/AutoLinkText'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
-import { CITIES, REGION_DATA, City, SERVICE_AREA_CITY_COUNT } from '@/data/cities'
+import { CITIES, REGION_DATA, City } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { business, services } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, HomeIcon, MapPinIcon, ExclamationCircleIcon, CheckIcon, SunIcon, BuildingOfficeIcon } from '@heroicons/react/24/solid'
@@ -1002,7 +1002,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
 
             <div className="text-center mt-8">
               <Link href="/#service-areas" className="text-primary font-semibold hover:underline">
-                View All {SERVICE_AREA_CITY_COUNT}+ Service Areas →
+                View All {Object.keys(CITIES).length}+ Service Areas →
               </Link>
             </div>
           </div>

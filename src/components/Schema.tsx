@@ -1,9 +1,5 @@
 import { business, services, serviceAreas, getFullAddress } from '@/data/business'
-import { CITIES, RETIRED_CITY_SLUGS } from '@/data/cities'
-
-// Title-case a slug for display: 'northborough' -> 'Northborough'
-const titleCase = (slug: string) =>
-  slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+import { CITIES } from '@/data/cities'
 
 // =============================================================================
 // SCHEMA.ORG OTIMIZADO PARA:
@@ -15,12 +11,7 @@ const titleCase = (slug: string) =>
 
 // LocalBusiness Schema - MÁXIMO SEO + AI DISCOVERY
 export function LocalBusinessSchema() {
-  // The service area is WIDER than the set of cities we publish a page for.
-  // We serve every town in RETIRED_CITY_SLUGS too — we simply don't generate a
-  // thin landing page for each. areaServed is the correct place to express real
-  // coverage; a page per city is not. Keep these unioned so trimming pages
-  // never silently shrinks the declared service area.
-  const allCities = [...Object.keys(CITIES), ...RETIRED_CITY_SLUGS]
+  const allCities = Object.keys(CITIES)
   const today = new Date().toISOString().split('T')[0]
 
   const schema = {
@@ -184,12 +175,10 @@ export function LocalBusinessSchema() {
 
     // === ÁREA DE SERVIÇO (Importante para Local SEO) ===
     areaServed: [
-      // Every town actually served — page or no page. Names are title-cased:
-      // the source is a URL slug, and emitting a raw 'northborough' as a City
-      // name is wrong for a consumer of this schema.
-      ...allCities.map(city => ({
+      // Cidades principais
+      ...allCities.slice(0, 60).map(city => ({
         '@type': 'City',
-        name: titleCase(city),
+        name: city,
         containedInPlace: {
           '@type': 'State',
           name: 'Massachusetts',
