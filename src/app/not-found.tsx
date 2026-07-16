@@ -1,8 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { PhoneIcon } from '@heroicons/react/24/solid'
+
+// Without this the page inherits the root layout's title and announces itself
+// as "Hudson, MA Painter | 2026 Free Quote in 24h" — a missing page claiming
+// to be the homepage. noindex because a 404 should never be a search result;
+// the status code already says so, but the tag makes it explicit for anything
+// that renders the page before reading the header.
+export const metadata: Metadata = {
+  title: { absolute: `Page Not Found | ${business.name}` },
+  description: 'That page does not exist. Browse our painting services and Massachusetts service areas, or call for a free estimate.',
+  robots: { index: false, follow: true },
+}
 
 const POPULAR_SERVICES = [
   { href: '/services/interior-painting/', title: 'Interior Painting', desc: 'Walls, ceilings, trim — premium paints' },
