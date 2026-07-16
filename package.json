@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-retired-cities.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:cities": "node scripts/check-retired-cities.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",

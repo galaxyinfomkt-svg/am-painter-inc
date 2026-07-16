@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { business } from '@/data/business'
-import { CITIES } from '@/data/cities'
+import { CITIES, SERVICE_AREA_CITY_COUNT } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { aiBusinessDescription, aiFrequentlyAskedQuestions, aiRegionalExpertise, aiServiceDescriptions } from '@/data/ai-discovery'
@@ -13,7 +13,7 @@ import { CheckCircleIcon, StarIcon, ShieldCheckIcon, MapPinIcon, PhoneIcon } fro
 
 export const metadata: Metadata = {
   title: { absolute: 'About A&M Painter Inc — Hudson MA Family-Owned Painter' },
-  description: `Family-owned Massachusetts painting contractor since ${business.foundedYear}. Serving ${Object.keys(CITIES).length}+ cities. Licensed, insured, EPA Lead-Safe certified.`,
+  description: `Family-owned Massachusetts painting contractor since ${business.foundedYear}. Serving ${SERVICE_AREA_CITY_COUNT}+ cities. Licensed, insured, EPA Lead-Safe certified.`,
   keywords: [
     'about A&M Painter',
     'A&M Painter Inc Massachusetts',
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 </span>
                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur rounded-full text-white border border-white/30">
                   <MapPinIcon className="h-5 w-5 text-primary" />
-                  {Object.keys(CITIES).length}+ Cities Served
+                  {SERVICE_AREA_CITY_COUNT}+ Cities Served
                 </span>
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function AboutPage() {
 
                 <h3 className="text-2xl font-bold text-secondary mt-12 mb-6">Our Service Areas</h3>
                 <p>
-                  We proudly serve {Object.keys(CITIES).length}+ cities across Massachusetts and the New England region, including:
+                  We proudly serve {SERVICE_AREA_CITY_COUNT}+ cities across Massachusetts and the New England region, including:
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-8 my-8">
