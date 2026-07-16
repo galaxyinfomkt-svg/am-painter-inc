@@ -66,6 +66,19 @@ const distancePhrase = (city: City): string | null =>
       : `about ${Math.round(city.distanceMiles)} miles from our Hudson shop`
     : null
 
+/** Great-circle miles between two towns, from their Census centroids. */
+function milesBetween(a: City, b: City): number | null {
+  if (a.lat == null || a.lon == null || b.lat == null || b.lon == null) return null
+  const R = 3958.8
+  const toRad = (x: number) => (x * Math.PI) / 180
+  const dLat = toRad(b.lat - a.lat)
+  const dLon = toRad(b.lon - a.lon)
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(h))
+}
+
 // Get city-specific challenges with detailed descriptions based on service type
 function getCityServiceChallenges(city: City, serviceName: string): Array<{ title: string; desc: string }> {
   // No known local challenges → render nothing. The section is hidden.
@@ -619,22 +632,24 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
 
   const otherServices = services.filter(s => s.id !== serviceSlug).slice(0, 4)
 
-  // Nearby cities, by actual distance from THIS city — every city carries real
-  // Census coordinates, so "nearby" can mean nearby instead of "same region".
+  // Nearby cities, by real distance from THIS city, measured between Census
+  // centroids. Do NOT compare distanceMiles (miles from the Hudson shop):
+  // that ranks towns by how similar their radius is, so Worcester listed
+  // Westford — both ~15mi from Hudson, but 29mi apart in opposite directions.
   const nearbyCities = Object.values(CITIES)
     .filter(c => c.slug !== citySlug)
+    .map(c => ({ city: c, miles: milesBetween(city, c) }))
     .sort((a, b) => {
-      if (city.distanceMiles != null && a.distanceMiles != null && b.distanceMiles != null) {
-        return (
-          Math.abs(a.distanceMiles - city.distanceMiles) -
-          Math.abs(b.distanceMiles - city.distanceMiles)
-        )
-      }
-      if (a.region === city.region && b.region !== city.region) return -1
-      if (a.region !== city.region && b.region === city.region) return 1
+      if (a.miles != null && b.miles != null) return a.miles - b.miles
+      if (a.miles != null) return -1
+      if (b.miles != null) return 1
+      // No coordinates on either → fall back to same-region first.
+      if (a.city.region === city.region && b.city.region !== city.region) return -1
+      if (a.city.region !== city.region && b.city.region === city.region) return 1
       return 0
     })
     .slice(0, 6)
+    .map(x => x.city)
 
   // Local knowledge — present for some cities, absent for others. Sections
   // keyed off these hide themselves when empty.

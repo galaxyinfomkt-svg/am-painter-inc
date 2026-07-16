@@ -36,8 +36,12 @@ const census = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
 // ---- Harvest local knowledge from the current file -------------------------
 const existing = new Map()
 const body = src.slice(src.indexOf('export const CITIES'))
-for (const m of body.matchAll(/^ {2}([a-zA-Z0-9_]+): \{([\s\S]*?)^ {2}\},/gm)) {
-  const block = m[2]
+// Keys may be bare (`hudson:`) in the hand-written original or quoted
+// (`'hudson':`) once this script has run — match both. Missing the quoted form
+// silently harvests nothing and wipes every town's local knowledge on the next
+// regeneration, which is exactly what happened once.
+for (const m of body.matchAll(/^ {2}'?[a-zA-Z0-9_-]+'?: \{([\s\S]*?)^ {2}\},/gm)) {
+  const block = m[1]
   // Quoted values may contain escaped quotes ("St. Mark\'s School area"), so
   // the string patterns must consume \\. pairs rather than stop at the first
   // quote. A naive [^']* here silently truncates and corrupts the output.
@@ -66,7 +70,24 @@ for (const m of body.matchAll(/^ {2}([a-zA-Z0-9_]+): \{([\s\S]*?)^ {2}\},/gm)) {
     climate: grabStr('climate'),
   })
 }
-console.error(`Carried local knowledge from ${existing.size} existing towns`)
+const localCount = [...existing.values()].filter(
+  (v) => v.architectureStyle?.length || v.neighborhoods?.length || v.challenges?.length || v.climate
+).length
+console.error(`Carried local knowledge from ${localCount} of ${existing.size} existing towns`)
+
+// The file on disk has local knowledge but we harvested none → the parse broke
+// (a key-format change, say). Writing now would silently delete hand-written
+// content that exists in no dataset and cannot be regenerated. Refuse instead.
+const fileHasLocal = /architectureStyle:|neighborhoods:|challenges:/.test(body)
+if (fileHasLocal && localCount === 0) {
+  console.error(
+    '\nREFUSING TO WRITE: cities.ts contains local knowledge but none was ' +
+      'parsed out. The harvest regex is probably out of date — fix it before ' +
+      'regenerating, or this run wipes content that cannot be recovered from ' +
+      'any API.'
+  )
+  process.exit(1)
+}
 
 // ---- Select the N nearest --------------------------------------------------
 const picked = census.slice(0, COUNT)
@@ -89,6 +110,8 @@ const entries = picked.map((c) => {
   if (local.zipCodes?.length) lines.push(`    zipCodes: ${arr(local.zipCodes)},`)
   lines.push(`    density: ${c.density},`)
   lines.push(`    distanceMiles: ${c.distanceMiles},`)
+  if (c.lat != null) lines.push(`    lat: ${c.lat},`)
+  if (c.lon != null) lines.push(`    lon: ${c.lon},`)
   lines.push(`    region: ${q(c.region)},`)
   lines.push(`    areaType: ${q(c.areaType)},`)
 
