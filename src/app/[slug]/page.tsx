@@ -33,10 +33,45 @@ function parseSlug(slug: string): { serviceSlug: string; citySlug: string } | nu
   return null
 }
 
+// ---------------------------------------------------------------------------
+// Local knowledge (architectureStyle / neighborhoods / challenges / climate)
+// exists for some cities and not others — it isn't in any dataset, so we only
+// have it where someone actually knew it. Every helper below must degrade to
+// "say less" rather than "say something invented". The Census facts
+// (population, medianHomeValue, pre1980Percent, density, distanceMiles) are
+// real for every city and carry the page when local colour is missing.
+// ---------------------------------------------------------------------------
+
+/** First architecture style, or null when we don't actually know. */
+const archOf = (city: City): string | null => city.architectureStyle?.[0] ?? null
+
+/** "Colonial and Victorian", or null. */
+function archPhrase(city: City, n = 2): string | null {
+  const a = city.architectureStyle?.slice(0, n)
+  return a && a.length ? a.join(' and ') : null
+}
+
+/** City climate when known, else the region's, else null. */
+const climateOf = (city: City): string | null =>
+  city.climate ?? REGION_DATA[city.region]?.climateNote ?? null
+
+/** Leading clause of the climate sentence, e.g. "cold winters". */
+const climateHead = (city: City): string | null => climateOf(city)?.split(',')[0] ?? null
+
+/** "12 miles from our Hudson shop" — real, and different for every city. */
+const distancePhrase = (city: City): string | null =>
+  city.distanceMiles != null
+    ? city.distanceMiles < 2
+      ? 'right here in our home town'
+      : `about ${Math.round(city.distanceMiles)} miles from our Hudson shop`
+    : null
+
 // Get city-specific challenges with detailed descriptions based on service type
 function getCityServiceChallenges(city: City, serviceName: string): Array<{ title: string; desc: string }> {
-  const challenges = city.challenges.slice(0, 4)
-  const climateChallenge = city.climate
+  // No known local challenges → render nothing. The section is hidden.
+  const challenges = city.challenges?.slice(0, 4) ?? []
+  if (!challenges.length) return []
+  const climateChallenge = climateOf(city) ?? ''
 
   // Create service-specific descriptions for each city challenge
   return challenges.map((challenge, idx) => {
@@ -44,23 +79,23 @@ function getCityServiceChallenges(city: City, serviceName: string): Array<{ titl
 
     if (serviceName.includes('Interior')) {
       const descs = [
-        `${city.name}'s ${city.architectureStyle[0] || 'historic'} homes often have this issue. Our interior specialists know exactly how to handle it with proper prep and premium paints.`,
+        `${city.name}'s ${archOf(city) ?? 'older'} homes often have this issue. Our interior specialists know exactly how to handle it with proper prep and premium paints.`,
         `Common in ${city.areaType} ${city.name} properties. We use moisture-resistant primers and low-VOC paints for lasting results.`,
-        `With ${city.pre1978Percent || 60}% of ${city.name} homes built before 1978, we're EPA Lead-Safe certified for safe interior work.`,
+        `With ${city.pre1980Percent ?? 60}% of ${city.name} homes built before 1980 (US Census), many fall under the EPA's pre-1978 lead rule — our team is Lead-Safe certified.`,
         `${city.name}'s ${climateChallenge.split(',')[0]} means interior surfaces need specialized treatment for durability.`
       ]
       desc = descs[idx] || descs[0]
     } else if (serviceName.includes('Exterior')) {
       const descs = [
         `${city.name}'s ${climateChallenge} directly impacts exterior paint. We use weather-specific coatings designed for Massachusetts conditions.`,
-        `${city.architectureStyle[0] || 'Traditional'} homes in ${city.name} require specialized prep work. Our team has ${business.yearsInBusiness}+ years experience with local architecture.`,
+        `${archOf(city) ?? 'Traditional'} homes in ${city.name} require specialized prep work. Our team has ${business.yearsInBusiness}+ years experience with local architecture.`,
         `The ${REGION_DATA[city.region]?.name || 'area'} climate demands premium exterior paints. We only use Benjamin Moore & Sherwin-Williams products.`,
         `${city.areaType === 'urban' ? 'Urban' : 'Suburban'} ${city.name} properties face unique challenges. Our EPA-certified team ensures proper protection.`
       ]
       desc = descs[idx] || descs[0]
     } else if (serviceName.includes('Cabinet')) {
       const descs = [
-        `Kitchens in ${city.name}'s ${city.architectureStyle[0] || 'traditional'} homes need factory-smooth finishes. We spray cabinets for flawless results.`,
+        `Kitchens in ${city.name}'s ${archOf(city) ?? 'traditional'} homes need factory-smooth finishes. We spray cabinets for flawless results.`,
         `${city.name} homeowners expect premium cabinet refinishing. Our conversion varnishes outlast standard paint.`,
         `With median home values of $${(city.medianHomeValue / 1000).toFixed(0)}K in ${city.name}, cabinet quality matters. We deliver showroom finishes.`,
         `${city.areaType === 'urban' ? 'Urban' : city.areaType === 'suburban' ? 'Suburban' : 'Rural'} ${city.name} kitchens deserve expert cabinet painting at 1/3 the cost of replacement.`
@@ -69,22 +104,22 @@ function getCityServiceChallenges(city: City, serviceName: string): Array<{ titl
     } else if (serviceName.includes('Deck')) {
       const descs = [
         `${city.name}'s ${climateChallenge} is tough on decks. We use penetrating stains designed for Massachusetts weather.`,
-        `Decks in ${city.name}'s ${city.architectureStyle[0] || 'traditional'} homes need proper restoration. Complete sanding, repair, and premium staining.`,
+        `Decks in ${city.name}'s ${archOf(city) ?? 'traditional'} homes need proper restoration. Complete sanding, repair, and premium staining.`,
         `${REGION_DATA[city.region]?.name || 'Area'} humidity and temperature swings damage deck finishes. Our products are specifically chosen for durability.`,
         `${city.name} outdoor living spaces deserve professional deck care. We restore and protect for years of enjoyment.`
       ]
       desc = descs[idx] || descs[0]
     } else if (serviceName.includes('Drywall')) {
       const descs = [
-        `${city.name}'s ${city.architectureStyle[0] || 'older'} homes often have plaster and drywall issues. We match textures perfectly.`,
+        `${city.name}'s ${archOf(city) ?? 'older'} homes often have plaster and drywall issues. We match textures perfectly.`,
         `Water damage is common due to ${climateChallenge.split(',')[0]}. Our drywall team repairs and prevents future problems.`,
-        `With ${city.pre1978Percent || 60}% pre-1978 homes in ${city.name}, we handle lead-safe drywall repairs with proper containment.`,
+        `With ${city.pre1980Percent ?? 60}% of ${city.name} homes built before 1980, lead-safe containment is standard on our drywall repairs.`,
         `${city.areaType === 'urban' ? 'Multi-family' : 'Single-family'} ${city.name} properties need expert drywall work. Seamless patches, perfect for paint.`
       ]
       desc = descs[idx] || descs[0]
     } else if (serviceName.includes('Remodeling')) {
       const descs = [
-        `${city.name}'s ${city.architectureStyle[0] || 'traditional'} homes benefit from thoughtful remodeling that preserves character while adding modern function.`,
+        `${city.name}'s ${archOf(city) ?? 'traditional'} homes benefit from thoughtful remodeling that preserves character while adding modern function.`,
         `Kitchen and bath remodeling in ${city.name}'s $${(city.medianHomeValue / 1000).toFixed(0)}K average homes requires quality craftsmanship.`,
         `${REGION_DATA[city.region]?.name || 'Area'} homeowners expect premium remodeling. We coordinate all trades for seamless projects.`,
         `From permits to final walkthrough, ${city.name} remodeling projects get our full attention and project management expertise.`
@@ -92,7 +127,7 @@ function getCityServiceChallenges(city: City, serviceName: string): Array<{ titl
       desc = descs[idx] || descs[0]
     } else {
       const descs = [
-        `General contracting in ${city.name} requires knowledge of local codes and ${city.architectureStyle[0] || 'area'} building styles.`,
+        `General contracting in ${city.name} requires knowledge of local codes and ${archOf(city) ?? 'local'} building styles.`,
         `We handle permits, subcontractors, and scheduling for all ${city.name} construction projects.`,
         `${city.areaType === 'urban' ? 'Commercial and residential' : 'Residential'} projects in ${city.name} get dedicated project management.`,
         `${business.yearsInBusiness}+ years serving ${REGION_DATA[city.region]?.name || 'Massachusetts'} means we know how to deliver on time and on budget.`
@@ -181,25 +216,36 @@ function getCityIntro(city: City, serviceName: string): string {
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
   const regionDesc = REGION_DATA[city.region]?.description || 'communities'
 
+  // Clauses that depend on knowledge we may not have. Each resolves to '' when
+  // unknown so the sentence closes cleanly instead of printing a guess.
+  const arch2 = archPhrase(city)
+  const archHomes = arch2 ? `${arch2} homes` : 'homes'
+  const clim = climateOf(city)
+  const dist = distancePhrase(city)
+  const pre80 = city.pre1980Percent
+  const leadClause = pre80
+    ? ` Per the US Census, ${pre80}% of ${city.name} homes were built before 1980 — many fall under the EPA's pre-1978 lead rule, and our Lead-Safe certified team handles them accordingly.`
+    : ''
+
   if (serviceName.includes('Interior')) {
-    return `As ${city.name}'s trusted interior painting specialists, we understand the unique needs of ${city.areaType} homes in ${regionName}. ${city.name}'s ${city.architectureStyle.slice(0, 2).join(' and ')} homes require careful prep work and premium paints to achieve lasting beauty. With ${city.pre1978Percent || 60}% of local homes built before 1978, our EPA Lead-Safe certified team ensures safe, thorough interior painting that protects your family and investment.`
+    return `As ${city.name}'s interior painting specialists, we understand the needs of ${city.areaType} ${archHomes} in ${regionName}${dist ? `, ${dist}` : ''}. Careful prep work and premium paints are what make an interior repaint last.${leadClause}`
   }
   if (serviceName.includes('Exterior')) {
-    return `${city.name}'s ${city.climate} creates specific challenges for exterior paint. Our team specializes in protecting ${city.architectureStyle.slice(0, 2).join(' and ')} homes throughout ${regionName}'s ${regionDesc}. We use weather-tested coatings from Benjamin Moore and Sherwin-Williams that withstand Massachusetts seasons, from harsh winters to humid summers.`
+    return `${clim ? `${city.name}'s ${clim} creates specific challenges for exterior paint. ` : ''}Our team protects ${archHomes} throughout ${regionName}'s ${regionDesc}${dist ? `, ${dist}` : ''}. We use weather-tested coatings from Benjamin Moore and Sherwin-Williams that withstand Massachusetts seasons, from harsh winters to humid summers.`
   }
   if (serviceName.includes('Cabinet')) {
-    return `Transform your ${city.name} kitchen without the cost of full replacement. Our cabinet refinishing specialists serve ${regionName}'s ${regionDesc}, including ${city.name}'s ${city.architectureStyle[0] || 'traditional'} homes. We deliver factory-smooth spray finishes using premium conversion varnishes that outlast standard cabinet paint by years.`
+    return `Transform your ${city.name} kitchen without the cost of full replacement. Our cabinet refinishing specialists serve ${regionName}'s ${regionDesc}${arch2 ? `, including ${city.name}'s ${arch2} homes` : ''}. We deliver factory-smooth spray finishes using premium conversion varnishes that outlast standard cabinet paint by years.`
   }
   if (serviceName.includes('Deck')) {
-    return `${city.name}'s ${city.climate} takes a toll on outdoor wood surfaces. Our deck staining experts restore and protect decks throughout ${regionName}, using penetrating stains designed for Massachusetts weather. Whether you have a pressure-treated deck, cedar, or composite, we bring back its beauty and extend its life.`
+    return `${clim ? `${city.name}'s ${clim} takes a toll on outdoor wood surfaces. ` : ''}Our deck staining experts restore and protect decks throughout ${regionName}${dist ? `, ${dist}` : ''}, using penetrating stains designed for Massachusetts weather. Whether you have a pressure-treated deck, cedar, or composite, we bring back its beauty and extend its life.`
   }
   if (serviceName.includes('Drywall')) {
-    return `${city.name}'s ${city.architectureStyle.slice(0, 2).join(' and ')} homes often need drywall repair due to age, settling, or water damage. Our experts handle everything from small patches to full room installations, matching existing textures perfectly. With ${city.pre1978Percent || 60}% pre-1978 homes in ${city.name}, we're trained in lead-safe practices for all repairs.`
+    return `${city.name}'s ${archHomes} need drywall repair for the usual reasons — age, settling, and water damage. Our experts handle everything from small patches to full room installations, matching existing textures.${pre80 ? ` With ${pre80}% of ${city.name} homes built before 1980 (US Census), we're trained in lead-safe practices for all repairs.` : ''}`
   }
   if (serviceName.includes('Remodeling')) {
-    return `Home remodeling in ${city.name} requires understanding local architecture and homeowner expectations. From kitchen renovations to bathroom updates, we transform ${city.architectureStyle[0] || 'traditional'} homes throughout ${regionName}. Our full-service approach covers design consultation, permits, and expert execution with attention to every detail.`
+    return `Home remodeling in ${city.name} requires understanding local architecture and homeowner expectations. From kitchen renovations to bathroom updates, we transform ${archOf(city) ?? 'traditional'} homes throughout ${regionName}. Our full-service approach covers design consultation, permits, and expert execution with attention to every detail.`
   }
-  return `As ${city.name}'s full-service general contractor, we handle projects of all sizes throughout ${regionName}. From ${city.architectureStyle[0] || 'residential'} home repairs to commercial work, our licensed team manages permits, coordinates subcontractors, and ensures quality results. ${business.yearsInBusiness}+ years serving Massachusetts families means you can trust us with your project.`
+  return `As ${city.name}'s full-service general contractor, we handle projects of all sizes throughout ${regionName}. From ${archOf(city) ?? 'residential'} home repairs to commercial work, our licensed team manages permits, coordinates subcontractors, and ensures quality results. ${business.yearsInBusiness}+ years serving Massachusetts families means you can trust us with your project.`
 }
 
 // Generate a second, data-rich paragraph using neighborhoods, county, zip codes
@@ -214,11 +260,23 @@ function getCityDetailsParagraph(city: City): string {
   if (neighborhoodList) {
     parts.push(`We frequently work in ${neighborhoodList} and the surrounding ${city.name} neighborhoods.`)
   }
+  const arch2 = archPhrase(city)
   if (county || zip) {
     const ident = [county, zip ? `ZIP ${zip}` : null].filter(Boolean).join(' / ')
-    parts.push(`${city.name} (${ident}) sees a ${city.areaType} mix of ${city.architectureStyle.slice(0, 2).join(' and ')} homes — most renovations here center on weathering, lead-safe prep, and color-matching to historic exteriors.`)
+    parts.push(
+      `${city.name} (${ident}) is a ${city.areaType} community${arch2 ? ` with a mix of ${arch2} homes` : ''} — most renovations here center on weathering, lead-safe prep, and color-matching to existing exteriors.`
+    )
   } else {
     parts.push(`${city.name}'s ${city.areaType} character means most projects center on weathering, lead-safe prep, and color-matching to existing architecture.`)
+  }
+  // Real Census facts — true for every city, and different for each one.
+  const facts: string[] = []
+  if (city.population) facts.push(`a population of about ${city.population.toLocaleString()}`)
+  if (city.medianHomeValue) facts.push(`a median home value near $${Math.round(city.medianHomeValue / 1000)}K`)
+  if (facts.length) {
+    parts.push(
+      `The town has ${facts.join(' and ')} (US Census, ACS 2023)${city.distanceMiles != null && city.distanceMiles >= 2 ? `, and sits about ${Math.round(city.distanceMiles)} miles from our Hudson shop` : ''}.`
+    )
   }
   return parts.join(' ')
 }
@@ -290,9 +348,9 @@ function getCityServicePriceRange(city: City, serviceName: string): { low: numbe
 
 // Generate 4-6 city + service specific FAQ items (drives FAQPage JSON-LD and visible Q&A)
 function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: string; answer: string }> {
-  const climate = city.climate.split(',')[0]
-  const arch = city.architectureStyle[0] || 'traditional'
-  const pre78 = city.pre1978Percent || 60
+  const climate = climateHead(city) ?? 'New England weather'
+  const arch = archOf(city) ?? 'traditional'
+  const pre80 = city.pre1980Percent ?? 60
   const phone = business.phone
   const county = city.county ? `${city.county} County` : 'the surrounding county'
 
@@ -304,7 +362,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
       },
       {
         question: `Are you EPA Lead-Safe certified for older ${city.name} homes?`,
-        answer: `Yes. Approximately ${pre78}% of homes in ${city.name} were built before 1978, so EPA Lead-Safe Renovation, Repair and Painting (RRP) compliance is required by law on disturbed painted surfaces. Our team is fully certified and uses HEPA containment, dust monitoring, and proper waste disposal on every pre-1978 ${city.name} project.`,
+        answer: `Yes. Per the US Census, ${pre80}% of ${city.name} homes were built before 1980, so a large share fall under the EPA's pre-1978 Lead-Safe Renovation, Repair and Painting (RRP) rule — which is required by law on disturbed painted surfaces in pre-1978 housing. Our team is fully certified and uses HEPA containment, dust monitoring, and proper waste disposal on every pre-1978 ${city.name} project.`,
       },
       {
         question: `How long does interior painting take in a typical ${city.name} home?`,
@@ -328,7 +386,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
       },
       {
         question: `Do you handle wood rot and trim repair on ${city.name} homes?`,
-        answer: `Yes. Wood rot from ${city.climate.toLowerCase()} is one of the most common findings on ${city.name} exteriors. We replace rotted trim, fascia, soffit and clapboard sections in-house before painting, so the new coating sits on sound substrate.`,
+        answer: `Yes. Wood rot from ${(climateOf(city) ?? 'New England weather').toLowerCase()} is one of the most common findings on ${city.name} exteriors. We replace rotted trim, fascia, soffit and clapboard sections in-house before painting, so the new coating sits on sound substrate.`,
       },
       {
         question: `Are you licensed and insured to work in ${county}?`,
@@ -453,7 +511,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
 
   // Create city-specific, unique meta description (max 155 chars)
-  const architectureText = city.architectureStyle.slice(0, 2).join(' & ')
+  const architectureText = city.architectureStyle?.slice(0, 2).join(' & ') ?? null
 
   // SHORT service labels for the visible part of the SERP. Google truncates
   // ~58 chars — "Cabinet Painting & Refinishing" alone is 30, which pushed
@@ -478,8 +536,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   // Description: drop the phone number (the page itself surfaces it after
   // the click), lead with a real differentiator (local + family-owned + 2026
-  // pricing), keep ≤155 chars.
-  const description = `Local family-owned painters for ${city.name}, MA homes. ${architectureText} specialists. Free written quote in 24h — 2026 pricing. EPA Lead-Safe.`
+  // pricing), keep ≤155 chars. Where we know the local architecture we lead
+  // with it; otherwise we lead with distance from the shop — also a real,
+  // per-city fact, and a genuine reason to pick a nearby painter.
+  const hook = architectureText
+    ? `${architectureText} specialists.`
+    : city.distanceMiles != null && city.distanceMiles >= 2
+      ? `Based ${Math.round(city.distanceMiles)} mi away in Hudson.`
+      : 'Based right here in Hudson.'
+  const description = `Local family-owned painters for ${city.name}, MA homes. ${hook} Free written quote in 24h — 2026 pricing. EPA Lead-Safe.`
 
   // Generate comprehensive keywords including city-specific terms
   const keywords = [
@@ -491,10 +556,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     `professional painters ${city.name} Massachusetts`,
     `${service.name.toLowerCase()} near me ${city.name}`,
     `licensed painters ${city.name} MA`,
-    `${city.name} ${city.architectureStyle[0]?.toLowerCase() || 'home'} painting`,
+    `${city.name} ${archOf(city)?.toLowerCase() ?? 'home'} painting`,
     `${regionName} painting contractor`,
     `${city.county || 'Middlesex'} County painters`,
-    ...city.neighborhoods.slice(0, 3).map(n => `painters ${n}`),
+    ...(city.neighborhoods ?? []).slice(0, 3).map(n => `painters ${n}`),
     `lead-safe painting ${city.name}`,
     `EPA certified painters ${city.name}`,
     `${city.name} home improvement`,
@@ -509,7 +574,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: { canonical },
     openGraph: {
       title: `${serviceShort} ${city.name}, MA | Family-Owned Local Painters`,
-      description: `Local family-owned painters for ${city.name}, MA — ${architectureText} home specialists. Free written quote in 24h. EPA Lead-Safe certified firm.`,
+      description: `Local family-owned painters for ${city.name}, MA. ${hook} Free written quote in 24h. EPA Lead-Safe certified firm.`,
       url: canonical,
       siteName: business.name,
       type: 'website',
@@ -526,7 +591,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     twitter: {
       card: 'summary_large_image',
       title: `${serviceShort} ${city.name}, MA | ${business.name}`,
-      description: `Local family-owned ${service.name.toLowerCase()} for ${city.name}'s ${architectureText} homes. Free written quote in 24h.`,
+      description: `Local family-owned ${service.name.toLowerCase()} for ${city.name}, MA. ${hook} Free written quote in 24h.`,
       images: [business.images.og],
     },
   }
@@ -548,26 +613,33 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
     notFound()
   }
 
-  const pre1978 = city.pre1978Percent || 60
+  const pre1980 = city.pre1980Percent
   const homeValue = city.medianHomeValue || 400000
   const population = city.population || 10000
 
   const otherServices = services.filter(s => s.id !== serviceSlug).slice(0, 4)
 
-  // Get nearby cities from same region first, then others
+  // Nearby cities, by actual distance from THIS city — every city carries real
+  // Census coordinates, so "nearby" can mean nearby instead of "same region".
   const nearbyCities = Object.values(CITIES)
     .filter(c => c.slug !== citySlug)
     .sort((a, b) => {
-      // Prioritize same region
+      if (city.distanceMiles != null && a.distanceMiles != null && b.distanceMiles != null) {
+        return (
+          Math.abs(a.distanceMiles - city.distanceMiles) -
+          Math.abs(b.distanceMiles - city.distanceMiles)
+        )
+      }
       if (a.region === city.region && b.region !== city.region) return -1
       if (a.region !== city.region && b.region === city.region) return 1
       return 0
     })
     .slice(0, 6)
 
-  // Use REAL city data - not generic content
-  const neighborhoods = city.neighborhoods // Real neighborhoods from cities.ts
-  const housingTypes = city.architectureStyle // Real architecture styles from cities.ts
+  // Local knowledge — present for some cities, absent for others. Sections
+  // keyed off these hide themselves when empty.
+  const neighborhoods = city.neighborhoods ?? []
+  const housingTypes = city.architectureStyle ?? []
   const commonIssues = getCityServiceChallenges(city, service.name) // City-specific challenges
   const whatWeOffer = getWhatWeOffer(service.name)
   const cityIntro = getCityIntro(city, service.name) // Unique intro paragraph
@@ -633,9 +705,14 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   {service.name} in <span className="text-primary">{city.name}</span>, MA
                 </h1>
 
-                {/* Description - City-specific */}
+                {/* Description — built from what we actually know about this
+                    city. Clauses drop out rather than printing a guess. */}
                 <p className="text-xl text-gray-300 mb-8 max-w-3xl">
-                  Expert {service.name.toLowerCase()} for {city.name}&apos;s {housingTypes.slice(0, 2).join(' & ')} homes. {city.climate.split(',')[0]} weather protection. {pre1978}% pre-1978 homes - EPA Lead-Safe certified. Serving {regionName} for {business.yearsInBusiness}+ years.
+                  Expert {service.name.toLowerCase()} for {city.name}
+                  {archPhrase(city) ? `'s ${archPhrase(city)} homes` : ', MA'}.{' '}
+                  {climateHead(city) ? `${climateHead(city)} weather protection. ` : ''}
+                  {pre1980 ? `${pre1980}% of homes built pre-1980 — EPA Lead-Safe certified. ` : 'EPA Lead-Safe certified. '}
+                  Serving {regionName} for {business.yearsInBusiness}+ years.
                 </p>
 
                 {/* CTA Buttons */}
@@ -704,14 +781,19 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       maxLinks={2}
                     />
                   </p>
-                  {/* Climate Info Box */}
-                  <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-                    <SunIcon className="h-6 w-6 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-semibold text-secondary">{city.name} Climate Considerations</h4>
-                      <p className="text-sm text-gray-600">{city.climate}. Our painting solutions are specifically designed to withstand these conditions.</p>
+                  {/* Climate Info Box — city-level note where we have one,
+                      otherwise the region's. Hidden if we have neither. */}
+                  {climateOf(city) && (
+                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
+                      <SunIcon className="h-6 w-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-secondary">
+                          {city.climate ? `${city.name} Climate Considerations` : `${regionName} Climate Considerations`}
+                        </h4>
+                        <p className="text-sm text-gray-600">{climateOf(city)}. Our painting solutions are designed to withstand these conditions.</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Price At a Glance — citable single-line fact for AI/SGE citations */}
                   <div className="mt-4 bg-amber-50 border-l-4 border-primary rounded-r-xl p-4">
@@ -737,64 +819,75 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </div>
                 </div>
 
-                {/* Neighborhoods + Housing Types Grid - Like RS */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Neighborhoods We Serve */}
-                  <div className="bg-amber-50 rounded-2xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <HomeIcon className="h-6 w-6 text-secondary" />
-                      <h3 className="text-xl font-bold text-secondary">{city.name} Neighborhoods We Serve</h3>
-                    </div>
-                    <ul className="space-y-2">
-                      {neighborhoods.map((neighborhood, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-gray-700">
-                          <span className="w-2 h-2 rounded-full bg-primary" />
-                          {neighborhood}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Architecture Styles We Specialize In */}
-                  <div className="bg-amber-50 rounded-2xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <BuildingOfficeIcon className="h-6 w-6 text-primary" />
-                      <h3 className="text-xl font-bold text-secondary">{city.name} Architecture We Specialize In</h3>
-                    </div>
-                    <ul className="space-y-2">
-                      {housingTypes.map((type, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-gray-700">
-                          <span className="w-2 h-2 rounded-full bg-primary" />
-                          {type} homes
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* City-Specific Challenges Section */}
-                <div>
-                  <h3 className="text-2xl font-bold text-secondary mb-6">
-                    {city.name}-Specific {service.name} Challenges We Solve
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    {city.name}&apos;s {housingTypes[0] || 'traditional'} homes and {city.climate.split(',')[0]} climate create unique {service.name.toLowerCase()} challenges. Our {regionName} expertise means we know exactly how to handle these local issues:
-                  </p>
-
-                  {/* Common Issues Grid - Like RS */}
-                  <div className="grid md:grid-cols-2 gap-4 mb-8">
-                    {commonIssues.map((issue, idx) => (
-                      <div key={idx} className="bg-red-50 border border-red-100 rounded-xl p-4">
-                        <div className="flex items-start gap-3">
-                          <ExclamationCircleIcon className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <h4 className="font-bold text-secondary">{issue.title}</h4>
-                            <p className="text-sm text-gray-600">{issue.desc}</p>
-                          </div>
+                {/* Neighborhoods + Housing Types. Both are local knowledge we
+                    only have for some cities — each box hides itself when we
+                    don't, and the grid disappears when we have neither. */}
+                {(neighborhoods.length > 0 || housingTypes.length > 0) && (
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {neighborhoods.length > 0 && (
+                      <div className="bg-amber-50 rounded-2xl p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <HomeIcon className="h-6 w-6 text-secondary" />
+                          <h3 className="text-xl font-bold text-secondary">{city.name} Neighborhoods We Serve</h3>
                         </div>
+                        <ul className="space-y-2">
+                          {neighborhoods.map((neighborhood, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-gray-700">
+                              <span className="w-2 h-2 rounded-full bg-primary" />
+                              {neighborhood}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
+                    )}
+
+                    {housingTypes.length > 0 && (
+                      <div className="bg-amber-50 rounded-2xl p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <BuildingOfficeIcon className="h-6 w-6 text-primary" />
+                          <h3 className="text-xl font-bold text-secondary">{city.name} Architecture We Specialize In</h3>
+                        </div>
+                        <ul className="space-y-2">
+                          {housingTypes.map((type, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-gray-700">
+                              <span className="w-2 h-2 rounded-full bg-primary" />
+                              {type} homes
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
+                )}
+
+                {/* City-Specific Challenges. The challenge list is local
+                    knowledge — where we don't have it, the heading and grid
+                    are omitted entirely rather than framing an empty list. */}
+                <div>
+                  {commonIssues.length > 0 && (
+                    <>
+                      <h3 className="text-2xl font-bold text-secondary mb-6">
+                        {city.name}-Specific {service.name} Challenges We Solve
+                      </h3>
+                      <p className="text-gray-600 mb-6">
+                        {city.name}&apos;s {housingTypes[0] || 'older'} homes{climateHead(city) ? ` and ${climateHead(city)} climate` : ''} create specific {service.name.toLowerCase()} challenges. Our {regionName} expertise means we know how to handle these local issues:
+                      </p>
+
+                      <div className="grid md:grid-cols-2 gap-4 mb-8">
+                        {commonIssues.map((issue, idx) => (
+                          <div key={idx} className="bg-red-50 border border-red-100 rounded-xl p-4">
+                            <div className="flex items-start gap-3">
+                              <ExclamationCircleIcon className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5" />
+                              <div>
+                                <h4 className="font-bold text-secondary">{issue.title}</h4>
+                                <p className="text-sm text-gray-600">{issue.desc}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
 
                   {/* Expert Solutions Box - Like RS */}
                   <div className="bg-green-50 border border-green-200 rounded-xl p-6">
@@ -803,7 +896,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       <div>
                         <h4 className="text-lg font-bold text-secondary">Why {city.name} Homeowners Trust {business.name}</h4>
                         <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}, we understand {city.name}&apos;s {housingTypes.slice(0, 2).join(' and ')} architecture. Our EPA Lead-Safe certified team handles {pre1978}% pre-1978 homes with expertise. As a family-owned local firm, we&apos;re committed to delivering {city.name}-specific quality and accountability on every project.
+                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}{archPhrase(city) ? `, we understand ${city.name}'s ${archPhrase(city)} architecture` : ''}.{pre1980 ? ` ${pre1980}% of ${city.name} homes were built before 1980 (US Census) — our EPA Lead-Safe certified team handles pre-1978 housing to the federal RRP standard.` : ' Our team is EPA Lead-Safe certified.'} As a family-owned local firm, we&apos;re committed to delivering {city.name}-specific quality and accountability on every project.
                         </p>
                       </div>
                     </div>
@@ -918,10 +1011,12 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                         <span className="text-gray-600">Median Home Value</span>
                         <span className="font-semibold">${(homeValue / 1000).toFixed(0)}K</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Pre-1978 Homes</span>
-                        <span className="font-semibold">{pre1978}%</span>
-                      </div>
+                      {pre1980 != null && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Homes built pre-1980</span>
+                          <span className="font-semibold">{pre1980}%</span>
+                        </div>
+                      )}
                       {city.county && (
                         <div className="flex justify-between">
                           <span className="text-gray-600">County</span>
