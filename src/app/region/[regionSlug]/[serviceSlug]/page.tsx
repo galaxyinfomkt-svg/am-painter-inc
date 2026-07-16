@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { REGIONS, getRegionBySlug } from '@/data/regions'
 import { SERVICES, getServiceBySlug } from '@/data/services'
-import { CITIES, SERVICE_AREA_CITY_COUNT } from '@/data/cities'
+import { CITIES } from '@/data/cities'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -494,7 +494,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
               <div className="text-center mt-8">
                 <Link href="/#service-areas" className="text-primary font-semibold hover:underline">
-                  View All {SERVICE_AREA_CITY_COUNT}+ Service Areas →
+                  View All {Object.keys(CITIES).length}+ Service Areas →
                 </Link>
               </div>
             </div>
