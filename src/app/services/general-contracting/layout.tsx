@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     question: "What areas do you serve?",
-    answer: "We serve all of MetroWest Massachusetts, Worcester County, and surrounding areas - over 60 cities including Hudson, Marlborough, Worcester, Framingham, and Shrewsbury."
+    answer: "We serve all of MetroWest Massachusetts, Worcester County, and surrounding areas - over 140 cities including Hudson, Marlborough, Worcester, Framingham, and Shrewsbury."
   },
   {
     question: "How do payments work?",
@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/general-contracting`,
+    canonical: `${business.url}/services/general-contracting/`,
   },
   openGraph: {
     title: `General Contracting Services | ${business.name} | Massachusetts`,
     description: `Full-service general contracting. Project management, permits, subcontractor coordination. ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/general-contracting`,
+    url: `${business.url}/services/general-contracting/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

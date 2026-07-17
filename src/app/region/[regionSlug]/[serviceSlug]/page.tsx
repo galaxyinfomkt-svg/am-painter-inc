@@ -481,7 +481,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
                 {regionCities.map((city) => (
                   <Link
                     key={city.slug}
-                    href={`/${serviceSlug}-${city.slug}-ma`}
+                    href={`/${serviceSlug}-${city.slug}-ma/`}
                     className="group flex items-center gap-2 px-4 py-3 bg-white rounded-xl hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
                   >
                     <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition" />

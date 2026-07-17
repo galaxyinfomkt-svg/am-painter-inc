@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/deck-staining`,
+    canonical: `${business.url}/services/deck-staining/`,
   },
   openGraph: {
     title: `Deck Staining & Restoration | ${business.name} | Massachusetts`,
     description: `Protect and beautify your deck with professional staining. Premium penetrating stains, wood repair, ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/deck-staining`,
+    url: `${business.url}/services/deck-staining/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

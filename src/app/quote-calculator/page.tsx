@@ -6,7 +6,9 @@ import { QuoteCalculator } from '@/components/QuoteCalculator'
 import { business } from '@/data/business'
 
 export const metadata: Metadata = {
-  title: 'Painting Cost Estimate Calculator | MetroWest MA Market Ranges',
+  // { absolute } so the root template doesn't append '| A&M Painter Inc' and
+  // push this past ~60 chars (every other page uses absolute for this reason).
+  title: { absolute: 'Painting Cost Calculator | MetroWest MA 2026 Ranges' },
   description:
     'Free painting cost calculator with 2026 MetroWest Massachusetts market ranges for interior, exterior, cabinet refinishing, deck staining, and drywall. Estimate only — not a quote.',
   alternates: {

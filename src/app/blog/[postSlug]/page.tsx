@@ -211,7 +211,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     .map((city) => (
                       <Link
                         key={city.slug}
-                        href={`/interior-painting-${city.slug}-ma/`}
+                        href={`/${post.relatedService ?? 'interior-painting'}-${city.slug}-ma/`}
                         className="block px-4 py-3 rounded-lg bg-gray-50 hover:bg-primary hover:text-white text-center font-medium text-gray-700 transition"
                       >
                         {city.name}, MA
@@ -245,7 +245,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <ContactFormSection
           heading="Get a Free Estimate"
-          subheading="Hudson, MA and 60+ MetroWest cities. We respond within 24 hours."
+          subheading={`Hudson, MA and ${Object.keys(CITIES).length}+ MetroWest cities. We respond within 24 hours.`}
           variant={`blog-${post.slug}`}
         />
       </main>

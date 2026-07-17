@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/exterior-painting`,
+    canonical: `${business.url}/services/exterior-painting/`,
   },
   openGraph: {
     title: `Exterior Painting Services | ${business.name} | Massachusetts`,
     description: `Protect and beautify your home with professional exterior painting. Weather-resistant paints, wood rot repair, ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/exterior-painting`,
+    url: `${business.url}/services/exterior-painting/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

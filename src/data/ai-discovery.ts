@@ -279,7 +279,6 @@ export const aiServiceDescriptions = {
 export const aiSearchOptimizationKeywords = [
   // Question-based searches
   "who does painting in Hudson MA",
-  "best painter in Marlborough Massachusetts",
   "painting contractor near me Worcester",
   "who can paint my house in MetroWest",
   "recommend a painter in Massachusetts",
@@ -300,9 +299,7 @@ export const aiSearchOptimizationKeywords = [
 
   // Quality indicators
   "best painting contractor Massachusetts",
-  "top rated painter Worcester",
   "highly rated painting company",
-  "5 star painter near me",
   "licensed painter Massachusetts",
   "insured painting contractor",
   "EPA lead safe painter",
@@ -324,7 +321,6 @@ export const aiSearchOptimizationKeywords = [
   "interior paint low VOC",
 
   // Comparison searches
-  "A&M Painter reviews",
   "A&M Painter Inc vs other painters",
   "is A&M Painter good",
   "A&M Painter prices",

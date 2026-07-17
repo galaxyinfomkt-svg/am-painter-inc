@@ -18,7 +18,7 @@ const painPoints = [
   },
   {
     problem: "Worried about contractors not showing up or delays?",
-    solution: "Our {business.yearsInBusiness}+ years of relationships with reliable subs means work flows smoothly. We hold everyone accountable to schedules."
+    solution: `Our ${business.yearsInBusiness}+ years of relationships with reliable subs means work flows smoothly. We hold everyone accountable to schedules.`
   },
   {
     problem: "Concerned about quality control across different trades?",

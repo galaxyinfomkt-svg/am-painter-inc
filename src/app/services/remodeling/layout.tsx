@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/remodeling`,
+    canonical: `${business.url}/services/remodeling/`,
   },
   openGraph: {
     title: `Home Remodeling Services | ${business.name} | Massachusetts`,
     description: `Transform your home with professional remodeling. Kitchen, bathroom, basement finishing. ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/remodeling`,
+    url: `${business.url}/services/remodeling/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

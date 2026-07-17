@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/interior-painting`,
+    canonical: `${business.url}/services/interior-painting/`,
   },
   openGraph: {
     title: `Interior Painting Services | ${business.name} | Massachusetts`,
     description: `Transform your home with professional interior painting. ${business.yearsInBusiness}+ years experience, premium paints, expert color consultation. family-owned. Free estimates!`,
-    url: `${business.url}/services/interior-painting`,
+    url: `${business.url}/services/interior-painting/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { PlayIcon } from '@heroicons/react/24/solid'
 import { business } from '@/data/business'
+import { CITIES } from '@/data/cities'
 
 interface YouTubeVideoProps {
   videoId?: string
@@ -114,7 +115,11 @@ export function HeroVideoSection() {
           <YouTubeVideo />
         </div>
 
-        {/* Stats Row */}
+        {/* Stats Row — every figure here must be one we can substantiate.
+            Was: '5.0 Google Rating' (business has 0 verifiable reviews),
+            '1000+ Projects Completed' and '100% Satisfaction Rate' (both
+            unsourced). Replaced with facts that are checkable: the MA HIC
+            registration, the liability cover, and the real town count. */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
@@ -124,21 +129,21 @@ export function HeroVideoSection() {
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-              5.0
+              $2M
             </div>
-            <div className="text-gray-600 font-medium">Google Rating</div>
+            <div className="text-gray-600 font-medium">Liability Insured</div>
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-              1000+
+              {Object.keys(CITIES).length}+
             </div>
-            <div className="text-gray-600 font-medium">Projects Completed</div>
+            <div className="text-gray-600 font-medium">Cities Served</div>
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-              100%
+              EPA
             </div>
-            <div className="text-gray-600 font-medium">Satisfaction Rate</div>
+            <div className="text-gray-600 font-medium">Lead-Safe Certified</div>
           </div>
         </div>
       </div>
