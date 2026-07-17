@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { CITIES } from '@/data/cities'
+import { CITIES, CITY_DATA_UPDATED } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { REGIONS } from '@/data/regions'
 import { business } from '@/data/business'
@@ -7,7 +7,19 @@ import { POSTS } from '@/data/posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = business.url
-  const currentDate = new Date()
+  // Content dates, NOT build time.
+  //
+  // Every entry used to carry `new Date()`, so all ~1,050 URLs claimed to have
+  // changed on whatever day the site last deployed — a lastmod that moves when
+  // nothing moved. Google learns to ignore a sitemap that does that, which
+  // costs us the signal on the pages where it IS true (blog posts have real
+  // updatedAt dates).
+  //
+  // City pages date from when their Census data was fetched. Static pages
+  // (legal, service hubs) date from the last deploy that could plausibly have
+  // touched them — still imperfect, but it no longer resets daily.
+  const cityDataDate = new Date(CITY_DATA_UPDATED + 'T00:00:00Z')
+  const currentDate = cityDataDate
 
   // Image URLs for top pages — surfaces them in Google Images
   const heroImage = `${baseUrl}${business.images.heroBackground.startsWith('/') ? business.images.heroBackground : ''}` ||

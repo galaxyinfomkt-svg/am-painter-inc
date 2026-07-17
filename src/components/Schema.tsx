@@ -144,11 +144,13 @@ export function LocalBusinessSchema() {
         addressCountry: business.address.country,
       },
     },
-    numberOfEmployees: {
-      '@type': 'QuantitativeValue',
-      minValue: 10,
-      maxValue: 25,
-    },
+    // numberOfEmployees removed. This block said 10–25 while the Organization
+    // block on the SAME page said 15 — two different answers to one question,
+    // which undermines confidence in the rest of the schema, including the
+    // parts that are correct. Neither figure is sourced, and a 5-year-old
+    // family business claiming 10–25 staff is exactly the kind of round number
+    // that turns out to be aspirational. Re-add ONE real figure, in
+    // business.ts, if it's worth stating — it isn't a ranking factor.
     founder: {
       '@type': 'Person',
       name: business.owner,
@@ -465,10 +467,8 @@ export function OrganizationSchema() {
     },
     foundingDate: `${business.foundedYear}`,
     foundingLocation: `${business.address.city}, ${business.address.state}`,
-    numberOfEmployees: {
-      '@type': 'QuantitativeValue',
-      value: '15',
-    },
+    // numberOfEmployees removed — this said 15 while LocalBusiness on the same
+    // page said 10–25. See the note there.
   }
 
   return (
@@ -493,14 +493,11 @@ export function WebSiteSchema() {
       '@id': `${business.url}/#organization`,
     },
     inLanguage: 'en-US',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${business.url}/?s={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
+    // No SearchAction. It pointed at /?s={search_term_string}, but the site has
+    // no search route and the homepage never reads ?s — the URL just returns
+    // the homepage and drops the query. Declaring a sitelinks searchbox that
+    // doesn't work is a claim the crawler can test and fail in one request.
+    // Re-add this alongside a real /search route, not before.
   }
 
   return (
