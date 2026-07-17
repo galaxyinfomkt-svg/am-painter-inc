@@ -54,12 +54,13 @@ export const REVIEWS: Review[] = [
   // Intentionally empty. See the rule above: real reviews only.
 ]
 
-/** Average of the real reviews, or null when there are none. */
-export function getAggregateRating(): { ratingValue: number; reviewCount: number } | null {
-  if (REVIEWS.length === 0) return null
-  const sum = REVIEWS.reduce((s, r) => s + r.rating, 0)
-  return {
-    ratingValue: Math.round((sum / REVIEWS.length) * 10) / 10,
-    reviewCount: REVIEWS.length,
-  }
-}
+// NO aggregate helper here, deliberately.
+//
+// The site does not print a star average or a review count anywhere, by the
+// owner's decision. Google requires that a rating asserted in structured data
+// be visible to users on the same page, so with nothing displayed there is no
+// aggregateRating to emit — and a helper that computes one is just an invitation
+// to wire it back up without noticing the policy it breaks.
+//
+// Individual reviews above still render verbatim and still carry per-review
+// Review schema, which is what makes them worth having.

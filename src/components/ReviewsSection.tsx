@@ -1,4 +1,4 @@
-import { REVIEWS, getAggregateRating } from '@/data/reviews'
+import { REVIEWS } from '@/data/reviews'
 import { business } from '@/data/business'
 import { StarIcon } from '@heroicons/react/24/solid'
 
@@ -12,9 +12,12 @@ import { StarIcon } from '@heroicons/react/24/solid'
  * visitor. This renders real reviews as first-party HTML instead.
  *
  * With no reviews yet, it shows an honest prompt rather than an empty box.
- * Review + AggregateRating JSON-LD is emitted ONLY from real entries in
- * reviews.ts — never hand-written — because structured data is exactly where
- * Google checks a rating claim against what the page actually shows.
+ *
+ * Review JSON-LD is emitted ONLY from real entries in reviews.ts — never
+ * hand-written. There is deliberately no AggregateRating and no visible star
+ * average or review count: Google requires an asserted rating to be visible on
+ * the page, and we show neither. Per-review schema is enough, and each entry
+ * maps to a review rendered verbatim right here in the HTML.
  */
 
 function Stars({ rating }: { rating: number }) {
@@ -32,21 +35,23 @@ function Stars({ rating }: { rating: number }) {
 }
 
 function ReviewSchema() {
-  const agg = getAggregateRating()
-  if (!agg) return null
+  if (REVIEWS.length === 0) return null
 
+  // NO aggregateRating here, by design.
+  //
+  // Google requires that a rating asserted in structured data be visible to
+  // users on the same page. We deliberately don't print a star average or a
+  // review count anywhere (see the section below), so claiming an aggregate
+  // would be asserting to the crawler something the page doesn't show — the
+  // same class of mismatch that got the old claims removed.
+  //
+  // Individual Review entries are fine and are emitted: each one corresponds
+  // to a review rendered verbatim right there in the HTML.
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': `${business.url}/#business`,
     name: business.name,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: agg.ratingValue,
-      reviewCount: agg.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
     review: REVIEWS.map((r) => ({
       '@type': 'Review',
       author: { '@type': 'Person', name: r.author },
@@ -70,8 +75,6 @@ function ReviewSchema() {
 }
 
 export function ReviewsSection() {
-  const agg = getAggregateRating()
-
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
       <ReviewSchema />
@@ -83,19 +86,13 @@ export function ReviewsSection() {
           <h2 className="text-3xl lg:text-4xl font-bold text-secondary mb-4">
             What Our Clients Say
           </h2>
-          {agg ? (
-            <div className="flex items-center justify-center gap-3">
-              <Stars rating={Math.round(agg.ratingValue)} />
-              <p className="text-gray-700 font-semibold">
-                {agg.ratingValue} from {agg.reviewCount}{' '}
-                {agg.reviewCount === 1 ? 'review' : 'reviews'}
-              </p>
-            </div>
-          ) : (
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We&apos;re a family business, and word of mouth is how we grow.
-            </p>
-          )}
+          {/* No star average and no review count — not here, and not in the
+              schema. A count is a number that only helps once it's large, and
+              it dates the moment it's stale. The reviews themselves carry the
+              weight; each one shows its own stars below. */}
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            We&apos;re a family business, and word of mouth is how we grow.
+          </p>
         </div>
 
         {REVIEWS.length > 0 ? (
