@@ -35,7 +35,10 @@ export function LocalBusinessSchema() {
     // === DESCRIÇÃO RICA PARA AI ===
     description: `${business.name} is a professional painting contractor based in ${business.address.city}, ${business.address.state}, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
 
-    slogan: 'Massachusetts\' Most Trusted Painting Contractor',
+    // No superlative here. "Most Trusted" is an unverifiable comparative claim,
+    // and structured data is exactly where Google checks claims against
+    // reality. Describe the business instead.
+    slogan: 'Family-owned painting and remodeling in MetroWest Massachusetts',
 
     // === URLs ===
     url: business.url,
