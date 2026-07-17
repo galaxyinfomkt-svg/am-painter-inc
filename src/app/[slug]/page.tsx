@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ReviewsSection } from '@/components/ReviewsSection'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { AutoLinkText } from '@/components/AutoLinkText'
@@ -1166,7 +1166,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
         </section>
 
         {/* Reviews Widget */}
-        <ReviewsWidget />
+        <ReviewsSection />
 
         <ContactFormSection
           heading="Get Your Free Estimate"

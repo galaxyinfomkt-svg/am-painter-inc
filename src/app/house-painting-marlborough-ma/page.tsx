@@ -5,7 +5,7 @@ import { business, services, cityData } from '@/data/business'
 import { CityPageSchema, FAQSchema } from '@/components/Schema'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ReviewsSection } from '@/components/ReviewsSection'
 import { ContactFormSection } from '@/components/ContactFormSection'
 
 const city = cityData['marlborough']
@@ -340,7 +340,7 @@ export default function MarlboroughPage() {
       </section>
 
       {/* Reviews Widget */}
-      <ReviewsWidget />
+      <ReviewsSection />
 
       {/* Mobile Floating CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg md:hidden z-40">

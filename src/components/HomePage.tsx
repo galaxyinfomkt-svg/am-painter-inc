@@ -8,7 +8,7 @@ import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema, HowToSchema } from '@/components/Schema'
-import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ReviewsSection } from '@/components/ReviewsSection'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { Lightbox } from '@/components/Lightbox'
@@ -31,6 +31,19 @@ const allProjectPhotos = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7e03e9d314ca71656.webp', alt: 'General contracting work', category: 'Contracting' },
 ]
 
+// UNVERIFIED — provenance unknown. These four have been on the homepage since
+// before the current work, but the business's review system reports 0 reviews
+// (checked 2026-07-16), so there is no record any of them came from a real
+// customer. Left in place rather than deleted: removing genuine testimonials
+// would be as wrong as keeping invented ones, and only the owner can say which
+// these are.
+//
+// Deliberately NOT migrated into data/reviews.ts, and deliberately NOT emitted
+// as Review structured data — telling Google these are real reviews is a claim
+// nobody can currently stand behind.
+//
+// Owner: if these are real, move them to data/reviews.ts with a source and they
+// become rich-result eligible. If they are not, delete this block.
 const testimonials = [
   { quote: 'A&M Painter did an amazing job on our exterior. Professional, on-time, and the results are stunning. Highly recommend!', name: 'Sarah M.', location: 'Hudson, MA', rating: 5, service: 'Exterior Painting' },
   { quote: 'Our kitchen cabinets look factory-new. Clear communication and spotless cleanup. Will use again!', name: 'John D.', location: 'Marlborough, MA', rating: 5, service: 'Cabinet Refinishing' },
@@ -640,7 +653,7 @@ export default function HomePage() {
         </section>
 
         {/* Reviews Widget */}
-        <ReviewsWidget />
+        <ReviewsSection />
 
         {/* Contact Section */}
         <section id="contact" className="below-fold py-24 lg:py-32 bg-secondary">

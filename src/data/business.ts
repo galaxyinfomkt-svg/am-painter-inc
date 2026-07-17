@@ -114,7 +114,9 @@ export const business = {
   // External URLs
   formEmbedUrl: 'https://api.leadconnectorhq.com/widget/form/Mh6K2okib8bY2wNnjYYq',
   gmbMapEmbedUrl: 'https://maps.google.com/maps?q=74+Broad+St%2C+Hudson%2C+MA+01749&t=&z=15&ie=UTF8&iwloc=&output=embed',
-  reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/npwVVdTpo5dMM8CCSeCT',
+  // reviewWidgetUrl removed — the third-party review iframe is gone. Reviews
+  // now render as first-party HTML from data/reviews.ts. The widget also
+  // published a stale phone (+1 774 417 9689) on every page it appeared on.
   googleReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   googleWriteReviewUrl: 'https://share.google/IStiqCUwkewrWgGu7',
   facebookUrl: 'https://www.facebook.com/p/AM-Painter-100083000816674/',
