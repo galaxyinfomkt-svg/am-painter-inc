@@ -8,7 +8,6 @@ import { CITIES } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { HomePageSchema, FAQSchema, HowToSchema } from '@/components/Schema'
-import { ReviewsSection } from '@/components/ReviewsSection'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { Lightbox } from '@/components/Lightbox'
@@ -444,7 +443,7 @@ export default function HomePage() {
                 </span>
 
                 <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                  Massachusetts&apos; Premier <span className="text-primary">Painting</span> & Remodeling Company
+                  Interior &amp; Exterior <span className="text-primary">Painting</span> Across MetroWest
                 </h2>
 
                 <p className="text-lg text-gray-300 leading-relaxed">
@@ -648,13 +647,30 @@ export default function HomePage() {
                   <ChevronRightIcon className="h-6 w-6" />
                 </button>
               </div>
+
+              {/* Review CTA lives here, in the homepage's one review section.
+                  ReviewsSection is not rendered on this page — it would put a
+                  second "Customer Reviews" heading directly below this one. */}
+              <div className="mt-12 text-center">
+                <a
+                  href={business.googleWriteReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:bg-gray-100 transition"
+                >
+                  <StarIcon className="h-5 w-5" />
+                  Leave us a review on Google
+                </a>
+                <p className="mt-4 text-sm text-white/80">
+                  We&apos;re a family business — word of mouth is how we grow.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Reviews Widget */}
-        <ReviewsSection />
-
+  
         {/* Contact Section */}
         <section id="contact" className="below-fold py-24 lg:py-32 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
