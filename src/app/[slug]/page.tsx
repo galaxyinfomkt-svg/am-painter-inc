@@ -66,6 +66,76 @@ const distancePhrase = (city: City): string | null =>
       : `about ${Math.round(city.distanceMiles)} miles from our Hudson shop`
     : null
 
+// ---------------------------------------------------------------------------
+// LOCAL PROFILE — the differentiation engine.
+//
+// The Census fields spread far enough to describe genuinely different places:
+// pre-1980 housing runs 24%–88%, median home value $271K–$1.59M, density
+// 45–19,537/sq mi. A dense town where 88% of homes predate 1980 is a different
+// painting job from a rural one at 24% — different law (RRP), different
+// substrate, different access, different money.
+//
+// So the copy branches on those facts instead of pasting the same sentence with
+// the town's name swapped in. Two towns read alike only when the towns ARE
+// alike, which is the honest ceiling: this cannot manufacture difference where
+// the data says there is none.
+// ---------------------------------------------------------------------------
+
+type HousingEra = 'postwar-new' | 'mixed' | 'older' | 'historic'
+type ValueTier = 'budget' | 'mid' | 'upper' | 'luxury'
+
+interface LocalProfile {
+  era: HousingEra
+  tier: ValueTier
+  /** The single fact that most shapes painting work in this town. */
+  angle: 'lead-safe' | 'premium-finish' | 'multi-family' | 'large-lot' | 'standard'
+}
+
+function profileOf(city: City): LocalProfile {
+  const pre = city.pre1980Percent ?? 60
+  const hv = city.medianHomeValue ?? 500000
+  const dens = city.density ?? 1000
+
+  const era: HousingEra =
+    pre >= 75 ? 'historic' : pre >= 60 ? 'older' : pre >= 40 ? 'mixed' : 'postwar-new'
+  const tier: ValueTier =
+    hv >= 1_000_000 ? 'luxury' : hv >= 700_000 ? 'upper' : hv >= 400_000 ? 'mid' : 'budget'
+
+  // Pick the dominant angle — what a painter would actually notice first.
+  // Density leads for the urban case: a city at 5,000+/sq mi with mostly
+  // pre-1980 stock is multi-family work whether it scores 74% or 76%. Keying
+  // that on a hard 75% put Boston (74%, ~13,000/sq mi) in the generic bucket
+  // over one percentage point.
+  let angle: LocalProfile['angle'] = 'standard'
+  if (dens >= 5000 && pre >= 60) angle = 'multi-family'
+  else if (pre >= 75) angle = 'lead-safe'
+  else if (hv >= 1_000_000) angle = 'premium-finish'
+  else if (dens < 500) angle = 'large-lot'
+
+  return { era, tier, angle }
+}
+
+/** One sentence naming what actually drives painting work in this town. */
+function localReality(city: City): string {
+  const p = profileOf(city)
+  const pre = city.pre1980Percent
+  const dens = city.density
+  const hv = city.medianHomeValue
+
+  switch (p.angle) {
+    case 'multi-family':
+      return `${city.name} is dense — about ${dens?.toLocaleString('en-US')} people per square mile — and ${pre}% of its homes predate 1980, so most work here means multi-family buildings, tight street access, and federal RRP lead rules on nearly every surface we disturb.`
+    case 'lead-safe':
+      return `${pre}% of ${city.name}'s homes were built before 1980, one of the older housing stocks we work in. That makes EPA Lead-Safe RRP practice the default here, not an add-on: containment, HEPA cleanup and dust control on any surface we sand or scrape.`
+    case 'premium-finish':
+      return `With a median home value near $${Math.round((hv ?? 0) / 1000)}K, ${city.name} homeowners generally expect a finish that stands up to close inspection — sprayed cabinets, sharp cut lines, and colour matched properly rather than approximated.`
+    case 'large-lot':
+      return `${city.name} is rural by the numbers — roughly ${dens} people per square mile — which usually means bigger lots, longer runs of siding and trim, and exteriors more exposed to weather than a town-centre house.`
+    default:
+      return `${city.name} is a ${city.areaType} town of about ${city.population?.toLocaleString('en-US')}, with ${pre}% of its homes built before 1980 — a mix that calls for straightforward prep, sound priming and a paint that survives New England freeze-thaw.`
+  }
+}
+
 /** Great-circle miles between two towns, from their Census centroids. */
 function milesBetween(a: City, b: City): number | null {
   if (a.lat == null || a.lon == null || b.lat == null || b.lon == null) return null
@@ -240,25 +310,66 @@ function getCityIntro(city: City, serviceName: string): string {
     ? ` Per the US Census, ${pre80}% of ${city.name} homes were built before 1980 — many fall under the EPA's pre-1978 lead rule, and our Lead-Safe certified team handles them accordingly.`
     : ''
 
+  // Lead with what's actually true of THIS town, then the service specifics.
+  // `localReality` is driven entirely by Census numbers, so a dense pre-1980
+  // town and a rural new-build town open with different facts, not the same
+  // sentence wearing a different name.
+  const reality = localReality(city)
+  const p = profileOf(city)
+
   if (serviceName.includes('Interior')) {
-    return `As ${city.name}'s interior painting specialists, we understand the needs of ${city.areaType} ${archHomes} in ${regionName}${dist ? `, ${dist}` : ''}. Careful prep work and premium paints are what make an interior repaint last.${leadClause}`
+    const angle =
+      p.angle === 'multi-family'
+        ? `In occupied multi-family buildings we work room by room, seal the work area each night, and keep stairwells and shared halls clear.`
+        : p.angle === 'lead-safe'
+          ? `On interiors this old, the prep is the job: stabilise what's there, prime it properly, and contain the dust while doing it.`
+          : p.angle === 'premium-finish'
+            ? // localReality already covers the finish expectation for this
+              // profile — don't restate it. Add what it costs to deliver.
+              `In practice that's a slower job: more sanding between coats, and trim sprayed rather than brushed.`
+            : `Careful prep, sound priming and premium paint are what decide whether an interior repaint still looks right in year five.`
+    return `${reality} ${angle}${archHomes !== 'homes' ? ` We work on ${archHomes} across ${regionName}${dist ? `, ${dist}` : ''}.` : ` We work across ${regionName}${dist ? `, ${dist}` : ''}.`}`
   }
   if (serviceName.includes('Exterior')) {
-    return `${clim ? `${city.name}'s ${clim} creates specific challenges for exterior paint. ` : ''}Our team protects ${archHomes} throughout ${regionName}'s ${regionDesc}${dist ? `, ${dist}` : ''}. We use weather-tested coatings from Benjamin Moore and Sherwin-Williams that withstand Massachusetts seasons, from harsh winters to humid summers.`
+    const angle =
+      p.angle === 'lead-safe' || p.angle === 'multi-family'
+        ? `Exterior work on pre-1980 housing means RRP containment on every scrape and sand — ground cover, no open-flame stripping, and HEPA cleanup before we leave the site.`
+        : p.angle === 'large-lot'
+          ? `Bigger lots mean more siding and trim per house and more weather exposure, so we quote by measured surface rather than by a rule of thumb.`
+          : p.angle === 'premium-finish'
+            ? `At this end of the market the failure people notice is trim and detail, so that's where the prep hours go.`
+            : `We use weather-tested coatings from Benjamin Moore and Sherwin-Williams built for New England freeze-thaw.`
+    return `${reality} ${angle}${clim ? ` Locally that means ${clim}.` : ''}`
   }
   if (serviceName.includes('Cabinet')) {
-    return `Transform your ${city.name} kitchen without the cost of full replacement. Our cabinet refinishing specialists serve ${regionName}'s ${regionDesc}${arch2 ? `, including ${city.name}'s ${arch2} homes` : ''}. We deliver factory-smooth spray finishes using premium conversion varnishes that outlast standard cabinet paint by years.`
+    const angle =
+      p.tier === 'luxury' || p.tier === 'upper'
+        ? `At ${city.name} home values, refinishing has to read as a finish, not a paint job — HVLP spray, conversion varnish, and doors sprayed off-site in a booth.`
+        : `Refinishing keeps a sound ${city.name} kitchen out of a dumpster at a fraction of replacement, and sprayed properly it wears like a factory finish.`
+    return `${reality} ${angle}`
   }
   if (serviceName.includes('Deck')) {
-    return `${clim ? `${city.name}'s ${clim} takes a toll on outdoor wood surfaces. ` : ''}Our deck staining experts restore and protect decks throughout ${regionName}${dist ? `, ${dist}` : ''}, using penetrating stains designed for Massachusetts weather. Whether you have a pressure-treated deck, cedar, or composite, we bring back its beauty and extend its life.`
+    const angle =
+      p.angle === 'large-lot'
+        ? `Rural decks take more sun and more weather than town-centre ones, so we moisture-test the boards before any stain goes down.`
+        : `We use penetrating semi-transparent stains that wear rather than peel — the failure mode that makes film-forming products a mistake here.`
+    return `${reality} ${angle}${clim ? ` ${city.name}'s ${clim} is what drives the schedule.` : ''}`
   }
   if (serviceName.includes('Drywall')) {
-    return `${city.name}'s ${archHomes} need drywall repair for the usual reasons — age, settling, and water damage. Our experts handle everything from small patches to full room installations, matching existing textures.${pre80 ? ` With ${pre80}% of ${city.name} homes built before 1980 (US Census), we're trained in lead-safe practices for all repairs.` : ''}`
+    const angle =
+      p.era === 'historic' || p.era === 'older'
+        ? `In housing this age we're usually working next to original plaster, so the patch has to match a texture that was never machine-made — and pre-1980 walls get lead-safe containment as standard.`
+        : `Most repairs here are the ordinary kind: settling cracks, doorknob holes, and water damage caught after the leak is fixed.`
+    return `${reality} ${angle} We feather repairs well past the patch so the fix disappears into the wall.`
   }
   if (serviceName.includes('Remodeling')) {
-    return `Home remodeling in ${city.name} requires understanding local architecture and homeowner expectations. From kitchen renovations to bathroom updates, we transform ${archOf(city) ?? 'traditional'} homes throughout ${regionName}. Our full-service approach covers design consultation, permits, and expert execution with attention to every detail.`
+    const angle =
+      p.tier === 'luxury' || p.tier === 'upper'
+        ? `At this level the work is as much sequencing and finish carpentry as it is construction, and we run one schedule across every trade.`
+        : `We keep remodels tight and predictable: fixed scope, permits filed with ${city.name}, and trades sequenced so the room isn't out of service longer than it has to be.`
+    return `${reality} ${angle}`
   }
-  return `As ${city.name}'s full-service general contractor, we handle projects of all sizes throughout ${regionName}. From ${archOf(city) ?? 'residential'} home repairs to commercial work, our licensed team manages permits, coordinates subcontractors, and ensures quality results. ${business.yearsInBusiness}+ years serving Massachusetts families means you can trust us with your project.`
+  return `${reality} As a registered Massachusetts contractor${business.hicLicense ? ` (HIC #${business.hicLicense})` : ''}, we pull permits with the ${city.name} building department, coordinate licensed subs for specialty trades, and manage the schedule end to end.`
 }
 
 // Generate a second, data-rich paragraph using neighborhoods, county, zip codes
@@ -284,7 +395,7 @@ function getCityDetailsParagraph(city: City): string {
   }
   // Real Census facts — true for every city, and different for each one.
   const facts: string[] = []
-  if (city.population) facts.push(`a population of about ${city.population.toLocaleString()}`)
+  if (city.population) facts.push(`a population of about ${city.population.toLocaleString('en-US')}`)
   if (city.medianHomeValue) facts.push(`a median home value near $${Math.round(city.medianHomeValue / 1000)}K`)
   if (facts.length) {
     parts.push(
@@ -298,17 +409,25 @@ function getCityDetailsParagraph(city: City): string {
 // MetroWest market ranges — adjust to a single number/range based on the
 // service type. LLMs love quotable single-line facts.
 function getCityServicePriceRange(city: City, serviceName: string): { low: number; high: number; unit: string; note: string } {
-  // Scale slightly with median home value as a wealth proxy (higher-value
-  // areas tend to spec higher-end materials → higher quotes).
+  // Scale with the town's real median home value. Higher-value areas spec
+  // higher-end materials and more prep, and the range should move with that.
+  //
+  // The per-sqft note has to move too. It used to be a hardcoded string, so
+  // Worcester (median $271K) and Wellesley ($1.59M) published the identical
+  // "$3.50–$5.50 per sqft" — the multiplier never touched the sentence that
+  // people actually read.
   const hv = city.medianHomeValue || 600000
-  const wealthMult = hv > 800000 ? 1.15 : hv > 500000 ? 1.0 : 0.9
+  const wealthMult = hv >= 1_000_000 ? 1.3 : hv >= 800_000 ? 1.15 : hv >= 500_000 ? 1.0 : 0.9
   const round = (n: number) => Math.round(n / 50) * 50
+  const money = (n: number) => `$${(Math.round(n * 100) / 100).toFixed(2)}`
   if (serviceName.includes('Interior')) {
+    const sqftLow = 3.5 * wealthMult
+    const sqftHigh = 5.5 * wealthMult
     return {
       low: round(1500 * wealthMult),
       high: round(7000 * wealthMult),
       unit: 'per project',
-      note: '$3.50–$5.50 per sqft of wall area; a 12×14 bedroom averages $450–$700',
+      note: `${money(sqftLow)}–${money(sqftHigh)} per sqft of wall area; a 12×14 bedroom in ${city.name} averages $${round(450 * wealthMult)}–$${round(700 * wealthMult)}`,
     }
   }
   if (serviceName.includes('Exterior')) {
@@ -366,13 +485,39 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
   const pre80 = city.pre1980Percent ?? 60
   const phone = business.phone
   const county = city.county ? `${city.county} County` : 'the surrounding county'
+  const p = profileOf(city)
+  // Same numbers the price box on the page shows — one source, so the FAQ and
+  // the page can't drift apart and contradict each other.
+  const pr = getCityServicePriceRange(city, serviceName)
+
+  // One extra question chosen by what this town actually is. A dense pre-1980
+  // town gets asked about parking and multi-family; a rural one about drive
+  // time and well water. Both are real questions from those places.
+  const localQ: { question: string; answer: string } | null =
+    p.angle === 'multi-family'
+      ? {
+          question: `Do you work on multi-family and triple-deckers in ${city.name}?`,
+          answer: `Yes — at roughly ${city.density?.toLocaleString('en-US')} people per square mile, most ${city.name} work is multi-family. We coordinate access with owners and tenants, stage materials so shared halls and stairwells stay clear, seal the work area nightly, and handle street-parking permits where the city requires them.`,
+        }
+      : p.angle === 'large-lot'
+        ? {
+            question: `Do you travel out to ${city.name}?`,
+            answer: `Yes — ${city.name} is about ${Math.round(city.distanceMiles ?? 0)} miles from our Hudson shop and we're there regularly. Rural properties usually mean more surface per house and space to stage equipment, which we account for in the quote rather than charging a travel fee.`,
+          }
+        : p.angle === 'premium-finish'
+          ? {
+              question: `Can you match the finish level ${city.name} homes are built to?`,
+              answer: `That's the expectation here, and it's what the prep hours buy: sprayed cabinetry and trim rather than brushed, sharp cut lines, and colour matched under your own lighting. We'll bring drawdown samples to the walk-through so you approve the actual colour on your actual wall.`,
+            }
+          : null
 
   if (serviceName.includes('Interior')) {
     return [
       {
         question: `How much does interior painting cost in ${city.name}, MA?`,
-        answer: `Interior painting in ${city.name} typically runs $3.50–$5.50 per square foot of wall area, depending on prep needs, ceiling height, and finish quality. A standard 12×14 bedroom in ${city.name} averages $450–$700. Free, fixed-price estimates are available — call ${phone}.`,
+        answer: `Interior painting in ${city.name} typically runs ${pr.note}. Most whole projects land between $${pr.low.toLocaleString('en-US')} and $${pr.high.toLocaleString('en-US')}, depending on prep needs, ceiling height, and finish quality. Free, fixed-price estimates — call ${phone}.`,
       },
+      ...(localQ ? [localQ] : []),
       {
         question: `Are you EPA Lead-Safe certified for older ${city.name} homes?`,
         answer: `Yes. Per the US Census, ${pre80}% of ${city.name} homes were built before 1980, so a large share fall under the EPA's pre-1978 Lead-Safe Renovation, Repair and Painting (RRP) rule — which is required by law on disturbed painted surfaces in pre-1978 housing. Our team is fully certified and uses HEPA containment, dust monitoring, and proper waste disposal on every pre-1978 ${city.name} project.`,
@@ -666,7 +811,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
 
   return (
     <>
-      <ServiceSchema cityName={city.name} serviceName={service.name} />
+      <ServiceSchema cityName={city.name} serviceName={service.name} city={city} />
       <LocalBusinessSchema />
       <FAQSchema faqs={cityFAQs} />
       <BreadcrumbSchema
@@ -816,7 +961,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       {service.name} cost in {city.name}, MA (2026)
                     </h4>
                     <p className="text-base text-gray-800">
-                      <strong>${priceRange.low.toLocaleString()}–${priceRange.high.toLocaleString()}</strong>{' '}
+                      <strong>${priceRange.low.toLocaleString('en-US')}–${priceRange.high.toLocaleString('en-US')}</strong>{' '}
                       {priceRange.unit} — {priceRange.note}.
                     </p>
                     <p className="mt-1 text-xs text-gray-500">
@@ -1020,7 +1165,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Population</span>
-                        <span className="font-semibold">{population.toLocaleString()}</span>
+                        <span className="font-semibold">{population.toLocaleString('en-US')}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Median Home Value</span>
