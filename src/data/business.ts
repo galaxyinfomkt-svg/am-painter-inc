@@ -43,10 +43,20 @@ export const business = {
   // — the footer and schema render it conditionally.
   cslLicense: '' as string,
   languages: ['English', 'Portuguese'] as string[],
-  rating: 5.0,
-  // reviewCount intentionally removed — site no longer claims a specific
-  // count to avoid inflated/inaccurate numbers. Copy uses "5-Star Rated"
-  // or "Top-Rated on Google" instead.
+
+  // NO rating / reviewCount here, deliberately.
+  //
+  // The old `rating: 5.0` was unused code, and the comment beside it told
+  // future editors to write "5-Star Rated" / "Top-Rated on Google" in copy
+  // instead — i.e. to make the claim in prose to dodge the structured-data
+  // rules. That's backwards: the rule exists because the claim needs backing,
+  // not because of where it's written.
+  //
+  // As of 2026-07-16 the review widget reports 0.00 / 0 reviews, so there is
+  // nothing to back a rating claim anywhere on the site. Add these back only
+  // when (a) a real, current count exists, and (b) the reviews render as
+  // visible HTML on our own origin — not inside the third-party iframe, whose
+  // content Google does not attribute to us.
 
   // Hours
   hours: {

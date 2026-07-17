@@ -139,8 +139,7 @@ export default function AboutPage() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
                     `${business.yearsInBusiness}+ years of professional painting experience`,
-                    'Verified five-star Google reviews',
-                    `Registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` — HIC #${business.hicLicense}` : ''}`,
+                    `Registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` — HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov` : ''}`,
                     `${business.insurance} general liability insurance`,
                     'EPA Lead-Safe Certified Firm',
                     'Benjamin Moore and Sherwin-Williams certified',

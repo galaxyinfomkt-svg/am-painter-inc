@@ -1,5 +1,19 @@
 import Script from 'next/script'
+import { business } from '@/data/business'
 
+/**
+ * Reviews are rendered by a third-party iframe (reputationhub / LeadConnector).
+ *
+ * Two consequences worth knowing before editing this:
+ *
+ * 1. Cross-origin iframe content is NOT attributed to this page. Nothing in
+ *    here counts as content, and it can never produce a review rich result.
+ *    For that, reviews have to be rendered as HTML on our own origin.
+ * 2. The copy here must not assert what the widget contains — we don't control
+ *    it and can't see it at build time. As of 2026-07-16 the widget reports
+ *    0.00 / 0 reviews, so any "read our verified reviews" line would be a
+ *    promise the page doesn't keep.
+ */
 export function ReviewsWidget() {
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
@@ -12,7 +26,7 @@ export function ReviewsWidget() {
             What Our Clients Say
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Read verified reviews from our satisfied customers across Massachusetts
+            Worked with us? Leave a review — it helps other {business.address.stateFullName} homeowners choose with confidence.
           </p>
         </div>
         <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8">
@@ -23,7 +37,7 @@ export function ReviewsWidget() {
             scrolling="no"
             loading="lazy"
             style={{ minWidth: '100%', width: '100%', minHeight: '500px' }}
-            title="Verified customer reviews on Google"
+            title="Customer reviews for A&M Painter Inc"
           />
           <Script
             src="https://reputationhub.site/reputation/assets/review-widget.js"

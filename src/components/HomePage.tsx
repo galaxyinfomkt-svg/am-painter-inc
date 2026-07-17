@@ -127,15 +127,16 @@ export default function HomePage() {
                   </span>
                   <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 backdrop-blur-sm rounded-full text-sm text-white border border-white/20 font-medium">
                     <StarIcon className="h-4 w-4 text-yellow-400" />
-                    5-Star Rated
+                    EPA Lead-Safe Certified
                   </span>
                 </div>
 
-                {/* SEO-Optimized H1 Headline */}
+                {/* H1 — leads with the search intent people actually have
+                    ("house painters hudson ma"), not a superlative. */}
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight animate-fadeInUp animation-delay-100">
-                  <span className="text-primary">#1 Painting Contractor</span> in Massachusetts
+                  <span className="text-primary">House Painters</span> in Hudson, MA
                   <span className="block text-3xl sm:text-4xl lg:text-5xl mt-4 text-gray-200">
-                    Hudson, Marlborough, Worcester & Beyond
+                    Serving Marlborough, Worcester, Framingham & MetroWest
                   </span>
                 </h1>
 
@@ -320,10 +321,10 @@ export default function HomePage() {
                 Why Massachusetts Homeowners Choose Us
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
-                The Most Trusted <span className="text-primary">Painting Contractor</span> in Massachusetts
+                A Family-Owned <span className="text-primary">Painting Contractor</span> in MetroWest
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Since {business.foundedYear}, {business.name} has been the preferred choice for homeowners and businesses across Massachusetts seeking professional painting and remodeling services.
+                Since {business.foundedYear}, {business.name} has painted homes and businesses across Hudson, Marlborough, Worcester, Framingham and the surrounding MetroWest towns.
               </p>
             </div>
 
@@ -335,9 +336,11 @@ export default function HomePage() {
                   description: `Fully licensed Massachusetts painting contractor with ${business.insurance} liability coverage for your complete protection.`,
                 },
                 {
-                  icon: StarIcon,
-                  title: '5-Star Rated on Google',
-                  description: 'Consistently rated as the best painters in Massachusetts by satisfied homeowners across Hudson, Marlborough, and Worcester.',
+                  icon: ShieldCheckIcon,
+                  title: business.hicLicense ? `MA Registered — HIC #${business.hicLicense}` : 'MA Registered Contractor',
+                  description: business.hicLicense
+                    ? `Verify our Home Improvement Contractor registration yourself at contractorhub.mass.gov — most painters won't show you the number.`
+                    : 'Registered Massachusetts Home Improvement Contractor.',
                 },
                 {
                   icon: ClockIcon,
