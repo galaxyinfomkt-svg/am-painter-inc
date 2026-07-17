@@ -9,7 +9,7 @@ import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { AutoLinkText } from '@/components/AutoLinkText'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
-import { CITIES, REGION_DATA, City } from '@/data/cities'
+import { CITIES, REGION_DATA, City, CITY_DATA_UPDATED } from '@/data/cities'
 import { SERVICES } from '@/data/services'
 import { business, services } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, HomeIcon, MapPinIcon, ExclamationCircleIcon, CheckIcon, SunIcon, BuildingOfficeIcon } from '@heroicons/react/24/solid'
@@ -806,7 +806,10 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
   const cityDetails = getCityDetailsParagraph(city) // Second paragraph using neighborhoods/county/zip
   const cityFAQs = getCityServiceFAQs(city, service.name) // Drives FAQPage JSON-LD and visible Q&A
   const priceRange = getCityServicePriceRange(city, service.name) // Citable price fact for AEO/LLM citations
-  const lastUpdated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  // Real content date, not build time. See CITY_DATA_UPDATED in data/cities.ts.
+  const lastUpdated = new Date(CITY_DATA_UPDATED + 'T00:00:00Z').toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+  })
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
 
   return (
@@ -969,13 +972,29 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     </p>
                   </div>
 
-                  {/* Author byline + last-updated — E-E-A-T + freshness signal */}
+                  {/* Data provenance. This replaces a "Reviewed by {owner}"
+                      byline stamped with new Date(): it asserted the owner had
+                      personally reviewed all ~1,000 city pages, on whatever day
+                      the site last deployed. Both halves were false. What IS
+                      true and checkable is where the numbers come from and when
+                      they were pulled — so say that instead. */}
                   <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-gray-500">
                     <span>
-                      Reviewed by <a href="/about/" className="text-primary hover:underline font-semibold">{business.owner}</a>, {business.ownerTitle}
+                      {city.name} figures from the{' '}
+                      <a
+                        href="https://data.census.gov/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline font-semibold"
+                      >
+                        US Census
+                      </a>{' '}
+                      (ACS 2023 5-year)
                     </span>
                     <span aria-hidden="true">·</span>
-                    <span>Last updated: <time dateTime={new Date().toISOString().split('T')[0]}>{lastUpdated}</time></span>
+                    <span>
+                      Updated <time dateTime={CITY_DATA_UPDATED}>{lastUpdated}</time>
+                    </span>
                   </div>
                 </div>
 

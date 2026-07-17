@@ -2673,3 +2673,17 @@ export const CITIES: Record<string, City> = {
 
 export const getAllCitySlugs = () => Object.keys(CITIES);
 export const getCityBySlug = (slug: string) => CITIES[slug];
+
+/**
+ * When the Census figures in this file were last fetched (ISO date).
+ *
+ * This is what a city page's "last updated" must reflect: the date the page's
+ * content actually changed. It used to print `new Date()`, evaluated at build
+ * time — so every deploy claimed all ~1,000 city pages had been updated that
+ * day, and the sitemap said the same. A lastmod that moves on every build,
+ * whether or not anything changed, is a signal Google learns to ignore
+ * entirely — including on the pages where it's true.
+ *
+ * Bump this ONLY when the data is genuinely refetched (scripts/fetch-census.js).
+ */
+export const CITY_DATA_UPDATED = '2026-07-16'
