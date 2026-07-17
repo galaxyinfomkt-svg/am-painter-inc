@@ -1,5 +1,5 @@
 import { business, services, serviceAreas, getFullAddress } from '@/data/business'
-import { CITIES } from '@/data/cities'
+import { CITIES, City } from '@/data/cities'
 
 // =============================================================================
 // SCHEMA.ORG OTIMIZADO PARA:
@@ -11,7 +11,10 @@ import { CITIES } from '@/data/cities'
 
 // LocalBusiness Schema - MÁXIMO SEO + AI DISCOVERY
 export function LocalBusinessSchema() {
-  const allCities = Object.keys(CITIES)
+  // Real City records — not slugs. Emitting 'northborough' as a City name is
+  // wrong for any consumer of this schema, and slicing the list silently drops
+  // towns we actually serve.
+  const allCities = Object.values(CITIES)
   const today = new Date().toISOString().split('T')[0]
 
   const schema = {
@@ -179,9 +182,12 @@ export function LocalBusinessSchema() {
     // === ÁREA DE SERVIÇO (Importante para Local SEO) ===
     areaServed: [
       // Cidades principais
-      ...allCities.slice(0, 60).map(city => ({
+      ...allCities.map(c => ({
         '@type': 'City',
-        name: city,
+        name: c.name,
+        ...(c.lat != null && c.lon != null
+          ? { geo: { '@type': 'GeoCoordinates', latitude: c.lat, longitude: c.lon } }
+          : {}),
         containedInPlace: {
           '@type': 'State',
           name: 'Massachusetts',
@@ -564,9 +570,25 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
   )
 }
 
-// Service Schema for city pages
-export function ServiceSchema({ cityName, serviceName }: { cityName: string; serviceName: string }) {
-  const schema = {
+/**
+ * Service schema for a city page.
+ *
+ * `city` carries the town's real Census centroid, county and housing stats, so
+ * this block can describe THIS town rather than repeating the shop's details on
+ * all ~1,000 pages. Before, the only GeoCoordinates on a city page were
+ * Hudson's — identical everywhere — which told Google nothing about the page's
+ * actual subject.
+ */
+export function ServiceSchema({
+  cityName,
+  serviceName,
+  city,
+}: {
+  cityName: string
+  serviceName: string
+  city?: City
+}) {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${business.url}/${serviceName.toLowerCase().replace(/\s+/g, '-')}-${cityName.toLowerCase()}-ma/#service`,
@@ -588,14 +610,40 @@ export function ServiceSchema({ cityName, serviceName }: { cityName: string; ser
         addressCountry: 'US',
       },
     },
+    // The town this page is about, with its real Census centroid and county.
+    // This is the one part of a city page's schema that is genuinely unique to
+    // the page — 143 distinct coordinates rather than the shop's, repeated.
     areaServed: {
       '@type': 'City',
       name: cityName,
-      containedInPlace: {
-        '@type': 'State',
-        name: 'Massachusetts',
-        alternateName: 'MA',
-      },
+      ...(city?.lat != null && city?.lon != null
+        ? {
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: city.lat,
+              longitude: city.lon,
+            },
+          }
+        : {}),
+      ...(city?.county
+        ? {
+            containedInPlace: {
+              '@type': 'AdministrativeArea',
+              name: `${city.county} County`,
+              containedInPlace: {
+                '@type': 'State',
+                name: 'Massachusetts',
+                alternateName: 'MA',
+              },
+            },
+          }
+        : {
+            containedInPlace: {
+              '@type': 'State',
+              name: 'Massachusetts',
+              alternateName: 'MA',
+            },
+          }),
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',

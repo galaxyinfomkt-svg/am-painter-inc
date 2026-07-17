@@ -353,7 +353,7 @@ export function QuoteCalculator() {
           MetroWest Massachusetts market-range estimate
         </p>
         <p className="text-4xl md:text-5xl font-bold text-secondary mb-2">
-          ${estimate.low.toLocaleString()}<span className="text-primary mx-2">–</span>${estimate.high.toLocaleString()}
+          ${estimate.low.toLocaleString('en-US')}<span className="text-primary mx-2">–</span>${estimate.high.toLocaleString('en-US')}
         </p>
         <p className="text-sm text-gray-700 mb-4">
           Typical 2026 range for the inputs above across Hudson, Marlborough, Worcester, Framingham, and surrounding MetroWest cities.
