@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
@@ -308,7 +308,7 @@ export default function GeneralContractingPage() {
         <ServiceCityLinks serviceSlug="general-contracting" serviceName="General Contracting" />
 
         {/* Reviews */}
-        <ReviewsWidget />
+        <ReviewsSection />
 
         <ContactFormSection
           heading="Get Your Free General Contracting Estimate"

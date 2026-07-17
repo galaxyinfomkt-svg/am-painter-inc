@@ -100,7 +100,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.leadconnectorhq.com" />
         <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
-        <link rel="dns-prefetch" href="https://reputationhub.site" />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900">
         <a href="#main-content" className="skip-to-content">

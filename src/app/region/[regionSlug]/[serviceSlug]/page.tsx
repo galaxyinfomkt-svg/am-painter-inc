@@ -7,7 +7,7 @@ import { CITIES } from '@/data/cities'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ReviewsWidget } from '@/components/ReviewsWidget'
+import { ReviewsSection } from '@/components/ReviewsSection'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
@@ -519,7 +519,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
         </section>
 
         {/* Reviews Widget */}
-        <ReviewsWidget />
+        <ReviewsSection />
 
         {/* Frequently Asked Questions — region + service specific */}
         <section className="py-16 lg:py-20 bg-white">
