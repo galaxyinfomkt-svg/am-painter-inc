@@ -7,7 +7,7 @@ import { Footer } from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'SMS Terms & Opt-In Methods',
   description: `SMS Terms & Opt-In Methods for ${business.name}. A2P 10DLC compliance, opt-in/opt-out, message frequency, and how we handle your mobile number.`,
-  alternates: { canonical: `${business.url}/sms-terms` },
+  alternates: { canonical: `${business.url}/sms-terms/` },
   robots: { index: true, follow: true },
 }
 

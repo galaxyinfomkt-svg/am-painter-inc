@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/drywall-repair`,
+    canonical: `${business.url}/services/drywall-repair/`,
   },
   openGraph: {
     title: `Drywall Repair & Installation | ${business.name} | Massachusetts`,
     description: `Expert drywall repair and installation. Hole patching, water damage repair, texture matching. ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/drywall-repair`,
+    url: `${business.url}/services/drywall-repair/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

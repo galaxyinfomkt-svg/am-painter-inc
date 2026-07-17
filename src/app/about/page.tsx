@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: `About ${business.name} | Professional Painting Contractor Massachusetts`,
     description: `${business.yearsInBusiness}+ years serving Massachusetts with professional painting and remodeling services. Family-owned, licensed, insured, EPA Lead-Safe.`,
-    url: `${business.url}/about`,
+    url: `${business.url}/about/`,
     type: 'website',
   },
   alternates: {
-    canonical: `${business.url}/about`,
+    canonical: `${business.url}/about/`,
   },
 }
 
@@ -341,7 +341,7 @@ export default function AboutPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
-            '@id': `${business.url}/about`,
+            '@id': `${business.url}/about/`,
             mainEntity: {
               '@type': ['LocalBusiness', 'ProfessionalService', 'HousePainter', 'GeneralContractor'],
               '@id': `${business.url}/#business`,

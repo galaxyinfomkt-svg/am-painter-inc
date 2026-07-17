@@ -781,7 +781,10 @@ export function HomePageSchema() {
       <WebSiteSchema />
       <WebPageSchema
         title={`${business.name} - Professional Painting Contractor Massachusetts`}
-        description={`Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Top-rated on Google.`}
+        // No "Top-rated on Google" — the business has no verifiable reviews to
+        // back it, and this description is exactly the kind of claim Google
+        // checks against reality. Kept to what is true and provable.
+        description={`Professional painting contractor serving Massachusetts since ${business.foundedYear}. Interior & exterior painting, cabinet refinishing, deck staining, home remodeling. Licensed, insured, EPA Lead-Safe certified.`}
         url={business.url}
       />
     </>
@@ -822,15 +825,19 @@ export function ServicePageSchema({
   serviceSlug: string
   faqs?: { question: string; answer: string }[]
 }) {
-  const url = `${business.url}/services/${serviceSlug}`
+  // Trailing slash to match the page's canonical and the sitemap (trailingSlash:true
+  // means the non-slash URL 301s, so it must not be the canonical/breadcrumb target).
+  const url = `${business.url}/services/${serviceSlug}/`
 
   return (
     <>
       <LocalBusinessSchema />
+      {/* No 'Services' crumb: there is no /services index route, so that item
+          pointed at a 404 and disagreed with the visible breadcrumb, which goes
+          Home → {Service}. Re-add here only alongside a real /services page. */}
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: business.url },
-          { name: 'Services', url: `${business.url}/services` },
           { name: serviceName, url: url },
         ]}
       />

@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     business.name,
   ],
   alternates: {
-    canonical: `${business.url}/services/cabinet-refinishing`,
+    canonical: `${business.url}/services/cabinet-refinishing/`,
   },
   openGraph: {
     title: `Cabinet Painting & Refinishing | ${business.name} | Massachusetts`,
     description: `Transform your kitchen with professional cabinet refinishing. Factory-smooth finish at 1/3 the cost of replacement. ${business.yearsInBusiness}+ years experience. Free estimates!`,
-    url: `${business.url}/services/cabinet-refinishing`,
+    url: `${business.url}/services/cabinet-refinishing/`,
     siteName: business.name,
     type: 'website',
     locale: 'en_US',

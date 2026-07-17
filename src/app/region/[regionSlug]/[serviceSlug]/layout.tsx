@@ -148,7 +148,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     openGraph: {
       title,
       description,
-      url: `${business.url}/region/${regionSlug}/${serviceSlug}`,
+      url: `${business.url}/region/${regionSlug}/${serviceSlug}/`,
       type: 'website',
       images: [
         {
@@ -166,7 +166,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       images: [business.images.og],
     },
     alternates: {
-      canonical: `${business.url}/region/${regionSlug}/${serviceSlug}`,
+      canonical: `${business.url}/region/${regionSlug}/${serviceSlug}/`,
     },
   }
 }

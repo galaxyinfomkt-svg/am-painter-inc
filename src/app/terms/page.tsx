@@ -7,7 +7,7 @@ import { Footer } from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Terms and Conditions',
   description: `Terms and Conditions for ${business.name}. Please read these Terms carefully before using our website, chat widget, SMS, or hiring our painting and remodeling services.`,
-  alternates: { canonical: `${business.url}/terms` },
+  alternates: { canonical: `${business.url}/terms/` },
   robots: { index: true, follow: true },
 }
 

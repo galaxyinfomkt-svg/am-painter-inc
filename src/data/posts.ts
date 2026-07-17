@@ -29,6 +29,14 @@ export interface BlogPost {
   faqs?: BlogPostFAQ[]
   /** Optional list of related city slugs that get a "{Service} in {City}" link block at the end */
   relatedCities?: string[]
+  /**
+   * Which service the related-city links should point at, e.g. 'exterior-painting'.
+   * Must match a key in data/services.ts. Defaults to 'interior-painting'.
+   *
+   * Before this existed, every post linked to /interior-painting-{city}-ma/ — so the
+   * cabinet and exterior posts sent their link equity to topically unrelated pages.
+   */
+  relatedService?: string
 }
 
 export const POSTS: BlogPost[] = [
@@ -227,6 +235,7 @@ export const POSTS: BlogPost[] = [
       },
     ],
     relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'shrewsbury'],
+    relatedService: 'exterior-painting',
   },
   {
     slug: 'cabinet-refinishing-vs-replacement-hudson-ma-cost',
@@ -356,6 +365,7 @@ export const POSTS: BlogPost[] = [
       },
     ],
     relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'sudbury', 'natick'],
+    relatedService: 'cabinet-refinishing',
   },
   {
     slug: 'interior-painting-cost-metrowest-massachusetts-2026',
@@ -452,7 +462,7 @@ export const POSTS: BlogPost[] = [
   <li>Confirm the home age (for lead-safe scope)</li>
   <li>Decide on ceilings vs walls-only before the walk-through</li>
 </ul>
-<p>Free walk-through estimates from A&M Painter Inc are available within 24 hours across all 60+ MetroWest cities — submit a request or call <a href="tel:7744161275">(774) 416-1275</a>.</p>
+<p>Free walk-through estimates from A&M Painter Inc are available within 24 hours across all 140+ MetroWest cities — submit a request or call <a href="tel:7744161275">(774) 416-1275</a>.</p>
 `,
     faqs: [
       {

@@ -11,7 +11,7 @@ import { HomePageSchema, FAQSchema, HowToSchema } from '@/components/Schema'
 import { HeroVideoSection } from '@/components/YouTubeVideo'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { Lightbox } from '@/components/Lightbox'
-import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon, PlayIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, SparklesIcon, PlayIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 // All project photos organized
 const allProjectPhotos = [
@@ -30,25 +30,13 @@ const allProjectPhotos = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7e03e9d314ca71656.webp', alt: 'General contracting work', category: 'Contracting' },
 ]
 
-// UNVERIFIED — provenance unknown. These four have been on the homepage since
-// before the current work, but the business's review system reports 0 reviews
-// (checked 2026-07-16), so there is no record any of them came from a real
-// customer. Left in place rather than deleted: removing genuine testimonials
-// would be as wrong as keeping invented ones, and only the owner can say which
-// these are.
-//
-// Deliberately NOT migrated into data/reviews.ts, and deliberately NOT emitted
-// as Review structured data — telling Google these are real reviews is a claim
-// nobody can currently stand behind.
-//
-// Owner: if these are real, move them to data/reviews.ts with a source and they
-// become rich-result eligible. If they are not, delete this block.
-const testimonials = [
-  { quote: 'A&M Painter did an amazing job on our exterior. Professional, on-time, and the results are stunning. Highly recommend!', name: 'Sarah M.', location: 'Hudson, MA', rating: 5, service: 'Exterior Painting' },
-  { quote: 'Our kitchen cabinets look factory-new. Clear communication and spotless cleanup. Will use again!', name: 'John D.', location: 'Marlborough, MA', rating: 5, service: 'Cabinet Refinishing' },
-  { quote: 'From start to finish, the team was excellent. Great prep work and beautiful finish. Very impressed.', name: 'Maria L.', location: 'Framingham, MA', rating: 5, service: 'Interior Painting' },
-  { quote: 'They transformed our whole house interior in just 4 days. Clean, professional, and the colors are perfect!', name: 'Robert K.', location: 'Worcester, MA', rating: 5, service: 'Interior Painting' },
-]
+// Testimonials array removed 2026-07-17. The four quotes here (Sarah M., John D.,
+// Maria L., Robert K.) had no verifiable source and the business reports 0 real
+// reviews — showing invented testimonials is worse for trust/E-E-A-T than showing
+// none, and it contradicted the deliberate removal of every other rating claim.
+// The homepage now shows an honest "be the first to review" prompt instead.
+// When real reviews exist, add them to data/reviews.ts (with source) so they
+// render verbatim AND become Review rich-result eligible.
 
 const faqList = [
   { question: 'Are you licensed and insured in Massachusetts?', answer: 'Yes. We are fully licensed, carry $2,000,000 in liability coverage, and follow EPA lead-safe practices on every project.' },
@@ -60,7 +48,6 @@ const faqList = [
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [activePhoto, setActivePhoto] = useState<{ src: string; alt: string; category: string } | null>(null)
 
   const categories = ['All', 'Interior', 'Exterior', 'Cabinet', 'Deck', 'Remodeling']
@@ -198,7 +185,10 @@ export default function HomePage() {
                 <div className="flex items-center gap-8 pt-8 border-t border-white/10 animate-fadeInUp animation-delay-500">
                   {[
                     { value: `${business.yearsInBusiness}+`, label: 'Years' },
-                    { value: '5.0', label: 'Google Rating' },
+                    // Was a hardcoded '5.0 Google Rating' — the business has 0
+                    // verifiable reviews, so that was an unsubstantiated claim.
+                    // Replaced with a fact we can stand behind: the liability cover.
+                    { value: '$2M', label: 'Insured' },
                     { value: `${Object.keys(CITIES).length}+`, label: 'Cities' },
                   ].map((stat, idx) => (
                     <div key={stat.label} className="flex items-center gap-4">
@@ -575,102 +565,46 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Testimonials - Carousel Style */}
+        {/* Reviews — honest state. The business has 0 verifiable reviews, so
+            rather than invent testimonials we invite real ones. Swap this whole
+            section for a real testimonial display once data/reviews.ts is filled. */}
         <section className="below-fold py-24 lg:py-32 bg-primary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
-                <StarIcon className="h-4 w-4" />
-                Customer Reviews - Massachusetts Painting
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                What Massachusetts Homeowners Say
-              </h2>
-            </div>
-
-            {/* Testimonial Carousel */}
-            <div className="relative max-w-4xl mx-auto">
-              <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
-                <div className="flex gap-1 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <StarIcon key={i} className="h-6 w-6 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-2xl md:text-3xl text-secondary font-medium mb-8 leading-relaxed">
-                  &quot;{testimonials[currentTestimonial].quote}&quot;
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-primary">{testimonials[currentTestimonial].name[0]}</span>
-                    </div>
-                    <div>
-                      <p className="font-bold text-secondary text-lg">{testimonials[currentTestimonial].name}</p>
-                      <p className="text-gray-500">{testimonials[currentTestimonial].location}</p>
-                    </div>
-                  </div>
-                  <span className="hidden sm:inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm">
-                    {testimonials[currentTestimonial].service}
-                  </span>
-                </div>
-              </div>
-
-              {/* Navigation */}
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <button
-                  type="button"
-                  aria-label="Previous testimonial"
-                  onClick={() => setCurrentTestimonial(prev => prev === 0 ? testimonials.length - 1 : prev - 1)}
-                  className="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white hover:text-primary transition"
-                >
-                  <ChevronLeftIcon className="h-6 w-6" />
-                </button>
-                <div className="flex gap-2">
-                  {testimonials.map((_, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      aria-label={`Go to testimonial ${idx + 1}`}
-                      onClick={() => setCurrentTestimonial(idx)}
-                      className="inline-flex items-center justify-center w-6 h-6 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary rounded-full"
-                    >
-                      <span className={`block rounded-full transition-all ${idx === currentTestimonial ? 'w-8 h-3 bg-white' : 'w-3 h-3 bg-white/40 hover:bg-white/60'}`} />
-                    </button>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  aria-label="Next testimonial"
-                  onClick={() => setCurrentTestimonial(prev => prev === testimonials.length - 1 ? 0 : prev + 1)}
-                  className="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white hover:text-primary transition"
-                >
-                  <ChevronRightIcon className="h-6 w-6" />
-                </button>
-              </div>
-
-              {/* Review CTA lives here, in the homepage's one review section.
-                  ReviewsSection is not rendered on this page — it would put a
-                  second "Customer Reviews" heading directly below this one. */}
-              <div className="mt-12 text-center">
-                <a
-                  href={business.googleWriteReviewUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:bg-gray-100 transition"
-                >
-                  <StarIcon className="h-5 w-5" />
-                  Leave us a review on Google
-                </a>
-                <p className="mt-4 text-sm text-white/80">
-                  We&apos;re a family business — word of mouth is how we grow.
-                </p>
-              </div>
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
+              <StarIcon className="h-4 w-4" />
+              Reviews
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Worked with us? Tell your neighbors.
+            </h2>
+            <p className="text-lg text-white/85 mb-10 leading-relaxed">
+              We&apos;re a family-owned Hudson business, licensed and $2M insured. The best way
+              to help other Massachusetts homeowners find honest work is an honest Google review.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href={business.googleReviewUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-secondary text-white font-bold rounded-full shadow-lg hover:bg-secondary/90 transition"
+              >
+                <StarIcon className="h-5 w-5 text-yellow-400" />
+                See our Google profile
+              </a>
+              <a
+                href={business.googleWriteReviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:bg-gray-100 transition"
+              >
+                <StarIcon className="h-5 w-5" />
+                Leave a review on Google
+              </a>
             </div>
           </div>
         </section>
 
-        {/* Reviews Widget */}
-  
+
         {/* Contact Section */}
         <section id="contact" className="below-fold py-24 lg:py-32 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
