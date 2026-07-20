@@ -873,11 +873,18 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
         {/* Hero Section */}
         <section className="relative bg-black py-20 lg:py-28 overflow-hidden">
           <div className="absolute inset-0">
+            {/* sizes + fetchPriority + quality to match the homepage hero. This
+                is the LCP image on all 1,001 city pages and was the only hero
+                without them: with no `sizes`, next/image assumes 100vw and can
+                serve a desktop-width file to a phone. */}
             <Image
               src={business.images.heroBackground}
               alt={`${service.name} in ${city.name}, MA`}
               fill
               priority
+              fetchPriority="high"
+              sizes="100vw"
+              quality={70}
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
