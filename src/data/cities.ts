@@ -29,6 +29,21 @@ export interface City {
    * pre-1978 rule — it must not present this number AS the pre-1978 share.
    */
   pre1980Percent?: number;
+  /**
+   * Median year the town's housing was built (ACS B25035). One concrete year,
+   * more precise than the pre-1980 bucket above.
+   */
+  medianYearBuilt?: number;
+  /** Share of occupied units that are owner-occupied (ACS B25003). */
+  ownerOccupiedPercent?: number;
+  /** Share of housing in 1-unit structures, detached or attached (ACS B25024). */
+  singleFamilyPercent?: number;
+  /**
+   * Share of housing in 2-4 unit structures (ACS B25024) — the two- and
+   * three-decker band, deliberately excluding large complexes this business
+   * does not bid on.
+   */
+  smallMultiFamilyPercent?: number;
   county?: string;
   zipCodes?: string[];
   /** Population per square mile of land area. Drives `areaType`. */
