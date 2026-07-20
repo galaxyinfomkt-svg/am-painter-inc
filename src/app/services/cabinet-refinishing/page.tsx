@@ -176,7 +176,7 @@ export default function CabinetRefinishingPage() {
                 New Kitchen Look. Same Great Cabinets.
               </h2>
               <p className="text-xl opacity-90 max-w-2xl mx-auto">
-                Why spend $30,000+ on new cabinets when refinishing delivers stunning results for $8,000-$12,000?
+                Replacing a kitchen typically runs several times what refinishing the same cabinets costs — for a result that, done properly, is hard to tell from new.
                 Keep your solid wood cabinets and transform only what you see.
               </p>
             </div>

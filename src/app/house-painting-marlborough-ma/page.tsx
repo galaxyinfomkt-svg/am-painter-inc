@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: `How much does it cost to paint a house in ${cityName}, MA?`,
-    answer: `House painting costs in ${cityName} vary based on home size, condition, and paint quality. Interior painting typically ranges from $2-$6 per square foot, while exterior painting ranges from $3-$7 per square foot. For a typical ${cityName} home, expect to invest $3,000-$8,000 for interior and $4,000-$12,000 for exterior. Contact ${business.name} at ${business.phone} for a free, detailed estimate.`,
+    answer: `As a market reference — not our price — house painting around ${cityName} generally runs $2-$6 per square foot interior and $3-$7 exterior, which puts a typical home somewhere around $3,000-$8,000 interior and $4,000-$12,000 exterior. Those are figures for the area, published so you have a reference point before talking to anyone. ${business.name} does not price from a table: we quote each house in writing after a free walkthrough, and yours may land outside those ranges either way. Call ${business.phone}.`,
   },
   {
     question: `Why choose ${business.name} for house painting in ${cityName}?`,
