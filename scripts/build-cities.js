@@ -106,6 +106,16 @@ const entries = picked.map((c) => {
   ]
   if (c.medianIncome) lines.push(`    medianIncome: ${c.medianIncome},`)
   lines.push(`    pre1980Percent: ${c.pre1980Percent},`)
+  // Census-sourced like everything above — emitted only when the API returned
+  // a value, so a town with a suppressed estimate omits the field rather than
+  // printing a zero that reads as fact.
+  if (c.medianYearBuilt) lines.push(`    medianYearBuilt: ${c.medianYearBuilt},`)
+  if (c.ownerOccupiedPercent != null)
+    lines.push(`    ownerOccupiedPercent: ${c.ownerOccupiedPercent},`)
+  if (c.singleFamilyPercent != null)
+    lines.push(`    singleFamilyPercent: ${c.singleFamilyPercent},`)
+  if (c.smallMultiFamilyPercent != null)
+    lines.push(`    smallMultiFamilyPercent: ${c.smallMultiFamilyPercent},`)
   if (c.county) lines.push(`    county: ${q(c.county)},`)
   if (local.zipCodes?.length) lines.push(`    zipCodes: ${arr(local.zipCodes)},`)
   lines.push(`    density: ${c.density},`)
@@ -133,12 +143,37 @@ const entries = picked.map((c) => {
 // Key must equal slug — URLs are built from the key. Use the slug verbatim.
 const entriesFixed = picked.map((c, i) => entries[i].replace(/^ {2}[a-z0-9_]+:/, `  '${c.slug}':`))
 
+// The tail below is regenerated too, so CITY_DATA_UPDATED must be re-emitted
+// here. It was previously dropped on every run — this script replaces
+// everything from `export const CITIES` onward, and the constant lives after
+// it, so regenerating deleted an export three modules import. The build caught
+// it, but only after the data had already been rewritten.
+//
+// The date is stamped from the run itself: reaching this line means the Census
+// data really was refetched, which is the one condition the constant's own
+// docblock says may bump it.
+const today = new Date().toISOString().slice(0, 10)
+
 const generated = `export const CITIES: Record<string, City> = {
 ${entriesFixed.join('\n\n')}
 };
 
 export const getAllCitySlugs = () => Object.keys(CITIES);
 export const getCityBySlug = (slug: string) => CITIES[slug];
+
+/**
+ * When the Census figures in this file were last fetched (ISO date).
+ *
+ * This is what a city page's "last updated" must reflect: the date the page's
+ * content actually changed. It used to print \`new Date()\`, evaluated at build
+ * time — so every deploy claimed all ~1,000 city pages had been updated that
+ * day, and the sitemap said the same. A lastmod that moves on every build,
+ * whether or not anything changed, is a signal Google learns to ignore
+ * entirely — including on the pages where it's true.
+ *
+ * Written by scripts/build-cities.js on a genuine refetch. Do not hand-edit.
+ */
+export const CITY_DATA_UPDATED = '${today}'
 `
 
 const head = src.slice(0, src.indexOf('export const CITIES'))

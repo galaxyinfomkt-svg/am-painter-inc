@@ -1074,10 +1074,28 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                         </dd>
                       </div>
                     )}
+                    {city.medianYearBuilt != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Median year built</dt>
+                        <dd className="font-bold text-secondary">{city.medianYearBuilt}</dd>
+                      </div>
+                    )}
                     {city.pre1980Percent != null && (
                       <div>
                         <dt className="text-xs uppercase tracking-wider text-gray-500">Built before 1980</dt>
                         <dd className="font-bold text-secondary">{city.pre1980Percent}%</dd>
+                      </div>
+                    )}
+                    {city.singleFamilyPercent != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Single-family homes</dt>
+                        <dd className="font-bold text-secondary">{city.singleFamilyPercent}%</dd>
+                      </div>
+                    )}
+                    {city.ownerOccupiedPercent != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Owner-occupied</dt>
+                        <dd className="font-bold text-secondary">{city.ownerOccupiedPercent}%</dd>
                       </div>
                     )}
                     {city.density != null && (
@@ -1124,9 +1142,30 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     )}
                     {city.pre1980Percent != null && (
                       <p>
+                        {city.medianYearBuilt != null
+                          ? `The median ${city.name} home was built in ${city.medianYearBuilt}, and ${city.pre1980Percent}% of the town's housing predates 1980. `
+                          : `${city.pre1980Percent}% of ${city.name}'s housing predates 1980. `}
                         {city.pre1980Percent >= 60
-                          ? `With ${city.pre1980Percent}% of ${city.name}'s housing built before 1980, most jobs here involve a home old enough to fall under the EPA's pre-1978 lead rule. We are a Lead-Safe certified firm, so containment and HEPA cleanup are standard on any surface we sand or scrape — not a line item added later.`
-                          : `Only ${city.pre1980Percent}% of ${city.name}'s housing predates 1980, so a good share of the homes here are newer builds. That usually means sound substrate, less stripping, and a job that turns on finish quality rather than restoration.`}
+                          ? `Most jobs here involve a home old enough to fall under the EPA's pre-1978 lead rule. We are a Lead-Safe certified firm, so containment and HEPA cleanup are standard on any surface we sand or scrape — not a line item added later.`
+                          : `That means a good share of newer builds: sound substrate, less stripping, and a job that turns on finish quality rather than restoration.`}
+                      </p>
+                    )}
+
+                    {/* Structure mix — the sharpest difference between towns.
+                        A town that is 91% detached houses and one that is a
+                        third two- and three-deckers are different trades:
+                        different access, staging, and who signs the contract. */}
+                    {city.singleFamilyPercent != null && (
+                      <p>
+                        {city.smallMultiFamilyPercent != null && city.smallMultiFamilyPercent >= 20
+                          ? `${city.smallMultiFamilyPercent}% of ${city.name}'s housing sits in two- to four-unit buildings — the two- and three-deckers this part of Massachusetts is built from. That work means staging off porches and back stairs, coordinating with more than one household, and prepping clapboard that has been repainted many times over.`
+                          : city.singleFamilyPercent >= 80
+                            ? `${city.singleFamilyPercent}% of ${city.name}'s housing is single-family, so nearly every job is a whole-house exterior or a room-by-room interior for one owner — one point of contact, and a schedule we can hold to.`
+                            : `${city.singleFamilyPercent}% of ${city.name}'s housing is single-family, with the balance in smaller multi-unit buildings — a mix that means we size crews per property rather than assuming one pattern.`}
+                        {city.ownerOccupiedPercent != null &&
+                          (city.ownerOccupiedPercent >= 70
+                            ? ` At ${city.ownerOccupiedPercent}% owner-occupied, most of the homes we quote here are lived in by the people paying for the work — they see the prep, so we do it properly.`
+                            : ` At ${city.ownerOccupiedPercent}% owner-occupied, a real share of ${city.name} property is tenanted, so we are used to landlord timelines, turnover windows, and quoting work that has to last between tenants.`)}
                       </p>
                     )}
                     {nearbyCities.length > 0 && (
