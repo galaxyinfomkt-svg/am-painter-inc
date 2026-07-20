@@ -6,6 +6,7 @@ import { CityPageSchema, FAQSchema } from '@/components/Schema'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ReviewsSection } from '@/components/ReviewsSection'
+import { InlineCTA } from '@/components/InlineCTA'
 import { ContactFormSection } from '@/components/ContactFormSection'
 
 const city = cityData['marlborough']
@@ -331,6 +332,7 @@ export default function MarlboroughPage() {
       </section>
 
       {/* Reviews Widget */}
+      <InlineCTA />
       <ReviewsSection />
 
       {/* Mobile Floating CTA */}
