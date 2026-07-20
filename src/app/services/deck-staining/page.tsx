@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -114,10 +115,12 @@ export default function DeckStainingPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Deck Staining</span>
                 </nav>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Deck Staining & <span className="text-primary">Restoration</span>
+                  Deck Staining & <span className="text-primary">Restoration</span> in Massachusetts
                 </h1>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Restore your deck to its former glory. Professional cleaning, repairs, and premium stains that protect against harsh New England weather - making your outdoor space beautiful again.
@@ -304,6 +307,7 @@ export default function DeckStainingPage() {
         <ServiceCityLinks serviceSlug="deck-staining" serviceName="Deck Staining" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="deck-staining" />
         <ReviewsSection />
 
         <ContactFormSection

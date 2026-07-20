@@ -82,6 +82,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'cabinet-refinishing': cabinetImage,
     'deck-staining': deckImage,
   }
+  // Services index — the hub that links all 7 service pages
+  const servicesIndex: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/services/`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+  ]
+
   const servicePages: MetadataRoute.Sitemap = Object.keys(SERVICES).map((serviceSlug) => ({
     url: `${baseUrl}/services/${serviceSlug}/`,
     lastModified: currentDate,
@@ -162,6 +172,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...toolPages,
     ...blogPages,
     ...legalPages,
+    ...servicesIndex,
     ...servicePages,
     ...regionalServicePages,
     ...housePaintingPages,

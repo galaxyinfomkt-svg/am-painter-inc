@@ -832,12 +832,12 @@ export function ServicePageSchema({
   return (
     <>
       <LocalBusinessSchema />
-      {/* No 'Services' crumb: there is no /services index route, so that item
-          pointed at a 404 and disagreed with the visible breadcrumb, which goes
-          Home → {Service}. Re-add here only alongside a real /services page. */}
+      {/* The 'Services' crumb is back: /services/ now exists as a real route
+          (src/app/services/page.tsx), so this no longer points at a 404. */}
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: business.url },
+          { name: 'Services', url: `${business.url}/services/` },
           { name: serviceName, url: url },
         ]}
       />

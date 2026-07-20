@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -114,10 +115,12 @@ export default function DrywallRepairPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Drywall Repair</span>
                 </nav>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Drywall Repair & <span className="text-primary">Installation</span>
+                  Drywall Repair & <span className="text-primary">Installation</span> in Massachusetts
                 </h1>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Seamless drywall repair that disappears completely. From small holes to water damage, we restore your walls to perfection - ready for paint with a flawless finish.
@@ -301,6 +304,7 @@ export default function DrywallRepairPage() {
         <ServiceCityLinks serviceSlug="drywall-repair" serviceName="Drywall Repair" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="drywall-repair" />
         <ReviewsSection />
 
         <ContactFormSection

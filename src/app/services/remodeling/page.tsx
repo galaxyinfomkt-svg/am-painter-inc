@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -114,10 +115,12 @@ export default function RemodelingPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Home Remodeling</span>
                 </nav>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Home Remodeling <span className="text-primary">Services</span>
+                  Home Remodeling <span className="text-primary">Services</span> in Massachusetts
                 </h1>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Transform your home with expert remodeling. Kitchen, bath, and whole-home renovations - designed around your life, built to last, delivered on time and on budget.
@@ -304,6 +307,7 @@ export default function RemodelingPage() {
         <ServiceCityLinks serviceSlug="remodeling" serviceName="Home Remodeling" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="remodeling" />
         <ReviewsSection />
 
         <ContactFormSection

@@ -135,7 +135,7 @@ export function Header({ cityName }: HeaderProps) {
                     {services.map((service, index) => (
                       <Link
                         key={service.id}
-                        href={`/services/${service.id}`}
+                        href={`/services/${service.id}/`}
                         className={`flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-50 transition group`}
                       >
                         <span className={`flex items-center justify-center w-10 h-10 rounded-xl ${index === 0 ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 group-hover:bg-primary group-hover:text-white'} transition`}>
@@ -222,7 +222,7 @@ export function Header({ cityName }: HeaderProps) {
                 {services.map((service, index) => (
                   <Link
                     key={service.id}
-                    href={`/services/${service.id}`}
+                    href={`/services/${service.id}/`}
                     className="flex items-center gap-3 text-white py-3 px-4 rounded-xl hover:bg-white/5 hover:text-primary transition"
                     onClick={() => setMobileMenuOpen(false)}
                   >

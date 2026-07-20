@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, HomeIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -114,10 +115,12 @@ export default function ExteriorPaintingPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Exterior Painting</span>
                 </nav>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Exterior Painting <span className="text-primary">Services</span>
+                  Exterior Painting <span className="text-primary">Services</span> in Massachusetts
                 </h1>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Protect and beautify your home with professional exterior painting that withstands harsh New England weather. Premium paints, thorough preparation, and lasting results - backed by {business.yearsInBusiness}+ years of experience.
@@ -309,6 +312,7 @@ export default function ExteriorPaintingPage() {
         <ServiceCityLinks serviceSlug="exterior-painting" serviceName="Exterior Painting" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="exterior-painting" />
         <ReviewsSection />
 
         <ContactFormSection
