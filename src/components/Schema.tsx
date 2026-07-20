@@ -182,9 +182,18 @@ export function LocalBusinessSchema() {
     paymentAccepted: ['Cash', 'Check', 'Credit Card', 'Debit Card', 'Financing Available'],
 
     // === ÁREA DE SERVIÇO (Importante para Local SEO) ===
+    //
+    // Named towns are capped. This block used to emit all 143 cities — each with
+    // its own GeoCoordinates and containedInPlace State — on every one of the
+    // ~1,058 pages, which came to ~40 KB of JSON-LD, 12-17% of each page's HTML.
+    // On a site whose traffic is mostly mobile that is real weight, and it buys
+    // nothing: listing 143 towns is not a ranking signal, and the GeoCircle below
+    // already states the actual coverage (50-mile radius from the shop) in a form
+    // Google can evaluate. City pages additionally carry a ServiceSchema naming
+    // their own town, which is where town-level precision belongs.
     areaServed: [
-      // Cidades principais
-      ...allCities.map(c => ({
+      // The towns the business actually works in most, by distance from the shop.
+      ...allCities.slice(0, 12).map(c => ({
         '@type': 'City',
         name: c.name,
         ...(c.lat != null && c.lon != null

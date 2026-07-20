@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ContactFormSection } from '@/components/ContactFormSection'
+import { InlineCTA } from '@/components/InlineCTA'
 import { BreadcrumbSchema, FAQSchema, OwnerPersonSchema } from '@/components/Schema'
 import { POSTS, getPostBySlug } from '@/data/posts'
 import { CITIES } from '@/data/cities'
@@ -166,10 +167,35 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Body */}
         <section className="py-16 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <article
-              className="article-body"
-              dangerouslySetInnerHTML={{ __html: post.bodyHtml }}
-            />
+            {/* Split the article at a heading near its midpoint so a reader
+                partway through gets a way to act without scrolling to either
+                end. Falls back to rendering the body whole when a post has too
+                few headings to split cleanly. */}
+            {(() => {
+              const parts = post.bodyHtml.split(/(?=<h2)/)
+              if (parts.length < 4) {
+                return (
+                  <article
+                    className="article-body"
+                    dangerouslySetInnerHTML={{ __html: post.bodyHtml }}
+                  />
+                )
+              }
+              const at = Math.ceil(parts.length / 2)
+              return (
+                <>
+                  <article
+                    className="article-body"
+                    dangerouslySetInnerHTML={{ __html: parts.slice(0, at).join('') }}
+                  />
+                  <InlineCTA />
+                  <article
+                    className="article-body"
+                    dangerouslySetInnerHTML={{ __html: parts.slice(at).join('') }}
+                  />
+                </>
+              )
+            })()}
 
             {post.updatedAt && post.updatedAt !== post.publishedAt && (
               <p className="mt-10 text-sm text-gray-500">
