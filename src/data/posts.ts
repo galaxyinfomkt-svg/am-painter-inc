@@ -589,6 +589,317 @@ export const POSTS: BlogPost[] = [
     ],
     relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'natick', 'concord'],
   },
+
+  {
+    slug: 'how-long-does-exterior-paint-last-massachusetts',
+    title: 'How Long Does Exterior Paint Last in Massachusetts?',
+    metaTitle: 'How Long Exterior Paint Lasts in MA | Real Answer',
+    metaDescription:
+      'Exterior paint in Massachusetts lasts 5-10 years, and which end you land on is decided by prep and exposure — not the paint. What actually drives it.',
+    excerpt:
+      'The honest range is 5 to 10 years. Here is what pushes a New England paint job to one end of it or the other.',
+    heroImage: '/images/exterior-painting-hudson-ma-am-painter-inc.jpg',
+    heroAlt: 'Exterior house painting in Hudson, Massachusetts',
+    publishedAt: '2026-07-06',
+    updatedAt: '2026-07-06',
+    category: 'How-To',
+    readMinutes: 7,
+    relatedService: 'exterior-painting',
+    bodyHtml: `
+<p class="lead">Ask three contractors how long exterior paint lasts and you will get three numbers. The honest answer for Massachusetts is <strong>5 to 10 years</strong> — and the gap between those two is almost never about which paint went on. It is about what happened before the paint went on, and which direction the wall faces.</p>
+
+<h2>Why New England is harder on paint than most of the country</h2>
+<p>Massachusetts puts a coating through a cycle that milder climates do not. Water gets into a hairline crack, freezes overnight, expands, and widens the crack. Then it thaws and does it again. We can run through dozens of freeze-thaw cycles in a single winter.</p>
+<p>On top of that:</p>
+<ul>
+<li><strong>Snow sits against the lower siding</strong> for weeks, keeping it wet far longer than rain would</li>
+<li><strong>Ice dams</strong> push water backward under trim and behind fascia</li>
+<li><strong>Summer humidity</strong> slows curing and feeds mildew on shaded walls</li>
+<li><strong>Coastal salt air</strong>, east of Route 128, is corrosive year-round</li>
+</ul>
+<p>A coating that would hold a decade in a dry climate is doing considerably more work here.</p>
+
+<h2>Prep decides the lifespan, not the paint</h2>
+<p>This is the part homeowners are most often surprised by. Two houses painted on the same street, with the same premium product, can be four years apart in how long they hold — because one was scraped, sanded, and primed to bare sound wood, and the other was painted over failing edges.</p>
+<p>Paint fails at the <em>bond</em>, not in the film. If the new coat is bonded to an old coat that is already lifting, the new one comes off with it. Nothing you buy in the can fixes that.</p>
+<p>What actually extends the life:</p>
+<ul>
+<li>Scraping back to a sound edge, then feather-sanding so the transition is not a ridge</li>
+<li>Spot-priming every bare spot before the finish coats — bare wood drinks the topcoat otherwise</li>
+<li>Caulking the joints that move: trim-to-siding, around windows, where dissimilar materials meet</li>
+<li>Letting a washed surface dry fully. This is the most commonly skipped step, and the most damaging</li>
+</ul>
+
+<h2>The same house wears unevenly</h2>
+<p>You will almost never need to repaint an entire Massachusetts house at once — the exposures fail at different rates.</p>
+<ul>
+<li><strong>South and west walls</strong> take the most UV and the biggest daily temperature swing. These usually fail first, often years before the rest</li>
+<li><strong>North walls</strong> stay damp and shaded, so they hold color longer but grow mildew</li>
+<li><strong>Horizontal surfaces</strong> — sills, railings, deck caps, the tops of trim — fail fastest of all, because water sits on them instead of running off</li>
+</ul>
+<p>Watching the south wall is a reasonable early-warning system for the whole house.</p>
+
+<h2>Substrate changes the number</h2>
+<p>What is under the paint matters as much as exposure:</p>
+<ul>
+<li><strong>Clapboard and wood siding</strong> — the shortest interval, because wood moves with moisture. Well-prepped, expect toward the middle of the range</li>
+<li><strong>Cedar shingles</strong> — hold stain longer than paint; painting them traps moisture that shingles are designed to release</li>
+<li><strong>Fiber cement</strong> — dimensionally stable and holds a coating longest of the common sidings here</li>
+<li><strong>Previously painted brick</strong> — a maintenance commitment, because once brick is painted it must stay painted; it cannot breathe as it did</li>
+</ul>
+
+<h2>The signs that matter, in order of urgency</h2>
+<p>Repaint when the coating stops protecting, not when it stops looking new. In rough order of how soon you should act:</p>
+<ul>
+<li><strong>Bare wood showing</strong> — act now. Unprotected wood in a New England winter is how rot starts, and rot is carpentry, not painting</li>
+<li><strong>Peeling or lifting edges</strong> — water is already getting behind the film</li>
+<li><strong>Caulk split open at joints</strong> — an open path straight into the wall assembly</li>
+<li><strong>Chalking</strong> (a powdery residue on your hand) — the binder is breaking down; you have a season or two</li>
+<li><strong>Fading alone</strong> — cosmetic. It can wait if the film is intact</li>
+</ul>
+
+<h2>What actually buys you extra years</h2>
+<p>Cheap maintenance that meaningfully extends the interval:</p>
+<ul>
+<li><strong>Wash the house once a year.</strong> Mildew and grit hold moisture against the film. A garden hose and a soft brush is enough</li>
+<li><strong>Keep gutters clear.</strong> Most premature paint failure traces back to water going where it should not — an overflowing gutter destroys the wall below it</li>
+<li><strong>Cut shrubs back off the siding.</strong> Anything touching the wall keeps it damp and shaded</li>
+<li><strong>Recaulk failed joints as you spot them</strong>, rather than waiting for the full repaint</li>
+<li><strong>Touch up the horizontal surfaces</strong> — sills and railings — a few years before the walls need it</li>
+</ul>
+
+<h2>The realistic expectation</h2>
+<p>For a wood-sided Massachusetts home, properly prepped, painted in the right season with a quality exterior product: plan on the south and west elevations wanting attention around year 6 or 7, and the whole house somewhere between year 8 and 10. A poorly prepped job on the same house can start failing in year 3.</p>
+<p>If a quote is far cheaper than the others, the difference is nearly always prep hours — and prep hours are exactly what you are buying.</p>
+`,
+    faqs: [
+      {
+        question: 'How long does exterior paint last in Massachusetts?',
+        answer:
+          'Typically 5 to 10 years. Wood siding that was properly scraped, sanded and primed lands at the upper end; a job painted over failing edges can start peeling within 3 years. South and west walls almost always fail first.',
+      },
+      {
+        question: 'Can I just paint over peeling paint?',
+        answer:
+          'No. Paint bonds to whatever is under it, so a new coat over a lifting one fails with it — usually within a season or two. The failing material has to be scraped back to a sound edge and the bare spots primed first.',
+      },
+      {
+        question: 'Why does one side of my house need painting before the others?',
+        answer:
+          'South and west elevations take the most UV and the widest daily temperature swing, so they age faster. North walls hold color longer but grow mildew because they stay damp and shaded. Painting only the failing elevations is often reasonable.',
+      },
+      {
+        question: 'Does more expensive paint last longer?',
+        answer:
+          'Better paint helps, but it is the smaller factor. Preparation and exposure decide the outcome. Premium paint over bad prep still fails early; mid-grade paint over excellent prep performs well.',
+      },
+      {
+        question: 'How can I make my exterior paint last longer?',
+        answer:
+          'Wash the house annually, keep gutters clear, cut shrubs back off the siding, and recaulk joints as they split. Most premature failure traces back to water going somewhere it should not.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'shrewsbury', 'natick'],
+  },
+
+  {
+    slug: 'paint-sheen-guide-new-england-homes',
+    title: 'Paint Sheen Guide: Where Each Finish Belongs',
+    metaTitle: 'Paint Sheen Guide for New England Homes',
+    metaDescription:
+      'Flat, eggshell, satin, semi-gloss — which finish goes in which room, and why sheen matters more in older Massachusetts homes than most people expect.',
+    excerpt:
+      'Sheen is the decision most homeowners spend the least time on and regret the most. Here is the practical version.',
+    heroImage: '/images/cabinet-refinishing-marlborough-ma-am-painter-inc.jpg',
+    heroAlt: 'Interior painting detail in a Massachusetts home',
+    publishedAt: '2026-07-13',
+    updatedAt: '2026-07-13',
+    category: 'How-To',
+    readMinutes: 6,
+    relatedService: 'interior-painting',
+    bodyHtml: `
+<p class="lead">People agonise over color for weeks and pick the sheen in ten seconds at the counter. That is backwards. Color is what you notice on day one; sheen is what you live with — how the wall cleans, how much it hides, and how light moves across it at four in the afternoon.</p>
+
+<h2>What sheen actually is</h2>
+<p>Sheen is how much light the dried film reflects. More reflectivity means a harder, tighter film: easier to wipe, more durable — and far less forgiving of anything wrong with the surface underneath.</p>
+<p>That trade-off is the whole decision. <strong>Shine equals washability. Shine also equals every flaw on display.</strong></p>
+
+<h2>The finishes, flattest to shiniest</h2>
+
+<h3>Flat / matte</h3>
+<p>Reflects almost nothing, so it hides an enormous amount — roller marks, patched spots, wavy plaster, nail pops. The trade is that it marks easily and does not wipe clean well; scrubbing burnishes a shiny spot into it.</p>
+<p><strong>Use it on:</strong> ceilings, always. Low-traffic adult bedrooms, formal rooms, and any old plaster wall you want to stop noticing.</p>
+
+<h3>Eggshell</h3>
+<p>A slight softness in the light. The most common wall finish in modern homes because it wipes reasonably well while still hiding moderate imperfection.</p>
+<p><strong>Use it on:</strong> living rooms, dining rooms, bedrooms, most hallways. The reasonable default when you do not want to think about it.</p>
+
+<h3>Satin</h3>
+<p>A clear, soft shine. Noticeably more washable than eggshell — but it starts showing the wall. On an older wall it will find every ripple you had stopped seeing.</p>
+<p><strong>Use it on:</strong> kitchens, bathrooms, children's rooms, mudrooms, high-traffic hallways. Anywhere hands and moisture reach the wall.</p>
+
+<h3>Semi-gloss</h3>
+<p>Hard, tight, genuinely scrubbable, and it stands up to moisture. Also unforgiving: on trim it looks sharp, on a wall it reads institutional.</p>
+<p><strong>Use it on:</strong> trim, doors, window casings, cabinets, and bathroom walls that see real steam.</p>
+
+<h3>Gloss</h3>
+<p>Full shine. Beautiful on a well-prepared front door or a piece of built-in millwork; punishing anywhere the substrate is not close to perfect.</p>
+<p><strong>Use it on:</strong> front doors, accent millwork, occasionally cabinetry when the prep supports it.</p>
+
+<h2>Why this matters more in an older Massachusetts home</h2>
+<p>Much of the housing here predates 1980, and a lot of it predates 1950. That means horsehair plaster, walls that have settled, and surfaces that have been patched by five owners. Those walls are rarely flat in the geometric sense.</p>
+<p>Put satin on a 1920s plaster wall in a room with a big west window and the late-afternoon sun will rake across it and show every undulation. The same wall in eggshell or flat looks calm. This is the single most common sheen regret we see — and no amount of extra coats fixes it, because the problem is the wall, not the paint.</p>
+<p>The rule for older homes: <strong>when in doubt, go one step flatter than you think.</strong></p>
+
+<h2>Light direction changes the answer</h2>
+<p>Sheen behaves differently depending on how light hits it:</p>
+<ul>
+<li><strong>North-facing rooms</strong> get flat, indirect light all day. A slightly higher sheen adds life without exposing much</li>
+<li><strong>South and west rooms</strong> get low, raking afternoon sun — the harshest possible test. Go flatter here</li>
+<li><strong>Rooms with big windows on one wall</strong> will show the opposite wall's texture. Sheen down</li>
+<li><strong>Windowless spaces</strong> — interior halls, powder rooms — can carry more sheen, and often benefit from the bounced light</li>
+</ul>
+
+<h2>The trim question</h2>
+<p>Trim is traditionally a step or two shinier than the walls. It defines the edges of a room and it takes the most contact — fingers on door casings, shoes on baseboards.</p>
+<p>Semi-gloss trim against eggshell walls is the classic New England combination and still the safest. Satin trim reads softer and more contemporary, and it suits an older home where high shine would look out of place against original woodwork.</p>
+<p>What to avoid is matching wall and trim sheen exactly — the room loses its definition and looks unfinished.</p>
+
+<h2>Practical shortcuts</h2>
+<ul>
+<li><strong>Ceilings: flat.</strong> Almost no exceptions. A ceiling with sheen shows every seam and roller lap</li>
+<li><strong>Bathrooms: satin walls, semi-gloss trim.</strong> Moisture needs a tight film</li>
+<li><strong>Kitchens: satin.</strong> Grease wipes off it</li>
+<li><strong>Kids' rooms and hallways: satin.</strong> Assume the walls will be cleaned</li>
+<li><strong>Old plaster anywhere: flat or eggshell</strong>, whatever the room's use suggests</li>
+</ul>
+
+<h2>Test it on the actual wall</h2>
+<p>Sheen cannot be judged from a chip in a store. Put a sample on the wall it is going on — not on poster board — and look at it in the morning, at midday, and under your lamps at night. A finish that looks right at noon can glare badly at 5pm in a west-facing room.</p>
+<p>If you are having the work done, ask which sheen is being quoted for each surface, and ask why. A good answer will reference the condition of your walls and where the light comes from — not just a default.</p>
+`,
+    faqs: [
+      {
+        question: 'What paint sheen is best for interior walls?',
+        answer:
+          'Eggshell is the reasonable default for living rooms, dining rooms and bedrooms. Move to satin in kitchens, bathrooms, kids rooms and busy hallways where walls get wiped. Use flat on ceilings and on older plaster you want to look calm.',
+      },
+      {
+        question: 'Why does my wall look wavy after painting?',
+        answer:
+          'Almost always the sheen, not the paint job. Higher-sheen finishes reflect light across the surface and reveal undulations that were always there. It shows most on older plaster in rooms with low afternoon sun. A flatter finish hides it.',
+      },
+      {
+        question: 'What sheen should trim be?',
+        answer:
+          'Semi-gloss is the traditional New England choice and the most durable for doors and casings. Satin reads softer and suits older homes with original woodwork. Avoid matching trim sheen to the walls exactly — the room loses definition.',
+      },
+      {
+        question: 'Can I use flat paint in a bathroom?',
+        answer:
+          'It is not advisable. Flat film is porous and does not shed moisture or clean well, so it stains and grows mildew in a room that gets steam. Satin on the walls and semi-gloss on the trim holds up far better.',
+      },
+      {
+        question: 'Does sheen affect how the color looks?',
+        answer:
+          'Yes, noticeably. The same color reads darker and richer in flat and lighter and cooler as sheen rises, because more light bounces off it. Always sample the exact color in the exact sheen, on the actual wall.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'framingham', 'natick', 'concord', 'sudbury'],
+  },
+
+  {
+    slug: 'signs-your-house-needs-repainting-new-england',
+    title: 'Seven Signs Your House Needs Repainting',
+    metaTitle: '7 Signs Your House Needs Repainting | New England',
+    metaDescription:
+      'How to tell whether your Massachusetts home needs paint now or can wait a season — and which warning signs mean water is already getting in.',
+    excerpt:
+      'Some of these mean you have a year or two. Two of them mean the clock is running on rot. Here is how to tell them apart.',
+    heroImage: '/images/exterior-painting-hudson-ma-am-painter-inc.jpg',
+    heroAlt: 'Exterior paint condition on a Massachusetts home',
+    publishedAt: '2026-07-20',
+    updatedAt: '2026-07-20',
+    category: 'How-To',
+    readMinutes: 6,
+    relatedService: 'exterior-painting',
+    bodyHtml: `
+<p class="lead">Paint is not decoration on the outside of a house — it is the layer keeping water out of the wood. So the question is not whether the house still looks good. It is whether the film is still doing its job. Some of the signs below mean you have a season or two. Two of them mean water is already getting in.</p>
+
+<h2>1. Bare wood showing — act now</h2>
+<p>Any spot where you can see raw wood is an open door. In a New England winter that wood absorbs water, freezes, and starts to break down. Once rot sets in you are no longer buying paint, you are buying carpentry, and the cost difference is significant.</p>
+<p>Check first where water sits rather than runs: window sills, the tops of trim boards, railing caps, the bottom edges of clapboards, and anywhere near a gutter that overflows.</p>
+
+<h2>2. Peeling, lifting or curling edges — act this season</h2>
+<p>Once an edge lifts, water gets behind the film and travels. Peeling always spreads, and it spreads faster after a winter.</p>
+<p>Worth knowing: peeling in a specific patch usually means a water source, not old paint. Paint failing on one wall below a gutter joint, or in a band under a window, is telling you where the leak is. Fix that first or the new paint fails the same way.</p>
+
+<h2>3. Caulk split open at the joints</h2>
+<p>Run your eye along where trim meets siding, around window and door casings, and where two materials meet. Caulk gets brittle and splits as the house moves through the seasons.</p>
+<p>Those splits are a direct path into the wall assembly. Caulk is cheap and this is genuinely worth doing yourself between repaints.</p>
+
+<h2>4. Chalking</h2>
+<p>Rub a hand firmly on the siding in a sunny spot. If it comes away with a powdery residue, the binder holding the pigment together is breaking down under UV.</p>
+<p>Chalking is not an emergency — you usually have a season or two — but it is a reliable signal that the film is at the end of its service life. It also means anything painted over it will not bond properly until the surface is washed.</p>
+
+<h2>5. Mildew and dark streaks</h2>
+<p>Common on north-facing walls and anywhere shaded by trees or shrubs. Mildew itself is a cleaning problem, not necessarily a painting one — wash it and see what is underneath.</p>
+<p>What matters is whether the film beneath is still sound. If washing takes the mildew off and the paint looks intact, you have bought yourself time. If washing lifts the paint, the film is done.</p>
+
+<h2>6. Gaps opening around windows and doors</h2>
+<p>These show up as thin dark lines where the casing meets the siding. They matter more than their size suggests: they let water in, they let heat out, and around windows they are frequently the reason a room is draughty in January.</p>
+
+<h2>7. Fading and colour loss — the one that can wait</h2>
+<p>The least urgent sign on this list. Fading is UV breaking down pigment, and it is cosmetic. South and west walls fade first and fastest.</p>
+<p>If the film is intact — no peeling, no chalking, no bare spots — a faded house is protected. It is a reason to repaint when it suits you, not a reason to hurry.</p>
+
+<h2>How to check your own house in ten minutes</h2>
+<p>Walk the perimeter slowly, once, and look at four things:</p>
+<ul>
+<li><strong>The south and west walls first.</strong> They age fastest, so they show you the future of the rest of the house</li>
+<li><strong>Everything horizontal.</strong> Sills, railing caps, trim tops, deck ledgers. Water sits on these instead of running off, and they always fail first</li>
+<li><strong>Below every gutter and downspout.</strong> Paint failure in a vertical stripe means the gutter above it is the actual problem</li>
+<li><strong>Down at ground level.</strong> The bottom foot of siding takes snow load and splash-back all winter</li>
+</ul>
+<p>Do this in the spring, after the snow has gone. That is when winter damage is visible and when there is still time to schedule work for the good weather.</p>
+
+<h2>Can you paint just one side?</h2>
+<p>Often, yes — and it is frequently the sensible choice. Exposures wear at genuinely different rates, so a south wall may need attention years before the north one.</p>
+<p>The honest limitation is colour match. Even the same product from the same brand will not match a wall that has been weathering for six years, so a single repainted elevation may read slightly different. On a house with natural breaks at corners this is rarely noticeable. On a long unbroken wall it can be.</p>
+
+<h2>What to do with what you found</h2>
+<p>If you found bare wood or active peeling, get it looked at before the next winter — that is the difference between a paint job and a carpentry job. If you found chalking, fading, or a bit of mildew and nothing else, you are in good shape to plan the work for a season that suits you.</p>
+<p>Either way, spring is the right time to book. Exterior work in Massachusetts runs roughly late April through October, and the good slots go early.</p>
+`,
+    faqs: [
+      {
+        question: 'How do I know if my house needs repainting?',
+        answer:
+          'Look for bare wood or peeling first — both mean water is getting in and should be handled before winter. Chalking, mildew and fading are less urgent and usually give you a season or two. Check south and west walls and all horizontal surfaces first, since they fail earliest.',
+      },
+      {
+        question: 'What does chalking on my siding mean?',
+        answer:
+          'A powdery residue on your hand means UV has broken down the binder holding the pigment together. The film is near the end of its life. It is not an emergency, but the surface must be washed before repainting or the new coat will not bond.',
+      },
+      {
+        question: 'Why is paint peeling in just one spot on my house?',
+        answer:
+          'Localised peeling almost always indicates a water source rather than old paint — an overflowing gutter, a failed caulk joint, or a leak around a window. Repainting without finding the source means it fails again in the same place.',
+      },
+      {
+        question: 'Can I repaint only one side of my house?',
+        answer:
+          'Yes, and it is often sensible since exposures wear at different rates. The limitation is colour match: a freshly painted elevation will not match walls that have weathered several years, so it works best on houses with natural breaks at the corners.',
+      },
+      {
+        question: 'When should I inspect my exterior paint?',
+        answer:
+          'Spring, once the snow has cleared. Winter damage is visible then, and there is still time to schedule work within the Massachusetts exterior season of roughly late April through October.',
+      },
+    ],
+    relatedCities: ['hudson', 'marlborough', 'worcester', 'shrewsbury', 'framingham', 'sudbury'],
+  },
 ]
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
