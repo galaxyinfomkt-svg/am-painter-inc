@@ -167,6 +167,28 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Body */}
         <section className="py-16 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Pricing posts quote market ranges, not this business's rates.
+                The articles already say "MetroWest ranges", but a reader
+                skimming a table sees numbers under a painting company's logo
+                and reasonably reads them as that company's prices. Say it
+                plainly, once, before the numbers appear. */}
+            {/* Any post that shows a dollar figure gets this, not just the
+                Pricing category — how-to-choose and the lead-safe guide both
+                carry cost tables too. Detects a "$1,234"-style number in the
+                body. */}
+            {/\$\d[\d,]{2,}/.test(post.bodyHtml) && (
+              <aside className="not-prose mb-10 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5">
+                <p className="text-sm text-gray-800 leading-relaxed">
+                  <strong>About the numbers in this article.</strong> These are typical
+                  market ranges for MetroWest Massachusetts, published so you have a
+                  reference point before you talk to any contractor. They are{' '}
+                  <strong>not {business.name}&apos;s prices</strong> and not a quote. We
+                  don&apos;t price from a table — every job is quoted in writing after a free
+                  walkthrough, and yours may land outside these ranges in either direction.
+                </p>
+              </aside>
+            )}
+
             {/* Split the article at a heading near its midpoint so a reader
                 partway through gets a way to act without scrolling to either
                 end. Falls back to rendering the body whole when a post has too

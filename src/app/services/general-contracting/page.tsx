@@ -75,7 +75,10 @@ const faqs = [
   },
   {
     question: "How do you charge for general contracting services?",
-    answer: "We typically charge a percentage of total project cost (usually 10-20%) or a fixed fee depending on project scope. Our detailed proposals break down all costs transparently."
+    // Was "We typically charge ... (usually 10-20%)" — stated as this business's
+    // own rate. It is a market norm, so it now reads as one, and the actual
+    // answer for a caller is that we quote per project.
+    answer: "General contractors are usually paid either as a percentage of total project cost — the market norm runs roughly 10-20% — or as a fixed fee, depending on scope. We do not work from a set rate: every project is quoted individually after a walkthrough, and the proposal breaks down all costs before anything starts."
   },
   {
     question: "Can you help with design or do I need an architect?",

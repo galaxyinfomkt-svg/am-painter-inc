@@ -562,7 +562,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
     return [
       {
         question: `How much does interior painting cost in ${city.name}, MA?`,
-        answer: `Interior painting in ${city.name} typically runs ${pr.note}. Most whole projects land between $${pr.low.toLocaleString('en-US')} and $${pr.high.toLocaleString('en-US')}, depending on prep needs, ceiling height, and finish quality. Free, fixed-price estimates — call ${phone}.`,
+        answer: `As a market reference — not our price — interior painting around ${city.name} typically runs ${pr.note}, with most whole projects landing between $${pr.low.toLocaleString('en-US')} and $${pr.high.toLocaleString('en-US')} depending on prep needs, ceiling height and finish quality. ${business.name} does not price from a table: we quote each property in writing after a free walkthrough, and yours may fall outside that range either way. Call ${phone}.`,
       },
       ...(localQ ? [localQ] : []),
       {
@@ -587,7 +587,10 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
       },
       {
         question: `How much does exterior painting cost in ${city.name}?`,
-        answer: `${arch} homes in ${city.name} typically run $4,500–$11,000 to repaint, depending on siding type, height, prep needs, and stories. Heavy carpentry repair (rotted trim, lead-safe stripping for pre-1978 homes) is quoted separately. Free written estimate: ${phone}.`,
+        // Was a hardcoded $4,500-$11,000 on all 143 towns, which both read as our
+        // price and contradicted the scaled range in the box above it. Uses the
+        // same computed range now, and says plainly what it is.
+        answer: `As a market reference — not our price — repainting ${arch.toLowerCase()} homes around ${city.name} typically runs ${pr.note}, with most projects landing between $${pr.low.toLocaleString('en-US')} and $${pr.high.toLocaleString('en-US')} depending on siding type, height, prep needs and stories. Heavy carpentry (rotted trim, lead-safe stripping on pre-1978 homes) is quoted separately. ${business.name} prices each property individually after a free walkthrough: ${phone}.`,
       },
       {
         question: `Do you handle wood rot and trim repair on ${city.name} homes?`,
@@ -1012,17 +1015,26 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     </div>
                   )}
 
-                  {/* Price At a Glance — citable single-line fact for AI/SGE citations */}
+                  {/* Price At a Glance — citable single-line fact for AI/SGE citations.
+                      Labelled as a market example throughout: these are what the
+                      MetroWest market runs, NOT this business's prices. The old
+                      wording ("Estimates are typical... ranges") could still be read
+                      as our estimate, which it is not — we quote per property after
+                      a walkthrough. */}
                   <div className="mt-4 bg-amber-50 border-l-4 border-primary rounded-r-xl p-4">
                     <h4 className="font-semibold text-secondary mb-1">
-                      {service.name} cost in {city.name}, MA (2026)
+                      Example: what {service.name.toLowerCase()} costs in the {city.name} area (2026)
                     </h4>
                     <p className="text-base text-gray-800">
                       <strong>${priceRange.low.toLocaleString('en-US')}–${priceRange.high.toLocaleString('en-US')}</strong>{' '}
                       {priceRange.unit} — {priceRange.note}.
                     </p>
-                    <p className="mt-1 text-xs text-gray-500">
-                      Estimates are typical 2026 MetroWest market ranges; your actual quote depends on scope and prep needs. Free written estimate within 24 hours.
+                    <p className="mt-2 text-xs text-gray-500">
+                      <strong>These are market examples, not our prices.</strong> They describe the
+                      typical 2026 range across MetroWest Massachusetts for work of this kind, so you
+                      have a reference point before you talk to anyone. {business.name} does not
+                      price from a table — every quote is written for the specific property after a
+                      free walkthrough, and yours may fall outside this range in either direction.
                     </p>
                   </div>
 
