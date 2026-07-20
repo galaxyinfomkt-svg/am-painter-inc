@@ -42,6 +42,31 @@ const ACS_VARS = [
   'B25034_004E', // built 2000-2009
   'B25034_005E', // built 1990-1999
   'B25034_006E', // built 1980-1989
+
+  // --- Added 2026-07: the variables that actually distinguish one town's
+  // painting work from another's. GSC showed 587 city pages "Crawled -
+  // currently not indexed"; the towns without local-knowledge fields had
+  // nothing town-specific to say beyond four numbers. These are all real,
+  // per-town, and reproducible by re-running this script.
+
+  // B25035: median year the housing was built. One concrete year per town,
+  // far more useful than the pre-1980 bucket we derive from B25034.
+  'B25035_001E',
+
+  // B25003: tenure. Owner-occupied share matters because owners commission
+  // repaints and landlords generally do not.
+  'B25003_001E', // occupied units: total
+  'B25003_002E', // owner occupied
+
+  // B25024: units in structure. This is the big one for a painter — it
+  // separates a single-family suburb from a triple-decker city, which are
+  // different jobs, different access, and different quotes.
+  'B25024_001E', // total
+  'B25024_002E', // 1 unit, detached
+  'B25024_003E', // 1 unit, attached
+  'B25024_004E', // 2 units
+  'B25024_005E', // 3-4 units
+  'B25024_006E', // 5-9 units
 ]
 
 const get = (url) =>
@@ -149,6 +174,34 @@ async function main() {
     const density = Math.round(population / g.sqmi)
     const distanceMiles = Math.round(haversineMiles(SHOP.lat, SHOP.lon, g.lat, g.lon) * 10) / 10
 
+    // Median year built — one concrete year per town (B25035).
+    const medianYearBuilt = num(row[idx.B25035_001E])
+
+    // Owner-occupied share (B25003). Owners commission repaints; landlords
+    // largely do not, so this changes who the page is actually written for.
+    const occupied = num(row[idx.B25003_001E])
+    const ownerOccupied = num(row[idx.B25003_002E])
+    const ownerOccupiedPercent =
+      occupied && ownerOccupied != null ? Math.round((100 * ownerOccupied) / occupied) : null
+
+    // Single-family share vs multi-family (B25024). The clearest split between
+    // a suburb of detached houses and a city of two- and three-deckers.
+    const structTotal = num(row[idx.B25024_001E])
+    const detached = num(row[idx.B25024_002E])
+    const attached = num(row[idx.B25024_003E])
+    const twoUnit = num(row[idx.B25024_004E])
+    const threeFour = num(row[idx.B25024_005E])
+    const singleFamilyPercent =
+      structTotal && detached != null
+        ? Math.round((100 * (detached + (attached ?? 0))) / structTotal)
+        : null
+    // 2-4 unit buildings: the triple-decker band specifically, not all
+    // multi-family — a 200-unit complex is not work this business bids on.
+    const smallMultiFamilyPercent =
+      structTotal && twoUnit != null
+        ? Math.round((100 * (twoUnit + (threeFour ?? 0))) / structTotal)
+        : null
+
     out.push({
       name,
       slug: slugify(name),
@@ -156,6 +209,10 @@ async function main() {
       medianHomeValue,
       ...(medianIncome ? { medianIncome } : {}),
       pre1980Percent,
+      ...(medianYearBuilt ? { medianYearBuilt } : {}),
+      ...(ownerOccupiedPercent != null ? { ownerOccupiedPercent } : {}),
+      ...(singleFamilyPercent != null ? { singleFamilyPercent } : {}),
+      ...(smallMultiFamilyPercent != null ? { smallMultiFamilyPercent } : {}),
       county,
       density,
       distanceMiles,
