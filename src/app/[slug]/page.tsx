@@ -39,7 +39,7 @@ function parseSlug(slug: string): { serviceSlug: string; citySlug: string } | nu
 // have it where someone actually knew it. Every helper below must degrade to
 // "say less" rather than "say something invented". The Census facts
 // (population, medianHomeValue, pre1980Percent, density, distanceMiles) are
-// real for every city and carry the page when local colour is missing.
+// real for every city and carry the page when local color is missing.
 // ---------------------------------------------------------------------------
 
 /** First architecture style, or null when we don't actually know. */
@@ -128,13 +128,57 @@ function localReality(city: City): string {
     case 'lead-safe':
       return `${pre}% of ${city.name}'s homes were built before 1980, one of the older housing stocks we work in. That makes EPA Lead-Safe RRP practice the default here, not an add-on: containment, HEPA cleanup and dust control on any surface we sand or scrape.`
     case 'premium-finish':
-      return `With a median home value near $${Math.round((hv ?? 0) / 1000)}K, ${city.name} homeowners generally expect a finish that stands up to close inspection — sprayed cabinets, sharp cut lines, and colour matched properly rather than approximated.`
+      return `With a median home value near $${Math.round((hv ?? 0) / 1000)}K, ${city.name} homeowners generally expect a finish that stands up to close inspection — sprayed cabinets, sharp cut lines, and color matched properly rather than approximated.`
     case 'large-lot':
       return `${city.name} is rural by the numbers — roughly ${dens} people per square mile — which usually means bigger lots, longer runs of siding and trim, and exteriors more exposed to weather than a town-centre house.`
     default:
       return `${city.name} is a ${city.areaType} town of about ${city.population?.toLocaleString('en-US')}, with ${pre}% of its homes built before 1980 — a mix that calls for straightforward prep, sound priming and a paint that survives New England freeze-thaw.`
   }
 }
+
+/**
+ * Compass direction from the Hudson shop to a town, from real centroids.
+ *
+ * Every town gets a different answer, and it is checkable on a map — unlike
+ * the qualitative fields (neighborhoods, architecture), which we only have for
+ * some towns and never guess at. Used by the housing snapshot so that the 83
+ * towns without local-knowledge fields still say something true and specific
+ * about themselves rather than only carrying the shared service copy.
+ */
+const COMPASS = [
+  'north', 'north-northeast', 'northeast', 'east-northeast',
+  'east', 'east-southeast', 'southeast', 'south-southeast',
+  'south', 'south-southwest', 'southwest', 'west-southwest',
+  'west', 'west-northwest', 'northwest', 'north-northwest',
+] as const
+
+function bearingFromShop(city: City): string | null {
+  if (city.lat == null || city.lon == null) return null
+  const toRad = (x: number) => (x * Math.PI) / 180
+  const lat1 = toRad(business.geo.latitude)
+  const lat2 = toRad(city.lat)
+  const dLon = toRad(city.lon - business.geo.longitude)
+  const y = Math.sin(dLon) * Math.cos(lat2)
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon)
+  const deg = (Math.atan2(y, x) * 180) / Math.PI
+  return COMPASS[Math.round(((deg + 360) % 360) / 22.5) % 16]
+}
+
+/**
+ * Median home value across every town we publish, computed from the committed
+ * Census figures. Lets a town page say how it compares without asserting a
+ * statewide number we did not fetch — the claim is exactly what it says:
+ * the median of the towns this business serves.
+ */
+const SERVED_MEDIAN_HOME_VALUE = (() => {
+  const values = Object.values(CITIES)
+    .map((c) => c.medianHomeValue)
+    .filter((v): v is number => typeof v === 'number')
+    .sort((a, b) => a - b)
+  if (!values.length) return null
+  const mid = Math.floor(values.length / 2)
+  return values.length % 2 ? values[mid] : Math.round((values[mid - 1] + values[mid]) / 2)
+})()
 
 /** Great-circle miles between two towns, from their Census centroids. */
 function milesBetween(a: City, b: City): number | null {
@@ -507,7 +551,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
         : p.angle === 'premium-finish'
           ? {
               question: `Can you match the finish level ${city.name} homes are built to?`,
-              answer: `That's the expectation here, and it's what the prep hours buy: sprayed cabinetry and trim rather than brushed, sharp cut lines, and colour matched under your own lighting. We'll bring drawdown samples to the walk-through so you approve the actual colour on your actual wall.`,
+              answer: `That's the expectation here, and it's what the prep hours buy: sprayed cabinetry and trim rather than brushed, sharp cut lines, and color matched under your own lighting. We'll bring drawdown samples to the walk-through so you approve the actual color on your actual wall.`,
             }
           : null
 
@@ -995,6 +1039,105 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     <span>
                       Updated <time dateTime={CITY_DATA_UPDATED}>{lastUpdated}</time>
                     </span>
+                  </div>
+                </div>
+
+                {/* Housing snapshot — every figure is a committed Census value or
+                    computed from one, so this renders for ALL 143 towns. It
+                    matters most on the 83 without local-knowledge fields, where
+                    the three sections below collapse and the page would otherwise
+                    be mostly shared service copy. Nothing here is estimated. */}
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                  <h3 className="text-xl font-bold text-secondary mb-2">
+                    {city.name} housing at a glance
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-5">
+                    US Census (ACS 2023 5-year) figures for {city.name}
+                    {city.county ? `, ${city.county} County` : ''} — the numbers that
+                    actually change how we quote and prep a job here.
+                  </p>
+
+                  <dl className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-5">
+                    {city.population != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Population</dt>
+                        <dd className="font-bold text-secondary">
+                          {city.population.toLocaleString('en-US')}
+                        </dd>
+                      </div>
+                    )}
+                    {city.medianHomeValue != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Median home value</dt>
+                        <dd className="font-bold text-secondary">
+                          ${city.medianHomeValue.toLocaleString('en-US')}
+                        </dd>
+                      </div>
+                    )}
+                    {city.pre1980Percent != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Built before 1980</dt>
+                        <dd className="font-bold text-secondary">{city.pre1980Percent}%</dd>
+                      </div>
+                    )}
+                    {city.density != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Density</dt>
+                        <dd className="font-bold text-secondary">
+                          {city.density.toLocaleString('en-US')}/sq mi
+                        </dd>
+                      </div>
+                    )}
+                    {city.distanceMiles != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">From our shop</dt>
+                        <dd className="font-bold text-secondary">
+                          {city.distanceMiles} mi
+                          {bearingFromShop(city) ? ` ${bearingFromShop(city)}` : ''}
+                        </dd>
+                      </div>
+                    )}
+                    {city.medianIncome != null && (
+                      <div>
+                        <dt className="text-xs uppercase tracking-wider text-gray-500">Median income</dt>
+                        <dd className="font-bold text-secondary">
+                          ${city.medianIncome.toLocaleString('en-US')}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+
+                  <div className="space-y-2 text-gray-700 text-sm leading-relaxed border-t border-slate-200 pt-4">
+                    {city.medianHomeValue != null && SERVED_MEDIAN_HOME_VALUE != null && (
+                      <p>
+                        {(() => {
+                          const ratio = city.medianHomeValue / SERVED_MEDIAN_HOME_VALUE
+                          const pct = Math.round(Math.abs(ratio - 1) * 100)
+                          if (pct < 8) {
+                            return `At $${city.medianHomeValue.toLocaleString('en-US')}, the typical ${city.name} home sits right around the median of the ${Object.keys(CITIES).length} Massachusetts towns we serve — so our standard material grades and crew sizing apply here without adjustment.`
+                          }
+                          return ratio > 1
+                            ? `At $${city.medianHomeValue.toLocaleString('en-US')}, the typical ${city.name} home runs about ${pct}% above the median of the ${Object.keys(CITIES).length} towns we serve. In practice that means more detailed trim, more color matching, and homeowners who want to see the prep work before the first coat.`
+                            : `At $${city.medianHomeValue.toLocaleString('en-US')}, the typical ${city.name} home runs about ${pct}% below the median of the ${Object.keys(CITIES).length} towns we serve. We quote accordingly — durable mid-grade products that hold up through New England winters without pricing the job past what the house calls for.`
+                        })()}
+                      </p>
+                    )}
+                    {city.pre1980Percent != null && (
+                      <p>
+                        {city.pre1980Percent >= 60
+                          ? `With ${city.pre1980Percent}% of ${city.name}'s housing built before 1980, most jobs here involve a home old enough to fall under the EPA's pre-1978 lead rule. We are a Lead-Safe certified firm, so containment and HEPA cleanup are standard on any surface we sand or scrape — not a line item added later.`
+                          : `Only ${city.pre1980Percent}% of ${city.name}'s housing predates 1980, so a good share of the homes here are newer builds. That usually means sound substrate, less stripping, and a job that turns on finish quality rather than restoration.`}
+                      </p>
+                    )}
+                    {nearbyCities.length > 0 && (
+                      <p>
+                        We work out of {business.address.city}
+                        {city.distanceMiles != null ? `, ${city.distanceMiles} miles away` : ''}, and
+                        regularly in neighboring{' '}
+                        {nearbyCities.slice(0, 3).map((n) => n.name).join(', ')} — so a crew is
+                        usually already in the area rather than traveling in for a single job.
+                      </p>
+                    )}
                   </div>
                 </div>
 
