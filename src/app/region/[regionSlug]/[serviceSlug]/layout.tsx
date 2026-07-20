@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   // Unique meta descriptions for each region-service combination
   const descriptionTemplates: Record<string, Record<string, string>> = {
     'greater-boston': {
-      'interior-painting': `Expert interior painting for Greater Boston's historic brownstones, Victorian homes, and luxury condos. Cambridge Historical Commission compliant. Salt-air resistant coatings. Serving Boston, Cambridge, Newton, Brookline. Licensed & ${business.insurance} insured. Free estimates: ${business.phone}`,
+      'interior-painting': `Expert interior painting for Greater Boston's historic brownstones, Victorian homes, and luxury condos. Careful work in historic districts. Salt-air resistant coatings. Serving Boston, Cambridge, Newton, Brookline. Licensed & ${business.insurance} insured. Free estimates: ${business.phone}`,
       'exterior-painting': `Boston exterior painting specialists using marine-grade, salt-resistant coatings for coastal properties. Historical district approved. Serving Greater Boston metro: Boston, Cambridge, Somerville, Brookline, Newton. ${business.yearsInBusiness}+ years experience. EPA Lead-Safe certified family-owned firm.`,
       'cabinet-refinishing': `Premium cabinet refinishing for Greater Boston luxury homes. Factory-smooth finishes on historic and contemporary kitchens. Serving Boston, Cambridge, Newton, Waltham, Lexington. Benjamin Moore & Sherwin-Williams. Free estimates: ${business.phone}`,
       'deck-staining': `Deck staining and weatherproofing for Greater Boston coastal homes. Salt-resistant sealers, UV protection, mold prevention. Serving waterfront and suburban properties. Licensed & insured. Call ${business.phone} for free estimate.`,

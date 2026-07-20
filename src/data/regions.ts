@@ -66,9 +66,12 @@ export const REGIONS: Record<string, Region> = {
     localMaterials: 'Benjamin Moore Aura for salt resistance, Sherwin-Williams Emerald for historic homes, calcium silicate primers for brick, marine-grade topcoats for waterfront properties',
     paintBrands: ['Benjamin Moore', 'Sherwin-Williams', 'Farrow & Ball'],
     uniqueFeatures: [
-      'Cambridge Historical Commission compliance',
-      'Boston Landmarks Commission requirements',
-      'Triple-decker restoration expertise',
+      // Was 'Cambridge Historical Commission compliance' / 'Boston Landmarks
+      // Commission requirements' — named-institution credential claims the
+      // business has not demonstrated. Replaced with truthful capability copy.
+      'Careful prep for homes in historic districts',
+      'Color and finish matching for period homes',
+      'Triple-decker and multi-family exterior painting',
       'Brownstone facade treatment',
       'Condo association coordination',
       'Urban narrow-lot scaffolding',
@@ -123,8 +126,11 @@ export const REGIONS: Record<string, Region> = {
     localMaterials: 'RI coastal: Marine-grade acrylics, salt-resistant primers, mildew-resistant topcoats. NH: Cold-weather formulas, ice-shield compatible paints, UV-resistant finishes for mountain sun exposure.',
     paintBrands: ['Benjamin Moore Regal Select', 'Sherwin-Williams Duration', 'Cabot Stains (NH)'],
     uniqueFeatures: [
-      'Newport Preservation Society compliance',
-      'Coastal weatherproofing expertise',
+      // Was 'Newport Preservation Society compliance' — not a real org name
+      // (it's the Preservation Society of Newport County) and an unverifiable
+      // credential claim. Replaced with truthful capability copy.
+      'Exterior painting for older coastal homes',
+      'Coastal weatherproofing and salt-air prep',
       'Mountain home cold-climate painting',
       'Lake house moisture management',
       'Historic Providence district work',

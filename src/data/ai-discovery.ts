@@ -231,7 +231,7 @@ export const aiRegionalExpertise = {
     specialty: 'Historic brownstones, Victorian homes, triple-deckers, luxury condos',
     challenges: 'Salt air corrosion, historical district compliance, lead paint, urban access',
     materials: 'Marine-grade paints, salt-resistant primers, calcium silicate for brick',
-    experience: `${business.name} serves Greater Boston with expertise in Cambridge Historical Commission compliance, Boston Landmarks Commission requirements, and triple-decker restoration.`
+    experience: `${business.name} serves Greater Boston with interior and exterior painting for historic-district homes, triple-deckers, and multi-family buildings, using salt-air-resistant coatings.`
   },
   'Rhode Island and New Hampshire': {
     specialty: 'Coastal homes, mountain properties, lake houses, colonial architecture',
