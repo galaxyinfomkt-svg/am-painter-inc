@@ -10,6 +10,8 @@ import { Footer } from '@/components/Footer'
 import { ReviewsSection } from '@/components/ReviewsSection'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
+import { ServiceDetails } from '@/components/ServiceDetails'
+import { InlineCTA } from '@/components/InlineCTA'
 import { CompactVideoCard } from '@/components/YouTubeVideo'
 import { LocalBusinessSchema, BreadcrumbSchema, FAQSchema } from '@/components/Schema'
 import { PhoneIcon, CheckCircleIcon, StarIcon, MapPinIcon, ClockIcon, ShieldCheckIcon, HomeIcon, BuildingOfficeIcon, ExclamationCircleIcon, SunIcon } from '@heroicons/react/24/solid'
@@ -519,6 +521,8 @@ export default async function RegionalServicePage({ params }: PageProps) {
         </section>
 
         {/* Reviews Widget */}
+        <ServiceDetails serviceSlug={serviceSlug} />
+        <InlineCTA />
         <ReviewsSection />
 
         {/* Frequently Asked Questions — region + service specific */}

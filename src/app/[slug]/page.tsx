@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 import { AutoLinkText } from '@/components/AutoLinkText'
+import { InlineCTA } from '@/components/InlineCTA'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City, CITY_DATA_UPDATED } from '@/data/cities'
 import { SERVICES } from '@/data/services'
@@ -1519,6 +1520,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
         </section>
 
         {/* Reviews Widget */}
+        <InlineCTA />
         <ReviewsSection />
 
         <ContactFormSection

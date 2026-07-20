@@ -55,7 +55,15 @@ EXTENDED COVERAGE:
 - Maine: Portland, South Portland, Lewiston, Bangor, Augusta
 - Vermont: Burlington, Rutland, Montpelier, Stowe
 
-The company provides free estimates and serves both residential and commercial clients within a 50-mile radius of Hudson, Massachusetts.
+The company provides free estimates to residential and commercial clients. Day-to-day
+work runs within roughly 50 miles of Hudson, Massachusetts — MetroWest, Worcester
+County and Greater Boston. The New England locations listed under EXTENDED COVERAGE
+are served for larger and scheduled projects, not same-week call-outs.
+
+(The flat "within a 50-mile radius" claim that used to close this section
+contradicted the list directly above it: Bangor is roughly 200 miles from Hudson and
+Burlington roughly 180. A reader — or a model quoting this file — could catch that in
+one step, which costs more trust than the wider coverage claim gains.)
 
 WHY CHOOSE A&M PAINTER INC:
 - ${business.yearsInBusiness}+ years of professional painting experience
