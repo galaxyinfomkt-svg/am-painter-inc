@@ -9,6 +9,7 @@ import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 import { RelatedGuides } from '@/components/RelatedGuides'
+import { ServiceDetails } from '@/components/ServiceDetails'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -319,6 +320,7 @@ export default function CabinetRefinishingPage() {
         <ServiceCityLinks serviceSlug="cabinet-refinishing" serviceName="Cabinet Refinishing" />
 
         {/* Reviews */}
+        <ServiceDetails serviceSlug="cabinet-refinishing" />
         <RelatedGuides serviceSlug="cabinet-refinishing" />
         <ReviewsSection />
 

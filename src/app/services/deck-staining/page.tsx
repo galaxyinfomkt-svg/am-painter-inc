@@ -9,6 +9,7 @@ import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 import { RelatedGuides } from '@/components/RelatedGuides'
+import { ServiceDetails } from '@/components/ServiceDetails'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -307,6 +308,7 @@ export default function DeckStainingPage() {
         <ServiceCityLinks serviceSlug="deck-staining" serviceName="Deck Staining" />
 
         {/* Reviews */}
+        <ServiceDetails serviceSlug="deck-staining" />
         <RelatedGuides serviceSlug="deck-staining" />
         <ReviewsSection />
 

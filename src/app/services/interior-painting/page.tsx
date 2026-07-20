@@ -9,6 +9,7 @@ import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
 import { RelatedGuides } from '@/components/RelatedGuides'
+import { ServiceDetails } from '@/components/ServiceDetails'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -339,6 +340,7 @@ export default function InteriorPaintingPage() {
         <ServiceCityLinks serviceSlug="interior-painting" serviceName="Interior Painting" />
 
         {/* Reviews */}
+        <ServiceDetails serviceSlug="interior-painting" />
         <RelatedGuides serviceSlug="interior-painting" />
         <ReviewsSection />
 
