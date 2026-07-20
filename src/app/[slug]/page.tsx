@@ -12,6 +12,8 @@ import { InlineCTA } from '@/components/InlineCTA'
 import { ServiceSchema, BreadcrumbSchema, LocalBusinessSchema, FAQSchema } from '@/components/Schema'
 import { CITIES, REGION_DATA, City, CITY_DATA_UPDATED } from '@/data/cities'
 import { SERVICES } from '@/data/services'
+import { housingEraFor } from '@/data/housing-era'
+import { historicFor } from '@/data/historic'
 import { business, services } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, HomeIcon, MapPinIcon, ExclamationCircleIcon, CheckIcon, SunIcon, BuildingOfficeIcon } from '@heroicons/react/24/solid'
 
@@ -1176,6 +1178,28 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                             : ` At ${city.ownerOccupiedPercent}% owner-occupied, a real share of ${city.name} property is tenanted, so we are used to landlord timelines, turnover windows, and quoting work that has to last between tenants.`)}
                       </p>
                     )}
+                    {/* National Register listings — a town-specific fact that
+                        can be checked against a federal register rather than
+                        guessed at. States what the town HAS; never implies this
+                        business worked on them or is approved by anyone. */}
+                    {(() => {
+                      const h = historicFor(city.slug)
+                      if (!h || h.count < 1) return null
+                      return (
+                        <p>
+                          {city.name} has{' '}
+                          <strong>
+                            {h.count} propert{h.count === 1 ? 'y' : 'ies'} on the National
+                            Register of Historic Places
+                          </strong>
+                          {h.examples.length > 0 && ` — among them ${h.examples.join(' and ')}`}.
+                          {h.count >= 8
+                            ? ` A register that size tells you what the housing stock is like: original millwork, many layers of paint, and exteriors where matching a period profile matters more than working fast.`
+                            : ` Towns with listed buildings tend to have the older stock around them too, which is where careful prep and lead-safe practice earn their keep.`}
+                        </p>
+                      )
+                    })()}
+
                     {nearbyCities.length > 0 && (
                       <p>
                         We work out of {business.address.city}
@@ -1187,6 +1211,44 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     )}
                   </div>
                 </div>
+
+                {/* Typical housing stock, derived from the town's real median
+                    year built (Census B25035).
+
+                    Shown ONLY where we have no known architectureStyle for the
+                    town: real local knowledge always wins, and this must never
+                    contradict it. The copy is framed as what housing of that
+                    PERIOD is generally like — never as a claim about this
+                    town's streets or neighborhoods, which we do not guess at.
+                    See data/housing-era.ts for why that line matters. */}
+                {city.medianYearBuilt != null && !(city.architectureStyle?.length) && (() => {
+                  const era = housingEraFor(city.medianYearBuilt)
+                  return (
+                    <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <BuildingOfficeIcon className="h-6 w-6 text-primary" />
+                        <h3 className="text-xl font-bold text-secondary">
+                          What {city.name}&apos;s housing is typically like
+                        </h3>
+                      </div>
+                      <p className="text-sm text-gray-500 mb-4">
+                        {city.name}&apos;s median home was built in{' '}
+                        <strong>{city.medianYearBuilt}</strong> (US Census). Homes of this
+                        period in Massachusetts are generally {era.era} stock — commonly{' '}
+                        {era.styles.slice(0, -1).join(', ')} and {era.styles.slice(-1)}.
+                      </p>
+                      <p className="text-gray-700 text-sm leading-relaxed">{era.paintingNote}</p>
+                      {era.leadCertain && (
+                        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+                          Because that predates the 1978 residential lead ban, we treat{' '}
+                          {city.name} work as lead-safe by default — we are an EPA Lead-Safe
+                          certified firm, and containment and HEPA cleanup are part of the job
+                          rather than an extra.
+                        </p>
+                      )}
+                    </div>
+                  )
+                })()}
 
                 {/* Neighborhoods + Housing Types. Both are local knowledge we
                     only have for some cities — each box hides itself when we
