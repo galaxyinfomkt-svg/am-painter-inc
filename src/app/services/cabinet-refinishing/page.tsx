@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -114,10 +115,12 @@ export default function CabinetRefinishingPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Cabinet Refinishing</span>
                 </nav>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Cabinet Painting & <span className="text-primary">Refinishing</span>
+                  Cabinet Painting & <span className="text-primary">Refinishing</span> in Massachusetts
                 </h1>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Transform your kitchen for a fraction of replacement cost. Factory-smooth finishes, endless color options, and professional results that last - without the chaos of a full remodel.
@@ -316,6 +319,7 @@ export default function CabinetRefinishingPage() {
         <ServiceCityLinks serviceSlug="cabinet-refinishing" serviceName="Cabinet Refinishing" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="cabinet-refinishing" />
         <ReviewsSection />
 
         <ContactFormSection

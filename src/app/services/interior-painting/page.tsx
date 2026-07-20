@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { business } from '@/data/business'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon } from '@heroicons/react/24/solid'
 import { ServiceCityLinks } from '@/components/ServiceCityLinks'
+import { RelatedGuides } from '@/components/RelatedGuides'
 import { ContactFormSection } from '@/components/ContactFormSection'
 import { LazyFormEmbed } from '@/components/LazyFormEmbed'
 
@@ -115,11 +116,13 @@ export default function InteriorPaintingPage() {
                 <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
                   <Link href="/" className="hover:text-primary transition">Home</Link>
                   <span>/</span>
+                  <Link href="/services/" className="hover:text-primary transition">Services</Link>
+                  <span>/</span>
                   <span className="text-white">Interior Painting</span>
                 </nav>
 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Interior Painting <span className="text-primary">Services</span>
+                  Interior Painting <span className="text-primary">Services</span> in Massachusetts
                 </h1>
 
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -336,6 +339,7 @@ export default function InteriorPaintingPage() {
         <ServiceCityLinks serviceSlug="interior-painting" serviceName="Interior Painting" />
 
         {/* Reviews */}
+        <RelatedGuides serviceSlug="interior-painting" />
         <ReviewsSection />
 
         <ContactFormSection
