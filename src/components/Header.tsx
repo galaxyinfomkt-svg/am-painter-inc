@@ -50,20 +50,20 @@ export function Header({ cityName }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top Bar - RED with Contact Info */}
       <div className="bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-10 text-sm">
-            <a href={`tel:${business.phoneRaw}`} className="flex items-center gap-2 font-bold hover:text-white/80 transition">
-              <PhoneIcon className="h-4 w-4" />
-              <span className="tracking-wide">{business.phone}</span>
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-2 sm:gap-4 h-10 text-xs sm:text-sm">
+            <a href={`tel:${business.phoneRaw}`} className="flex shrink-0 items-center gap-1.5 sm:gap-2 font-bold hover:text-white/80 transition">
+              <PhoneIcon className="h-4 w-4 shrink-0" />
+              <span className="tracking-wide whitespace-nowrap">{business.phone}</span>
             </a>
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <MapPinIcon className="h-4 w-4" />
-                <span className="font-medium">Serving {displayCity}, Massachusetts</span>
+            <div className="flex min-w-0 items-center gap-4 lg:gap-6">
+              <div className="hidden md:flex min-w-0 items-center gap-2">
+                <MapPinIcon className="h-4 w-4 shrink-0" />
+                <span className="font-medium truncate">Serving {displayCity}, Massachusetts</span>
               </div>
-              <a href={`mailto:${business.email}`} className="hidden md:flex items-center gap-2 hover:text-white/80 transition">
-                <EnvelopeIcon className="h-4 w-4" />
-                <span>{business.email}</span>
+              <a href={`mailto:${business.email}`} className="flex min-w-0 items-center gap-1.5 sm:gap-2 hover:text-white/80 transition">
+                <EnvelopeIcon className="h-4 w-4 shrink-0" />
+                <span className="truncate">{business.email}</span>
               </a>
             </div>
           </div>
