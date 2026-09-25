@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { CITIES } from '@/data/cities'
+import { indexedCityServices } from '@/data/indexed-pages'
 import { SERVICES } from '@/data/services'
 import { REGIONS } from '@/data/regions'
 import { business } from '@/data/business'
@@ -49,10 +49,10 @@ export async function POST(req: Request) {
       urls.push(`${business.url}/region/${region}/${svc}/`)
     }
   }
-  for (const city of Object.keys(CITIES)) {
-    for (const svc of Object.keys(SERVICES)) {
-      urls.push(`${business.url}/${svc}-${city}-ma/`)
-    }
+  urls.push(`${business.url}/region/`)
+  // Only indexed town×service pages — the same set the sitemap publishes.
+  for (const { serviceSlug, citySlug } of indexedCityServices()) {
+    urls.push(`${business.url}/${serviceSlug}-${citySlug}-ma/`)
   }
 
   // IndexNow accepts up to 10,000 URLs per request

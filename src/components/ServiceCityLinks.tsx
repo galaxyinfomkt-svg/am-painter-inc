@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { CITIES } from '@/data/cities'
+import { isIndexedCityService } from '@/data/indexed-pages'
 
 interface ServiceCityLinksProps {
   serviceSlug: string
@@ -7,10 +8,10 @@ interface ServiceCityLinksProps {
 }
 
 /**
- * Service hub block: lists EVERY city we serve with a direct link to the
- * matching {service}-{city}-ma page. Major internal-linking signal — each
- * service page becomes a hub that endorses 60+ children pages, which
- * compounds PageRank and helps Google understand topical coverage.
+ * Service hub block: lists every city we serve, linking the ones that have
+ * an indexed {service}-{city}-ma page (see data/indexed-pages.ts). Towns
+ * without one are still listed — we work there — but as plain text, so the
+ * hub never spends a link on a noindexed page.
  */
 export function ServiceCityLinks({ serviceSlug, serviceName }: ServiceCityLinksProps) {
   // Show ALL cities, grouped by region for readability
@@ -44,7 +45,7 @@ export function ServiceCityLinks({ serviceSlug, serviceName }: ServiceCityLinksP
             {serviceName} in <span className="text-primary">{cityCount}+ Massachusetts Cities</span>
           </h2>
           <p className="text-gray-600 mt-3 max-w-3xl mx-auto">
-            We provide {serviceName.toLowerCase()} across the entire MetroWest, Worcester County, and Greater Boston region. Click a city below for local details, pricing, and architecture-specific notes.
+            We provide {serviceName.toLowerCase()} across the entire MetroWest, Worcester County, and Greater Boston region. Linked towns have a page written for {serviceName.toLowerCase()} there.
           </p>
         </div>
 
@@ -53,17 +54,28 @@ export function ServiceCityLinks({ serviceSlug, serviceName }: ServiceCityLinksP
             <div key={regionLabel}>
               <h3 className="text-lg font-bold text-secondary mb-3 px-1">{regionLabel}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                {cities.map((city) => (
-                  <Link
-                    key={city.slug}
-                    href={`/${serviceSlug}-${city.slug}-ma/`}
-                    className="group flex items-center gap-2 px-3 py-2.5 bg-white rounded-lg hover:bg-primary transition-all shadow-sm text-center justify-center"
-                  >
-                    <span className="text-sm font-medium text-gray-700 group-hover:text-white transition">
+                {cities.map((city) =>
+                  // Link only towns with an indexed page for this service; the
+                  // rest are served but have no page of their own for it.
+                  isIndexedCityService(serviceSlug, city.slug) ? (
+                    <Link
+                      key={city.slug}
+                      href={`/${serviceSlug}-${city.slug}-ma/`}
+                      className="group flex items-center gap-2 px-3 py-2.5 bg-white rounded-lg hover:bg-primary transition-all shadow-sm text-center justify-center"
+                    >
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-white transition">
+                        {city.name}
+                      </span>
+                    </Link>
+                  ) : (
+                    <span
+                      key={city.slug}
+                      className="flex items-center px-3 py-2.5 rounded-lg text-center justify-center text-sm text-gray-500"
+                    >
                       {city.name}
                     </span>
-                  </Link>
-                ))}
+                  )
+                )}
               </div>
             </div>
           ))}

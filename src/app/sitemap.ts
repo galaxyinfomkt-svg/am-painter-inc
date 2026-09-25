@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
-import { CITIES, CITY_DATA_UPDATED } from '@/data/cities'
+import { CITY_DATA_UPDATED } from '@/data/cities'
+import { CONTENT_UPDATED } from '@/data/city-service-content'
+import { indexedCityServices } from '@/data/indexed-pages'
 import { SERVICES } from '@/data/services'
 import { REGIONS } from '@/data/regions'
 import { business } from '@/data/business'
@@ -100,21 +102,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(serviceImageMap[serviceSlug] ? { images: [serviceImageMap[serviceSlug]] } : {}),
   }))
 
-  // City + Service pages (the main SEO pages)
-  const cityServicePages: MetadataRoute.Sitemap = []
-  const citySlugs = Object.keys(CITIES)
+  // City + Service pages — ONLY the indexed ones (those with their own written
+  // content; see data/indexed-pages.ts). The other ~760 town×service URLs are
+  // noindex, and listing a noindexed URL in a sitemap sends Google a
+  // contradiction. Their lastmod is the day that content was written.
+  const contentDate = new Date(CONTENT_UPDATED + 'T00:00:00Z')
   const serviceSlugs = Object.keys(SERVICES)
-
-  for (const citySlug of citySlugs) {
-    for (const serviceSlug of serviceSlugs) {
-      cityServicePages.push({
-        url: `${baseUrl}/${serviceSlug}-${citySlug}-ma/`,
-        lastModified: currentDate,
-        changeFrequency: 'monthly',
-        priority: 0.8,
-      })
-    }
-  }
+  const cityServicePages: MetadataRoute.Sitemap = indexedCityServices().map(
+    ({ serviceSlug, citySlug }) => ({
+      url: `${baseUrl}/${serviceSlug}-${citySlug}-ma/`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    })
+  )
 
   // Special house-painting pages for high-population cities
   const housePaintingPages: MetadataRoute.Sitemap = [
@@ -132,8 +133,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Regional service pages (NEW - High Priority for Multi-State SEO)
-  const regionalServicePages: MetadataRoute.Sitemap = []
+  // Regional service pages, plus the /region/ index that parents them
+  const regionalServicePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/region/`,
+      lastModified: contentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+  ]
   const regionSlugs = Object.keys(REGIONS)
 
   for (const regionSlug of regionSlugs) {

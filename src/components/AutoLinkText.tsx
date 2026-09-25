@@ -1,5 +1,6 @@
 import { CITIES } from '@/data/cities'
 import { SERVICES } from '@/data/services'
+import { townHref } from '@/data/indexed-pages'
 
 interface AutoLinkTextProps {
   /** Plain-text content to scan + auto-link */
@@ -38,11 +39,10 @@ export function AutoLinkText({
 
   for (const city of Object.values(CITIES)) {
     if (city.slug === currentCitySlug) continue
-    // Match "Worcester" but not "Worcester County" (use word boundaries)
-    targets.push({
-      text: city.name,
-      href: `/interior-painting-${city.slug}-ma/`,
-    })
+    // Only towns with an indexed page are link targets.
+    const href = townHref(city.slug)
+    if (!href) continue
+    targets.push({ text: city.name, href })
   }
 
   for (const slug of Object.keys(SERVICES)) {

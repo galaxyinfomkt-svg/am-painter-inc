@@ -83,8 +83,11 @@ export function ReviewsSection() {
           <span className="inline-block bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full text-sm mb-4">
             Customer Reviews
           </span>
+          {/* "What Our Clients Say" above an empty section promised reviews the
+              page then didn't show — on every page of the site. The heading
+              only claims that once there is something under it. */}
           <h2 className="text-3xl lg:text-4xl font-bold text-secondary mb-4">
-            What Our Clients Say
+            {REVIEWS.length > 0 ? 'What Our Clients Say' : 'Worked with us? Tell your neighbors.'}
           </h2>
           {/* No star average and no review count — not here, and not in the
               schema. A count is a number that only helps once it's large, and

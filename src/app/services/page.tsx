@@ -6,6 +6,7 @@ import { ContactFormSection } from '@/components/ContactFormSection'
 import { BreadcrumbSchema, WebPageSchema, LocalBusinessSchema } from '@/components/Schema'
 import { SERVICES } from '@/data/services'
 import { CITIES } from '@/data/cities'
+import { townHref } from '@/data/indexed-pages'
 import { POSTS } from '@/data/posts'
 import { business } from '@/data/business'
 
@@ -106,7 +107,7 @@ export default function ServicesIndexPage() {
               {topCities.map((city) => (
                 <Link
                   key={city.slug}
-                  href={`/interior-painting-${city.slug}-ma/`}
+                  href={townHref(city.slug) ?? '/services/interior-painting/'}
                   className="block px-4 py-3 rounded-lg bg-white border border-gray-200 hover:bg-primary hover:text-white text-center font-medium text-gray-700 transition"
                 >
                   {city.name}, MA
