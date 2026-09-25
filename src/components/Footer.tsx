@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { business, services } from '@/data/business'
 import { CITIES } from '@/data/cities'
+import { townHref } from '@/data/indexed-pages'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -41,7 +42,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/region/greater-boston/interior-painting"
+                  href="/region/greater-boston/interior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Greater Boston
@@ -49,7 +50,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/rhode-island-new-hampshire/interior-painting"
+                  href="/region/rhode-island-new-hampshire/interior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Rhode Island and New Hampshire
@@ -57,7 +58,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/maine-vermont/interior-painting"
+                  href="/region/maine-vermont/interior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Maine and Vermont
@@ -65,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/worcester-nearby/interior-painting"
+                  href="/region/worcester-nearby/interior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Worcester and Nearby Towns
@@ -82,7 +83,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/region/greater-boston/exterior-painting"
+                  href="/region/greater-boston/exterior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Greater Boston
@@ -90,7 +91,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/rhode-island-new-hampshire/exterior-painting"
+                  href="/region/rhode-island-new-hampshire/exterior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Rhode Island and New Hampshire
@@ -98,7 +99,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/maine-vermont/exterior-painting"
+                  href="/region/maine-vermont/exterior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Maine and Vermont
@@ -106,7 +107,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/worcester-nearby/exterior-painting"
+                  href="/region/worcester-nearby/exterior-painting/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Worcester and Nearby Towns
@@ -123,7 +124,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/region/greater-boston/cabinet-refinishing"
+                  href="/region/greater-boston/cabinet-refinishing/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Greater Boston
@@ -131,7 +132,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/rhode-island-new-hampshire/cabinet-refinishing"
+                  href="/region/rhode-island-new-hampshire/cabinet-refinishing/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Rhode Island and New Hampshire
@@ -139,7 +140,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/maine-vermont/cabinet-refinishing"
+                  href="/region/maine-vermont/cabinet-refinishing/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Maine and Vermont
@@ -147,7 +148,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/worcester-nearby/cabinet-refinishing"
+                  href="/region/worcester-nearby/cabinet-refinishing/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Worcester and Nearby Towns
@@ -164,7 +165,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/region/greater-boston/remodeling"
+                  href="/region/greater-boston/remodeling/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Greater Boston
@@ -172,7 +173,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/rhode-island-new-hampshire/remodeling"
+                  href="/region/rhode-island-new-hampshire/remodeling/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Rhode Island and New Hampshire
@@ -180,7 +181,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/maine-vermont/remodeling"
+                  href="/region/maine-vermont/remodeling/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Maine and Vermont
@@ -188,7 +189,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/region/worcester-nearby/remodeling"
+                  href="/region/worcester-nearby/remodeling/"
                   className="text-sm text-gray-600 hover:text-primary transition"
                 >
                   Worcester and Nearby Towns
@@ -216,17 +217,23 @@ export function Footer() {
               <div key={columnIndex}>
                 <ul className="space-y-2">
                   {column.map((city, cityIdx) => {
-                    // Rotate through different services for diverse internal linking
-                    const serviceRotation = ['interior-painting', 'exterior-painting', 'cabinet-refinishing', 'deck-staining', 'drywall-repair', 'remodeling', 'general-contracting']
-                    const serviceSlug = serviceRotation[(columnIndex + cityIdx) % serviceRotation.length]
+                    // Rotate the painting services for varied anchors, but only
+                    // ever link a page that is indexed; towns without one are
+                    // listed as plain text (we still serve them).
+                    const serviceRotation = ['interior-painting', 'exterior-painting', 'cabinet-refinishing', 'deck-staining']
+                    const href = townHref(city.slug, serviceRotation[(columnIndex + cityIdx) % serviceRotation.length])
                     return (
                       <li key={city.slug}>
-                        <Link
-                          href={`/${serviceSlug}-${city.slug}-ma`}
-                          className="text-sm text-gray-600 hover:text-primary transition block"
-                        >
-                          {city.name}
-                        </Link>
+                        {href ? (
+                          <Link
+                            href={href}
+                            className="text-sm text-gray-600 hover:text-primary transition block"
+                          >
+                            {city.name}
+                          </Link>
+                        ) : (
+                          <span className="text-sm text-gray-500 block">{city.name}</span>
+                        )}
                       </li>
                     )
                   })}

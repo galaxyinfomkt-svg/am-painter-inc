@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { REGIONS, getRegionBySlug } from '@/data/regions'
 import { SERVICES, getServiceBySlug } from '@/data/services'
+import { isIndexedCityService } from '@/data/indexed-pages'
 import { CITIES } from '@/data/cities'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
@@ -126,7 +127,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
         'maine-vermont': [],
         'worcester-nearby': ['worcester-county', 'metrowest', 'central-ma'],
       }
-      return cityRegionMap[regionSlug]?.includes(c.region)
+      return cityRegionMap[regionSlug]?.includes(c.region) && isIndexedCityService(serviceSlug, c.slug)
     })
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 12)

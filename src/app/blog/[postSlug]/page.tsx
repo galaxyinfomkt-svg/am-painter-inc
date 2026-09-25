@@ -9,6 +9,7 @@ import { InlineCTA } from '@/components/InlineCTA'
 import { BreadcrumbSchema, FAQSchema, OwnerPersonSchema } from '@/components/Schema'
 import { POSTS, getPostBySlug } from '@/data/posts'
 import { CITIES } from '@/data/cities'
+import { townHref } from '@/data/indexed-pages'
 import { business } from '@/data/business'
 
 interface PageProps {
@@ -256,10 +257,12 @@ export default async function BlogPostPage({ params }: PageProps) {
                   {post.relatedCities
                     .map((slug) => CITIES[slug])
                     .filter(Boolean)
-                    .map((city) => (
+                    .map((city) => ({ city, href: townHref(city.slug, post.relatedService) }))
+                    .filter((x): x is { city: typeof x.city; href: string } => x.href !== null)
+                    .map(({ city, href }) => (
                       <Link
                         key={city.slug}
-                        href={`/${post.relatedService ?? 'interior-painting'}-${city.slug}-ma/`}
+                        href={href}
                         className="block px-4 py-3 rounded-lg bg-gray-50 hover:bg-primary hover:text-white text-center font-medium text-gray-700 transition"
                       >
                         {city.name}, MA

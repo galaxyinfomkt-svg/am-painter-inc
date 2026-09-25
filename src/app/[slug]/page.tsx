@@ -15,6 +15,9 @@ import { SERVICES } from '@/data/services'
 import { housingEraFor } from '@/data/housing-era'
 import { historicFor } from '@/data/historic'
 import { business, services } from '@/data/business'
+import { CITY_SERVICE_CONTENT, CONTENT_UPDATED } from '@/data/city-service-content'
+import { isIndexedCityService, cityServiceHref } from '@/data/indexed-pages'
+import { INDEXED_CITY_SERVICE_KEYS } from '@/data/indexed-keys'
 import { PhoneIcon, CheckCircleIcon, StarIcon, ShieldCheckIcon, ClockIcon, HomeIcon, MapPinIcon, ExclamationCircleIcon, CheckIcon, SunIcon, BuildingOfficeIcon } from '@heroicons/react/24/solid'
 
 // Helper function to parse the slug (e.g., "interior-painting-marlborough-ma" -> { service: "interior-painting", city: "marlborough" })
@@ -194,79 +197,6 @@ function milesBetween(a: City, b: City): number | null {
     Math.sin(dLat / 2) ** 2 +
     Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2
   return 2 * R * Math.asin(Math.sqrt(h))
-}
-
-// Get city-specific challenges with detailed descriptions based on service type
-function getCityServiceChallenges(city: City, serviceName: string): Array<{ title: string; desc: string }> {
-  // No known local challenges → render nothing. The section is hidden.
-  const challenges = city.challenges?.slice(0, 4) ?? []
-  if (!challenges.length) return []
-  const climateChallenge = climateOf(city) ?? ''
-
-  // Create service-specific descriptions for each city challenge
-  return challenges.map((challenge, idx) => {
-    let desc = ''
-
-    if (serviceName.includes('Interior')) {
-      const descs = [
-        `${city.name}'s ${archOf(city) ?? 'older'} homes often have this issue. Our interior specialists know exactly how to handle it with proper prep and premium paints.`,
-        `Common in ${city.areaType} ${city.name} properties. We use moisture-resistant primers and low-VOC paints for lasting results.`,
-        `With ${city.pre1980Percent ?? 60}% of ${city.name} homes built before 1980 (US Census), many fall under the EPA's pre-1978 lead rule — our team is Lead-Safe certified.`,
-        `${city.name}'s ${climateChallenge.split(',')[0]} means interior surfaces need specialized treatment for durability.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else if (serviceName.includes('Exterior')) {
-      const descs = [
-        `${city.name}'s ${climateChallenge} directly impacts exterior paint. We use weather-specific coatings designed for Massachusetts conditions.`,
-        `${archOf(city) ?? 'Traditional'} homes in ${city.name} require specialized prep work. Our team has ${business.yearsInBusiness}+ years experience with local architecture.`,
-        `The ${REGION_DATA[city.region]?.name || 'area'} climate demands premium exterior paints. We only use Benjamin Moore & Sherwin-Williams products.`,
-        `${city.areaType === 'urban' ? 'Urban' : 'Suburban'} ${city.name} properties face unique challenges. Our EPA-certified team ensures proper protection.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else if (serviceName.includes('Cabinet')) {
-      const descs = [
-        `Kitchens in ${city.name}'s ${archOf(city) ?? 'traditional'} homes need factory-smooth finishes. We spray cabinets for flawless results.`,
-        `${city.name} homeowners expect premium cabinet refinishing. Our conversion varnishes outlast standard paint.`,
-        `With median home values of $${(city.medianHomeValue / 1000).toFixed(0)}K in ${city.name}, cabinet quality matters. We deliver showroom finishes.`,
-        `${city.areaType === 'urban' ? 'Urban' : city.areaType === 'suburban' ? 'Suburban' : 'Rural'} ${city.name} kitchens deserve expert cabinet painting at 1/3 the cost of replacement.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else if (serviceName.includes('Deck')) {
-      const descs = [
-        `${city.name}'s ${climateChallenge} is tough on decks. We use penetrating stains designed for Massachusetts weather.`,
-        `Decks in ${city.name}'s ${archOf(city) ?? 'traditional'} homes need proper restoration. Complete sanding, repair, and premium staining.`,
-        `${REGION_DATA[city.region]?.name || 'Area'} humidity and temperature swings damage deck finishes. Our products are specifically chosen for durability.`,
-        `${city.name} outdoor living spaces deserve professional deck care. We restore and protect for years of enjoyment.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else if (serviceName.includes('Drywall')) {
-      const descs = [
-        `${city.name}'s ${archOf(city) ?? 'older'} homes often have plaster and drywall issues. We match textures perfectly.`,
-        `Water damage is common due to ${climateChallenge.split(',')[0]}. Our drywall team repairs and prevents future problems.`,
-        `With ${city.pre1980Percent ?? 60}% of ${city.name} homes built before 1980, lead-safe containment is standard on our drywall repairs.`,
-        `${city.areaType === 'urban' ? 'Multi-family' : 'Single-family'} ${city.name} properties need expert drywall work. Seamless patches, perfect for paint.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else if (serviceName.includes('Remodeling')) {
-      const descs = [
-        `${city.name}'s ${archOf(city) ?? 'traditional'} homes benefit from thoughtful remodeling that preserves character while adding modern function.`,
-        `Kitchen and bath remodeling in ${city.name}'s $${(city.medianHomeValue / 1000).toFixed(0)}K average homes requires quality craftsmanship.`,
-        `${REGION_DATA[city.region]?.name || 'Area'} homeowners expect premium remodeling. We coordinate all trades for seamless projects.`,
-        `From permits to final walkthrough, ${city.name} remodeling projects get our full attention and project management expertise.`
-      ]
-      desc = descs[idx] || descs[0]
-    } else {
-      const descs = [
-        `General contracting in ${city.name} requires knowledge of local codes and ${archOf(city) ?? 'local'} building styles.`,
-        `We handle permits, subcontractors, and scheduling for all ${city.name} construction projects.`,
-        `${city.areaType === 'urban' ? 'Commercial and residential' : 'Residential'} projects in ${city.name} get dedicated project management.`,
-        `${business.yearsInBusiness}+ years serving ${REGION_DATA[city.region]?.name || 'Massachusetts'} means we know how to deliver on time and on budget.`
-      ]
-      desc = descs[idx] || descs[0]
-    }
-
-    return { title: challenge, desc }
-  })
 }
 
 // Get what we offer based on service - these are consistent per service type
@@ -687,6 +617,13 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
 export const dynamicParams = true
 
 export async function generateStaticParams() {
+  // The indexed-page list (client-safe keys) and the content file must agree,
+  // or a page would be indexed with no content or written but noindexed.
+  const contentKeys = Object.keys(CITY_SERVICE_CONTENT).sort().join('|')
+  if (contentKeys !== [...INDEXED_CITY_SERVICE_KEYS].sort().join('|')) {
+    throw new Error('indexed-keys.ts is out of sync with city-service-content.ts — regenerate both')
+  }
+
   const paths: { slug: string }[] = []
   const cityKeys = Object.keys(CITIES)
   const serviceKeys = Object.keys(SERVICES)
@@ -775,11 +712,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     business.name,
   ]
 
+  // Only towns×services with their own written content are offered to search.
+  // The rest stay reachable but noindex — see data/indexed-pages.ts for why.
+  const indexable = isIndexedCityService(service.slug, city.slug)
+
   return {
     title: { absolute: title },
     description,
     keywords,
     alternates: { canonical },
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title: `${serviceShort} ${city.name}, MA | Family-Owned Local Painters`,
       description: `Local family-owned painters for ${city.name}, MA. ${hook} Free written quote in 24h. EPA Lead-Safe certified firm.`,
@@ -832,7 +776,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
   // that ranks towns by how similar their radius is, so Worcester listed
   // Westford — both ~15mi from Hudson, but 29mi apart in opposite directions.
   const nearbyCities = Object.values(CITIES)
-    .filter(c => c.slug !== citySlug)
+    .filter(c => c.slug !== citySlug && isIndexedCityService(serviceSlug, c.slug))
     .map(c => ({ city: c, miles: milesBetween(city, c) }))
     .sort((a, b) => {
       if (a.miles != null && b.miles != null) return a.miles - b.miles
@@ -850,14 +794,27 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
   // keyed off these hide themselves when empty.
   const neighborhoods = city.neighborhoods ?? []
   const housingTypes = city.architectureStyle ?? []
-  const commonIssues = getCityServiceChallenges(city, service.name) // City-specific challenges
+  // Local-knowledge challenge list, titles only. The per-service descriptions
+  // that used to follow each title were one template sentence per slot, so they
+  // read identically on every page — the written content now covers the why.
+  const commonIssues = city.challenges?.slice(0, 4) ?? []
+  // Hand-planned editorial content for this exact town and service, when it
+  // exists. Its presence is also what makes the page indexable.
+  const content = CITY_SERVICE_CONTENT[`${service.slug}-${city.slug}`] ?? null
   const whatWeOffer = getWhatWeOffer(service.name)
   const cityIntro = getCityIntro(city, service.name) // Unique intro paragraph
   const cityDetails = getCityDetailsParagraph(city) // Second paragraph using neighborhoods/county/zip
-  const cityFAQs = getCityServiceFAQs(city, service.name) // Drives FAQPage JSON-LD and visible Q&A
+  // Drives FAQPage JSON-LD and visible Q&A. Pages with written content lead
+  // with their own question and keep only the cost one from the shared set —
+  // the rest were the same answers on every page with the town name swapped.
+  const sharedFAQs = getCityServiceFAQs(city, service.name)
+  const cityFAQs = content
+    ? [content.faq, sharedFAQs.find((f) => /cost/i.test(f.question)) ?? sharedFAQs[0]]
+    : sharedFAQs
   const priceRange = getCityServicePriceRange(city, service.name) // Citable price fact for AEO/LLM citations
   // Real content date, not build time. See CITY_DATA_UPDATED in data/cities.ts.
-  const lastUpdated = new Date(CITY_DATA_UPDATED + 'T00:00:00Z').toLocaleDateString('en-US', {
+  const updatedOn = content ? CONTENT_UPDATED : CITY_DATA_UPDATED
+  const lastUpdated = new Date(updatedOn + 'T00:00:00Z').toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
   })
   const regionName = REGION_DATA[city.region]?.name || 'Massachusetts'
@@ -982,9 +939,20 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   <div className="flex items-center gap-3 mb-4">
                     <MapPinIcon className="h-6 w-6 text-primary" />
                     <h2 className="text-3xl md:text-4xl font-bold text-secondary">
-                      Your Trusted {service.name} Contractor in {city.name}
+                      {content ? content.heading : `${service.name} in ${city.name}: what the job involves`}
                     </h2>
                   </div>
+                  {content ? (
+                    content.lead.map((para, idx) => (
+                      <p
+                        key={idx}
+                        className={`${idx === 0 ? 'text-lg' : 'text-base'} text-gray-600 leading-relaxed mb-4`}
+                      >
+                        {para}
+                      </p>
+                    ))
+                  ) : (
+                  <>
                   <p className="text-lg text-gray-600 leading-relaxed mb-4">
                     <AutoLinkText
                       text={cityIntro}
@@ -1001,6 +969,8 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       maxLinks={2}
                     />
                   </p>
+                  </>
+                  )}
                   {/* Climate Info Box — city-level note where we have one,
                       otherwise the region's. Hidden if we have neither. */}
                   {climateOf(city) && (
@@ -1030,11 +1000,8 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       {priceRange.unit} — {priceRange.note}.
                     </p>
                     <p className="mt-2 text-xs text-gray-500">
-                      <strong>These are market examples, not our prices.</strong> They describe the
-                      typical 2026 range across MetroWest Massachusetts for work of this kind, so you
-                      have a reference point before you talk to anyone. {business.name} does not
-                      price from a table — every quote is written for the specific property after a
-                      free walkthrough, and yours may fall outside this range in either direction.
+                      <strong>A market reference, not our price.</strong> We quote each property
+                      in writing after a free walkthrough, and yours may land outside this range.
                     </p>
                   </div>
 
@@ -1059,10 +1026,32 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                     </span>
                     <span aria-hidden="true">·</span>
                     <span>
-                      Updated <time dateTime={CITY_DATA_UPDATED}>{lastUpdated}</time>
+                      Updated <time dateTime={updatedOn}>{lastUpdated}</time>
                     </span>
                   </div>
                 </div>
+
+                {/* Before-you-hire checklist written for this town and service. */}
+                {content && content.planning.length > 0 && (
+                  <div>
+                    <h3 className="text-2xl font-bold text-secondary mb-4">
+                      Before you book {service.name.toLowerCase()} in {city.name}
+                    </h3>
+                    <ol className="space-y-4">
+                      {content.planning.map((tip, idx) => (
+                        <li key={idx} className="flex gap-4 bg-gray-50 rounded-xl p-5">
+                          <span className="w-8 h-8 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <div>
+                            <h4 className="font-bold text-secondary mb-1">{tip.title}</h4>
+                            <p className="text-sm text-gray-600 leading-relaxed">{tip.body}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
 
                 {/* Housing snapshot — every figure is a committed Census value or
                     computed from one, so this renders for ALL 143 towns. It
@@ -1148,7 +1137,11 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </dl>
 
                   <div className="space-y-2 text-gray-700 text-sm leading-relaxed border-t border-slate-200 pt-4">
-                    {city.medianHomeValue != null && SERVED_MEDIAN_HOME_VALUE != null && (
+                    {/* The three interpretive paragraphs below are templates keyed
+                        on Census bands. Pages with written content already
+                        interpret these numbers for the specific service, so
+                        there they show only the figures above. */}
+                    {!content && city.medianHomeValue != null && SERVED_MEDIAN_HOME_VALUE != null && (
                       <p>
                         {(() => {
                           const ratio = city.medianHomeValue / SERVED_MEDIAN_HOME_VALUE
@@ -1162,7 +1155,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                         })()}
                       </p>
                     )}
-                    {city.pre1980Percent != null && (
+                    {!content && city.pre1980Percent != null && (
                       <p>
                         {city.medianYearBuilt != null
                           ? `The median ${city.name} home was built in ${city.medianYearBuilt}, and ${city.pre1980Percent}% of the town's housing predates 1980. `
@@ -1177,7 +1170,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                         A town that is 91% detached houses and one that is a
                         third two- and three-deckers are different trades:
                         different access, staging, and who signs the contract. */}
-                    {city.singleFamilyPercent != null && (
+                    {!content && city.singleFamilyPercent != null && (
                       <p>
                         {city.smallMultiFamilyPercent != null && city.smallMultiFamilyPercent >= 20
                           ? `${city.smallMultiFamilyPercent}% of ${city.name}'s housing sits in two- to four-unit buildings — the two- and three-deckers this part of Massachusetts is built from. That work means staging off porches and back stairs, coordinating with more than one household, and prepping clapboard that has been repainted many times over.`
@@ -1303,73 +1296,25 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                   </div>
                 )}
 
-                {/* City-Specific Challenges. The challenge list is local
-                    knowledge — where we don't have it, the heading and grid
-                    are omitted entirely rather than framing an empty list. */}
-                <div>
-                  {commonIssues.length > 0 && (
-                    <>
-                      <h3 className="text-2xl font-bold text-secondary mb-6">
-                        {city.name}-Specific {service.name} Challenges We Solve
-                      </h3>
-                      <p className="text-gray-600 mb-6">
-                        {city.name}&apos;s {housingTypes[0] || 'older'} homes{climateHead(city) ? ` and ${climateHead(city)} climate` : ''} create specific {service.name.toLowerCase()} challenges. Our {regionName} expertise means we know how to handle these local issues:
-                      </p>
-
-                      <div className="grid md:grid-cols-2 gap-4 mb-8">
-                        {commonIssues.map((issue, idx) => (
-                          <div key={idx} className="bg-red-50 border border-red-100 rounded-xl p-4">
-                            <div className="flex items-start gap-3">
-                              <ExclamationCircleIcon className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5" />
-                              <div>
-                                <h4 className="font-bold text-secondary">{issue.title}</h4>
-                                <p className="text-sm text-gray-600">{issue.desc}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
-
-                  {/* Expert Solutions Box - Like RS */}
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-                    <div className="flex items-start gap-3">
-                      <CheckCircleIcon className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h4 className="text-lg font-bold text-secondary">Why {city.name} Homeowners Trust {business.name}</h4>
-                        <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {regionName}&apos;s {REGION_DATA[city.region]?.description || 'communities'}{archPhrase(city) ? `, we understand ${city.name}'s ${archPhrase(city)} architecture` : ''}.{pre1980 ? ` ${pre1980}% of ${city.name} homes were built before 1980 (US Census) — our EPA Lead-Safe certified team handles pre-1978 housing to the federal RRP standard.` : ' Our team is EPA Lead-Safe certified.'} As a family-owned local firm, we&apos;re committed to delivering {city.name}-specific quality and accountability on every project.
-                        </p>
-                      </div>
-                    </div>
+                {/* Local issues we already know about in this town — local
+                    knowledge, so the block is omitted where we have none. The
+                    generic "why trust us" box and 4-step process that used to
+                    sit here were identical on every page and are gone. */}
+                {commonIssues.length > 0 && (
+                  <div>
+                    <h3 className="text-2xl font-bold text-secondary mb-4">
+                      What we watch for in {city.name}
+                    </h3>
+                    <ul className="grid md:grid-cols-2 gap-3">
+                      {commonIssues.map((issue, idx) => (
+                        <li key={idx} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4">
+                          <ExclamationCircleIcon className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{issue}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-
-                {/* Our Process Section */}
-                <div>
-                  <h3 className="text-2xl font-bold text-secondary mb-6">
-                    Our {service.name} Process in {city.name}
-                  </h3>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      { step: '1', title: 'Free Consultation', desc: 'We assess your project and provide a detailed estimate' },
-                      { step: '2', title: 'Preparation', desc: 'Thorough surface prep including repairs and priming' },
-                      { step: '3', title: 'Execution', desc: 'Expert application with premium materials' },
-                      { step: '4', title: 'Final Walkthrough', desc: 'Ensuring your complete satisfaction' },
-                    ].map((item) => (
-                      <div key={item.step} className="bg-gray-50 rounded-xl p-5">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
-                            {item.step}
-                          </span>
-                          <h4 className="font-bold text-secondary">{item.title}</h4>
-                        </div>
-                        <p className="text-sm text-gray-600 ml-11">{item.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                )}
 
                 {/* What We Offer - Like RS */}
                 <div>
@@ -1427,7 +1372,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
                       {otherServices.map((s, idx) => (
                         <Link
                           key={s.id}
-                          href={`/${s.id}-${citySlug}-ma`}
+                          href={cityServiceHref(s.id, citySlug)}
                           className="flex items-center justify-between bg-white/10 hover:bg-white/20 rounded-lg px-4 py-3 text-white transition"
                         >
                           <div className="flex items-center gap-2">
@@ -1513,7 +1458,8 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
           </div>
         </section>
 
-        {/* Nearby Cities */}
+        {/* Nearby Cities — only towns with an indexed page for this service */}
+        {nearbyCities.length > 0 && (
         <section className="py-16 lg:py-20 bg-stone">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -1527,7 +1473,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
               {nearbyCities.map((c) => (
                 <Link
                   key={c.slug}
-                  href={`/${serviceSlug}-${c.slug}-ma`}
+                  href={`/${serviceSlug}-${c.slug}-ma/`}
                   className="group flex items-center gap-2 px-4 py-3 bg-white rounded-xl hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
                 >
                   <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition" />
@@ -1545,6 +1491,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
             </div>
           </div>
         </section>
+        )}
 
         {/* CTA Section */}
         <section id="contact" className="py-20 lg:py-28 bg-primary">
