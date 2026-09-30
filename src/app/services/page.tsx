@@ -12,7 +12,7 @@ import { business } from '@/data/business'
 
 export const metadata: Metadata = {
   title: { absolute: 'Painting & Remodeling Services in Massachusetts' },
-  description: `Interior and exterior painting, cabinet refinishing, deck staining, drywall, remodeling and general contracting across MetroWest Massachusetts. Licensed, ${business.insurance} insured, EPA Lead-Safe. Free quote in 24h.`,
+  description: `Interior and exterior painting, cabinets, decks, drywall, remodeling and general contracting across MetroWest, MA. EPA Lead-Safe. Free written estimate.`,
   alternates: { canonical: `${business.url}/services/` },
   openGraph: {
     title: 'Painting & Remodeling Services in Massachusetts',

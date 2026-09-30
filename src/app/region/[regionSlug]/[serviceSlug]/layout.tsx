@@ -40,91 +40,95 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     }
   }
 
-  // Unique SEO titles for each region-service combination
+  // Titles ≤60 chars and descriptions ≤158, so neither is cut in the result.
+  // The previous set ran to 86 / 278 chars and made claims nothing backs:
+  // "Licensed in ME & VT", "Historical district approved", "Benjamin Moore
+  // certified", "Emergency service available", plus labels like "Budget-Friendly
+  // Excellence". Only verifiable facts here: services, the MA HIC number, the
+  // EPA Lead-Safe firm status, family-owned, based in Hudson.
   const titleTemplates: Record<string, Record<string, string>> = {
     'greater-boston': {
-      'interior-painting': 'Greater Boston Interior Painting | Family-Owned Local | Historic Homes & Modern Condos',
-      'exterior-painting': 'Boston Exterior Painting | Salt-Air Resistant Coatings',
-      'cabinet-refinishing': `Cabinet Refinishing Greater Boston | Luxury Kitchen Transformations`,
-      'deck-staining': `Deck Staining & Weatherproofing | Greater Boston Coastal Homes`,
-      'drywall-repair': `Drywall Repair Greater Boston | Brownstone & Condo Specialists`,
-      'remodeling': `Home Remodeling Greater Boston | Historic Preservation Experts`,
-      'general-contracting': `General Contractor Greater Boston | Full-Service Renovation`
+      'interior-painting': 'Interior Painting in Greater Boston | A&M Painter',
+      'exterior-painting': 'Exterior House Painting in Greater Boston | A&M Painter',
+      'cabinet-refinishing': 'Cabinet Refinishing in Greater Boston | A&M Painter',
+      'deck-staining': 'Deck Staining in Greater Boston | A&M Painter',
+      'drywall-repair': 'Drywall Repair in Greater Boston | A&M Painter',
+      'remodeling': 'Home Remodeling in Greater Boston | A&M Painter',
+      'general-contracting': 'General Contractor in Greater Boston | A&M Painter',
     },
     'rhode-island-new-hampshire': {
-      'interior-painting': 'Interior Painting RI & NH | Coastal Homes & Mountain Retreats',
-      'exterior-painting': `Exterior Painting Rhode Island & New Hampshire | Weather-Tough Coatings`,
-      'cabinet-refinishing': `Cabinet Refinishing RI & NH | Providence to Portsmouth`,
-      'deck-staining': `Deck Staining RI & NH | Lake & Coastal Properties`,
-      'drywall-repair': `Drywall Repair Rhode Island & New Hampshire | Expert Service`,
-      'remodeling': `Home Remodeling RI & NH | Newport to Manchester`,
-      'general-contracting': `General Contractor RI & NH | Residential & Commercial`
+      'interior-painting': 'Interior Painting in Rhode Island & New Hampshire',
+      'exterior-painting': 'Exterior Painting in Rhode Island & New Hampshire',
+      'cabinet-refinishing': 'Cabinet Refinishing in Rhode Island & New Hampshire',
+      'deck-staining': 'Deck Staining in Rhode Island & New Hampshire',
+      'drywall-repair': 'Drywall Repair in Rhode Island & New Hampshire',
+      'remodeling': 'Home Remodeling in Rhode Island & New Hampshire',
+      'general-contracting': 'General Contractor in Rhode Island & New Hampshire',
     },
     'maine-vermont': {
-      'interior-painting': 'Interior Painting Maine & Vermont | Cold-Climate Specialists',
-      'exterior-painting': `Exterior Painting ME & VT | Extreme Weather Protection`,
-      'cabinet-refinishing': `Cabinet Refinishing Maine & Vermont | Portland to Burlington`,
-      'deck-staining': `Deck Staining ME & VT | Mountain & Coastal Properties`,
-      'drywall-repair': `Drywall Repair Maine & Vermont | Professional Service`,
-      'remodeling': `Home Remodeling ME & VT | Barns, Farmhouses & Modern Homes`,
-      'general-contracting': `General Contractor Maine & Vermont | Licensed & Insured`
+      'interior-painting': 'Interior Painting in Maine & Vermont | A&M Painter',
+      'exterior-painting': 'Exterior Painting in Maine & Vermont | A&M Painter',
+      'cabinet-refinishing': 'Cabinet Refinishing in Maine & Vermont | A&M Painter',
+      'deck-staining': 'Deck Staining in Maine & Vermont | A&M Painter',
+      'drywall-repair': 'Drywall Repair in Maine & Vermont | A&M Painter',
+      'remodeling': 'Home Remodeling in Maine & Vermont | A&M Painter',
+      'general-contracting': 'General Contractor in Maine & Vermont | A&M Painter',
     },
     'worcester-nearby': {
-      'interior-painting': 'Interior Painting Worcester MA | Triple-Decker Specialists',
-      'exterior-painting': `Exterior Painting Worcester & Central MA | Freeze-Thaw Resistant`,
-      'cabinet-refinishing': `Cabinet Refinishing Worcester MA | Affordable Quality`,
-      'deck-staining': `Deck Staining Worcester & Nearby | Budget-Friendly Excellence`,
-      'drywall-repair': `Drywall Repair Worcester MA | Multi-Family Experts`,
-      'remodeling': `Home Remodeling Worcester | Victorian & Triple-Decker Renovations`,
-      'general-contracting': `General Contractor Worcester MA | Value-Driven Projects`
-    }
+      'interior-painting': 'Interior Painting in Worcester & Nearby Towns',
+      'exterior-painting': 'Exterior Painting in Worcester & Nearby Towns',
+      'cabinet-refinishing': 'Cabinet Refinishing in Worcester & Nearby Towns',
+      'deck-staining': 'Deck Staining in Worcester & Nearby Towns',
+      'drywall-repair': 'Drywall Repair in Worcester & Nearby Towns',
+      'remodeling': 'Home Remodeling in Worcester & Nearby Towns',
+      'general-contracting': 'General Contractor in Worcester & Nearby Towns',
+    },
   }
 
-  // Unique meta descriptions for each region-service combination
+
   const descriptionTemplates: Record<string, Record<string, string>> = {
     'greater-boston': {
-      'interior-painting': `Expert interior painting for Greater Boston's historic brownstones, Victorian homes, and luxury condos. Careful work in historic districts. Salt-air resistant coatings. Serving Boston, Cambridge, Newton, Brookline. Licensed & ${business.insurance} insured. Free estimates: ${business.phone}`,
-      'exterior-painting': `Boston exterior painting specialists using marine-grade, salt-resistant coatings for coastal properties. Historical district approved. Serving Greater Boston metro: Boston, Cambridge, Somerville, Brookline, Newton. ${business.yearsInBusiness}+ years experience. EPA Lead-Safe certified family-owned firm.`,
-      'cabinet-refinishing': `Premium cabinet refinishing for Greater Boston luxury homes. Factory-smooth finishes on historic and contemporary kitchens. Serving Boston, Cambridge, Newton, Waltham, Lexington. Benjamin Moore & Sherwin-Williams. Free estimates: ${business.phone}`,
-      'deck-staining': `Deck staining and weatherproofing for Greater Boston coastal homes. Salt-resistant sealers, UV protection, mold prevention. Serving waterfront and suburban properties. Licensed & insured. Call ${business.phone} for free estimate.`,
-      'drywall-repair': `Drywall repair for Greater Boston brownstones, triple-deckers, and condos. Water damage, cracks, holes, smooth finishes. Serving Boston, Cambridge, Somerville, Arlington. Same-day response. ${business.phone}`,
-      'remodeling': `Full-service home remodeling in Greater Boston. Historic preservation specialists for Federal, Victorian, and Georgian homes. Kitchen, bath, whole-home renovations. Cambridge & Boston compliant. Call ${business.phone}`,
-      'general-contracting': `Licensed general contractor serving Greater Boston metro. Residential & commercial projects. Condo, brownstone, and new construction expertise. ${business.insurance} insured. Family-owned. ${business.phone}`
+      'interior-painting': 'Interior painting for Greater Boston homes and condos, from plaster walls in older houses to newer drywall. EPA Lead-Safe firm. Free written estimate.',
+      'exterior-painting': 'Exterior house painting across Greater Boston: clapboard, trim and older multi-family buildings, with lead-safe prep on pre-1978 homes. Free written estimate.',
+      'cabinet-refinishing': 'Kitchen cabinet painting and refinishing in Greater Boston. Sprayed finishes on sound cabinet boxes, an alternative to replacement. Free written estimate.',
+      'deck-staining': 'Deck cleaning, repair and staining for Greater Boston homes, with stain chosen for the wood and how much sun the deck gets. Free written estimate.',
+      'drywall-repair': 'Drywall and plaster repair in Greater Boston homes and condos: cracks, holes and water damage, finished ready for paint. Free written estimate.',
+      'remodeling': 'Kitchen, bath and interior remodeling in Greater Boston from a registered Massachusetts home improvement contractor (HIC #207214). Free estimate.',
+      'general-contracting': 'General contracting in Greater Boston: permits, scheduling and trade coordination by a registered Massachusetts HIC contractor. Free written estimate.',
     },
     'rhode-island-new-hampshire': {
-      'interior-painting': `Interior painting for Rhode Island coastal homes and New Hampshire mountain properties. Newport to Portsmouth, Providence to Manchester. Salt-air and cold-climate formulas. ${business.yearsInBusiness}+ years. Free estimates: ${business.phone}`,
-      'exterior-painting': `Exterior painting RI & NH using weather-tough coatings. Salt corrosion protection for coastal RI, extreme cold resistance for NH mountains. Providence, Newport, Manchester, Nashua, Portsmouth. Licensed & ${business.insurance} insured.`,
-      'cabinet-refinishing': `Cabinet refinishing Rhode Island & New Hampshire. Transform your kitchen from Providence to Portsmouth. Premium finishes, budget-friendly pricing. Benjamin Moore certified. Call ${business.phone} for free quote.`,
-      'deck-staining': `Deck staining for RI coastal properties and NH lake houses. Salt-resistant, UV-blocking, moisture-sealed. Serving Providence, Newport, Manchester, Portsmouth areas. ${business.phone}`,
-      'drywall-repair': `Professional drywall repair across Rhode Island and New Hampshire. Water damage, cracks, patches, smooth finishes. Residential & commercial. Licensed contractors. ${business.phone}`,
-      'remodeling': `Home remodeling specialists in RI & NH. Colonial, Victorian, contemporary renovations. Newport mansions to NH farmhouses. Kitchen, bath, whole-home projects. ${business.phone}`,
-      'general-contracting': `General contractor serving Rhode Island & New Hampshire. Full-service residential and commercial work. Providence to Manchester. ${business.insurance} insured. Family-owned. ${business.phone}`
+      'interior-painting': 'Interior painting for homes in Rhode Island and New Hampshire from a family-owned Hudson, MA painting contractor. EPA Lead-Safe firm. Free written estimate.',
+      'exterior-painting': 'Exterior painting in Rhode Island and New Hampshire: prep, repairs and coatings chosen for coastal and cold-inland conditions. Free written estimate.',
+      'cabinet-refinishing': 'Kitchen cabinet painting and refinishing for Rhode Island and New Hampshire homes, sprayed for a smooth, durable finish. Free written estimate.',
+      'deck-staining': 'Deck cleaning, repair and staining in Rhode Island and New Hampshire, including lake and coastal properties. Free written estimate.',
+      'drywall-repair': 'Drywall and plaster repair in Rhode Island and New Hampshire homes: cracks, holes and water damage, finished ready for paint. Free written estimate.',
+      'remodeling': 'Kitchen, bath and interior remodeling for homes in Rhode Island and New Hampshire from a family-owned Hudson, MA contractor. Free estimate.',
+      'general-contracting': 'General contracting for home projects in Rhode Island and New Hampshire: scheduling and trade coordination. Family-owned. Free written estimate.',
     },
     'maine-vermont': {
-      'interior-painting': `Interior painting Maine & Vermont using cold-climate formulas. Portland, Bangor, Burlington, Rutland specialists. Farmhouses, barns, cottages, contemporary homes. Short-season experts. Licensed & insured. ${business.phone}`,
-      'exterior-painting': `Extreme weather exterior painting for Maine coast and Vermont mountains. Cold-weather acrylics, UV-resistant, ice-dam compatible. Portland, Burlington, Stowe, Augusta. ${business.yearsInBusiness}+ years. ${business.phone}`,
-      'cabinet-refinishing': `Cabinet refinishing specialists serving Maine & Vermont. Portland to Burlington kitchen transformations. Natural wood preservation and painted finishes. Free estimates: ${business.phone}`,
-      'deck-staining': `Deck staining for Maine coastal cottages and Vermont mountain homes. Cold-climate sealers, UV protection, rapid application. Licensed contractors. ${business.phone}`,
-      'drywall-repair': `Drywall repair across Maine & Vermont. Water damage from ice dams, cracks, smooth finishes. Portland, Lewiston, Burlington, Rutland. Emergency service available. ${business.phone}`,
-      'remodeling': `Home remodeling Maine & Vermont. Barn conversions, farmhouse renovations, mountain retreats. Portland, Burlington, Stowe specialists. Historic preservation & contemporary design. ${business.phone}`,
-      'general-contracting': `General contractor serving Maine & Vermont. Residential & commercial projects. Cold-climate construction experts. ${business.insurance} insured. Licensed in ME & VT. ${business.phone}`
+      'interior-painting': 'Interior painting for homes in Maine and Vermont, from farmhouses to newer builds, by a family-owned Hudson, MA contractor. Free written estimate.',
+      'exterior-painting': 'Exterior painting in Maine and Vermont, scheduled around a short painting season, with prep for cold-climate wear. Free written estimate.',
+      'cabinet-refinishing': 'Kitchen cabinet painting and refinishing for Maine and Vermont homes, sprayed for a smooth, durable finish. Free written estimate.',
+      'deck-staining': 'Deck cleaning, repair and staining in Maine and Vermont, with stain chosen for cold winters and strong summer sun. Free written estimate.',
+      'drywall-repair': 'Drywall and plaster repair in Maine and Vermont homes: cracks, holes and water damage from ice dams, finished ready for paint. Free estimate.',
+      'remodeling': 'Kitchen, bath and interior remodeling for homes in Maine and Vermont, including older farmhouses. Family-owned contractor. Free estimate.',
+      'general-contracting': 'General contracting for home projects in Maine and Vermont: scheduling and trade coordination by a family-owned contractor. Free written estimate.',
     },
     'worcester-nearby': {
-      'interior-painting': `Worcester interior painting specialists for triple-deckers, multi-family, and Victorian homes. Lead-safe certified. Budget-friendly quality. Serving Worcester, Shrewsbury, Marlborough, Framingham. Family-owned. ${business.phone}`,
-      'exterior-painting': `Worcester exterior painting using freeze-thaw resistant coatings. Triple-decker, multi-family, Victorian home specialists. Central MA harsh winter protection. Licensed & ${business.insurance} insured. ${business.phone}`,
-      'cabinet-refinishing': `Affordable cabinet refinishing in Worcester & Central MA. Owner-occupied and rental property transformations. Shrewsbury, Marlborough, Westborough, Grafton. Quality on budget. ${business.phone}`,
-      'deck-staining': `Deck staining Worcester & nearby towns. Durable protection for Central MA freeze-thaw cycles. Budget-conscious excellence. Serving Worcester metro area. ${business.phone}`,
-      'drywall-repair': `Drywall repair Worcester MA. Multi-family, triple-decker, Victorian specialists. College rental turnovers, water damage, smooth finishes. Fast, affordable service. ${business.phone}`,
-      'remodeling': `Worcester home remodeling. Triple-decker renovations, Victorian restorations, contemporary updates. Budget-friendly project planning. Serving Central Massachusetts. ${business.phone}`,
-      'general-contracting': `Worcester general contractor. Multi-family, residential, commercial work. Value-driven projects. Triple-decker expertise. ${business.insurance} insured. Family-owned. ${business.phone}`
-    }
+      'interior-painting': 'Interior painting in Worcester and nearby towns, including two- and three-deckers and older plaster walls. EPA Lead-Safe firm. Free written estimate.',
+      'exterior-painting': 'Exterior painting in Worcester and nearby towns: clapboard, trim and multi-family buildings, with lead-safe prep on older homes. Free written estimate.',
+      'cabinet-refinishing': 'Kitchen cabinet painting and refinishing in Worcester and nearby towns, for owner-occupied homes and rentals. Free written estimate.',
+      'deck-staining': 'Deck cleaning, repair and staining in Worcester and nearby towns, with stain chosen for Central Massachusetts freeze-thaw. Free written estimate.',
+      'drywall-repair': 'Drywall and plaster repair in Worcester and nearby towns: cracks, holes, water damage and rental turnovers, ready for paint. Free estimate.',
+      'remodeling': 'Kitchen, bath and interior remodeling in Worcester and nearby towns from a registered Massachusetts HIC contractor (#207214). Free estimate.',
+      'general-contracting': 'General contracting in Worcester and nearby towns: permits, scheduling and trade coordination by a registered MA HIC contractor. Free estimate.',
+    },
   }
-
   const title = titleTemplates[regionSlug]?.[serviceSlug] ||
-    `${service.name} ${region.name} — Free 24h Estimate`
+    `${service.name} in ${region.name} | A&M Painter`
 
   const description = descriptionTemplates[regionSlug]?.[serviceSlug] ||
-    `Professional ${service.name.toLowerCase()} services in ${region.name}. Serving ${region.popularCities.slice(0, 3).join(', ')}. ${region.climate}. Licensed, ${business.insurance} insured. EPA Lead-Safe certified family-owned firm. Free estimates: ${business.phone}`
+    `${service.name} in ${region.name} from a family-owned Hudson, MA contractor. EPA Lead-Safe firm. Free written estimate.`
 
   return {
     title: { absolute: title },

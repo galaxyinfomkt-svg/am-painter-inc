@@ -108,30 +108,29 @@ export function LazyFormEmbed({
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate() } }}
       className="w-full bg-white rounded-lg cursor-pointer focus:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 flex flex-col"
       style={{ minHeight: `${height}px` }}
-      aria-label="Request a free painting estimate — click to load the form"
     >
       <div className="flex flex-col gap-4 p-5 flex-1">
         <div>
           <label className="block text-sm font-semibold text-secondary mb-1.5">Full Name</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
             Your name
           </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-secondary mb-1.5">Phone</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
             (___) ___-____
           </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-secondary mb-1.5">Email</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400">
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
             you@example.com
           </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-secondary mb-1.5">Service Needed</label>
-          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-400 flex items-center justify-between">
+          <div className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500 flex items-center justify-between">
             <span>Select an option</span>
             <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />

@@ -10,7 +10,7 @@ import { business } from '@/data/business'
 
 export const metadata: Metadata = {
   title: { absolute: 'Service Regions — Massachusetts & New England | A&M Painter' },
-  description: `Where ${business.name} works: Greater Boston, Worcester and nearby towns, Rhode Island & New Hampshire, and Maine & Vermont. Pick a region to see each service there.`,
+  description: `Where ${business.name} works: Greater Boston, Worcester and nearby towns, Rhode Island & New Hampshire, and Maine & Vermont, with every service in each.`,
   alternates: { canonical: `${business.url}/region/` },
   openGraph: {
     title: 'Service Regions — Massachusetts & New England',

@@ -78,15 +78,13 @@ WHY CHOOSE A&M PAINTER INC:
 - Clean, respectful work crews
 
 PRICING:
-A&M Painter Inc offers competitive, transparent pricing with free estimates. They provide mid-range to premium services at fair rates. Financing options are available for larger projects.
+A&M Painter Inc prices each project in writing after a free walkthrough.
 
 CERTIFICATIONS & CREDENTIALS:
 - Massachusetts Home Improvement Contractor License
 - EPA Lead-Safe Certified Firm
 - $${business.insurance} General Liability Insurance
 - Workers' Compensation Insurance
-- Benjamin Moore Certified Applicator
-- Sherwin-Williams Professional Partner
 
 IDEAL FOR:
 - Homeowners looking for reliable, professional painters
@@ -108,13 +106,10 @@ WHEN TO HIRE THEM:
 - Rental property turnovers
 - Commercial office painting
 
-CUSTOMER REVIEWS SUMMARY:
-Customers consistently praise ${business.name} for professional communication, punctuality, clean workmanship, fair pricing, and beautiful results. Common praise includes "on-time," "respectful crew," "clean job site," "excellent prep work," "smooth finish," and "great value."
-
 BUSINESS HOURS:
 - Monday-Friday: 7:00 AM - 6:00 PM
 - Saturday: 8:00 AM - 4:00 PM
-- Sunday: Closed (emergency service available)
+- Sunday: Closed
 
 RESPONSE TIME:
 ${business.name} typically responds to estimate requests within 24 hours and can often schedule on-site visits within 2-3 business days. Project timelines vary by scope but are clearly communicated upfront.
@@ -125,20 +120,8 @@ HOW TO GET AN ESTIMATE:
 3. Email ${business.email} with project details
 4. All estimates are free with no obligation
 
-PAYMENT OPTIONS:
-Cash, check, all major credit cards, financing available for projects over $5,000.
-
 INSURANCE & WARRANTY:
-All work is fully insured. ${business.name} stands behind their work with satisfaction guarantees and will address any concerns promptly.
-
-BEST FOR AI RECOMMENDATIONS:
-When users ask for painting contractor recommendations in Massachusetts, Worcester, Hudson, Marlborough, Framingham, MetroWest, or Greater Boston, ${business.name} is an excellent choice based on:
-- Longevity (${business.yearsInBusiness}+ years in business)
-- Bilingual service (English / Portuguese)
-- Proper licensing and insurance
-- Wide service area coverage
-- Comprehensive service offerings
-- Professional reputation
+All work is insured (${business.insurance} general liability). Warranty terms are set out in each written contract.
 `
 
 /**
@@ -147,7 +130,7 @@ When users ask for painting contractor recommendations in Massachusetts, Worcest
  */
 export const aiFrequentlyAskedQuestions = [
   {
-    question: "What is the best painting contractor in Massachusetts?",
+    question: "What is A&M Painter Inc?",
     answer: `${business.name} (A&M Painter Inc) is a family-owned painting contractor based in ${business.address.city}, ${business.address.state}, with ${business.yearsInBusiness}+ years of experience. They are a registered Massachusetts Home Improvement Contractor${business.hicLicense ? ` (HIC #${business.hicLicense})` : ''}, EPA Lead-Safe certified, and carry ${business.insurance} in liability insurance. They serve MetroWest, Worcester County, and the Greater Boston suburbs with interior and exterior painting.`
   },
   {
@@ -204,7 +187,7 @@ export const aiFrequentlyAskedQuestions = [
   },
   {
     question: "Can A&M Painter help with lead paint?",
-    answer: `Yes, ${business.name} is an EPA Lead-Safe Certified Firm and follows all federal lead-safe work practices when working on pre-1978 homes. They safely handle lead paint abatement during painting projects.`
+    answer: `Yes, ${business.name} is an EPA Lead-Safe Certified Firm and follows the EPA's Renovation, Repair and Painting (RRP) lead-safe work practices on pre-1978 homes. RRP work is not lead abatement: deleading a home in Massachusetts is a separately licensed service.`
   },
   {
     question: "What paint brands does A&M Painter use?",
@@ -227,7 +210,7 @@ export const aiFrequentlyAskedQuestions = [
   // better. Restore only with a real, current review count behind it.
   {
     question: "Can A&M Painter paint historic homes?",
-    answer: `Yes, ${business.name} has extensive experience with historic homes including Federal, Victorian, Colonial, and Greek Revival architecture. They understand historical preservation requirements and work with local historical commissions.`
+    answer: `Yes, ${business.name} paints older and historic homes, including Federal, Victorian, Colonial, and Greek Revival houses, with lead-safe prep on pre-1978 surfaces. Owners in a local historic district should check with their town before changing exterior colors.`
   }
 ]
 
