@@ -141,7 +141,7 @@ export default function HomePage() {
 
                 {/* Description with keywords */}
                 <p className="text-xl lg:text-2xl text-gray-300 max-w-xl leading-relaxed animate-fadeInUp animation-delay-200">
-                  Award-winning <strong className="text-white">interior & exterior painting</strong>, cabinet refinishing, deck staining, and home remodeling. Serving {Object.keys(CITIES).length}+ Massachusetts cities for {business.yearsInBusiness}+ years.
+                  Family-owned <strong className="text-white">interior & exterior painting</strong>, cabinet refinishing, deck staining, and home remodeling. Serving {Object.keys(CITIES).length}+ Massachusetts cities for {business.yearsInBusiness}+ years.
                 </p>
 
                 {/* Features Grid */}
@@ -149,7 +149,7 @@ export default function HomePage() {
                   {[
                     { icon: ShieldCheckIcon, text: '$2M Insured', highlight: true },
                     { icon: CheckCircleIcon, text: 'EPA Lead-Safe' },
-                    { icon: ClockIcon, text: 'Same Day Response' },
+                    { icon: ClockIcon, text: 'Reply Within 24h' },
                     { icon: SparklesIcon, text: 'Free Estimates' },
                   ].map((item) => (
                     <div key={item.text} className={`flex items-center gap-3 p-3 rounded-xl ${item.highlight ? 'bg-primary/10 border border-primary/20' : 'bg-white/5'}`}>
@@ -211,7 +211,7 @@ export default function HomePage() {
 
                   <div className="relative bg-white rounded-2xl p-[5px] border border-white/20 shadow-2xl overflow-hidden">
                     <div className="text-center mb-1 pt-1">
-                      <h3 className="text-base font-bold text-secondary leading-tight">Get Your Free Quote</h3>
+                      <h2 className="text-base font-bold text-secondary leading-tight">Get Your Free Quote</h2>
                       <p className="text-xs text-gray-600">Response within 24 hours</p>
                     </div>
                     <div className="rounded-lg overflow-hidden">
@@ -241,7 +241,7 @@ export default function HomePage() {
         <section id="services" className="below-fold py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 <SparklesIcon className="h-4 w-4" />
                 Professional Painting Services Massachusetts
               </span>
@@ -319,7 +319,7 @@ export default function HomePage() {
         <section className="below-fold py-24 lg:py-32 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 Why Massachusetts Homeowners Choose Us
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
@@ -422,13 +422,13 @@ export default function HomePage() {
                 {/* Floating Badge */}
                 <div className="absolute -bottom-6 -right-6 lg:right-12 bg-primary text-white px-6 py-4 rounded-2xl shadow-xl">
                   <p className="text-4xl font-bold">{business.yearsInBusiness}+</p>
-                  <p className="text-sm opacity-90">Years Experience</p>
+                  <p className="text-sm">Years Experience</p>
                 </div>
               </div>
 
               {/* Content */}
               <div className="space-y-8">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary-300 font-semibold text-sm">
                   About {business.name}
                 </span>
 
@@ -442,10 +442,10 @@ export default function HomePage() {
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   {[
-                    { title: 'Expert Craftsmen', desc: 'Skilled painters with decades of Massachusetts experience' },
+                    { title: 'Registered Contractor', desc: `Massachusetts HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov` },
                     { title: 'Premium Materials', desc: 'Benjamin Moore, Sherwin-Williams & top-quality products' },
                     { title: 'Fully Insured', desc: `${business.insurance} liability coverage protection` },
-                    { title: 'Satisfaction Guaranteed', desc: 'Your complete satisfaction is our priority' },
+                    { title: 'Written Estimates', desc: 'Every quote in writing, after a free walkthrough' },
                   ].map((item) => (
                     <div key={item.title} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition">
                       <CheckCircleIcon className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
@@ -485,7 +485,7 @@ export default function HomePage() {
         <section id="projects" className="below-fold py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 <PlayIcon className="h-4 w-4" />
                 Our Portfolio - Massachusetts Painting Projects
               </span>
@@ -570,14 +570,14 @@ export default function HomePage() {
             section for a real testimonial display once data/reviews.ts is filled. */}
         <section className="below-fold py-24 lg:py-32 bg-primary">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white font-semibold text-sm mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/20 rounded-full text-white font-semibold text-sm mb-6">
               <StarIcon className="h-4 w-4" />
               Reviews
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Worked with us? Tell your neighbors.
             </h2>
-            <p className="text-lg text-white/85 mb-10 leading-relaxed">
+            <p className="text-lg text-white mb-10 leading-relaxed">
               We&apos;re a family-owned Hudson business, licensed and $2M insured. The best way
               to help other Massachusetts homeowners find honest work is an honest Google review.
             </p>
@@ -611,7 +611,7 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               {/* Contact Info */}
               <div className="space-y-8">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary font-semibold text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary-300 font-semibold text-sm">
                   Contact Us
                 </span>
 
@@ -702,7 +702,7 @@ export default function HomePage() {
         <section className="below-fold py-24 lg:py-32 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary-700 font-semibold text-sm mb-6">
                 Frequently Asked Questions
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-secondary">

@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     `residential painting ${cityName} MA`,
     `commercial painting ${cityName}`,
     `cabinet painting ${cityName}`,
-    `best painters ${cityName}`,
     `Worcester County painters`,
   ],
   openGraph: {
@@ -46,8 +45,8 @@ const faqs = [
     answer: `As a market reference — not our price — house painting around ${cityName} generally runs $2-$6 per square foot interior and $3-$7 exterior, putting a typical home somewhere around $3,500-$9,000 interior and $5,000-$15,000 exterior. Those are figures for the area, published so you have a reference point before talking to anyone. ${business.name} does not price from a table: we quote each house in writing after a free walkthrough, and yours may land outside those ranges either way. Call ${business.phone}.`,
   },
   {
-    question: `Why is ${business.name} the best choice for painting in ${cityName}?`,
-    answer: `As the second-largest city in New England, ${cityName} has diverse architecture from Victorian homes in College Hill to modern construction in newer areas. ${business.name} has ${business.yearsInBusiness}+ years of experience handling all styles. We're a family-owned firm, fully licensed, carry ${business.insurance} insurance, and are EPA Lead-Safe certified — important for the many pre-1978 ${cityName} homes. We know ${cityName} homes.`,
+    question: `What should I look for in a painter for an older ${cityName} home?`,
+    answer: `Much of ${cityName}'s housing predates 1978, so start with lead safety: federal law requires an EPA Lead-Safe (RRP) certified firm for any work that disturbs paint on those homes, and ${business.name} is one. Then check that the contractor is registered with the state (ours is HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov), carries liability insurance, and gives you a written scope that spells out prep and repairs, not just coats of paint.`,
   },
   {
     question: `Which ${cityName} neighborhoods do you serve?`,
@@ -135,7 +134,6 @@ export default function WorcesterPage() {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              {cityName}, the Heart of the Commonwealth, deserves the best painting services.
               {business.name} brings {business.yearsInBusiness}+ years of experience to homes and businesses
               across New England&apos;s second-largest city. Premium paints, expert craftsmen,
               {business.insurance} insured.
@@ -284,15 +282,15 @@ export default function WorcesterPage() {
 
                 {/* Trust Badges */}
                 <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6">
-                  <h3 className="font-bold text-secondary mb-4">Our Guarantee</h3>
+                  <h3 className="font-bold text-secondary mb-4">How We Work</h3>
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span>100% Satisfaction Guaranteed</span>
+                      <span>Written Estimate After a Free Walkthrough</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span>On-Time Project Completion</span>
+                      <span>EPA Lead-Safe Prep on Pre-1978 Homes</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />

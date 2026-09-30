@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     `residential painting ${cityName} MA`,
     `commercial painting ${cityName}`,
     `cabinet painting ${cityName}`,
-    `best painters ${cityName}`,
   ],
   openGraph: {
     title: `House Painting ${cityName}, MA | ${business.name}`,

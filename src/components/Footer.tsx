@@ -8,16 +8,21 @@ export function Footer() {
 
   // Get all cities and sort by name
   const allCities = Object.values(CITIES).sort((a, b) => a.name.localeCompare(b.name))
+  // The grid lists only towns with a page of their own. All 143 used to be
+  // listed on every page — 83 of them as unlinked names — which put ~140
+  // near-identical lines at the foot of each page. The rest are counted below.
+  const linkedCities = allCities.filter((c) => townHref(c.slug) !== null)
+  const otherCityCount = allCities.length - linkedCities.length
 
   // Split cities into 6 columns for better layout
-  const citiesPerColumn = Math.ceil(allCities.length / 6)
+  const citiesPerColumn = Math.ceil(linkedCities.length / 6)
   const cityColumns = [
-    allCities.slice(0, citiesPerColumn),
-    allCities.slice(citiesPerColumn, citiesPerColumn * 2),
-    allCities.slice(citiesPerColumn * 2, citiesPerColumn * 3),
-    allCities.slice(citiesPerColumn * 3, citiesPerColumn * 4),
-    allCities.slice(citiesPerColumn * 4, citiesPerColumn * 5),
-    allCities.slice(citiesPerColumn * 5),
+    linkedCities.slice(0, citiesPerColumn),
+    linkedCities.slice(citiesPerColumn, citiesPerColumn * 2),
+    linkedCities.slice(citiesPerColumn * 2, citiesPerColumn * 3),
+    linkedCities.slice(citiesPerColumn * 3, citiesPerColumn * 4),
+    linkedCities.slice(citiesPerColumn * 4, citiesPerColumn * 5),
+    linkedCities.slice(citiesPerColumn * 5),
   ]
 
   return (
@@ -208,7 +213,9 @@ export function Footer() {
               Cities We Serve in Massachusetts
             </h3>
             <p className="text-gray-600">
-              Professional painting services in {allCities.length}+ cities across Massachusetts
+              Towns near our Hudson shop with their own page. We also work in{' '}
+              {otherCityCount} more Massachusetts towns and across{' '}
+              <Link href="/region/" className="text-primary-700 underline">New England</Link>.
             </p>
           </div>
 
@@ -245,7 +252,7 @@ export function Footer() {
           <div className="text-center mt-12">
             <p className="text-sm text-gray-500 mb-4">
               Looking for a different service? We offer interior painting, exterior painting, cabinet refinishing,
-              deck staining, drywall repair, home remodeling, and general contracting in all locations.
+              deck staining, drywall repair, home remodeling, and general contracting.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link

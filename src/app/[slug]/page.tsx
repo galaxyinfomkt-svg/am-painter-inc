@@ -613,6 +613,25 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
   ]
 }
 
+/**
+ * Meta description for a page with written content: the service and town,
+ * then the first sentence of that page's own lead that fits. Every indexed
+ * page used to share one description per town ("Local family-owned painters
+ * for Acton, MA homes…") across all four services — 60 duplicate groups, and
+ * the deck page never said "deck".
+ */
+function descriptionFromContent(prefix: string, lead: string[]): string {
+  // Always the opening sentence — later ones lean on what came before ("Others
+  // have been renovated…") and read as fragments in a search result. Cut at a
+  // word boundary when it doesn't fit.
+  const MAX = 158
+  const first = (lead[0].match(/^[^.!?]+[.!?]+/)?.[0] ?? lead[0]).trim()
+  const room = MAX - prefix.length - 1
+  if (first.length <= room) return `${prefix} ${first}`
+  const cut = first.slice(0, room - 1)
+  return `${prefix} ${cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:]$/, '')}…`
+}
+
 // Allow dynamic params
 export const dynamicParams = true
 
@@ -671,6 +690,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     'general-contracting': 'General Contractor',
   }
   const serviceShort = SERVICE_SHORT[service.slug] || service.name
+  // Shorter than service.name so the description keeps room for the sentence.
+  const SERVICE_LABEL: Record<string, string> = {
+    'cabinet-refinishing': 'Cabinet Refinishing',
+    'drywall-repair': 'Drywall Repair',
+  }
 
   // Build title that fits within Google's ~58-char visible window. The
   // "(2026)" / "2026" year is a meaningful freshness signal — keep it when
@@ -689,7 +713,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : city.distanceMiles != null && city.distanceMiles >= 2
       ? `Based ${Math.round(city.distanceMiles)} mi away in Hudson.`
       : 'Based right here in Hudson.'
-  const description = `Local family-owned painters for ${city.name}, MA homes. ${hook} Free written quote in 24h — 2026 pricing. EPA Lead-Safe.`
+  const content = CITY_SERVICE_CONTENT[`${service.slug}-${city.slug}`]
+  const description = content
+    ? descriptionFromContent(`${SERVICE_LABEL[service.slug] ?? service.name} in ${city.name}, MA:`, content.lead)
+    : `${service.name} for ${city.name}, MA homes from a family-owned Hudson contractor. ${hook} Free written estimate. EPA Lead-Safe.`
 
   // Generate comprehensive keywords including city-specific terms
   const keywords = [
@@ -697,7 +724,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     `${city.name} ${service.name.toLowerCase()}`,
     `${service.name.toLowerCase()} contractor ${city.name}`,
     `${city.name} painting company`,
-    `best ${service.name.toLowerCase()} ${city.name}`,
     `professional painters ${city.name} Massachusetts`,
     `${service.name.toLowerCase()} near me ${city.name}`,
     `licensed painters ${city.name} MA`,
@@ -726,7 +752,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title: `${serviceShort} ${city.name}, MA | Family-Owned Local Painters`,
-      description: `Local family-owned painters for ${city.name}, MA. ${hook} Free written quote in 24h. EPA Lead-Safe certified firm.`,
+      description,
       url: canonical,
       siteName: business.name,
       type: 'website',
@@ -743,7 +769,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     twitter: {
       card: 'summary_large_image',
       title: `${serviceShort} ${city.name}, MA | ${business.name}`,
-      description: `Local family-owned ${service.name.toLowerCase()} for ${city.name}, MA. ${hook} Free written quote in 24h.`,
+      description,
       images: [business.images.og],
     },
   }

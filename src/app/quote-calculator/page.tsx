@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   // push this past ~60 chars (every other page uses absolute for this reason).
   title: { absolute: 'Painting Cost Calculator | MetroWest MA 2026 Ranges' },
   description:
-    'Free painting cost calculator with 2026 MetroWest Massachusetts market ranges for interior, exterior, cabinet refinishing, deck staining, and drywall. Estimate only — not a quote.',
+    'Painting cost calculator with 2026 MetroWest Massachusetts market ranges for interiors, exteriors, cabinets, decks and drywall. An estimate, not a quote.',
   alternates: {
     canonical: `${business.url}/quote-calculator/`,
   },
