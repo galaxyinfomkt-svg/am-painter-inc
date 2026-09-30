@@ -5,6 +5,7 @@ import { REGIONS, getRegionBySlug } from '@/data/regions'
 import { SERVICES, getServiceBySlug } from '@/data/services'
 import { isIndexedCityService } from '@/data/indexed-pages'
 import { CITIES } from '@/data/cities'
+import { REGION_SERVICE_CONTENT } from '@/data/region-service-content'
 import { business } from '@/data/business'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -57,10 +58,10 @@ export default async function RegionalServicePage({ params }: PageProps) {
   }
 
   // Region + service specific FAQs (drives FAQPage JSON-LD and visible Q&A)
-  const regionFAQs: Array<{ question: string; answer: string }> = [
+  const sharedFAQs: Array<{ question: string; answer: string }> = [
     {
       question: `Do you serve all of ${region.name}?`,
-      answer: `Yes. Our crews work across ${region.name}, including ${region.popularCities.slice(0, 4).join(', ')}. Coverage is from a single dispatch base — same crew lead, same standards across the whole region.`,
+      answer: `Yes. We take projects across ${region.name}, including ${region.popularCities.slice(0, 4).join(', ')}. Coverage is from a single dispatch base — same crew lead, same standards across the whole region.`,
     },
     {
       question: `How does ${region.name}'s climate affect ${service.name.toLowerCase()}?`,
@@ -81,6 +82,17 @@ export default async function RegionalServicePage({ params }: PageProps) {
       answer: `For most ${region.name} projects we can schedule a walk-through within 3–5 business days and start work within 2–4 weeks, depending on season and scope.`,
     },
   ]
+  // Hand-written content for this region and service, when it exists. Pages
+  // with it lead the FAQ with their own question and keep only the licensing
+  // and cost answers from the shared set, which otherwise repeat across all
+  // seven services of a region.
+  const content = REGION_SERVICE_CONTENT[`${regionSlug}/${serviceSlug}`] ?? null
+  const regionFAQs = content
+    ? [
+        content.faq,
+        ...sharedFAQs.filter((f) => /licensed|cost/i.test(f.question)),
+      ]
+    : sharedFAQs
 
   // Get what we offer based on service
   const whatWeOffer = serviceSlug === 'interior-painting' ? [
@@ -257,13 +269,21 @@ export default async function RegionalServicePage({ params }: PageProps) {
                   <div className="flex items-center gap-3 mb-4">
                     <MapPinIcon className="h-6 w-6 text-primary" />
                     <h2 className="text-3xl md:text-4xl font-bold text-secondary">
-                      Your Trusted {service.name} Contractor in {region.name}
+                      {content ? content.heading : `${service.name} in ${region.name}`}
                     </h2>
                   </div>
 
-                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    {region.description}
-                  </p>
+                  {content ? (
+                    content.lead.map((para, idx) => (
+                      <p key={idx} className={`${idx === 0 ? 'text-lg' : 'text-base'} text-gray-600 leading-relaxed mb-4`}>
+                        {para}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                      {region.description}
+                    </p>
+                  )}
 
                   {/* Climate Info Box */}
                   <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3 mb-6">
@@ -283,6 +303,28 @@ export default async function RegionalServicePage({ params }: PageProps) {
                     </div>
                   </div>
                 </div>
+
+                {/* Before-you-book steps written for this region and service */}
+                {content && (
+                  <div>
+                    <h3 className="text-2xl font-bold text-secondary mb-4">
+                      Before you book {service.name.toLowerCase()} in {region.name}
+                    </h3>
+                    <ol className="space-y-4">
+                      {content.planning.map((tip, idx) => (
+                        <li key={idx} className="flex gap-4 bg-gray-50 rounded-xl p-5">
+                          <span className="w-8 h-8 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <div>
+                            <h4 className="font-bold text-secondary mb-1">{tip.title}</h4>
+                            <p className="text-sm text-gray-600 leading-relaxed">{tip.body}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
 
                 {/* Cities + Architecture Grid */}
                 <div className="grid md:grid-cols-2 gap-6">
@@ -306,7 +348,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
                   <div className="bg-amber-50 rounded-2xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <BuildingOfficeIcon className="h-6 w-6 text-primary" />
-                      <h3 className="text-xl font-bold text-secondary">Architecture We Specialize In</h3>
+                      <h3 className="text-xl font-bold text-secondary">Common Architecture</h3>
                     </div>
                     <ul className="space-y-2">
                       {region.architectureStyles.map((type, idx) => (
@@ -343,7 +385,9 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
                 </div>
 
-                {/* Our Process */}
+                {/* Generic 4-step process: only where there is no written content,
+                    since it was identical on every region page. */}
+                {!content && (
                 <div>
                   <h3 className="text-2xl font-bold text-secondary mb-6">
                     Our {service.name} Process in {region.name}
@@ -367,6 +411,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* What We Offer */}
                 <div>
