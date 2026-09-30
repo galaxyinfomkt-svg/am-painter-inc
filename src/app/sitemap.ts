@@ -117,22 +117,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   )
 
-  // Special house-painting pages for high-population cities
-  const housePaintingPages: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/house-painting-marlborough-ma/`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/house-painting-worcester-ma/`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
-
   // Regional service pages, plus the /region/ index that parents them
   const regionalServicePages: MetadataRoute.Sitemap = [
     {
@@ -183,7 +167,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...servicesIndex,
     ...servicePages,
     ...regionalServicePages,
-    ...housePaintingPages,
     ...cityServicePages,
   ]
 }

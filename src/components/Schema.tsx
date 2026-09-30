@@ -798,30 +798,6 @@ export function HomePageSchema() {
   )
 }
 
-// City Page Schema
-export function CityPageSchema({ cityName, serviceName }: { cityName: string; serviceName?: string }) {
-  const service = serviceName || 'House Painting'
-  const slug = `${service.toLowerCase().replace(/\s+/g, '-')}-${cityName.toLowerCase()}-ma`
-
-  return (
-    <>
-      <LocalBusinessSchema />
-      <ServiceSchema cityName={cityName} serviceName={service} />
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', url: business.url },
-          { name: `${service} ${cityName}, MA`, url: `${business.url}/${slug}` },
-        ]}
-      />
-      <WebPageSchema
-        title={`${service} in ${cityName}, MA - ${business.name}`}
-        description={`Professional ${service.toLowerCase()} in ${cityName}, Massachusetts. Licensed, insured, ${business.yearsInBusiness}+ years experience. Free estimates: ${business.phone}`}
-        url={`${business.url}/${slug}`}
-      />
-    </>
-  )
-}
-
 // Service Page Schema
 export function ServicePageSchema({
   serviceName,

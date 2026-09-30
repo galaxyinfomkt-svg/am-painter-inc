@@ -247,9 +247,9 @@ export default function AboutPage() {
                   ))}
                 </div>
 
-                <h3 className="text-2xl font-bold text-secondary mt-12 mb-6">Regional Expertise</h3>
+                <h3 className="text-2xl font-bold text-secondary mt-12 mb-6">Where We Work</h3>
                 <p>
-                  Our {business.yearsInBusiness}+ years of experience across different regions of New England gives us unique expertise in handling the specific challenges of each area:
+                  Most of our work is in MetroWest and Worcester County. We also take projects across Greater Boston and in Rhode Island, New Hampshire, Maine and Vermont. What each area asks of a paint job:
                 </p>
 
                 <div className="space-y-6 mt-8">
@@ -259,7 +259,7 @@ export default function AboutPage() {
                       <p className="text-gray-700 mb-4">{data.experience}</p>
                       <div className="grid sm:grid-cols-2 gap-4 text-sm">
                         <div>
-                          <p className="font-semibold text-gray-900">Specialty:</p>
+                          <p className="font-semibold text-gray-900">Common housing:</p>
                           <p className="text-gray-600">{data.specialty}</p>
                         </div>
                         <div>

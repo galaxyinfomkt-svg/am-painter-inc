@@ -540,7 +540,7 @@ function getCityServiceFAQs(city: City, serviceName: string): Array<{ question: 
       },
       {
         question: `Will refinished cabinets in ${city.name} hold up like a factory finish?`,
-        answer: `Yes, when sprayed properly. We use HVLP spray with conversion varnish or 2K urethane that cures to a hard, scratch-resistant film comparable to a factory paint finish — much harder than brushed wall paint. Most ${city.name} clients see 10+ years of daily kitchen use with no chipping.`,
+        answer: `Yes, when sprayed properly. We use HVLP spray with conversion varnish or 2K urethane that cures to a hard, scratch-resistant film comparable to a factory paint finish — much harder than brushed wall paint. How long it lasts comes down to the prep underneath: degreasing, sanding and a bonding primer.`,
       },
       {
         question: `How long is my ${city.name} kitchen out of commission?`,
