@@ -25,15 +25,11 @@ export function LocalBusinessSchema() {
     // === IDENTIDADE DA EMPRESA (AI Discovery) ===
     name: business.name,
     legalName: business.legalName,
-    alternateName: [
-      'A&M Painter',
-      'AM Painter Inc',
-      'A&M Painting',
-      'A&M Painters Massachusetts',
-      'A&M Painter Hudson MA',
-      'AM Painting Company',
-      'A and M Painter',
-    ],
+    // Only spellings of THIS name. "A&M Painting", "AM Painting Company" and
+    // the like are other, unrelated contractors in the same area; listing
+    // them here told Google and AI engines those names were us.
+    alternateName: ['A&M Painter', 'AM Painter Inc', 'A and M Painter Inc'],
+    disambiguatingDescription: `Family-owned painting contractor at ${business.address.street}, ${business.address.city}, ${business.address.state} (MA HIC #${business.hicLicense}). Not affiliated with other similarly named "A&M" painting companies.`,
 
     // === DESCRIÇÃO RICA PARA AI ===
     description: `${business.name} is a professional painting contractor based in ${business.address.city}, ${business.address.state}, serving the MetroWest and Greater Boston area since ${business.foundedYear}. We specialize in interior painting, exterior painting, cabinet refinishing, deck staining, drywall repair, home remodeling, and general contracting. Our team of ${business.yearsInBusiness}+ years experienced painters uses premium Benjamin Moore and Sherwin-Williams paints. We are EPA Lead-Safe certified, licensed, and carry ${business.insurance} liability insurance. We serve ${allCities.length}+ cities including Hudson, Marlborough, Worcester, Framingham, Shrewsbury, Northborough, Southborough, Westborough, and the entire MetroWest region. Contact us at ${business.phone} for a free estimate.`,
@@ -179,7 +175,7 @@ export function LocalBusinessSchema() {
     // === PREÇOS E PAGAMENTO ===
     priceRange: '$$',
     currenciesAccepted: 'USD',
-    paymentAccepted: ['Cash', 'Check', 'Credit Card', 'Debit Card', 'Financing Available'],
+    paymentAccepted: ['Cash', 'Check', 'Credit Card', 'Debit Card'],
 
     // === ÁREA DE SERVIÇO (Importante para Local SEO) ===
     //
@@ -346,6 +342,7 @@ export function LocalBusinessSchema() {
       business.googleBusinessUrl,
       business.facebookUrl,
       business.instagramUrl,
+      business.thumbtackUrl,
     ].filter(Boolean),
 
     // === AÇÕES (CTAs para Google) ===
@@ -469,6 +466,7 @@ export function OrganizationSchema() {
       business.googleBusinessUrl,
       business.facebookUrl,
       business.instagramUrl,
+      business.thumbtackUrl,
     ].filter(Boolean),
     founder: {
       '@type': 'Person',
