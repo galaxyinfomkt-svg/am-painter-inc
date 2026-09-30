@@ -69,7 +69,11 @@ export const business = {
   url: 'https://ampainterinc.com',
 
   // Social/External
-  googleBusinessUrl: 'https://g.page/ampainterinc',
+  // Google Business Profile, by its Knowledge Graph id (/g/11v5jklx_1, taken
+  // from where the review link resolves). The old g.page short link now lands
+  // on a generic Google search, so sameAs pointed at nothing.
+  googleBusinessUrl: 'https://www.google.com/search?kgmid=/g/11v5jklx_1',
+  thumbtackUrl: 'https://www.thumbtack.com/ma/hudson/interior-painting/m-painter-inc/service/495675202529386500',
 
   // Images
   images: {

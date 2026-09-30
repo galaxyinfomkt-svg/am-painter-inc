@@ -24,8 +24,8 @@ const faqs = [
     answer: "Our detailed estimates include all labor, materials, permits, and cleanup. No hidden fees. We specify exactly what's included so you can compare apples to apples."
   },
   {
-    question: "Do you offer financing?",
-    answer: "Yes, we offer financing options for larger projects. We can discuss payment plans and financing during your consultation to find what works best for your budget."
+    question: "How are payments scheduled on a remodel?",
+    answer: "The payment schedule is written into your contract before work starts. Under Massachusetts law (M.G.L. c. 142A), a home improvement deposit can be no more than one-third of the contract price, or the full cost of any special-order materials."
   }
 ]
 
