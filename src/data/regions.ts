@@ -74,8 +74,7 @@ export const REGIONS: Record<string, Region> = {
       'Triple-decker and multi-family exterior painting',
       'Brownstone facade treatment',
       'Condo association coordination',
-      'Urban narrow-lot scaffolding',
-      'Premium finish expectations'
+      'Urban narrow-lot scaffolding'
     ]
   },
 
@@ -130,12 +129,10 @@ export const REGIONS: Record<string, Region> = {
       // (it's the Preservation Society of Newport County) and an unverifiable
       // credential claim. Replaced with truthful capability copy.
       'Exterior painting for older coastal homes',
-      'Coastal weatherproofing and salt-air prep',
-      'Mountain home cold-climate painting',
-      'Lake house moisture management',
-      'Historic Providence district work',
-      'Portsmouth NH seacoast experience',
-      'Ski-area property scheduling'
+      'Salt-air prep and mildew-resistant coatings near the coast',
+      'Cold-climate product choice for inland New Hampshire',
+      'Moisture checks before staining lake-house decks and siding',
+      'Scheduling larger projects around travel from Hudson'
     ]
   },
 
@@ -145,7 +142,7 @@ export const REGIONS: Record<string, Region> = {
     fullName: 'Maine and Vermont',
     states: ['Maine', 'Vermont'],
     description: 'The rugged beauty of Maine\'s coast and Vermont\'s mountains demands painting contractors who understand extreme weather, rural accessibility, and preservation of classic New England character. From Portland\'s Victorian districts to Burlington\'s lakefront, from coastal cottages to mountain retreats, these states require specialized knowledge of cold-climate performance and natural wood preservation.',
-    climate: 'Maine: Harsh coastal winters, salt exposure, heavy snowfall, short summers. Vermont: Severe continental climate, -20°F winters, heavy snow, intense UV at elevation, dramatic freeze-thaw cycles.',
+    climate: 'Maine: Harsh coastal winters, salt exposure, heavy snowfall, short summers. Vermont: Severe continental climate, sub-zero winter cold, heavy snow, intense UV at elevation, dramatic freeze-thaw cycles.',
     architectureStyles: [
       'New England Farmhouse',
       'Colonial Cape (Maine Coast)',
@@ -185,18 +182,16 @@ export const REGIONS: Record<string, Region> = {
       'Barn and outbuilding restoration',
       'Wildlife damage (woodpeckers, etc.)'
     ],
-    seasonalConsiderations: 'Compressed May-September exterior season. Interior work dominates October-April. Coastal Maine fog delays spring starts. Vermont mountain properties accessible only summer. Rush scheduling essential. Winter prep includes heated tents for emergency work.',
+    seasonalConsiderations: 'Compressed May-September exterior season. Interior work dominates October-April. Coastal Maine fog delays spring starts. Vermont mountain properties accessible only summer. Exterior projects are booked well ahead of the short season.',
     localMaterials: 'Cold-weather acrylics rated to 35°F, marine-grade primers for ME coast, transparent wood stains for VT timber frames, mold-resistant bathroom paints, barn and silo coatings, UV-blocking clear sealers for mountain sun.',
     paintBrands: ['Benjamin Moore Aura (cold formula)', 'Sherwin-Williams Emerald Exterior', 'Cabot Australian Timber Oil'],
     uniqueFeatures: [
-      'Coastal Maine weatherization expertise',
-      'Vermont historic barn restoration',
-      'Mountain property logistics',
-      'Cold-climate application specialists',
-      'Natural wood preservation',
-      'Seasonal rush scheduling',
-      'Remote site access planning',
-      'Historic Portland/Burlington district knowledge'
+      'Booking exterior work inside the short May–September window',
+      'Cold-weather product choice and application temperatures',
+      'Prep for weathered wood, including barn and outbuilding siding',
+      'Penetrating stains for natural wood and timber frames',
+      'Access and staging plans for remote sites',
+      'Scheduling larger projects around travel from Hudson'
     ]
   },
 
@@ -205,8 +200,8 @@ export const REGIONS: Record<string, Region> = {
     slug: 'worcester-nearby',
     fullName: 'Worcester and Central Massachusetts',
     states: ['Massachusetts'],
-    description: 'Central Massachusetts, anchored by Worcester—the Heart of the Commonwealth—combines working-class affordability with growing investment in historic triple-deckers, Victorian neighborhoods, and expanding suburban developments. This region requires practical, budget-conscious painting that delivers lasting value while respecting the area\'s industrial heritage and tight-knit community standards.',
-    climate: 'Cold continental, 10-15°F colder than Boston in winter, heavier snowfall (60-70"), significant freeze-thaw cycles, humid summers, harsher weather than coastal areas requiring extra-durable paints.',
+    description: 'Central Massachusetts, anchored by Worcester—the Heart of the Commonwealth—mixes historic triple-deckers, Victorian neighborhoods, mill-era buildings and newer suburban developments. Much of the housing predates 1978, so lead-safe prep is routine, and multi-family buildings mean coordinating with owners and tenants.',
+    climate: 'Cold continental, with colder winters and heavier snowfall than Boston, significant freeze-thaw cycles, humid summers, harsher weather than coastal areas requiring extra-durable paints.',
     architectureStyles: [
       'Triple-Decker Multi-Family',
       'Victorian Worker Cottages',
@@ -237,11 +232,11 @@ export const REGIONS: Record<string, Region> = {
       medianIncome: '$58,000 - $72,000'
     },
     challenges: [
-      'Triple-decker lead paint compliance (75% pre-1978)',
+      'Lead-safe work on triple-deckers, most built before 1978',
       'Multi-family owner coordination and budgets',
       'Freeze-thaw damage more severe than Boston',
       'Industrial pollution residue on older homes',
-      'Budget constraints requiring value engineering',
+      'Phasing work on large multi-family buildings',
       'Deferred maintenance on rental properties',
       'Victorian trim deterioration',
       'Mill conversion unique surfaces (brick, steel)',
@@ -251,14 +246,12 @@ export const REGIONS: Record<string, Region> = {
     localMaterials: 'Durable acrylics for freeze-thaw resistance, lead-safe certified products, budget-friendly Sherwin-Williams Pro-Mar for rentals, premium Benjamin Moore for owner-occupied, calcium silicate primers for triple-decker porches.',
     paintBrands: ['Sherwin-Williams ProMar 200', 'Benjamin Moore ben', 'PPG Speedhide'],
     uniqueFeatures: [
-      'Triple-decker restoration specialists',
-      'Multi-family coordination expertise',
-      'Lead-safe certified (EPA RRP)',
-      'Budget-conscious project planning',
-      'College rental turnover experience',
-      'Historic district familiarity (Main South, etc.)',
-      'Mill building conversion knowledge',
-      'Value-driven material selection'
+      'Triple-decker and multi-family exterior painting',
+      'Coordinating access with owners and tenants',
+      'EPA Lead-Safe (RRP) certified firm',
+      'Phased work when a full repaint is not done at once',
+      'Rental turnover painting',
+      'Material grade matched to owner-occupied or rental use'
     ]
   }
 }

@@ -32,7 +32,7 @@ const painPoints = [
   },
   {
     problem: "Have textured walls and afraid they won't match?",
-    solution: "We're experts in matching all wall textures - orange peel, knockdown, skip trowel, and more. The repair will be undetectable."
+    solution: "We match the texture around the repair (orange peel, knockdown, skip trowel) and feather it well past the patch so it blends into the wall once painted."
   }
 ]
 

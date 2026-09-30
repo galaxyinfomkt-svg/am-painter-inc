@@ -36,6 +36,12 @@ const nextConfig = {
         statusCode: 301,
       })),
 
+      // The two standalone "house painting" pages were an older template that
+      // competed with the town pages for the same searches (and got 0 clicks).
+      // Each now points at the town page already ranking for those queries.
+      { source: '/house-painting-worcester-ma', destination: '/interior-painting-worcester-ma/', statusCode: 301 },
+      { source: '/house-painting-marlborough-ma', destination: '/exterior-painting-marlborough-ma/', statusCode: 301 },
+
       // Conventional pages this site keeps as homepage sections, not routes.
       { source: '/contact', destination: '/#contact', statusCode: 301 },
       { source: '/gallery', destination: '/#portfolio', statusCode: 301 },

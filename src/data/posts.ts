@@ -64,7 +64,7 @@ export const POSTS: BlogPost[] = [
 <p>Ask for a Certificate of Insurance (COI) listing both general liability (minimum $1M, ideally $2M) and workers' compensation. Massachusetts law requires workers' comp for any contractor with employees. Without it, an injured painter on your property could file a claim against your homeowner's insurance.</p>
 
 <h2>3. Verify EPA Lead-Safe (RRP) certification for pre-1978 homes</h2>
-<p>About 60% of homes in Hudson, Marlborough, and Worcester were built before 1978 — when lead paint was still legal. Federal law (the RRP rule) requires any contractor disturbing painted surfaces in a pre-1978 home to be EPA Lead-Safe certified. Verify on the <a href="https://cfpub.epa.gov/flpp/pub/index.cfm?do=main.firmSearchAbbreviated" target="_blank" rel="noopener">EPA Firm Locator</a>. A non-certified painter doing work on a pre-1978 home is exposing your family to lead dust and you to fines.</p>
+<p>Per the US Census, 60% of homes in Hudson and Marlborough and 77% in Worcester were built before 1980, so most fall under the pre-1978 lead rule. Federal law (the RRP rule) requires any contractor disturbing painted surfaces in a pre-1978 home to be EPA Lead-Safe certified. Verify on the <a href="https://cfpub.epa.gov/flpp/pub/index.cfm?do=main.firmSearchAbbreviated" target="_blank" rel="noopener">EPA Firm Locator</a>. A non-certified painter doing work on a pre-1978 home is exposing your family to lead dust and you to fines.</p>
 
 <h2>4. Get a written, fixed-price estimate within 24 hours</h2>
 <p>Reputable painters in the Hudson area return a written estimate within 24-48 hours of a walk-through. The estimate should include:</p>
@@ -130,7 +130,7 @@ export const POSTS: BlogPost[] = [
       {
         question: 'Do painters in Hudson MA need EPA lead-safe certification?',
         answer:
-          'Yes for any home built before 1978 — federal RRP law requires EPA Lead-Safe Renovation, Repair and Painting certification. About 60% of homes in Hudson, Marlborough, and Worcester qualify. Verify the firm on the EPA Firm Locator before signing.',
+          'Yes for any home built before 1978 — federal RRP law requires EPA Lead-Safe Renovation, Repair and Painting certification. Per the US Census, most homes in Hudson, Marlborough and Worcester were built before 1980, so many qualify. Verify the firm on the EPA Firm Locator before signing.',
       },
       {
         question: 'What is a typical painting deposit in Massachusetts?',
@@ -361,7 +361,7 @@ export const POSTS: BlogPost[] = [
       {
         question: 'Will sprayed cabinet finishes hold up like a factory finish?',
         answer:
-          'Yes when done correctly. Premium conversion varnish or 2K urethane sprayed with HVLP cures to a hard, chip-resistant film comparable to factory paint. Most MetroWest clients see 10+ years of daily kitchen use with no chipping.',
+          'Yes when done correctly. Premium conversion varnish or 2K urethane sprayed with HVLP cures to a hard, chip-resistant film comparable to factory paint. A properly cured catalyzed finish is built to take years of daily kitchen use; the prep underneath decides how long it actually lasts.',
       },
     ],
     relatedCities: ['hudson', 'marlborough', 'worcester', 'framingham', 'sudbury', 'natick'],
@@ -422,7 +422,7 @@ export const POSTS: BlogPost[] = [
 <p>Standard 8-foot ceilings = no extra. 9–10 ft = +10%. Vaulted/cathedral = +20–40%. Stairwells with 2-story ceilings (common in Hudson colonials) require scaffold = +$300–$800 per side.</p>
 
 <h3>4. Lead paint (pre-1978 homes)</h3>
-<p>Approximately 60% of homes in Hudson, Marlborough, and Worcester were built before 1978. EPA Lead-Safe RRP work adds ~$300–$900 to a typical interior paint job (containment, HEPA cleanup, monitoring). This is non-negotiable by federal law.</p>
+<p>Per the US Census, 60% of homes in Hudson and Marlborough and 77% in Worcester were built before 1980, so most fall under the pre-1978 lead rule. EPA Lead-Safe RRP work adds ~$300–$900 to a typical interior paint job (containment, HEPA cleanup, monitoring). This is non-negotiable by federal law.</p>
 
 <h3>5. Repairs and prep</h3>
 <p>Nail pops, holes, water stains, peeling paint, wallpaper removal — these are billed separately on most quotes. Average MetroWest add-ons:</p>
@@ -503,14 +503,14 @@ export const POSTS: BlogPost[] = [
     category: 'How-To',
     readMinutes: 7,
     bodyHtml: `
-<p class="lead">Lead paint was banned in 1978, but it didn't disappear — it's still on the walls, trim, and siding of about 60% of homes in Hudson, Marlborough, Worcester, and the surrounding MetroWest market. Here's what federal law requires and what Hudson-area homeowners need to verify before any paint job starts.</p>
+<p class="lead">Lead paint was banned in 1978, but it didn't disappear — it's still under the newer coats in many older homes across Hudson, Marlborough, Worcester and the surrounding MetroWest market. Here's what federal law requires and what Hudson-area homeowners need to verify before any paint job starts.</p>
 
 <h2>What is the EPA RRP rule?</h2>
 <p>The federal <strong>Renovation, Repair and Painting (RRP) rule</strong> (40 CFR Part 745) requires any contractor doing work that disturbs more than 6 sqft interior or 20 sqft exterior of painted surfaces in a pre-1978 home to be <strong>EPA Lead-Safe certified</strong>. This applies to painting, drywall repair, window replacement, siding work, demolition, and renovation.</p>
 <p>Violations carry civil penalties up to $40,000+ per day. The rule applies to contractors, but the homeowner is the one who lives in the dust if it's not done right.</p>
 
 <h2>Why this matters in Hudson and MetroWest</h2>
-<p>About <strong>60% of homes</strong> in Hudson (built 1750s–present, with peak construction in the 1900s–1970s), Marlborough, Worcester, Framingham, Natick, and the surrounding MetroWest market are pre-1978. Most original layers of paint contain lead.</p>
+<p>Per the US Census, <strong>60% of homes in Hudson and Marlborough and 77% in Worcester</strong> were built before 1980, and older towns across MetroWest are similar. In a house built before 1978, assume the original layers of paint may contain lead until a test says otherwise.</p>
 <p>Lead dust is the primary health hazard, not intact paint. The dust gets created when paint is sanded, scraped, or chipped — exactly what happens during prep for a new paint job. A 50-microgram speck of lead dust on a windowsill exceeds the federal hazard threshold.</p>
 
 <h2>What an EPA Lead-Safe job actually looks like</h2>
@@ -569,7 +569,7 @@ export const POSTS: BlogPost[] = [
       {
         question: 'Do I need an EPA Lead-Safe certified painter for my pre-1978 Hudson MA home?',
         answer:
-          'Yes. Federal RRP law requires any contractor disturbing more than 6 sqft interior or 20 sqft exterior of painted surfaces in a pre-1978 home to be EPA Lead-Safe certified. About 60% of homes in Hudson, Marlborough, and Worcester qualify. Verify the firm at the EPA Firm Locator before signing.',
+          'Yes. Federal RRP law requires any contractor disturbing more than 6 sqft interior or 20 sqft exterior of painted surfaces in a pre-1978 home to be EPA Lead-Safe certified. Per the US Census, most homes in Hudson, Marlborough and Worcester were built before 1980, so many qualify. Verify the firm at the EPA Firm Locator before signing.',
       },
       {
         question: 'How much extra does EPA Lead-Safe painting cost in Hudson, MA?',

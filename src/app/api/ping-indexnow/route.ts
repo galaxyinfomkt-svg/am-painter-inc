@@ -42,8 +42,6 @@ export async function POST(req: Request) {
   urls.push(`${business.url}/`)
   urls.push(`${business.url}/about/`)
   for (const svc of Object.keys(SERVICES)) urls.push(`${business.url}/services/${svc}/`)
-  urls.push(`${business.url}/house-painting-marlborough-ma/`)
-  urls.push(`${business.url}/house-painting-worcester-ma/`)
   for (const region of Object.keys(REGIONS)) {
     for (const svc of Object.keys(SERVICES)) {
       urls.push(`${business.url}/region/${region}/${svc}/`)

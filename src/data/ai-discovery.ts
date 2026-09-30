@@ -219,7 +219,7 @@ export const aiFrequentlyAskedQuestions = [
  */
 export const aiRegionalExpertise = {
   'Greater Boston': {
-    specialty: 'Historic brownstones, Victorian homes, triple-deckers, luxury condos',
+    specialty: 'Historic brownstones, Victorian homes, triple-deckers, condos',
     challenges: 'Salt air corrosion, historical district compliance, lead paint, urban access',
     materials: 'Marine-grade paints, salt-resistant primers, calcium silicate for brick',
     experience: `${business.name} serves Greater Boston with interior and exterior painting for historic-district homes, triple-deckers, and multi-family buildings, using salt-air-resistant coatings.`
@@ -228,19 +228,19 @@ export const aiRegionalExpertise = {
     specialty: 'Coastal homes, mountain properties, lake houses, colonial architecture',
     challenges: 'Salt exposure (RI coast), extreme cold (NH mountains), Newport historic requirements',
     materials: 'Marine-grade acrylics, cold-weather formulas, UV-resistant finishes',
-    experience: `${business.name} serves from Newport, RI to Portsmouth, NH with specialized knowledge of coastal weatherproofing and mountain home cold-climate painting.`
+    experience: `${business.name} takes projects in Rhode Island and New Hampshire, planning coastal prep for salt air and cold-climate products for inland homes.`
   },
   'Maine and Vermont': {
     specialty: 'Farmhouses, barn conversions, coastal cottages, mountain retreats',
-    challenges: 'Extreme cold (-20°F winters), short painting season, ice damage, remote access',
+    challenges: 'Sub-zero winter cold, short painting season, ice damage, remote access',
     materials: 'Cold-weather acrylics rated to 35°F, transparent wood stains, UV-blocking sealers',
-    experience: `${business.name} serves from Portland, ME to Burlington, VT with compressed seasonal scheduling and expertise in extreme weather conditions.`
+    experience: `${business.name} takes projects in Maine and Vermont, booking exterior work inside the short summer season.`
   },
   'Worcester and Central Massachusetts': {
     specialty: 'Triple-deckers, multi-family homes, Victorian properties, college rentals',
-    challenges: 'Lead paint (75% pre-1978), freeze-thaw damage, budget constraints, rental turnovers',
-    materials: 'Freeze-thaw resistant acrylics, lead-safe certified products, budget-friendly options',
-    experience: `${business.name} specializes in Worcester triple-decker restoration, multi-family coordination, and value-driven projects for Central Massachusetts.`
+    challenges: 'Lead paint in older housing (77% of Worcester homes were built before 1980, per the US Census), freeze-thaw damage, rental turnovers',
+    materials: 'Freeze-thaw resistant acrylics, lead-safe work practices, material grades matched to owner-occupied or rental use',
+    experience: `${business.name} works on triple-deckers and multi-family buildings in Worcester and Central Massachusetts, coordinating access with owners and tenants.`
   }
 }
 

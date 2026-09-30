@@ -33,6 +33,20 @@ const projectPhotos = [
   { src: 'https://storage.googleapis.com/msgsndr/npwVVdTpo5dMM8CCSeCT/media/69398ae7d1810d361767592f.webp', alt: 'Kitchen remodeling' },
 ]
 
+/**
+ * What is actually true about registration in each region. Massachusetts
+ * requires HIC registration for residential work and we hold it. Rhode Island
+ * requires Contractors' Registration Board registration, which the owner has
+ * confirmed; add the number here once it is on file. New Hampshire, Maine and
+ * Vermont have no state license for residential painting.
+ */
+const REGION_LICENSE_NOTE: Record<string, string> = {
+  'greater-boston': `We are a registered Massachusetts Home Improvement Contractor (HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov). `,
+  'worcester-nearby': `We are a registered Massachusetts Home Improvement Contractor (HIC #${business.hicLicense}, verifiable at contractorhub.mass.gov). `,
+  'rhode-island-new-hampshire': `For Rhode Island work we hold the state Contractors' Registration Board registration that residential contractors there need; New Hampshire has no state license for residential painting. In Massachusetts we are registered HIC #${business.hicLicense}. `,
+  'maine-vermont': `Maine and Vermont have no state license for residential painting. In Massachusetts we are a registered Home Improvement Contractor (HIC #${business.hicLicense}). `,
+}
+
 export default async function RegionalServicePage({ params }: PageProps) {
   const { regionSlug, serviceSlug } = await params
   const region = getRegionBySlug(regionSlug)
@@ -58,11 +72,13 @@ export default async function RegionalServicePage({ params }: PageProps) {
     },
     {
       question: `Are you licensed and insured for ${region.name} work?`,
-      answer: `Yes. We hold an active Massachusetts Home Improvement Contractor (HIC) registration, carry ${business.insurance} in general liability plus workers' comp, and we send certificates of insurance to clients, condo boards, and property managers on request.`,
+      // Answered per state. The old answer cited only the Massachusetts HIC for
+      // every region, which read as the credential for RI, NH, ME and VT too.
+      answer: `${REGION_LICENSE_NOTE[regionSlug] ?? ''}We carry ${business.insurance} in general liability plus workers' comp, and send certificates of insurance to clients, condo boards and property managers on request.`,
     },
     {
       question: `How quickly can you start a ${service.name.toLowerCase()} project in ${region.name}?`,
-      answer: `For most ${region.name} projects we can schedule a walk-through within 3–5 business days and start work within 2–4 weeks, depending on season and scope. Emergency repairs (storm damage, water leaks) are prioritized.`,
+      answer: `For most ${region.name} projects we can schedule a walk-through within 3–5 business days and start work within 2–4 weeks, depending on season and scope.`,
     },
   ]
 
@@ -306,10 +322,10 @@ export default async function RegionalServicePage({ params }: PageProps) {
                 {/* Regional Challenges */}
                 <div>
                   <h3 className="text-2xl font-bold text-secondary mb-6">
-                    {region.name} {service.name} Challenges We Solve
+                    What {service.name.toLowerCase()} runs into in {region.name}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    {region.name}'s unique climate and architecture create specific challenges for {service.name.toLowerCase()}. Our regional expertise means we know exactly how to handle these issues:
+                    Conditions in {region.name} that shape how we prep, which products we choose and when we schedule:
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-4 mb-8">
@@ -325,18 +341,6 @@ export default async function RegionalServicePage({ params }: PageProps) {
                     ))}
                   </div>
 
-                  {/* Expert Solutions */}
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-                    <div className="flex items-start gap-3">
-                      <CheckCircleIcon className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h4 className="text-lg font-bold text-secondary mb-2">Why {region.name} Homeowners Trust {business.name}</h4>
-                        <p className="text-gray-600">
-                          With {business.yearsInBusiness}+ years serving {region.states.join(', ')}, we understand {region.name}&apos;s unique needs. Our EPA Lead-Safe certified team has expertise in all local architecture styles. As a family-owned local firm, we&apos;re committed to delivering quality and accountability on every project.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Our Process */}
@@ -392,7 +396,9 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
                 {/* Project Photos Gallery */}
                 <div>
-                  <h3 className="text-2xl font-bold text-secondary mb-6">Recent Projects in {region.name}</h3>
+                  {/* These are company-wide photos, not jobs in this region — the
+                      old "Recent Projects in {region}" heading said otherwise. */}
+                  <h3 className="text-2xl font-bold text-secondary mb-6">Examples of Our Work</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {projectPhotos.map((photo, idx) => (
                       <div key={idx} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md group">
@@ -453,7 +459,7 @@ export default async function RegionalServicePage({ params }: PageProps) {
 
                 {/* Unique Features */}
                 <div className="bg-gray-50 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-secondary mb-4">Our {region.name} Expertise</h3>
+                  <h3 className="text-xl font-bold text-secondary mb-4">How We Plan Work in {region.name}</h3>
                   <ul className="space-y-3">
                     {region.uniqueFeatures.slice(0, 6).map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
