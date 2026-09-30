@@ -17,25 +17,25 @@ import { POSTS } from '@/data/posts'
 const GUIDES_BY_SERVICE: Record<string, string[]> = {
   'interior-painting': [
     'interior-painting-cost-metrowest-massachusetts-2026',
-    'how-to-choose-a-painter-hudson-ma',
+    'plaster-vs-drywall-repair-older-massachusetts-homes',
     'epa-lead-safe-painting-pre-1978-hudson-ma-homes',
   ],
   'exterior-painting': [
     'best-time-to-paint-house-exterior-massachusetts',
+    'painting-multi-family-house-massachusetts-tenants-lead',
     'epa-lead-safe-painting-pre-1978-hudson-ma-homes',
-    'how-to-choose-a-painter-hudson-ma',
   ],
   'cabinet-refinishing': [
     'cabinet-refinishing-vs-replacement-hudson-ma-cost',
     'interior-painting-cost-metrowest-massachusetts-2026',
   ],
-  'deck-staining': ['best-time-to-paint-house-exterior-massachusetts'],
-  'drywall-repair': ['interior-painting-cost-metrowest-massachusetts-2026'],
+  'deck-staining': ['deck-stain-types-new-england-massachusetts', 'best-time-to-paint-house-exterior-massachusetts'],
+  'drywall-repair': ['plaster-vs-drywall-repair-older-massachusetts-homes', 'epa-lead-safe-painting-pre-1978-hudson-ma-homes'],
   'remodeling': [
+    'massachusetts-remodel-hic-csl-permits-contract',
     'cabinet-refinishing-vs-replacement-hudson-ma-cost',
-    'how-to-choose-a-painter-hudson-ma',
   ],
-  'general-contracting': ['how-to-choose-a-painter-hudson-ma'],
+  'general-contracting': ['massachusetts-remodel-hic-csl-permits-contract', 'painting-multi-family-house-massachusetts-tenants-lead'],
 }
 
 export function RelatedGuides({ serviceSlug }: { serviceSlug: string }) {
