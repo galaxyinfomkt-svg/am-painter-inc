@@ -18,10 +18,11 @@
  * of the sitemap, and nothing on the site links to it. Adding a page to search
  * therefore means writing for it first, which is the point.
  *
- * Today that is the 60 towns we have real local knowledge for, across the
- * four painting services. Drywall, remodeling and general contracting stay on
- * their /services/ hubs: the town changes almost nothing about those jobs, so
- * a page per town could only ever be the same page with the name swapped.
+ * Round 1 (2026-09-23) wrote the 60 towns with local knowledge × the four
+ * painting services. Round 2 extends written content to every town × every
+ * service, each entry planned from that town's own Census, National Register
+ * and housing-era record — pages go indexable as their entry lands, never
+ * before.
  */
 // Keys only — this module reaches client components (the service hubs), so it
 // must not import the full content file. See indexed-keys.ts.
@@ -40,11 +41,15 @@ export function cityServiceHref(serviceSlug: string, citySlug: string): string {
     : `/services/${serviceSlug}/`
 }
 
+// Painting first: townHref() prefers these when a link has no preferred service.
 const INDEXED_SERVICE_ORDER = [
   'interior-painting',
   'exterior-painting',
   'cabinet-refinishing',
   'deck-staining',
+  'drywall-repair',
+  'remodeling',
+  'general-contracting',
 ]
 
 /**

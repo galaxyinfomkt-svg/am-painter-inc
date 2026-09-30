@@ -839,7 +839,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
     : sharedFAQs
   const priceRange = getCityServicePriceRange(city, service.name) // Citable price fact for AEO/LLM citations
   // Real content date, not build time. See CITY_DATA_UPDATED in data/cities.ts.
-  const updatedOn = content ? CONTENT_UPDATED : CITY_DATA_UPDATED
+  const updatedOn = content ? (content.updated ?? CONTENT_UPDATED) : CITY_DATA_UPDATED
   const lastUpdated = new Date(updatedOn + 'T00:00:00Z').toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
   })
