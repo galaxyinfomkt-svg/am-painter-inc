@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { CITY_DATA_UPDATED } from '@/data/cities'
-import { CONTENT_UPDATED } from '@/data/city-service-content'
+import { CITY_SERVICE_CONTENT, CONTENT_UPDATED } from '@/data/city-service-content'
 import { indexedCityServices } from '@/data/indexed-pages'
 import { SERVICES } from '@/data/services'
 import { REGIONS } from '@/data/regions'
@@ -111,7 +111,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cityServicePages: MetadataRoute.Sitemap = indexedCityServices().map(
     ({ serviceSlug, citySlug }) => ({
       url: `${baseUrl}/${serviceSlug}-${citySlug}-ma/`,
-      lastModified: contentDate,
+      // Each entry carries the date it was written; round 1 and round 2 differ.
+      lastModified: new Date(
+        (CITY_SERVICE_CONTENT[`${serviceSlug}-${citySlug}`]?.updated ?? CONTENT_UPDATED) + 'T00:00:00Z'
+      ),
       changeFrequency: 'monthly',
       priority: 0.8,
     })

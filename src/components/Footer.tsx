@@ -8,10 +8,14 @@ export function Footer() {
 
   // Get all cities and sort by name
   const allCities = Object.values(CITIES).sort((a, b) => a.name.localeCompare(b.name))
-  // The grid lists only towns with a page of their own. All 143 used to be
-  // listed on every page — 83 of them as unlinked names — which put ~140
-  // near-identical lines at the foot of each page. The rest are counted below.
-  const linkedCities = allCities.filter((c) => townHref(c.slug) !== null)
+  // The grid lists the 60 towns nearest the shop that have a page. All 143 on
+  // every page put ~140 near-identical lines at the foot of each page; the rest
+  // are counted below and linked from the service hubs and region pages.
+  const linkedCities = allCities
+    .filter((c) => townHref(c.slug) !== null)
+    .sort((a, b) => (a.distanceMiles ?? 99) - (b.distanceMiles ?? 99))
+    .slice(0, 60)
+    .sort((a, b) => a.name.localeCompare(b.name))
   const otherCityCount = allCities.length - linkedCities.length
 
   // Split cities into 6 columns for better layout
@@ -213,7 +217,7 @@ export function Footer() {
               Cities We Serve in Massachusetts
             </h3>
             <p className="text-gray-600">
-              Towns near our Hudson shop with their own page. We also work in{' '}
+              Towns nearest our Hudson shop. We also work in{' '}
               {otherCityCount} more Massachusetts towns and across{' '}
               <Link href="/region/" className="text-primary-700 underline">New England</Link>.
             </p>
