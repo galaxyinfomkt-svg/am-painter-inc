@@ -27,13 +27,10 @@
 // Keys only — this module reaches client components (the service hubs), so it
 // must not import the full content file. See indexed-keys.ts.
 import { INDEXED_CITY_SERVICE_KEYS } from './indexed-keys'
-import { INDEX_SCOPE_TOWNS, INDEX_SCOPE_SERVICES } from './index-scope'
+import { SCOPE_KEYS } from './index-scope'
 
-// Indexed = written AND inside the current scope (index-scope.ts). Written
-// pages outside the scope stay live but noindex and unlinked.
-const SCOPE_KEYS = new Set(
-  INDEX_SCOPE_SERVICES.flatMap((s) => INDEX_SCOPE_TOWNS.map((t) => `${s}-${t}`))
-)
+// Indexed = written AND inside the current stage of index-scope.ts. Written
+// pages outside it stay live but noindex and unlinked.
 const INDEXED_KEYS = INDEXED_CITY_SERVICE_KEYS.filter((k) => SCOPE_KEYS.has(k))
 const INDEXED = new Set(INDEXED_KEYS)
 
