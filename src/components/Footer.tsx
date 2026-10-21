@@ -237,6 +237,7 @@ export function Footer() {
                       <li key={city.slug}>
                         {href ? (
                           <Link
+                            prefetch={false}
                             href={href}
                             className="text-sm text-gray-600 hover:text-primary transition block"
                           >

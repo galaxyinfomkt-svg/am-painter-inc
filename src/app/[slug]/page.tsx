@@ -1498,6 +1498,7 @@ export default async function CityServicePage({ params }: { params: Promise<{ sl
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {nearbyCities.map((c) => (
                 <Link
+                  prefetch={false}
                   key={c.slug}
                   href={`/${serviceSlug}-${c.slug}-ma/`}
                   className="group flex items-center gap-2 px-4 py-3 bg-white rounded-xl hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
