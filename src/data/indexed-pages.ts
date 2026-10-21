@@ -13,10 +13,10 @@
  * THE RULE
  * A town×service page is indexable only if it has its own hand-planned
  * editorial content in city-service-content.ts (keys mirrored in
- * indexed-keys.ts). No entry → the page stays live for visitors (and for
- * links already pointing at it) but is served `noindex, follow`, is left out
- * of the sitemap, and nothing on the site links to it. Adding a page to search
- * therefore means writing for it first, which is the point.
+ * indexed-keys.ts) AND falls inside the current scope in index-scope.ts.
+ * Otherwise the page stays live for visitors (and for links already pointing
+ * at it) but is served `noindex, follow`, is left out of the sitemap, and
+ * nothing on the site links to it.
  *
  * Round 1 (2026-09-23) wrote the 60 towns with local knowledge × the four
  * painting services. Round 2 extends written content to every town × every
@@ -27,8 +27,15 @@
 // Keys only — this module reaches client components (the service hubs), so it
 // must not import the full content file. See indexed-keys.ts.
 import { INDEXED_CITY_SERVICE_KEYS } from './indexed-keys'
+import { INDEX_SCOPE_TOWNS, INDEX_SCOPE_SERVICES } from './index-scope'
 
-const INDEXED = new Set(INDEXED_CITY_SERVICE_KEYS)
+// Indexed = written AND inside the current scope (index-scope.ts). Written
+// pages outside the scope stay live but noindex and unlinked.
+const SCOPE_KEYS = new Set(
+  INDEX_SCOPE_SERVICES.flatMap((s) => INDEX_SCOPE_TOWNS.map((t) => `${s}-${t}`))
+)
+const INDEXED_KEYS = INDEXED_CITY_SERVICE_KEYS.filter((k) => SCOPE_KEYS.has(k))
+const INDEXED = new Set(INDEXED_KEYS)
 
 export function isIndexedCityService(serviceSlug: string, citySlug: string): boolean {
   return INDEXED.has(`${serviceSlug}-${citySlug}`)
@@ -67,7 +74,7 @@ export function townHref(citySlug: string, preferred?: string): string | null {
 
 /** Every indexed town×service slug pair — for the sitemap and IndexNow. */
 export function indexedCityServices(): Array<{ serviceSlug: string; citySlug: string }> {
-  return INDEXED_CITY_SERVICE_KEYS.map((key) => {
+  return INDEXED_KEYS.map((key) => {
     const serviceSlug = INDEXED_SERVICE_ORDER.find((s) => key.startsWith(`${s}-`))
     if (!serviceSlug) throw new Error(`indexed-keys.ts: unknown service in "${key}"`)
     return { serviceSlug, citySlug: key.slice(serviceSlug.length + 1) }
