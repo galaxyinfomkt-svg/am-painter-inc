@@ -59,6 +59,7 @@ export function ServiceCityLinks({ serviceSlug, serviceName }: ServiceCityLinksP
                   // rest are served but have no page of their own for it.
                   isIndexedCityService(serviceSlug, city.slug) ? (
                     <Link
+                      prefetch={false}
                       key={city.slug}
                       href={`/${serviceSlug}-${city.slug}-ma/`}
                       className="group flex items-center gap-2 px-3 py-2.5 bg-white rounded-lg hover:bg-primary transition-all shadow-sm text-center justify-center"
